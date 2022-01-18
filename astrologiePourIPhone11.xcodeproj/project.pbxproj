@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F40CA02A2797504600EF0991 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = F40CA0292797504600EF0991 /* Zip */; };
 		F4141EA92797414800381179 /* astrologiePourIPhone11App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141EA82797414800381179 /* astrologiePourIPhone11App.swift */; };
 		F4141EAB2797414800381179 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141EAA2797414800381179 /* ContentView.swift */; };
 		F4141EAD2797414900381179 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4141EAC2797414900381179 /* Assets.xcassets */; };
@@ -14,6 +15,32 @@
 		F4141EBA2797414900381179 /* astrologiePourIPhone11Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141EB92797414900381179 /* astrologiePourIPhone11Tests.swift */; };
 		F4141EC42797414900381179 /* astrologiePourIPhone11UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141EC32797414900381179 /* astrologiePourIPhone11UITests.swift */; };
 		F4141EC62797414900381179 /* astrologiePourIPhone11UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141EC52797414900381179 /* astrologiePourIPhone11UITestsLaunchTests.swift */; };
+		F4141F00279741A100381179 /* swedate.c in Sources */ = {isa = PBXBuildFile; fileRef = F4141ED52797419F00381179 /* swedate.c */; };
+		F4141F02279741A100381179 /* sedeltat.txt.inactive in Resources */ = {isa = PBXBuildFile; fileRef = F4141ED92797419F00381179 /* sedeltat.txt.inactive */; };
+		F4141F05279741A100381179 /* swepcalc.c in Sources */ = {isa = PBXBuildFile; fileRef = F4141EDC279741A000381179 /* swepcalc.c */; };
+		F4141F08279741A100381179 /* seleapsec.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4141EE2279741A000381179 /* seleapsec.txt */; };
+		F4141F09279741A100381179 /* swepdate.c in Sources */ = {isa = PBXBuildFile; fileRef = F4141EE3279741A000381179 /* swepdate.c */; };
+		F4141F0A279741A100381179 /* swemplan.c in Sources */ = {isa = PBXBuildFile; fileRef = F4141EE4279741A000381179 /* swemplan.c */; };
+		F4141F0C279741A100381179 /* swephlib.c in Sources */ = {isa = PBXBuildFile; fileRef = F4141EE8279741A000381179 /* swephlib.c */; };
+		F4141F0D279741A100381179 /* sefstars.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4141EE9279741A000381179 /* sefstars.txt */; };
+		F4141F0E279741A100381179 /* swejpl.c in Sources */ = {isa = PBXBuildFile; fileRef = F4141EEA279741A000381179 /* swejpl.c */; };
+		F4141F0F279741A100381179 /* swehouse.c in Sources */ = {isa = PBXBuildFile; fileRef = F4141EEB279741A000381179 /* swehouse.c */; };
+		F4141F12279741A100381179 /* sweph.c in Sources */ = {isa = PBXBuildFile; fileRef = F4141EF1279741A000381179 /* sweph.c */; };
+		F4141F13279741A100381179 /* seorbel.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4141EF2279741A000381179 /* seorbel.txt */; };
+		F4141F15279741A100381179 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = F4141EF4279741A000381179 /* Makefile */; };
+		F4141F17279741A100381179 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = F4141EF6279741A000381179 /* CMakeLists.txt */; };
+		F4141F1A279741A100381179 /* swecl.c in Sources */ = {isa = PBXBuildFile; fileRef = F4141EFA279741A100381179 /* swecl.c */; };
+		F4141F1B279741A100381179 /* swemmoon.c in Sources */ = {isa = PBXBuildFile; fileRef = F4141EFC279741A100381179 /* swemmoon.c */; };
+		F4141F1C279741A100381179 /* swehel.c in Sources */ = {isa = PBXBuildFile; fileRef = F4141EFE279741A100381179 /* swehel.c */; };
+		F4141F1D279741A100381179 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F4141EFF279741A100381179 /* LICENSE */; };
+		F4141F26279741FC00381179 /* Swe.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141F1E279741F900381179 /* Swe.swift */; };
+		F4141F27279741FC00381179 /* Swe17.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141F1F279741F900381179 /* Swe17.swift */; };
+		F4141F28279741FC00381179 /* Swe02.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141F20279741F900381179 /* Swe02.swift */; };
+		F4141F29279741FC00381179 /* Swe08.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141F21279741F900381179 /* Swe08.swift */; };
+		F4141F2A279741FC00381179 /* Swe07.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141F22279741F900381179 /* Swe07.swift */; };
+		F4141F2B279741FC00381179 /* Swe03.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141F23279741F900381179 /* Swe03.swift */; };
+		F4141F2C279741FC00381179 /* ephem.zip in Resources */ = {isa = PBXBuildFile; fileRef = F4141F24279741FC00381179 /* ephem.zip */; };
+		F4141F2D279741FC00381179 /* Swe14.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141F25279741FC00381179 /* Swe14.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +71,57 @@
 		F4141EBF2797414900381179 /* astrologiePourIPhone11UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = astrologiePourIPhone11UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4141EC32797414900381179 /* astrologiePourIPhone11UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = astrologiePourIPhone11UITests.swift; sourceTree = "<group>"; };
 		F4141EC52797414900381179 /* astrologiePourIPhone11UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = astrologiePourIPhone11UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F4141ED42797419F00381179 /* astrologiePourIPhone11-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "astrologiePourIPhone11-Bridging-Header.h"; sourceTree = "<group>"; };
+		F4141ED52797419F00381179 /* swedate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = swedate.c; sourceTree = "<group>"; };
+		F4141ED62797419F00381179 /* swemmoon.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = swemmoon.o; sourceTree = "<group>"; };
+		F4141ED72797419F00381179 /* swenut2000a.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swenut2000a.h; sourceTree = "<group>"; };
+		F4141ED82797419F00381179 /* compile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = compile.h; sourceTree = "<group>"; };
+		F4141ED92797419F00381179 /* sedeltat.txt.inactive */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sedeltat.txt.inactive; sourceTree = "<group>"; };
+		F4141EDA2797419F00381179 /* swepdate.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = swepdate.o; sourceTree = "<group>"; };
+		F4141EDB2797419F00381179 /* swejpl.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = swejpl.o; sourceTree = "<group>"; };
+		F4141EDC279741A000381179 /* swepcalc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = swepcalc.c; sourceTree = "<group>"; };
+		F4141EDD279741A000381179 /* sweph.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = sweph.o; sourceTree = "<group>"; };
+		F4141EDE279741A000381179 /* swephexp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swephexp.h; sourceTree = "<group>"; };
+		F4141EDF279741A000381179 /* swehouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swehouse.h; sourceTree = "<group>"; };
+		F4141EE0279741A000381179 /* sweodef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sweodef.h; sourceTree = "<group>"; };
+		F4141EE1279741A000381179 /* swehouse.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = swehouse.o; sourceTree = "<group>"; };
+		F4141EE2279741A000381179 /* seleapsec.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = seleapsec.txt; sourceTree = "<group>"; };
+		F4141EE3279741A000381179 /* swepdate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = swepdate.c; sourceTree = "<group>"; };
+		F4141EE4279741A000381179 /* swemplan.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = swemplan.c; sourceTree = "<group>"; };
+		F4141EE5279741A000381179 /* swehel.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = swehel.o; sourceTree = "<group>"; };
+		F4141EE6279741A000381179 /* swedate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swedate.h; sourceTree = "<group>"; };
+		F4141EE7279741A000381179 /* swemptab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swemptab.h; sourceTree = "<group>"; };
+		F4141EE8279741A000381179 /* swephlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = swephlib.c; sourceTree = "<group>"; };
+		F4141EE9279741A000381179 /* sefstars.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sefstars.txt; sourceTree = "<group>"; };
+		F4141EEA279741A000381179 /* swejpl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = swejpl.c; sourceTree = "<group>"; };
+		F4141EEB279741A000381179 /* swehouse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = swehouse.c; sourceTree = "<group>"; };
+		F4141EEC279741A000381179 /* swecl.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = swecl.o; sourceTree = "<group>"; };
+		F4141EEE279741A000381179 /* swejpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swejpl.h; sourceTree = "<group>"; };
+		F4141EEF279741A000381179 /* swedate.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = swedate.o; sourceTree = "<group>"; };
+		F4141EF0279741A000381179 /* swedll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swedll.h; sourceTree = "<group>"; };
+		F4141EF1279741A000381179 /* sweph.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sweph.c; sourceTree = "<group>"; };
+		F4141EF2279741A000381179 /* seorbel.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = seorbel.txt; sourceTree = "<group>"; };
+		F4141EF3279741A000381179 /* libswe.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswe.a; sourceTree = "<group>"; };
+		F4141EF4279741A000381179 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		F4141EF5279741A000381179 /* swephlib.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = swephlib.o; sourceTree = "<group>"; };
+		F4141EF6279741A000381179 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		F4141EF7279741A000381179 /* swemplan.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = swemplan.o; sourceTree = "<group>"; };
+		F4141EF8279741A100381179 /* swepcalc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swepcalc.h; sourceTree = "<group>"; };
+		F4141EF9279741A100381179 /* swepcalc.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = swepcalc.o; sourceTree = "<group>"; };
+		F4141EFA279741A100381179 /* swecl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = swecl.c; sourceTree = "<group>"; };
+		F4141EFB279741A100381179 /* swephlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = swephlib.h; sourceTree = "<group>"; };
+		F4141EFC279741A100381179 /* swemmoon.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = swemmoon.c; sourceTree = "<group>"; };
+		F4141EFD279741A100381179 /* sweph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sweph.h; sourceTree = "<group>"; };
+		F4141EFE279741A100381179 /* swehel.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = swehel.c; sourceTree = "<group>"; };
+		F4141EFF279741A100381179 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		F4141F1E279741F900381179 /* Swe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swe.swift; sourceTree = "<group>"; };
+		F4141F1F279741F900381179 /* Swe17.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swe17.swift; sourceTree = "<group>"; };
+		F4141F20279741F900381179 /* Swe02.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swe02.swift; sourceTree = "<group>"; };
+		F4141F21279741F900381179 /* Swe08.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swe08.swift; sourceTree = "<group>"; };
+		F4141F22279741F900381179 /* Swe07.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swe07.swift; sourceTree = "<group>"; };
+		F4141F23279741F900381179 /* Swe03.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swe03.swift; sourceTree = "<group>"; };
+		F4141F24279741FC00381179 /* ephem.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = ephem.zip; sourceTree = "<group>"; };
+		F4141F25279741FC00381179 /* Swe14.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swe14.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F40CA02A2797504600EF0991 /* Zip in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +173,7 @@
 		F4141EA72797414800381179 /* astrologiePourIPhone11 */ = {
 			isa = PBXGroup;
 			children = (
+				F4141ED22797415E00381179 /* Types */,
 				F4141EA82797414800381179 /* astrologiePourIPhone11App.swift */,
 				F4141EAA2797414800381179 /* ContentView.swift */,
 				F4141EAC2797414900381179 /* Assets.xcassets */,
@@ -127,6 +207,72 @@
 			path = astrologiePourIPhone11UITests;
 			sourceTree = "<group>";
 		};
+		F4141ED22797415E00381179 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				F4141F24279741FC00381179 /* ephem.zip */,
+				F4141F1E279741F900381179 /* Swe.swift */,
+				F4141F20279741F900381179 /* Swe02.swift */,
+				F4141F23279741F900381179 /* Swe03.swift */,
+				F4141F22279741F900381179 /* Swe07.swift */,
+				F4141F21279741F900381179 /* Swe08.swift */,
+				F4141F25279741FC00381179 /* Swe14.swift */,
+				F4141F1F279741F900381179 /* Swe17.swift */,
+				F4141ED32797417900381179 /* Swe */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
+		F4141ED32797417900381179 /* Swe */ = {
+			isa = PBXGroup;
+			children = (
+				F4141EF6279741A000381179 /* CMakeLists.txt */,
+				F4141ED82797419F00381179 /* compile.h */,
+				F4141EF3279741A000381179 /* libswe.a */,
+				F4141EFF279741A100381179 /* LICENSE */,
+				F4141EF4279741A000381179 /* Makefile */,
+				F4141ED92797419F00381179 /* sedeltat.txt.inactive */,
+				F4141EE9279741A000381179 /* sefstars.txt */,
+				F4141EE2279741A000381179 /* seleapsec.txt */,
+				F4141EF2279741A000381179 /* seorbel.txt */,
+				F4141EFA279741A100381179 /* swecl.c */,
+				F4141EEC279741A000381179 /* swecl.o */,
+				F4141ED52797419F00381179 /* swedate.c */,
+				F4141EE6279741A000381179 /* swedate.h */,
+				F4141EEF279741A000381179 /* swedate.o */,
+				F4141EF0279741A000381179 /* swedll.h */,
+				F4141EFE279741A100381179 /* swehel.c */,
+				F4141EE5279741A000381179 /* swehel.o */,
+				F4141EEB279741A000381179 /* swehouse.c */,
+				F4141EDF279741A000381179 /* swehouse.h */,
+				F4141EE1279741A000381179 /* swehouse.o */,
+				F4141EEA279741A000381179 /* swejpl.c */,
+				F4141EEE279741A000381179 /* swejpl.h */,
+				F4141EDB2797419F00381179 /* swejpl.o */,
+				F4141EFC279741A100381179 /* swemmoon.c */,
+				F4141ED62797419F00381179 /* swemmoon.o */,
+				F4141EE4279741A000381179 /* swemplan.c */,
+				F4141EF7279741A000381179 /* swemplan.o */,
+				F4141EE7279741A000381179 /* swemptab.h */,
+				F4141ED72797419F00381179 /* swenut2000a.h */,
+				F4141EE0279741A000381179 /* sweodef.h */,
+				F4141EDC279741A000381179 /* swepcalc.c */,
+				F4141EF8279741A100381179 /* swepcalc.h */,
+				F4141EF9279741A100381179 /* swepcalc.o */,
+				F4141EE3279741A000381179 /* swepdate.c */,
+				F4141EDA2797419F00381179 /* swepdate.o */,
+				F4141EF1279741A000381179 /* sweph.c */,
+				F4141EFD279741A100381179 /* sweph.h */,
+				F4141EDD279741A000381179 /* sweph.o */,
+				F4141EDE279741A000381179 /* swephexp.h */,
+				F4141EE8279741A000381179 /* swephlib.c */,
+				F4141EFB279741A100381179 /* swephlib.h */,
+				F4141EF5279741A000381179 /* swephlib.o */,
+				F4141ED42797419F00381179 /* astrologiePourIPhone11-Bridging-Header.h */,
+			);
+			path = Swe;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +289,9 @@
 			dependencies = (
 			);
 			name = astrologiePourIPhone11;
+			packageProductDependencies = (
+				F40CA0292797504600EF0991 /* Zip */,
+			);
 			productName = astrologiePourIPhone11;
 			productReference = F4141EA52797414800381179 /* astrologiePourIPhone11.app */;
 			productType = "com.apple.product-type.application";
@@ -195,6 +344,7 @@
 				TargetAttributes = {
 					F4141EA42797414800381179 = {
 						CreatedOnToolsVersion = 13.2.1;
+						LastSwiftMigration = 1320;
 					};
 					F4141EB42797414900381179 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -215,6 +365,9 @@
 				Base,
 			);
 			mainGroup = F4141E9C2797414800381179;
+			packageReferences = (
+				F40CA0282797504600EF0991 /* XCRemoteSwiftPackageReference "Zip-1" */,
+			);
 			productRefGroup = F4141EA62797414800381179 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -231,8 +384,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4141F08279741A100381179 /* seleapsec.txt in Resources */,
+				F4141F13279741A100381179 /* seorbel.txt in Resources */,
+				F4141F1D279741A100381179 /* LICENSE in Resources */,
 				F4141EB02797414900381179 /* Preview Assets.xcassets in Resources */,
+				F4141F02279741A100381179 /* sedeltat.txt.inactive in Resources */,
+				F4141F2C279741FC00381179 /* ephem.zip in Resources */,
+				F4141F17279741A100381179 /* CMakeLists.txt in Resources */,
 				F4141EAD2797414900381179 /* Assets.xcassets in Resources */,
+				F4141F0D279741A100381179 /* sefstars.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +417,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4141F09279741A100381179 /* swepdate.c in Sources */,
 				F4141EAB2797414800381179 /* ContentView.swift in Sources */,
+				F4141F0C279741A100381179 /* swephlib.c in Sources */,
+				F4141F15279741A100381179 /* Makefile in Sources */,
+				F4141F12279741A100381179 /* sweph.c in Sources */,
+				F4141F26279741FC00381179 /* Swe.swift in Sources */,
+				F4141F0A279741A100381179 /* swemplan.c in Sources */,
+				F4141F1A279741A100381179 /* swecl.c in Sources */,
+				F4141F2B279741FC00381179 /* Swe03.swift in Sources */,
+				F4141F1C279741A100381179 /* swehel.c in Sources */,
+				F4141F0F279741A100381179 /* swehouse.c in Sources */,
+				F4141F1B279741A100381179 /* swemmoon.c in Sources */,
+				F4141F2D279741FC00381179 /* Swe14.swift in Sources */,
+				F4141F05279741A100381179 /* swepcalc.c in Sources */,
+				F4141F00279741A100381179 /* swedate.c in Sources */,
+				F4141F28279741FC00381179 /* Swe02.swift in Sources */,
+				F4141F27279741FC00381179 /* Swe17.swift in Sources */,
+				F4141F2A279741FC00381179 /* Swe07.swift in Sources */,
+				F4141F29279741FC00381179 /* Swe08.swift in Sources */,
+				F4141F0E279741A100381179 /* swejpl.c in Sources */,
 				F4141EA92797414800381179 /* astrologiePourIPhone11App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,7 +525,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -401,7 +580,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -416,6 +595,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"astrologiePourIPhone11/Preview Content\"";
@@ -427,14 +607,21 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/astrologiePourIPhone11/Types/Swe",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = stephane.bressani.dev.astrologiePourIPhone11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "astrologiePourIPhone11/Types/Swe/astrologiePourIPhone11-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -445,6 +632,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"astrologiePourIPhone11/Preview Content\"";
@@ -456,14 +644,20 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/astrologiePourIPhone11/Types/Swe",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = stephane.bressani.dev.astrologiePourIPhone11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "astrologiePourIPhone11/Types/Swe/astrologiePourIPhone11-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -585,6 +779,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F40CA0282797504600EF0991 /* XCRemoteSwiftPackageReference "Zip-1" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephaneworkspace/Zip-1";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F40CA0292797504600EF0991 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F40CA0282797504600EF0991 /* XCRemoteSwiftPackageReference "Zip-1" */;
+			productName = Zip;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F4141E9D2797414800381179 /* Project object */;
 }
