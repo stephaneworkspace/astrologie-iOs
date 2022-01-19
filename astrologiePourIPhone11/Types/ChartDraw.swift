@@ -54,19 +54,24 @@ struct ChartDraw {
     }
 
     func getPosTrigo(angular: Double, radiusCircle: Double) -> Offset {
-        let getCenter = SIZE / 2.0
+        let getCenter = getRadiusTotal()
         return Offset(
-                x: getCenter + cos(angular / getRadiusTotal() * Double.pi) * -1.0 * radiusCircle,
-                y: getCenter + sin(angular / getRadiusTotal() * Double.pi) * radiusCircle)
+                x: getCenter + cos(angular / CIRCLE * 2.0 * Double.pi) * -1.0 * radiusCircle,
+                y: getCenter + sin(angular / CIRCLE * 2.0 * Double.pi) * radiusCircle)
     }
 
     func getRadiusCircleZodiac() -> Double {
         let divTraitBig = 0.2
-        return (getRadiusTotal() * ((CIRCLE_SIZE_NATAL[2].0 - CIRCLE_SIZE_NATAL[1].0) - CIRCLE_SIZE_NATAL[2].0)) / 100.0
+        return (getRadiusTotal() * (
+                        (
+                                (CIRCLE_SIZE_NATAL[1].0 - CIRCLE_SIZE_NATAL[0].0)
+                                / (2.0 + divTraitBig)
+                        ) + CIRCLE_SIZE_NATAL[0].0))
+        / 100.0
     }
 
     func getRadiusTotal() -> Double {
-        CIRCLE / 2.0
+        SIZE / 2.0
     }
 
     struct Object {
@@ -80,18 +85,28 @@ struct ChartDraw {
         var o: Object
 
         func path(in rect: CGRect) -> Path {
+            print(o)
             var path = Path()
             path.move(to: CGPoint(x: o.pX, y: o.pY))
             path.addLine(to: CGPoint(x: o.sX, y: o.sY))
             return path
         }
-
     }
 
-    func zodiac(swe: Swe, sign: Swe.Signs) -> Object {
+    struct LineShape2: Shape {
+        func path(in rect: CGRect) -> Path {
+            var path = Path()
+            path.move(to: CGPoint(x: 0, y: 0))
+            path.addLine(to: CGPoint(x: -100, y: -100))
+            return path
+        }
+    }
+
+    func zodiac(swe: Swe, sign: Int32) -> Object {
         let zodiacSize = (((ZODIAC_SIZE * ZODIAC_RATIO) / 100.0) * SIZE) / 100.0;
         let offPosAsc = CIRCLE - swe.houses[0].longitude
-        let pos = (Double(sign.rawValue - 1) * 30.0) + 15.0 + offPosAsc
+        let signEnum: Swe.Signs = Swe.Signs.init(rawValue: sign) ?? Swe.Signs.aries
+        let pos = (Double(signEnum.rawValue - 1) * 30.0) + 15.0 + offPosAsc
         let offset = getCenterItem(
                 size: zodiacSize,
                 offset: getPosTrigo(

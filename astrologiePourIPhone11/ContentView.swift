@@ -29,11 +29,18 @@ struct ContentView: View {
                 // #endif
             }.frame(width: .infinity, height: .infinity)
             // Zodiac
-            VStack {
-                ChartDraw.LineShape(o: cD.zodiac(swe: cD.swe, sign: .aries))
+            ForEach(1...12, id: \.self) { i in
+                VStack {
+                    ChartDraw.LineShape(o: cD.zodiac(swe: cD.swe, sign: Int32(i)))
+                            .stroke(Color.red, lineWidth: 2.0)
+                            .border(.red, width: 1.0)
+                }.frame(width: cD.SIZE, height: cD.SIZE)
+            }
+            /*VStack {
+                ChartDraw.LineShape2()
                         .stroke(Color.red, lineWidth: 2.0)
                         .border(.red, width: 1.0)
-            }.frame(width: cD.SIZE, height: cD.SIZE)
+            }.frame(width: cD.SIZE, height: cD.SIZE)*/
 
         }
     }
