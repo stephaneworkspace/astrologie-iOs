@@ -19,9 +19,6 @@ struct ContentView: View {
         ZStack {
             // Circle
             VStack {
-                Circle()
-                        .stroke(.black)
-                        .frame(width: cD.SIZE, height: cD.SIZE)
                 // Text("Astrologie").padding()
                 // Text("Éphémérides").padding()
                 // #if targetEnvironment(simulator)
@@ -36,11 +33,16 @@ struct ContentView: View {
                             .border(.red, width: 1.0)
                 }.frame(width: cD.SIZE, height: cD.SIZE)
             }*/
+            // Draw Chart circles
+            VStack {
+                cD.drawCircle(circles: cD.circles(swe: cD.swe))
+                        .stroke(.black, lineWidth: 1.0)
+                        //.border(.black, width: 2.0)
+            }.frame(width: cD.SIZE, height: cD.SIZE)
             // Draw Zodiac lines
             VStack {
                 cD.drawLine(lines: cD.zodiac_lines(swe: cD.swe))
-                        .stroke(Color.red, lineWidth: 1.0)
-                        .border(.red, width: 1.0)
+                        .stroke(.black, lineWidth: 1.0)
             }.frame(width: cD.SIZE, height: cD.SIZE)
 
         }

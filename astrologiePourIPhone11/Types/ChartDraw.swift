@@ -6,9 +6,9 @@ import Foundation
 import SwiftUI
 
 struct ChartDraw {
-    let size = 100
+    let size = 130
     let mult = 3
-    let SIZE = 300.0
+    let SIZE = 390.0
     let b = 1.0
     let ZODIAC_RATIO = 10.0
     let ZODIAC_SIZE = 50.0
@@ -107,6 +107,11 @@ struct ChartDraw {
         var lY2: Double
     }
 
+    struct Circle {
+        var center: Double
+        var radius: Double
+    }
+
     struct LineShape: Shape {
         var obj: Object
         let center = 300.0 // TODO 300.0
@@ -139,6 +144,16 @@ struct ChartDraw {
         return path
     }
 
+    func drawCircle(circles: [Circle]) -> Path {
+        var path = Path()
+        for circle in circles.reversed() {
+            path.move(to: CGPoint(x: circle.center + circle.radius, y: circle.center))
+            path.addArc(center: CGPoint(x: circle.center, y: circle.center), radius: circle.radius, startAngle: .zero, endAngle: .degrees(360.0), clockwise: false)
+            path.closeSubpath()
+        }
+        return path
+    }
+
     func getCenter() -> Offset {
         Offset(offX: getRadiusTotal(), offY: getRadiusTotal())
     }
@@ -165,8 +180,8 @@ struct ChartDraw {
     }
 
     func getRadiusCircle(occurs: Int) -> (Double, Bool) {
-        /*if occurs > CIRCLE_SIZE_TRANSIT.len() {
-            // TODO panic out of range in circle occurs
+        /* TODO if occurs > CIRCLE_SIZE_TRANSIT.len() {
+            exception("out of range in circle occurs")
         }*/
         let res = getRadiusTotal() * CIRCLE_SIZE_TRANSIT[occurs].0 / 100
         return (res, CIRCLE_SIZE_TRANSIT[occurs].1)
@@ -186,6 +201,18 @@ struct ChartDraw {
 
     enum LargerDrawLine {
         case large, small
+    }
+
+    func circles(swe: Swe) -> [Circle] {
+        var res: [Circle] = []
+        let center = getRadiusTotal()
+        for (idx, circleSize) in CIRCLE_SIZE_TRANSIT.enumerated() {
+            if circleSize.1 {
+                let radius = getRadiusCircle(occurs: idx).0
+                res.append(Circle(center: center, radius: radius))
+            }
+        }
+        return res
     }
 
     func zodiac_lines(swe: Swe) -> [Line] {
