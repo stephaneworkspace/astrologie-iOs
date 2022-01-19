@@ -29,21 +29,30 @@ struct ContentView: View {
                 // #endif
             }.frame(width: .infinity, height: .infinity)
             // Zodiac
-            ForEach(1...12, id: \.self) { i in
+            /*ForEach(1...12, id: \.self) { i in
                 VStack {
                     ChartDraw.LineShape(o: cD.zodiac(swe: cD.swe, sign: Int32(i)))
                             .stroke(Color.red, lineWidth: 2.0)
                             .border(.red, width: 1.0)
                 }.frame(width: cD.SIZE, height: cD.SIZE)
-            }
-            /*VStack {
-                ChartDraw.LineShape2()
+            }*/
+            VStack {
+                cD.drawLine(objects: cD.zodiac_lines(swe: cD.swe))
                         .stroke(Color.red, lineWidth: 2.0)
                         .border(.red, width: 1.0)
-            }.frame(width: cD.SIZE, height: cD.SIZE)*/
+/*                cD.drawTickMarks(size: 300.0, offset: 0.0)
+                        .stroke(Color.red, lineWidth: 2.0)
+                        .border(.red, width: 1.0)*/
+                /*    ChartDraw.LineShape2()
+                        .stroke(Color.red, lineWidth: 2.0)
+                        .border(.red, width: 1.0)*/
+            }.frame(width: cD.SIZE, height: cD.SIZE)
 
         }
     }
+
+
+
 }
 
 struct ContentView_Previews: PreviewProvider {
