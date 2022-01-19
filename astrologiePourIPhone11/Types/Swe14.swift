@@ -9,7 +9,7 @@ class Swe14 {
         var objectId: Int32
         var longitude: Double
         var split: Swe17.SplitDeg
-        var angle: Angle
+        var angle: Swe.Angle
     }
 
     struct HouseResult {
@@ -24,18 +24,18 @@ class Swe14 {
         let _ = swe_houses_ex(tjdUt, 0, geoLat, geoLong, Int32(hsys), cuspsPtr, ascmcPtr)
         var house: [House] = []
         for pos in 1...12 {
-            var angle = Angle.nothing
+            var angle: Swe.Angle = Swe.Angle.nothing
             if pos == 1 {
-                angle = Angle.asc
+                angle = .asc
             }
             if pos == 4 {
-                angle = Angle.fc
+                angle = .fc
             }
             if pos == 7 {
-                angle = Angle.desc
+                angle = .desc
             }
             if pos == 10 {
-                angle = Angle.mc
+                angle = .mc
             }
             house.append(House.init(objectId: Int32(pos), longitude: cuspsPtr[pos], angle: angle))
         }
@@ -45,7 +45,7 @@ class Swe14 {
 
 
 extension Swe14.House {
-    init(objectId: Int32, longitude: Double, angle: Angle) {
+    init(objectId: Int32, longitude: Double, angle: Swe.Angle) {
         let swe17 = Swe17()
         let splitdeg = swe17.split_deg(ddeg: longitude, roundflag: 0)
         self.init(objectId: objectId, longitude: longitude, split: splitdeg, angle: angle)

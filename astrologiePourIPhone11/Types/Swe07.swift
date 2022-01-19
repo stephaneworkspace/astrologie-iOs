@@ -17,7 +17,7 @@ class Swe07 {
         var serr: String
     }
 
-    func pheno_ut(tjdUt: Double, ipl: Bodies, iFlag: OptionalFlag) -> PhenoUt {
+    func pheno_ut(tjdUt: Double, ipl: Swe.Bodies, iFlag: Swe.OptionalFlag) -> PhenoUt {
         let attrPtr = UnsafeMutablePointer<Double>.allocate(capacity: 20)
         let serrPtr = UnsafeMutablePointer<Int8>.allocate(capacity: 255)
         let status = swe_pheno_ut(

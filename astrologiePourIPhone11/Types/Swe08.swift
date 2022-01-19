@@ -7,7 +7,7 @@
 import Foundation
 
 class Swe08 {
-    func julday(year: Int32, month: Int32, day: Int32, hour: Double, calandar: Calandar) -> Double {
+    func julday(year: Int32, month: Int32, day: Int32, hour: Double, calandar: Swe.Calandar) -> Double {
         let res = swe_julday(year, month, day, hour, calandar.rawValue)
         return res
     }
@@ -19,7 +19,7 @@ class Swe08 {
         var result: Int32
     }
 
-    func utc_to_jd(tz: TimeZone, calandar: Calandar) -> UtcToJd {
+    func utc_to_jd(tz: TimeZone, calandar: Swe.Calandar) -> UtcToJd {
         let dretPtr = UnsafeMutablePointer<Double>.allocate(capacity: 2)
         let serrPtr = UnsafeMutablePointer<Int8>.allocate(capacity: 255)
         let result = swe_utc_to_jd(

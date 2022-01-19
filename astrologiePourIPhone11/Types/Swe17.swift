@@ -11,7 +11,7 @@ class Swe17 {
         var min: Int32
         var sec: Int32
         var cdegfr: Double
-        var sign: Signs
+        var sign: Swe.Signs
         var result: Double
     }
 
@@ -26,9 +26,9 @@ class Swe17 {
         let isgnPtr = UnsafeMutablePointer<Int32>.allocate(capacity: 1)
         let result = swe_split_deg(long30, roundflag, degPtr, minPtr, secPtr, cdegfrPtr, isgnPtr)
         let print = "\(abs(degPtr[0]))°\(minPtr[0])\'\(secPtr[0])"
-        var sign = Signs.aries
+        var sign = Swe.Signs.aries
         for pos in 1...12 {
-            let signTemp: Signs = Signs.init(rawValue: Int32(signCalc) + 1) ?? Signs.aries
+            let signTemp: Swe.Signs = Swe.Signs.init(rawValue: Int32(signCalc) + 1) ?? Swe.Signs.aries
             if pos == signTemp.rawValue {
                 sign = signTemp
                 break
