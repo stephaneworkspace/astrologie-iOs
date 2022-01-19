@@ -13,9 +13,21 @@ func swe() -> String {
 }
 
 struct ContentView: View {
+    let size = 100
+    let mult = 3
+    let s = 300.0
+    let b = 1.0
     var body: some View {
-        Text("Hello, world: " + swe())
-            .padding()
+        ZStack {
+            VStack {
+                Text("Astrologie").padding()
+                Circle()
+                        .stroke(.black)
+                        .frame(width: s, height: s)
+                Text("Éphémérides").padding()
+            }.frame(width: .infinity, height: .infinity)
+
+        }
     }
 }
 
