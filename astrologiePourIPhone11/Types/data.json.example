@@ -1,0 +1,23 @@
+{
+  "natal":
+    {
+      "lat": 46.12,
+      "lng": 6.09,
+      "timeZone": 2,
+      "year": 2021,
+      "month": 1,
+      "day": 24,
+      "hour": 12,
+      "min": 0
+    },
+  "transit": {
+      "lat": 46.12,
+      "lng": 6.09,
+      "timeZone": 2,
+      "year": 2030,
+      "month": 1,
+      "day": 1,
+      "hour": 0,
+      "min": 0
+    }
+}
