@@ -29,7 +29,32 @@ class Swe {
         // Compute bodies
         let swe03 = Swe03()
         let swe07 = Swe07()
-        bodies.append(Swe.Bodie.init(bodie: .sun, calculUt: swe03.calc_ut(tjdUt: utcToJd.julianDayUt, ipl: .sun, iflag: .speed), phenoUt: swe07.pheno_ut(tjdUt: utcToJd.julianDayUt, ipl: .sun, iFlag: .speed)))
+        var b: [Bodies] = []
+        b.append(.sun)
+        b.append(.moon)
+        b.append(.mercury)
+        b.append(.venus)
+        b.append(.mars)
+        b.append(.jupiter)
+        b.append(.saturn)
+        b.append(.uranus)
+        b.append(.neptune)
+        b.append(.pluto)
+        b.append(.ceres)
+        for x in b {
+            bodies.append(
+                    Swe.Bodie.init(
+                            bodie: x,
+                            calculUt: swe03.calc_ut(
+                                    tjdUt: utcToJd.julianDayUt,
+                                    ipl: x,
+                                    iflag: .speed),
+                            phenoUt: swe07.pheno_ut(
+                                    tjdUt: utcToJd.julianDayUt,
+                                    ipl: x,
+                                    iFlag: .speed)))
+
+        }
 
         // Computes houses
         let swe14 = Swe14()
