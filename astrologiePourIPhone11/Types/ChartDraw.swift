@@ -25,21 +25,23 @@ struct ChartDraw {
         (71.0, false), // 8 correction planet between 2 and 3
     ]
     let CIRCLE_SIZE_TRANSIT: [(Double, Bool)] = [
-(45.0, true), // 0 CIRCLE ASPECT
-(59.0, true), // 1 CIRCLE TRANSIT
-(75.0, true), // 2 CIRCLE ZODIAC END
-(80.0, true), // 3 CIRCLE HOUSE
-(92.0, false), // 4 CIRCLE INVISIBLE -
-(92.0, false), // 5 CIRCLE INVISIBLE PLANET
-    //    (0.0, false), // 5
-(0.0, false), // 6
-(82.0, false), // 7 between 2 and 3
-(85.0, false), // 8 correction planet between 2 and 3
-(49.0, false), // 9 Planet pos transit
-(57.5, false), // 10 - 7 transit
-(54.5, false), // 11 - 8 transit
-];
+        (45.0, true), // 0 CIRCLE ASPECT
+        (59.0, true), // 1 CIRCLE TRANSIT
+        (75.0, true), // 2 CIRCLE ZODIAC END
+        (80.0, true), // 3 CIRCLE HOUSE
+        (92.0, false), // 4 CIRCLE INVISIBLE -
+        (92.0, false), // 5 CIRCLE INVISIBLE PLANET
+        //    (0.0, false), // 5
+        (0.0, false), // 6
+        (82.0, false), // 7 between 2 and 3
+        (85.0, false), // 8 correction planet between 2 and 3
+        (49.0, false), // 9 Planet pos transit
+        (57.5, false), // 10 - 7 transit
+        (54.5, false), // 11 - 8 transit
+    ]
 
+    let LARGER_DRAW_LINE_RULES_SMALL = 0.1
+    let LARGER_DRAW_LINE_RULES_LARGE = 0.2
 
     let swe = Swe()
 
@@ -194,12 +196,28 @@ struct ChartDraw {
         return (d, CIRCLE_SIZE_TRANSIT[occurs].1)
     }
 
+    func getRadiusRulesInsideCircle(largerDrawLine: LargerDrawLine) -> Double {
+        var size = 0.0
+        switch largerDrawLine {
+        case .small:
+            size = 1.0 + LARGER_DRAW_LINE_RULES_SMALL
+        case .large:
+            size = 1.0 + LARGER_DRAW_LINE_RULES_LARGE
+        }
+        return getRadiusTotal() * (((CIRCLE_SIZE_TRANSIT[2].0 - CIRCLE_SIZE_TRANSIT[1].0) / size)
+                        + CIRCLE_SIZE_TRANSIT[1].0) / 100.0
+    }
+
+    enum LargerDrawLine {
+        case large, small
+    }
+
     func zodiac_lines(swe: Swe) -> [Line] {
         var res: [Line] = []
-        for i in 1...12 {
+        for iIdx in 1...12 {
             // 0°
             let offPosAsc = 360.0 - swe.houses[0].longitude
-            var pos = Double(i) * 30.0 + offPosAsc
+            var pos = Double(iIdx) * 30.0 + offPosAsc
             pos = getFixedPos(pos_value: pos)
             let axy: [Offset] = getLineTrigo(
                     angular: pos,
@@ -211,6 +229,27 @@ struct ChartDraw {
                     x2: axy[1].x,
                     y2: axy[1].y)
             )
+            // 1° to 29°
+            var largerDrawLine: LargerDrawLine = .large
+            for jIdx in 1...15 {
+                if jIdx == 5 || jIdx == 10 || jIdx == 15 {
+                    largerDrawLine = .large
+                } else
+                {
+                    largerDrawLine = .small
+                }
+                pos = (Double(iIdx) * 30.9) + Double(jIdx) * 2.0 + offPosAsc
+                pos = getFixedPos(pos_value: pos)
+                let axy: [Offset] = getLineTrigo(
+                        angular: pos,
+                        radiusCircleBegin: getRadiusCircle(occurs: 2).0,
+                        radiusCircleEnd: getRadiusRulesInsideCircle(largerDrawLine: largerDrawLine))
+                res.append(Line(
+                        x1: axy[0].x,
+                        y1: axy[0].y,
+                        x2: axy[1].x,
+                        y2: axy[1].y))
+            }
         }
         return res
     }

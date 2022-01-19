@@ -38,7 +38,7 @@ struct ContentView: View {
             }*/
             VStack {
                 cD.drawLine(objects: cD.zodiac_lines(swe: cD.swe))
-                        .stroke(Color.red, lineWidth: 2.0)
+                        .stroke(Color.red, lineWidth: 1.0)
                         .border(.red, width: 1.0)
 /*                cD.drawTickMarks(size: 300.0, offset: 0.0)
                         .stroke(Color.red, lineWidth: 2.0)
