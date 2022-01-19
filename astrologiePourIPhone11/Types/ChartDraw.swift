@@ -94,6 +94,7 @@ struct ChartDraw {
     }
 
     struct Object {
+        var sign: Swe.Signs
         var oSx: Double
         var oSy: Double
         var oPx: Double
@@ -268,10 +269,103 @@ struct ChartDraw {
                 offset: getPosTrigo(
                         angular: pos,
                         radiusCircle: getRadiusCircleZodiac()))
-        return Object(
+        let res = Object(
+                sign: signEnum,
                 oSx: zodiacSize,
                 oSy: zodiacSize,
                 oPx: offset.offX,
                 oPy: offset.offY)
+        print(res)
+        return res
+    }
+
+    func drawZodiacSvg(object: Object) -> some View {
+        let FIXX = 180.0
+        let FIXY = 180.0
+        switch object.sign.rawValue {
+        case 1:
+            return VStack {
+                Image("zod01").resizable()
+                        .resizable()
+                        .position(x: object.oPx - FIXX, y: object.oPy - FIXY).frame(width: object.oSx, height: object.oSy)
+
+            }.frame(width: SIZE, height: SIZE)
+        case 2:
+            return VStack {
+                Image("zod02").resizable()
+                        .resizable()
+                        .position(x: object.oPx - FIXX, y: object.oPy - FIXY).frame(width: object.oSx, height: object.oSy)
+
+            }.frame(width: SIZE, height: SIZE)
+        case 3:
+            return VStack {
+                Image("zod03").resizable()
+                        .resizable()
+                        .position(x: object.oPx - FIXX, y: object.oPy - FIXY).frame(width: object.oSx, height: object.oSy)
+
+            }.frame(width: SIZE, height: SIZE)
+        case 4:
+            return VStack {
+                Image("zod04").resizable()
+                        .resizable()
+                        .position(x: object.oPx - FIXX, y: object.oPy - FIXY).frame(width: object.oSx, height: object.oSy)
+
+            }.frame(width: SIZE, height: SIZE)
+        case 5:
+            return VStack {
+                Image("zod05").resizable()
+                        .resizable()
+                        .position(x: object.oPx - FIXX, y: object.oPy - FIXY).frame(width: object.oSx, height: object.oSy)
+
+            }.frame(width: SIZE, height: SIZE)
+        case 6:
+            return VStack {
+                Image("zod06").resizable()
+                        .resizable()
+                        .position(x: object.oPx - FIXX, y: object.oPy - FIXY).frame(width: object.oSx, height: object.oSy)
+
+            }.frame(width: SIZE, height: SIZE)
+        case 7:
+            return VStack {
+                Image("zod07").resizable()
+                        .resizable()
+                        .position(x: object.oPx - FIXX, y: object.oPy - FIXY).frame(width: object.oSx, height: object.oSy)
+
+            }.frame(width: SIZE, height: SIZE)
+        case 8:
+            return VStack {
+                Image("zod08").resizable()
+                        .resizable()
+                        .position(x: object.oPx - FIXX, y: object.oPy - FIXY).frame(width: object.oSx, height: object.oSy)
+
+            }.frame(width: SIZE, height: SIZE)
+        case 9:
+            return VStack {
+                Image("zod09").resizable()
+                        .resizable()
+                        .position(x: object.oPx - FIXX, y: object.oPy - FIXY).frame(width: object.oSx, height: object.oSy)
+
+            }.frame(width: SIZE, height: SIZE)
+        case 10:
+            return VStack {
+                Image("zod10").resizable()
+                        .resizable()
+                        .position(x: object.oPx - FIXX, y: object.oPy - FIXY).frame(width: object.oSx, height: object.oSy)
+
+            }.frame(width: SIZE, height: SIZE)
+        case 11:
+            return VStack {
+                Image("zod11").resizable()
+                        .resizable()
+                        .position(x: object.oPx - FIXX, y: object.oPy - FIXY).frame(width: object.oSx, height: object.oSy)
+
+            }.frame(width: SIZE, height: SIZE)
+        default:
+            return VStack {
+                Image("zod12").resizable()
+                        .resizable()
+                        .position(x: object.oPx - FIXX, y: object.oPy - FIXY).frame(width: object.oSx, height: object.oSy)
+            }.frame(width: SIZE, height: SIZE)
+        }
     }
 }

@@ -14,7 +14,6 @@ func swe() -> String {
 
 struct ContentView: View {
     var cD: ChartDraw = ChartDraw()
-
     var body: some View {
         ZStack {
             // Circle
@@ -26,25 +25,47 @@ struct ContentView: View {
                 // #endif
             }.frame(width: .infinity, height: .infinity)
             // Zodiac
-            /*ForEach(1...12, id: \.self) { i in
+            /*
+            ForEach(1...12, id: \.self) { i in
                 VStack {
                     ChartDraw.LineShape(o: cD.zodiac(swe: cD.swe, sign: Int32(i)))
                             .stroke(Color.red, lineWidth: 2.0)
                             .border(.red, width: 1.0)
                 }.frame(width: cD.SIZE, height: cD.SIZE)
             }*/
-            // Draw Chart circles
+            // Draw chart circles
             VStack {
                 cD.drawCircle(circles: cD.circles(swe: cD.swe))
                         .stroke(.black, lineWidth: 1.0)
                         //.border(.black, width: 2.0)
             }.frame(width: cD.SIZE, height: cD.SIZE)
-            // Draw Zodiac lines
+            // Draw zodiac lines
             VStack {
                 cD.drawLine(lines: cD.zodiac_lines(swe: cD.swe))
                         .stroke(.black, lineWidth: 1.0)
             }.frame(width: cD.SIZE, height: cD.SIZE)
+            // Draw zodiac symbols
+            /*
+            VStack {
+                Image("zod01").resizable()
+                        .position(
+                                x: cD.zodiac_sign(swe: cD.swe, sign: 1).oPx,
+                                y: cD.zodiac_sign(swe: cD.swe, sign: 1).oPy)
+                        .offset(
+                                x: cD.zodiac_sign(swe: cD.swe, sign: 1).oPx,
+                                y: cD.zodiac_sign(swe: cD.swe, sign: 1).oPy)
+                        .frame(
+                                width: 5.0,
+                                height: 5.0)
 
+            }.frame(width: cD.SIZE, height: cD.SIZE)*/
+            ForEach(1...12, id: \.self) { idx in
+                cD.drawZodiacSvg(object: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)))
+            }
+            /*VStack {
+              Image("zod10").resizable().position(x: 15.0, y: 15.0).frame(width: 20.0, height: 20.0)
+            }.frame(width: cD.SIZE, height: cD.SIZE)
+            */
         }
     }
 }
