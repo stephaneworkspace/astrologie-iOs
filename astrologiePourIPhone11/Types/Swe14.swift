@@ -39,6 +39,8 @@ class Swe14 {
             }
             house.append(House.init(objectId: Int32(pos), longitude: cuspsPtr[pos], angle: angle))
         }
+        free(cuspsPtr)
+        free(ascmcPtr)
         return house
     }
 }

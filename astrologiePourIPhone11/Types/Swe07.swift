@@ -26,7 +26,7 @@ class Swe07 {
                 iFlag.rawValue,
                 attrPtr,
                 serrPtr)
-        return PhenoUt(
+        let res = PhenoUt(
                 phaseAngle: attrPtr[0],
                 phaseIlluminated: attrPtr[1],
                 elongationOfPlanet: attrPtr[2],
@@ -34,5 +34,8 @@ class Swe07 {
                 apparentMagnitude: attrPtr[4],
                 status: Int(status),
                 serr: String(cString: serrPtr))
+        free(attrPtr)
+        free(serrPtr)
+        return res
     }
 }

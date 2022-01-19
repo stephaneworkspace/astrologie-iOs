@@ -32,7 +32,10 @@ class Swe08 {
                 calandar.rawValue,
                 dretPtr, serrPtr)
         let serr = String(cString: serrPtr)
-        return UtcToJd(julianDayEt: dretPtr[0], julianDayUt: dretPtr[1], err: serr, result: result)
+        let res = UtcToJd(julianDayEt: dretPtr[0], julianDayUt: dretPtr[1], err: serr, result: result)
+        free(dretPtr)
+        free(serrPtr)
+        return res
     }
 }
 

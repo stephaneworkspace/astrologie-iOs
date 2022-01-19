@@ -9,6 +9,7 @@ import Foundation
 
 class Swe {
     var bodies: [Bodie] = []
+    var houses: [Swe14.House] = []
     init() {
         // Load json or default
         let chart = load_default_value()
@@ -21,29 +22,23 @@ class Swe {
         // Compute julian day
         let swe08: Swe08 = Swe08()
         let julday = swe08.julday(year: chart.nYear, month: chart.nMonth, day: chart.nDay, hour: Double(chart.nHour), calandar: .gregorian)
+        var utcTimeZone = TimeZone(year: chart.nYear, month: chart.nMonth, day: chart.nDay, hour: chart.nHour, min: chart.nMin, sec: 0.0)
+        utcTimeZone.utc_time_zone(timezone: 2.0)
+        let utcToJd = swe08.utc_to_jd(tz: utcTimeZone, calandar: .gregorian)
 
         // Compute bodies
         let swe03 = Swe03()
-        bodies.append(Swe.Bodie.init(bodie: .sun, utResult: swe03.calc_ut(tjdUt: julday, ipl: .sun, iflag: .speed)))
-
         let swe07 = Swe07()
-        let phenoUt = swe07.pheno_ut(tjdUt: julday, ipl: .sun, iFlag: .speed)
-        // print(phenoUt)
-        var utcTimeZone = TimeZone(year: 2021, month: 1, day: 24, hour: 0, min: 0, sec: 0.0)
-        utcTimeZone.utc_time_zone(timezone: 2.0)
+        bodies.append(Swe.Bodie.init(bodie: .sun, calculUt: swe03.calc_ut(tjdUt: utcToJd.julianDayUt, ipl: .sun, iflag: .speed), phenoUt: swe07.pheno_ut(tjdUt: utcToJd.julianDayUt, ipl: .sun, iFlag: .speed)))
 
-        let utcToJd = swe08.utc_to_jd(tz: utcTimeZone, calandar: .gregorian)
-        // print(utcToJd)
-
+        // Computes houses
         let swe14 = Swe14()
-        let houses = swe14.houses(
+        houses = swe14.houses(
                 tjdUt: utcToJd.julianDayUt,
                 geoLat: chart.nLat,
                 geoLong: chart.nLng,
                 hsys: CChar("W") ?? CChar.init())
-        /*for house in houses {
-            print(house)
-        }*/
+
         swe02.close()
     }
 
@@ -96,14 +91,8 @@ class Swe {
 
     struct Bodie {
         var bodie: Bodies
-        var longitude: Double
-        var latitude: Double
-        var distanceAu: Double
-        var speedLongitude: Double
-        var speedLatitude: Double
-        var speedDistanceAu: Double
-        var status: Int32
-        var serr: String
+        var calculUt: Swe03.CalcUt
+        var phenoUt: Swe07.PhenoUt
     }
 
     enum Bodies: Int32 {
@@ -242,20 +231,6 @@ class Swe {
              jplHorApprox = 524288
     }
 
-}
-extension Swe.Bodie {
-    init(bodie: Swe.Bodies, utResult: Swe03.CalcUtResult) {
-        self.init(
-               bodie: bodie,
-               longitude: utResult.longitude,
-               latitude: utResult.latitude,
-               distanceAu: utResult.distanceAu,
-               speedLongitude: utResult.speedLongitude,
-               speedLatitude: utResult.speedLatitude,
-               speedDistanceAu: utResult.speedDistanceAu,
-               status: utResult.status,
-               serr: utResult.serr)
-    }
 }
 
 /*

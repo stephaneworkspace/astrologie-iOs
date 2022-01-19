@@ -34,7 +34,7 @@ class Swe17 {
                 break
             }
         }
-        return SplitDeg(
+        let res = SplitDeg(
                 print: print,
                 deg: degPtr[0],
                 min: minPtr[0],
@@ -42,5 +42,11 @@ class Swe17 {
                 cdegfr: cdegfrPtr[0],
                 sign: sign,
                 result: result)
+        free(degPtr)
+        free(minPtr)
+        free(secPtr)
+        free(cdegfrPtr)
+        free(isgnPtr)
+        return res
     }
 }

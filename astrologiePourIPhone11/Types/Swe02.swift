@@ -14,8 +14,8 @@ class Swe02 {
         do {
             let filePath = Bundle.main.url(forResource: "ephem", withExtension: "zip")!
             let unzipDirectory = try Zip.quickUnzipFile(filePath) // Unzip
-            let param = UnsafeMutablePointer<Int8>(mutating: (unzipDirectory.absoluteString as NSString).utf8String)
-            swe_set_ephe_path(param)
+            let paramPtr = UnsafeMutablePointer<Int8>(mutating: (unzipDirectory.absoluteString as NSString).utf8String)
+            swe_set_ephe_path(paramPtr)
         } catch {
             print("Something went wrong with unzip")
         }
@@ -26,17 +26,19 @@ class Swe02 {
         swe_close()
     }
 
-    // Set path ephe file
+    /*
+    // Set path ephe file (Not used)
     func set_jpl_file() {
         let path = Bundle.main.bundlePath
-        let param = UnsafeMutablePointer<Int8>(mutating: (path as NSString).utf8String)
-        swe_set_jpl_file(param)
-    }
+        let paramPtr = UnsafeMutablePointer<Int8>(mutating: (path as NSString).utf8String)
+        swe_set_jpl_file(paramPtr)
+    }*/
 
     // Get version of swiss ephemeris
     func version() -> String {
         let versionPtr = UnsafeMutablePointer<Int8>.allocate(capacity: 255)
         let res = String.init(cString: swe_version(versionPtr)) as String
+        free(versionPtr)
         return res
     }
 

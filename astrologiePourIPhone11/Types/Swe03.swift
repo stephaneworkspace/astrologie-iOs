@@ -14,7 +14,7 @@
 import Foundation
 
 class Swe03 {
-    struct CalcUtResult {
+    struct CalcUt{
         var longitude: Double
         var latitude: Double
         var distanceAu: Double
@@ -25,7 +25,7 @@ class Swe03 {
         var serr: String
     }
 
-    func calc_ut(tjdUt: Double, ipl: Swe.Bodies, iflag: Swe.OptionalFlag) -> CalcUtResult {
+    func calc_ut(tjdUt: Double, ipl: Swe.Bodies, iflag: Swe.OptionalFlag) -> CalcUt {
         let xxPtr = UnsafeMutablePointer<Double>.allocate(capacity: 6)
         let serrPtr = UnsafeMutablePointer<Int8>.allocate(capacity: 255)
         let status: Int32
@@ -42,7 +42,7 @@ class Swe03 {
                 xxPtr[0] -= 360.0
             }
         }
-        let res = CalcUtResult(
+        let res = CalcUt(
                 longitude: xxPtr[0],
                 latitude: xxPtr[1],
                 distanceAu: xxPtr[2],
@@ -51,7 +51,6 @@ class Swe03 {
                 speedDistanceAu: xxPtr[5],
                 status: status,
                 serr: String(cString: serrPtr))
-        // TODO free everyvere
         free(xxPtr)
         free(serrPtr)
         return res
