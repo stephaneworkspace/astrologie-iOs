@@ -36,23 +36,15 @@ struct ContentView: View {
                             .border(.red, width: 1.0)
                 }.frame(width: cD.SIZE, height: cD.SIZE)
             }*/
+            // Draw Zodiac lines
             VStack {
-                cD.drawLine(objects: cD.zodiac_lines(swe: cD.swe))
+                cD.drawLine(lines: cD.zodiac_lines(swe: cD.swe))
                         .stroke(Color.red, lineWidth: 1.0)
                         .border(.red, width: 1.0)
-/*                cD.drawTickMarks(size: 300.0, offset: 0.0)
-                        .stroke(Color.red, lineWidth: 2.0)
-                        .border(.red, width: 1.0)*/
-                /*    ChartDraw.LineShape2()
-                        .stroke(Color.red, lineWidth: 2.0)
-                        .border(.red, width: 1.0)*/
             }.frame(width: cD.SIZE, height: cD.SIZE)
 
         }
     }
-
-
-
 }
 
 struct ContentView_Previews: PreviewProvider {

@@ -62,21 +62,21 @@ struct ChartDraw {
     }
 
     struct Offset {
-        var x: Double
-        var y: Double
+        var offX: Double
+        var offY: Double
     }
 
     func getCenterItem(size: Double, offset: Offset) -> Offset {
         Offset(
-                x: offset.x - (size / 2.0),
-                y: offset.y - (size / 2.0))
+                offX: offset.offX - (size / 2.0),
+                offY: offset.offY - (size / 2.0))
     }
 
     func getPosTrigo(angular: Double, radiusCircle: Double) -> Offset {
         let getCenter = getRadiusTotal()
         return Offset(
-                x: getCenter + cos(angular / CIRCLE * 2.0 * Double.pi) * -1.0 * radiusCircle,
-                y: getCenter + sin(angular / CIRCLE * 2.0 * Double.pi) * radiusCircle)
+                offX: getCenter + cos(angular / CIRCLE * 2.0 * Double.pi) * -1.0 * radiusCircle,
+                offY: getCenter + sin(angular / CIRCLE * 2.0 * Double.pi) * radiusCircle)
     }
 
     func getRadiusCircleZodiac() -> Double {
@@ -94,33 +94,32 @@ struct ChartDraw {
     }
 
     struct Object {
-        var sX: Double
-        var sY: Double
-        var pX: Double
-        var pY: Double
+        var oSx: Double
+        var oSy: Double
+        var oPx: Double
+        var oPy: Double
     }
 
     struct Line {
-        var x1: Double
-        var y1: Double
-        var x2: Double
-        var y2: Double
+        var lX1: Double
+        var lY1: Double
+        var lX2: Double
+        var lY2: Double
     }
 
     struct LineShape: Shape {
-        var o: Object
+        var obj: Object
         let center = 300.0 // TODO 300.0
 
         func path(in rect: CGRect) -> Path {
-            print(o)
+            print(obj)
             var path = Path()
-            path.move(to: CGPoint(x: center + o.pX, y: center + o.pY))
-            path.addLine(to: CGPoint(x: o.sX, y: o.sY))
+            path.move(to: CGPoint(x: center + obj.oPx, y: center + obj.oPy))
+            path.addLine(to: CGPoint(x: obj.oSx, y: obj.oSy))
             path.closeSubpath()
             return path
         }
     }
-
 
     struct LineShape2: Shape {
         func path(in rect: CGRect) -> Path {
@@ -131,60 +130,37 @@ struct ChartDraw {
         }
     }
 
-    func drawLine(objects: [Line]) -> Path {
+    func drawLine(lines: [Line]) -> Path {
         var path = Path()
-        for o in objects {
-            path.move(to: CGPoint(x: o.x1, y: o.y1))
-            path.addLine(to: CGPoint(x: o.x2, y:o.y2))
+        for line in lines {
+            path.move(to: CGPoint(x: line.lX1, y: line.lY1))
+            path.addLine(to: CGPoint(x: line.lX2, y: line.lY2))
         }
         return path
     }
-/*
-    func drawTickMarks(size: Double, offset: Double, objects: [Object]) -> Path {
-        var path = Path()
-        // 1
-        let clockCenter = size / 2.0 + offset
-        let clockRadius = size / 2.0
-        // 2
-        for x in zodiac_objects(swe: <#T##Swe##astrologiePourIPhone11.Swe#>) {
-            // 3
-            //let angle = Double(hourMark) / 12.0 * 2.0 * Double.pi
-            // 4
-            let startX = cos(angle) * clockRadius + clockCenter
-            let startY = sin(angle) * clockRadius + clockCenter
-            // 5
-            let endX = cos(angle) * clockRadius * 0.9 + clockCenter
-            let endY = sin(angle) * clockRadius * 0.9 + clockCenter
-            // 6
-            path.move(to: CGPoint(x: startX, y: startY))
-            // 7
-            path.addLine(to: CGPoint(x: endX, y: endY))
-        }
-        return path
-    }*/
 
     func getCenter() -> Offset {
-        Offset(x: getRadiusTotal(), y: getRadiusTotal())
+        Offset(offX: getRadiusTotal(), offY: getRadiusTotal())
     }
 
     func getLineTrigo(angular: Double, radiusCircleBegin: Double, radiusCircleEnd: Double) -> [Offset] {
         var res: [Offset] = []
-        let dx1: Double = getCenter().x
+        let dx1: Double = getCenter().offX
                 + cos(angular / CIRCLE  * 2.0 * Double.pi)
                 * -1.0
                 * radiusCircleBegin
-        let dx2: Double = self.getCenter().y
+        let dx2: Double = getCenter().offY
                 + sin(angular / CIRCLE * 2.0 * Double.pi)
                 * radiusCircleBegin
-        let dy1: Double = self.getCenter().x
+        let dy1: Double = getCenter().offX
                 + cos(angular / CIRCLE * 2.0 * Double.pi)
                 * -1.0
                 * radiusCircleEnd
-        let dy2: Double = self.getCenter().y
+        let dy2: Double = getCenter().offY
                 + sin(angular / CIRCLE * 2.0 * Double.pi)
                 * radiusCircleEnd
-        res.append(Offset(x: dx1, y: dx2))
-        res.append(Offset(x: dy1, y: dy2))
+        res.append(Offset(offX: dx1, offY: dx2))
+        res.append(Offset(offX: dy1, offY: dy2))
         return res
     }
 
@@ -192,8 +168,8 @@ struct ChartDraw {
         /*if occurs > CIRCLE_SIZE_TRANSIT.len() {
             // TODO panic out of range in circle occurs
         }*/
-        let d = getRadiusTotal() * CIRCLE_SIZE_TRANSIT[occurs].0 / 100
-        return (d, CIRCLE_SIZE_TRANSIT[occurs].1)
+        let res = getRadiusTotal() * CIRCLE_SIZE_TRANSIT[occurs].0 / 100
+        return (res, CIRCLE_SIZE_TRANSIT[occurs].1)
     }
 
     func getRadiusRulesInsideCircle(largerDrawLine: LargerDrawLine) -> Double {
@@ -224,10 +200,10 @@ struct ChartDraw {
                     radiusCircleBegin: getRadiusCircle(occurs: 2).0,
                     radiusCircleEnd: getRadiusCircle(occurs: 1).0)
             res.append(Line(
-                    x1: axy[0].x,
-                    y1: axy[0].y,
-                    x2: axy[1].x,
-                    y2: axy[1].y)
+                    lX1: axy[0].offX,
+                    lY1: axy[0].offY,
+                    lX2: axy[1].offX,
+                    lY2: axy[1].offY)
             )
             // 1° to 29°
             var largerDrawLine: LargerDrawLine = .large
@@ -238,17 +214,18 @@ struct ChartDraw {
                 {
                     largerDrawLine = .small
                 }
-                pos = (Double(iIdx) * 30.9) + Double(jIdx) * 2.0 + offPosAsc
+                pos = (Double(iIdx) * 30.0) + Double(jIdx) * 2.0 + offPosAsc
                 pos = getFixedPos(pos_value: pos)
                 let axy: [Offset] = getLineTrigo(
                         angular: pos,
                         radiusCircleBegin: getRadiusCircle(occurs: 2).0,
                         radiusCircleEnd: getRadiusRulesInsideCircle(largerDrawLine: largerDrawLine))
                 res.append(Line(
-                        x1: axy[0].x,
-                        y1: axy[0].y,
-                        x2: axy[1].x,
-                        y2: axy[1].y))
+                        lX1: axy[0].offX,
+                        lY1: axy[0].offY,
+                        lX2: axy[1].offX,
+                        lY2: axy[1].offY)
+                )
             }
         }
         return res
@@ -265,9 +242,9 @@ struct ChartDraw {
                         angular: pos,
                         radiusCircle: getRadiusCircleZodiac()))
         return Object(
-                sX: zodiacSize,
-                sY: zodiacSize,
-                pX: offset.x,
-                pY: offset.y)
+                oSx: zodiacSize,
+                oSy: zodiacSize,
+                oPx: offset.offX,
+                oPy: offset.offY)
     }
 }
