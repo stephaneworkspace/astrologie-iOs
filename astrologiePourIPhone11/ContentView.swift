@@ -13,19 +13,27 @@ func swe() -> String {
 }
 
 struct ContentView: View {
-    let size = 100
-    let mult = 3
-    let s = 300.0
-    let b = 1.0
+    var cD: ChartDraw = ChartDraw()
+
     var body: some View {
         ZStack {
+            // Circle
             VStack {
-                Text("Astrologie").padding()
                 Circle()
                         .stroke(.black)
-                        .frame(width: s, height: s)
-                Text("Éphémérides").padding()
+                        .frame(width: cD.SIZE, height: cD.SIZE)
+                // Text("Astrologie").padding()
+                // Text("Éphémérides").padding()
+                // #if targetEnvironment(simulator)
+                // Text("Simulator").padding()
+                // #endif
             }.frame(width: .infinity, height: .infinity)
+            // Zodiac
+            VStack {
+                ChartDraw.LineShape(o: cD.zodiac(swe: cD.swe, sign: .aries))
+                        .stroke(Color.red, lineWidth: 2.0)
+                        .border(.red, width: 1.0)
+            }.frame(width: cD.SIZE, height: cD.SIZE)
 
         }
     }
