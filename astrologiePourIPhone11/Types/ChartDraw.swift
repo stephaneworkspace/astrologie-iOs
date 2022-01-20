@@ -13,6 +13,7 @@ struct ChartDraw {
     let ZODIAC_RATIO = 10.0
     let ZODIAC_SIZE = 50.0
     let BODIE_SIZE = 35.0
+    let ANGLE_SIZE = 50.0
     let HOUSE_SIZE = 40.0
     let DEG_SIZE = 50.0
     let MIN_SIZE = 50.0
@@ -133,6 +134,14 @@ struct ChartDraw {
     }
 
     struct ObjectHouse {
+        var oSx: Double
+        var oSy: Double
+        var oPx: Double
+        var oPy: Double
+    }
+
+    struct ObjectAngle {
+        var svg: String
         var oSx: Double
         var oSy: Double
         var oPx: Double
@@ -349,6 +358,18 @@ struct ChartDraw {
                 + CIRCLE_SIZE_TRANSIT[1].0) / 100.0
     }
 
+    func getAngleLongitude(angle: Swe.Angle) -> Double {
+        var pos = 0.0
+        for house in swe.houses {
+            if house.angle == angle {
+                pos = CIRCLE - swe.houses[0].longitude + house.longitude
+                break
+            }
+        }
+        pos = getFixedPos(pos_value: pos)
+        return pos
+    }
+
     enum LargerDrawLine {
         case large, small
     }
@@ -529,6 +550,37 @@ struct ChartDraw {
                 oPx: offset.offX,
                 oPy: offset.offY)
         return res
+    }
+
+    func angle(swe: Swe, angle: Swe.Angle) -> ObjectAngle {
+        let angleRatio = 12.0 // TODO const
+        var angleSize = (((ANGLE_SIZE * angleRatio) / 100.0) * SIZE) / 100.0
+        let pos = getAngleLongitude(angle: angle)
+        let offAngle = getCenterItem(
+                size: angleSize,
+                offset: getPosTrigo(
+                        angular: pos,
+                        radiusCircle: getRadiusCircle(occurs: 5).0))
+        var posNext: Double
+        var svg = "aas"
+        switch angle {
+        case .asc:
+            svg = "aas"
+        case .fc:
+            svg = "afc"
+        case .desc:
+            svg = "ads"
+        case .mc:
+            svg = "amc"
+        case .nothing:
+            svg = ""
+        }
+        return ObjectAngle(
+                svg: svg,
+                oSx: angleSize,
+                oSy: angleSize,
+                oPx: offAngle.offX,
+                oPy: offAngle.offY)
     }
 
     func house(swe: Swe, number: Int32) -> ObjectHouse {

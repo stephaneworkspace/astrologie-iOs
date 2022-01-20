@@ -12,36 +12,96 @@ func swe() -> String {
     return swe.bodies[0].0.calculUt.longitude.formatted()
 }
 
+struct Chart1View: View {
+    var cD: ChartDraw = ChartDraw()
+    var body: some View {
+        // Circle
+        /* VStack {
+             // Text("Astrologie").padding()
+             // Text("Éphémérides").padding()
+             // #if targetEnvironment(simulator)
+             // Text("Simulator").padding()
+             // #endif
+         }.frame(width: .infinity, height: .infinity)*/
+        // Draw chart circles
+        VStack {
+            cD.drawCircle(circles: cD.circles(swe: cD.swe))
+                    .stroke(.black, lineWidth: 1.0)
+        }.frame(width: cD.SIZE, height: cD.SIZE)
+        // Draw zodiac lines
+        VStack {
+            cD.drawLine(lines: cD.zodiac_lines(swe: cD.swe))
+                    .stroke(.black, lineWidth: 1.0)
+        }.frame(width: cD.SIZE, height: cD.SIZE)
+        // Draw house triangle and lines
+        VStack {
+            ChartDraw.DrawHouseTriangle(lines: cD.house_lines(swe: cD.swe))
+                    .fill(.black)
+        }.frame(width: cD.SIZE, height: cD.SIZE)
+        VStack {
+            cD.drawHouseLine(lines: cD.house_lines(swe: cD.swe)).stroke(.black, lineWidth: 1.0)
+        }.frame(width: cD.SIZE, height: cD.SIZE)
+        let angle = cD.angle(swe: cD.swe, angle: .asc)
+        VStack {
+            GeometryReader { geometry in
+                Image(angle.svg)
+                        .resizable()
+                        .offset(
+                                x: angle.oPx,
+                                y: angle.oPy)
+                        .frame(
+                                width: angle.oSx,
+                                height: angle.oSy)
+            }
+        }.frame(width: cD.SIZE, height: cD.SIZE)
+        let angle = cD.angle(swe: cD.swe, angle: .fc)
+        VStack {
+            GeometryReader { geometry in
+                Image(angle.svg)
+                        .resizable()
+                        .offset(
+                                x: angle.oPx,
+                                y: angle.oPy)
+                        .frame(
+                                width: angle.oSx,
+                                height: angle.oSy)
+            }
+        }.frame(width: cD.SIZE, height: cD.SIZE)
+        let angle = cD.angle(swe: cD.swe, angle: .desc)
+        VStack {
+            GeometryReader { geometry in
+                Image(angle.svg)
+                        .resizable()
+                        .offset(
+                                x: angle.oPx,
+                                y: angle.oPy)
+                        .frame(
+                                width: angle.oSx,
+                                height: angle.oSy)
+            }
+        }.frame(width: cD.SIZE, height: cD.SIZE)
+        let angle = cD.angle(swe: cD.swe, angle: .mc)
+        VStack {
+            GeometryReader { geometry in
+                Image(angle.svg)
+                        .resizable()
+                        .offset(
+                                x: angle.oPx,
+                                y: angle.oPy)
+                        .frame(
+                                width: angle.oSx,
+                                height: angle.oSy)
+            }
+        }.frame(width: cD.SIZE, height: cD.SIZE)
+
+    }
+}
+
 struct ContentView: View {
     var cD: ChartDraw = ChartDraw()
     var body: some View {
         ZStack {
-            // Circle
-            VStack {
-                // Text("Astrologie").padding()
-                // Text("Éphémérides").padding()
-                // #if targetEnvironment(simulator)
-                // Text("Simulator").padding()
-                // #endif
-            }.frame(width: .infinity, height: .infinity)
-            // Draw chart circles
-            VStack {
-                cD.drawCircle(circles: cD.circles(swe: cD.swe))
-                        .stroke(.black, lineWidth: 1.0)
-            }.frame(width: cD.SIZE, height: cD.SIZE)
-            // Draw zodiac lines
-            VStack {
-                cD.drawLine(lines: cD.zodiac_lines(swe: cD.swe))
-                        .stroke(.black, lineWidth: 1.0)
-            }.frame(width: cD.SIZE, height: cD.SIZE)
-            // Draw house triangle and lines
-            VStack {
-                ChartDraw.DrawHouseTriangle(lines: cD.house_lines(swe: cD.swe))
-                        .fill(.black)
-            }.frame(width: cD.SIZE, height: cD.SIZE)
-            VStack {
-                cD.drawHouseLine(lines: cD.house_lines(swe: cD.swe)).stroke(.black, lineWidth: 1.0)
-            }.frame(width: cD.SIZE, height: cD.SIZE)
+            Chart1View(cD: cD)
             // House number
             ForEach(1...12, id: \.self) { idx in
                 let house = cD.house(swe: cD.swe, number: Int32(idx))
