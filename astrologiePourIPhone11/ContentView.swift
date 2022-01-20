@@ -44,34 +44,22 @@ struct ContentView: View {
                 cD.drawLine(lines: cD.zodiac_lines(swe: cD.swe))
                         .stroke(.black, lineWidth: 1.0)
             }.frame(width: cD.SIZE, height: cD.SIZE)
-            // Draw zodiac symbols
-            /*
+            // Draw house lines
             VStack {
-                Image("zod01").resizable()
-                        .position(
-                                x: cD.zodiac_sign(swe: cD.swe, sign: 1).oPx,
-                                y: cD.zodiac_sign(swe: cD.swe, sign: 1).oPy)
-                        .offset(
-                                x: cD.zodiac_sign(swe: cD.swe, sign: 1).oPx,
-                                y: cD.zodiac_sign(swe: cD.swe, sign: 1).oPy)
-                        .frame(
-                                width: 5.0,
-                                height: 5.0)
-
-            }.frame(width: cD.SIZE, height: cD.SIZE)*/
+                cD.drawHouseLine(lines: cD.house_lines(swe: cD.swe))
+                        .stroke(.black, lineWidth: 1.0)
+            }.frame(width: cD.SIZE, height: cD.SIZE)
+            // Draw zodiac symbols
             ForEach(1...12, id: \.self) { idx in
                 cD.drawZodiacSvg(object: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)))
+                        .frame(width: cD.SIZE, height: cD.SIZE).border(.red, width: 1.0)
             }
-            /*VStack {
-              Image("zod10").resizable().position(x: 15.0, y: 15.0).frame(width: 20.0, height: 20.0)
-            }.frame(width: cD.SIZE, height: cD.SIZE)
-            */
         }
-    }
+}
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+static var previews: some View {
+    ContentView()
+}
 }
