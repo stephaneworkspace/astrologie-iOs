@@ -71,12 +71,12 @@ struct ContentView: View {
             // Draw bodies line on chart
             ForEach(1...8, id: \.self) { idx in
                 VStack {
-                    cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: false)).stroke(.black, lineWidth: 1.0)
+                    cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: false)).stroke(.black, lineWidth: 0.1)
                 }.frame(width: cD.SIZE, height: cD.SIZE)
             }
             ForEach(1...8, id: \.self) { idx in
                 VStack {
-                    cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: true)).stroke(.black, lineWidth: 1.0)
+                    cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: true)).stroke(.black, lineWidth: 0.1)
                 }.frame(width: cD.SIZE, height: cD.SIZE)
             }
             // Draw bodies symbol
@@ -86,27 +86,27 @@ struct ContentView: View {
                 let bodT = cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true)
                 VStack {
                     GeometryReader { geometry in
-                        if bodN.swRetrograde {
-                            Image("r")
-                                    .resizable()
-                                    .offset(
-                                            x: bodN.oPx + bodN.oSx / cD.RETOGRADE_DIV,
-                                            y: bodN.oPy + bodN.oSy / cD.RETOGRADE_DIV)
-                                    .frame(
-                                            width: bodN.oSx / cD.RETOGRADE_DIV,
-                                            height: bodN.oSy / cD.RETOGRADE_DIV)
-                        }
-                        if bodT.swRetrograde {
-                            Image("r")
-                                    .resizable()
-                                    .offset(
-                                            x: bodT.oPx + bodT.oSx / cD.RETOGRADE_DIV,
-                                            y: bodT.oPy + bodT.oSy / cD.RETOGRADE_DIV)
-                                    .frame(
-                                            width: bodT.oSx / cD.RETOGRADE_DIV,
-                                            height: bodT.oSy / cD.RETOGRADE_DIV)
-                        }
                         if idx < 10 {
+                            if bodN.swRetrograde {
+                                Image("r0" + idx.formatted())
+                                        .resizable()
+                                        .offset(
+                                                x: bodN.oPx + bodN.oSx / cD.RETOGRADE_DIV,
+                                                y: bodN.oPy + bodN.oSy / cD.RETOGRADE_DIV)
+                                        .frame(
+                                                width: bodN.oSx / cD.RETOGRADE_DIV,
+                                                height: bodN.oSy / cD.RETOGRADE_DIV)
+                            }
+                            if bodT.swRetrograde {
+                                Image("r0" + idx.formatted())
+                                        .resizable()
+                                        .offset(
+                                                x: bodT.oPx + bodT.oSx / cD.RETOGRADE_DIV,
+                                                y: bodT.oPy + bodT.oSy / cD.RETOGRADE_DIV)
+                                        .frame(
+                                                width: bodT.oSx / cD.RETOGRADE_DIV,
+                                                height: bodT.oSy / cD.RETOGRADE_DIV)
+                            }
                             Image("b0" + idx.formatted())
                                     .resizable()
                                     .foregroundColor(.red)
@@ -125,6 +125,26 @@ struct ContentView: View {
                                             width: bodT.oSx,
                                             height: bodT.oSy)
                         } else {
+                            if bodN.swRetrograde {
+                                Image("r" + idx.formatted())
+                                        .resizable()
+                                        .offset(
+                                                x: bodN.oPx + bodN.oSx / cD.RETOGRADE_DIV,
+                                                y: bodN.oPy + bodN.oSy / cD.RETOGRADE_DIV)
+                                        .frame(
+                                                width: bodN.oSx / cD.RETOGRADE_DIV,
+                                                height: bodN.oSy / cD.RETOGRADE_DIV)
+                            }
+                            if bodT.swRetrograde {
+                                Image("r" + idx.formatted())
+                                        .resizable()
+                                        .offset(
+                                                x: bodT.oPx + bodT.oSx / cD.RETOGRADE_DIV,
+                                                y: bodT.oPy + bodT.oSy / cD.RETOGRADE_DIV)
+                                        .frame(
+                                                width: bodT.oSx / cD.RETOGRADE_DIV,
+                                                height: bodT.oSy / cD.RETOGRADE_DIV)
+                            }
                             Image("b" + idx.formatted())
                                     .resizable()
                                     .offset(
