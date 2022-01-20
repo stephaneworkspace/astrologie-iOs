@@ -81,18 +81,21 @@ struct ContentView: View {
             }
             // Draw bodies symbol
             ForEach(0...8, id: \.self) { idx in
+                let bod = Swe.Bodies.init(rawValue: Int32(idx)) ?? Swe.Bodies.sun
+                let color = bod.color()
+                let bodN = cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false)
+                let bodT = cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true)
                 VStack {
                     GeometryReader { geometry in
                         if cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).swRetrograde {
                             Image("r")
                                     .resizable()
                                     .offset(
-                                            x: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oPx + cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSx / cD.RETOGRADE_DIV,
-                                            y: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oPy + cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSy / cD.RETOGRADE_DIV)
+                                            x: bodT.oPx + bodT.oSx / cD.RETOGRADE_DIV,
+                                            y: bodT.oPy + bodT.oSy / cD.RETOGRADE_DIV)
                                     .frame(
-                                            width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSx / cD.RETOGRADE_DIV,
-                                            height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSy / cD.RETOGRADE_DIV)
-
+                                            width: bodT.oSx / cD.RETOGRADE_DIV,
+                                            height: bodT.oSy / cD.RETOGRADE_DIV)
                         }
                         if cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).swRetrograde {
                             Image("r")

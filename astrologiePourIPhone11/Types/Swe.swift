@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class Swe {
     var bodies: [(Bodie, Bodie)] = []
@@ -281,7 +282,17 @@ class Swe {
              dpsideps1980 = 262144,
              jplHorApprox = 524288
     }
+}
 
+extension Swe.Bodies {
+    func color() -> Color {
+        switch self {
+        case .sun:
+            return .orange
+        default:
+            return .black
+        }
+    }
 }
 
 /*
