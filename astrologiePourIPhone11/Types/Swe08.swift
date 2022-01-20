@@ -57,12 +57,12 @@ extension TimeZone {
         let minPtr = UnsafeMutablePointer<Int32>.allocate(capacity: 2)
         let secPtr = UnsafeMutablePointer<Double>.allocate(capacity: 2)
         swe_utc_time_zone(year, month, day, hour, min, sec, timezone, yearPtr, monthPtr, dayPtr, hourPtr, minPtr, secPtr)
-        year = yearPtr.pointee
-        month = monthPtr.pointee
-        day = dayPtr.pointee
-        hour = hourPtr.pointee
-        min = minPtr.pointee
-        sec = secPtr.pointee
+        year = yearPtr[0]
+        month = monthPtr[0]
+        day = dayPtr[0]
+        hour = hourPtr[0]
+        min = minPtr[0]
+        sec = secPtr[0]
         free(yearPtr)
         free(monthPtr)
         free(dayPtr)

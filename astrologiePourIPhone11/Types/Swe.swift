@@ -17,45 +17,21 @@ class Swe {
         // Set path
         let swe02 = Swe02()
         swe02.set_ephe_path()
-        //let path = swe02.get_library_path()
+        // let path = swe02.get_library_path()
 
         // Compute julian day
         let swe08: Swe08 = Swe08()
-        let julday = swe08.julday(year: chart.nYear, month: chart.nMonth, day: chart.nDay, hour: Double(chart.nHour), calandar: .gregorian)
-        var utcTimeZone = TimeZone(year: chart.nYear, month: chart.nMonth, day: chart.nDay, hour: chart.nHour, min: chart.nMin, sec: 0.0)
+        var utcTimeZone = TimeZone(
+                year: chart.nYear,
+                month: chart.nMonth,
+                day: chart.nDay,
+                hour: chart.nHour,
+                min: chart.nMin,
+                sec: 0.0)
         utcTimeZone.utc_time_zone(timezone: 2.0)
+        print(utcTimeZone)
         let utcToJd = swe08.utc_to_jd(tz: utcTimeZone, calandar: .gregorian)
-
-        // Compute bodies
-        let swe03 = Swe03()
-        let swe07 = Swe07()
-        var b: [Bodies] = []
-        b.append(.sun)
-        b.append(.moon)
-        b.append(.mercury)
-        b.append(.venus)
-        b.append(.mars)
-        b.append(.jupiter)
-        b.append(.saturn)
-        b.append(.uranus)
-        b.append(.neptune)
-        b.append(.pluto)
-        b.append(.ceres)
-        for x in b {
-            bodies.append(
-                    Swe.Bodie.init(
-                            bodie: x,
-                            calculUt: swe03.calc_ut(
-                                    tjdUt: utcToJd.julianDayUt,
-                                    ipl: x,
-                                    iflag: .speed),
-                            phenoUt: swe07.pheno_ut(
-                                    tjdUt: utcToJd.julianDayUt,
-                                    ipl: x,
-                                    iFlag: .speed)))
-
-        }
-
+        print(utcToJd)
         // Computes houses
         let swe14 = Swe14()
         houses = swe14.houses(
@@ -63,7 +39,37 @@ class Swe {
                 geoLat: chart.nLat,
                 geoLong: chart.nLng,
                 hsys: CChar("W") ?? CChar.init())
+        // let julday = swe08.julday(year: chart.nYear, month: chart.nMonth, day: chart.nDay, hour: Double(chart.nHour), calandar: .gregorian)
 
+        // Compute bodies
+        let swe03 = Swe03()
+        let swe07 = Swe07()
+        var bbb: [Bodies] = []
+        bbb.append(.sun)
+        bbb.append(.moon)
+        bbb.append(.mercury)
+        bbb.append(.venus)
+        bbb.append(.mars)
+        bbb.append(.jupiter)
+        bbb.append(.saturn)
+        bbb.append(.uranus)
+        bbb.append(.neptune)
+        bbb.append(.pluto)
+        bbb.append(.ceres)
+        for bbx in bbb {
+            bodies.append(
+                    Swe.Bodie.init(
+                            bodie: bbx,
+                            calculUt: swe03.calc_ut(
+                                    tjdUt: utcToJd.julianDayUt,
+                                    ipl: bbx,
+                                    iflag: .speed),
+                            phenoUt: swe07.pheno_ut(
+                                    tjdUt: utcToJd.julianDayUt,
+                                    ipl: bbx,
+                                    iFlag: .speed)))
+
+        }
         swe02.close()
     }
 
