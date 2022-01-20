@@ -80,9 +80,30 @@ struct ContentView: View {
                 }.frame(width: cD.SIZE, height: cD.SIZE)
             }
             // Draw bodies symbol
-            ForEach(1...8, id: \.self) { idx in
+            ForEach(0...8, id: \.self) { idx in
                 VStack {
                     GeometryReader { geometry in
+                        if cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).swRetrograde {
+                            Image("r")
+                                    .resizable()
+                                    .offset(
+                                            x: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oPx + cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSx / cD.RETOGRADE_DIV,
+                                            y: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oPy + cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSy / cD.RETOGRADE_DIV)
+                                    .frame(
+                                            width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSx / cD.RETOGRADE_DIV,
+                                            height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSy / cD.RETOGRADE_DIV)
+
+                        }
+                        if cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).swRetrograde {
+                            Image("r")
+                                    .resizable()
+                                    .offset(
+                                            x: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPx + cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSx / cD.RETOGRADE_DIV,
+                                            y: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPy + cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSy / cD.RETOGRADE_DIV)
+                                    .frame(
+                                            width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSx / cD.RETOGRADE_DIV,
+                                            height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSy / cD.RETOGRADE_DIV)
+                        }
                         if idx < 10 {
                             Image("b0" + idx.formatted())
                                     .resizable()
@@ -92,24 +113,6 @@ struct ContentView: View {
                                     .frame(
                                             width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSx,
                                             height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSy)
-                        } else {
-                            Image("b" + idx.formatted())
-                                    .resizable()
-                                    .offset(
-                                            x: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPx,
-                                            y: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPy)
-                                    .frame(
-                                            width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSx,
-                                            height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSy)
-                        }
-                    }
-                }.frame(width: cD.SIZE, height: cD.SIZE)
-            }
-            // Draw bodies symbol
-            ForEach(1...8, id: \.self) { idx in
-                VStack {
-                    GeometryReader { geometry in
-                        if idx < 10 {
                             Image("b0" + idx.formatted())
                                     .resizable()
                                     .offset(
@@ -119,6 +122,14 @@ struct ContentView: View {
                                             width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSx,
                                             height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSy)
                         } else {
+                            Image("b" + idx.formatted())
+                                    .resizable()
+                                    .offset(
+                                            x: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPx,
+                                            y: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPy)
+                                    .frame(
+                                            width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSx,
+                                            height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSy)
                             Image("b" + idx.formatted())
                                     .resizable()
                                     .offset(

@@ -16,6 +16,7 @@ struct ChartDraw {
     let DEG_SIZE = 50.0
     let MIN_SIZE = 50.0
     let CIRCLE = 360.0
+    let RETOGRADE_DIV = 1.5
     let CIRCLE_SIZE_NATAL: [(Double, Bool)] = [
         (35.0, true), // 0
         (62.0, true), // 1
@@ -28,7 +29,7 @@ struct ChartDraw {
         (71.0, false), // 8 correction planet between 2 and 3
     ]
     let CIRCLE_SIZE_TRANSIT: [(Double, Bool)] = [
-        (45.0, true), // 0 CIRCLE ASPECT
+        (42.0, true), // 0 CIRCLE ASPECT
         (59.0, true), // 1 CIRCLE TRANSIT
         (75.0, true), // 2 CIRCLE ZODIAC END
         (80.0, true), // 3 CIRCLE HOUSE
@@ -96,11 +97,11 @@ struct ChartDraw {
     func getRadiusCircleZodiac() -> Double {
         let divTraitBig = 0.2
         return (getRadiusTotal() * (
-                        (
-                                (CIRCLE_SIZE_TRANSIT[2].0 - CIRCLE_SIZE_TRANSIT[1].0)
+                (
+                        (CIRCLE_SIZE_TRANSIT[2].0 - CIRCLE_SIZE_TRANSIT[1].0)
                                 / (2.0 + divTraitBig)
-                        ) + CIRCLE_SIZE_TRANSIT[1].0))
-        / 100.0
+                ) + CIRCLE_SIZE_TRANSIT[1].0))
+                / 100.0
     }
 
     func getRadiusTotal() -> Double {
@@ -116,6 +117,7 @@ struct ChartDraw {
     }
 
     struct ObjectBodie {
+        var swRetrograde: Bool
         var oSx: Double
         var oSy: Double
         var oPx: Double
@@ -179,6 +181,7 @@ struct ChartDraw {
 
     struct DrawHouseTriangle: Shape {
         var lines: [HouseLine]
+
         func path(in rect: CGRect) -> Path {
             var path = Path()
             for line in lines {
@@ -212,7 +215,7 @@ struct ChartDraw {
         var path = Path()
         for line in lines {
             if line.lXY3 {
-               /* path.move(to: CGPoint(x: line.lX3, y: line.lY3))
+                /* path.move(to: CGPoint(x: line.lX3, y: line.lY3))
                 path.addLine(to: CGPoint(x: line.lX1, y: line.lY1))
                 path.addLine(to: CGPoint(x: line.lX2, y: line.lY2))
                 path.addLine(to: CGPoint(x: line.lX3, y: line.lY3))
@@ -250,7 +253,7 @@ struct ChartDraw {
     func getLineTrigo(angular: Double, radiusCircleBegin: Double, radiusCircleEnd: Double) -> [Offset] {
         var res: [Offset] = []
         let dx1: Double = getCenter().offX
-                + cos(angular / CIRCLE  * 2.0 * Double.pi)
+                + cos(angular / CIRCLE * 2.0 * Double.pi)
                 * -1.0
                 * radiusCircleBegin
         let dx2: Double = getCenter().offY
@@ -328,7 +331,7 @@ struct ChartDraw {
             size = 1.0 + LARGER_DRAW_LINE_RULES_LARGE
         }
         return getRadiusTotal() * (((CIRCLE_SIZE_TRANSIT[2].0 - CIRCLE_SIZE_TRANSIT[1].0) / size)
-                        + CIRCLE_SIZE_TRANSIT[1].0) / 100.0
+                + CIRCLE_SIZE_TRANSIT[1].0) / 100.0
     }
 
     enum LargerDrawLine {
@@ -388,7 +391,7 @@ struct ChartDraw {
                     lXY3: true,
                     lX3: axyTriangle[2].offX,
                     lY3: axyTriangle[2].offY)
-                    )
+            )
         }
         return res
     }
@@ -474,8 +477,7 @@ struct ChartDraw {
             for jIdx in 1...15 {
                 if jIdx == 5 || jIdx == 10 || jIdx == 15 {
                     largerDrawLine = .large
-                } else
-                {
+                } else {
                     largerDrawLine = .small
                 }
                 pos = (Double(iIdx) * 30.0) + Double(jIdx) * 2.0 + offPosAsc
@@ -527,50 +529,65 @@ struct ChartDraw {
         let minRatio = 6.0 // TODO const
         let minSize = (((MIN_SIZE * degRatio) / 100.0) * SIZE)
         var swRetrograde = false
-        if swTransit {
-            for bod in swe.bodies.enumerated() { // TODO remove enumerated if needer
-                if bod.element.0.bodie.rawValue == bodie {
-                    // TODO bod.object_pos and R symbol
-                }
-            }
-        } else {
-
-        }
-        var pos = 0.0
         for bod in swe.bodies {
             if bod.1.bodie.rawValue == bodie {
                 if swTransit {
-                    pos = getBodieLongitude(bodie: bod.1, swTransit: swTransit)
+                    if abs(bod.1.calculUt.speedLongitude) < 0.0003 {
+                        // Stationary
+                    } else if bod.1.calculUt.speedLongitude > 0.0 {
+                        // Direct
+                    } else {
+                        swRetrograde = true
+                    }
+                } else {
+                    if !swTransit {
+                        if abs(bod.0.calculUt.speedLongitude) < 0.0003 {
+                            // Stationary
+                        } else if bod.0.calculUt.speedLongitude > 0.0 {
+                            // Direct
+                        } else {
+                            swRetrograde = true
+                        }
+                    }
                 }
-                // TODO posFix getBodieFixLongitude line 1306 svg_draw.rs
-            }
-            if bod.0.bodie.rawValue == bodie {
-                if !swTransit {
-                    pos = getBodieLongitude(bodie: bod.0, swTransit: swTransit)
-                }
-                // TODO posFix getBodieFixLongitude line 1306 svg_draw.rs
             }
         }
-        let offset: Offset
-        if swTransit {
-            offset = getCenterItem(
-                    size: planetSize,
-                    offset: getPosTrigo(
-                            angular: pos,
-                            radiusCircle: getRadiusCircle(occurs: 9).0))
-        } else {
-            offset = getCenterItem(
-                    size: planetSize,
-                    offset: getPosTrigo(
-                            angular: pos,
-                            radiusCircle: getRadiusCircle(occurs: 5).0))
-        }
-        // TODO deg min line 1336 sw_draw.rs
-        let res = ObjectBodie(
-                oSx: planetSize,
-                oSy: planetSize,
-                oPx: offset.offX,
-                oPy: offset.offY)
-        return res
+            var pos = 0.0
+            for bod in swe.bodies {
+                if bod.1.bodie.rawValue == bodie {
+                    if swTransit {
+                        pos = getBodieLongitude(bodie: bod.1, swTransit: swTransit)
+                    }
+                    // TODO posFix getBodieFixLongitude line 1306 svg_draw.rs
+                }
+                if bod.0.bodie.rawValue == bodie {
+                    if !swTransit {
+                        pos = getBodieLongitude(bodie: bod.0, swTransit: swTransit)
+                    }
+                    // TODO posFix getBodieFixLongitude line 1306 svg_draw.rs
+                }
+            }
+            let offset: Offset
+            if swTransit {
+                offset = getCenterItem(
+                        size: planetSize,
+                        offset: getPosTrigo(
+                                angular: pos,
+                                radiusCircle: getRadiusCircle(occurs: 9).0))
+            } else {
+                offset = getCenterItem(
+                        size: planetSize,
+                        offset: getPosTrigo(
+                                angular: pos,
+                                radiusCircle: getRadiusCircle(occurs: 5).0))
+            }
+            // TODO deg min line 1336 sw_draw.rs
+            let res = ObjectBodie(
+                    swRetrograde: swRetrograde,
+                    oSx: planetSize,
+                    oSy: planetSize,
+                    oPx: offset.offX,
+                    oPy: offset.offY)
+            return res
     }
 }
