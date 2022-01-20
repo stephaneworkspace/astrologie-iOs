@@ -12,6 +12,9 @@ struct ChartDraw {
     let b = 1.0
     let ZODIAC_RATIO = 10.0
     let ZODIAC_SIZE = 50.0
+    let BODIE_SIZE = 50.0
+    let DEG_SIZE = 50.0
+    let MIN_SIZE = 50.0
     let CIRCLE = 360.0
     let CIRCLE_SIZE_NATAL: [(Double, Bool)] = [
         (35.0, true), // 0
@@ -72,6 +75,17 @@ struct ChartDraw {
                 offY: offset.offY - (size / 2.0))
     }
 
+    func getBodieLongitude(bodie: Swe.Bodie, swTransit: Bool) -> Double {
+        var pos = 0.0
+        if swTransit {
+            pos = CIRCLE - swe.houses[0].longitude + bodie.calculUt.longitude // TODO
+        } else {
+            pos = CIRCLE - swe.houses[0].longitude + bodie.calculUt.longitude
+        }
+        pos = getFixedPos(pos_value: pos)
+        return pos
+    }
+
     func getPosTrigo(angular: Double, radiusCircle: Double) -> Offset {
         let getCenter = getRadiusTotal()
         return Offset(
@@ -95,6 +109,13 @@ struct ChartDraw {
 
     struct Object {
         var sign: Swe.Signs
+        var oSx: Double
+        var oSy: Double
+        var oPx: Double
+        var oPy: Double
+    }
+
+    struct ObjectBodie {
         var oSx: Double
         var oSy: Double
         var oPx: Double
@@ -418,6 +439,66 @@ struct ChartDraw {
                 sign: signEnum,
                 oSx: zodiacSize,
                 oSy: zodiacSize,
+                oPx: offset.offX,
+                oPy: offset.offY)
+        return res
+    }
+
+    func bodie(swe: Swe, bodie: Int32, swTransit: Bool) -> ObjectBodie {
+        var planetRatio = 0.0
+        if swTransit {
+            planetRatio = 6.0 // TODO const
+        } else {
+            planetRatio = 12.0 // TODO const
+        }
+        let planetSize = (((BODIE_SIZE * ZODIAC_RATIO) / 100.0) * SIZE) / 100.0;
+        let degRatio = 6.0 // TODO const
+        let degSize = (((DEG_SIZE * degRatio) / 100.0) * SIZE)
+        let minRatio = 6.0 // TODO const
+        let minSize = (((MIN_SIZE * degRatio) / 100.0) * SIZE)
+        var swRetrograde = false
+        if swTransit {
+            for bod in swe.bodies.enumerated() { // TODO remove enumerated if needer
+                if bod.element.0.bodie.rawValue == bodie {
+                    // TODO bod.object_pos and R symbol
+                }
+            }
+        } else {
+
+        }
+        var pos = 0.0
+        for bod in swe.bodies {
+            if bod.1.bodie.rawValue == bodie {
+                if swTransit {
+                    pos = getBodieLongitude(bodie: bod.1, swTransit: swTransit)
+                }
+                // TODO posFix getBodieFixLongitude line 1306 svg_draw.rs
+            }
+            if bod.0.bodie.rawValue == bodie {
+                if !swTransit {
+                    pos = getBodieLongitude(bodie: bod.0, swTransit: swTransit)
+                }
+                // TODO posFix getBodieFixLongitude line 1306 svg_draw.rs
+            }
+        }
+        let offset: Offset
+        if swTransit {
+            offset = getCenterItem(
+                    size: planetSize,
+                    offset: getPosTrigo(
+                            angular: pos,
+                            radiusCircle: getRadiusCircle(occurs: 9).0))
+        } else {
+            offset = getCenterItem(
+                    size: planetSize,
+                    offset: getPosTrigo(
+                            angular: pos,
+                            radiusCircle: getRadiusCircle(occurs: 5).0))
+        }
+        // TODO deg min line 1336 sw_draw.rs
+        let res = ObjectBodie(
+                oSx: planetSize,
+                oSy: planetSize,
                 oPx: offset.offX,
                 oPy: offset.offY)
         return res

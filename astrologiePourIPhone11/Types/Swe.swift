@@ -8,7 +8,7 @@
 import Foundation
 
 class Swe {
-    var bodies: [Bodie] = []
+    var bodies: [(Bodie, Bodie)] = []
     var houses: [Swe14.House] = []
     init() {
         // Load json or default
@@ -29,9 +29,18 @@ class Swe {
                 min: chart.nMin,
                 sec: 0.0)
         utcTimeZone.utc_time_zone(timezone: 2.0)
-        print(utcTimeZone)
         let utcToJd = swe08.utc_to_jd(tz: utcTimeZone, calandar: .gregorian)
-        print(utcToJd)
+        // Transit
+        var utcTimeZoneTransit = TimeZone(
+                year: chart.tYear,
+                month: chart.tMonth,
+                day: chart.tDay,
+                hour: chart.tHour,
+                min: chart.tMin,
+                sec: 0.0)
+        utcTimeZoneTransit.utc_time_zone(timezone: 2.0)
+        let utcToJdTransit = swe08.utc_to_jd(tz: utcTimeZoneTransit, calandar: .gregorian)
+
         // Computes houses
         let swe14 = Swe14()
         houses = swe14.houses(
@@ -54,21 +63,32 @@ class Swe {
         bbb.append(.saturn)
         bbb.append(.uranus)
         bbb.append(.neptune)
-        bbb.append(.pluto)
-        bbb.append(.ceres)
+       // bbb.append(.pluto)
+        //bbb.append(.ceres)
         for bbx in bbb {
             bodies.append(
-                    Swe.Bodie.init(
-                            bodie: bbx,
-                            calculUt: swe03.calc_ut(
-                                    tjdUt: utcToJd.julianDayUt,
+                    (
+                            Swe.Bodie.init(
+                                    bodie: bbx,
+                                    calculUt: swe03.calc_ut(
+                                            tjdUt: utcToJd.julianDayUt,
+                                            ipl: bbx, iflag: .speed),
+                                    phenoUt: swe07.pheno_ut(
+                                            tjdUt: utcToJd.julianDayUt,
                                     ipl: bbx,
-                                    iflag: .speed),
-                            phenoUt: swe07.pheno_ut(
-                                    tjdUt: utcToJd.julianDayUt,
-                                    ipl: bbx,
-                                    iFlag: .speed)))
-
+                                    iFlag: .speed)),
+                            Swe.Bodie.init(
+                                    bodie: bbx,
+                                    calculUt: swe03.calc_ut(
+                                            tjdUt: utcToJdTransit.julianDayUt,
+                                            ipl: bbx,
+                                            iflag: .speed),
+                                    phenoUt: swe07.pheno_ut(
+                                            tjdUt: utcToJdTransit.julianDayUt,
+                                            ipl: bbx,
+                                            iFlag: .speed))
+                    )
+            )
         }
         swe02.close()
     }

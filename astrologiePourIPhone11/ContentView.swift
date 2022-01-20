@@ -9,7 +9,7 @@ import SwiftUI
 
 func swe() -> String {
     let swe = Swe()
-    return swe.bodies[0].calculUt.longitude.formatted()
+    return swe.bodies[0].0.calculUt.longitude.formatted()
 }
 
 struct ContentView: View {
@@ -28,7 +28,6 @@ struct ContentView: View {
             VStack {
                 cD.drawCircle(circles: cD.circles(swe: cD.swe))
                         .stroke(.black, lineWidth: 1.0)
-                        //.border(.black, width: 2.0)
             }.frame(width: cD.SIZE, height: cD.SIZE)
             // Draw zodiac lines
             VStack {
@@ -67,14 +66,66 @@ struct ContentView: View {
                                             height: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oSy)
                         }
                     }
-                }.frame(width: cD.SIZE, height: cD.SIZE).border(.red, width: 1.0)
+                }.frame(width: cD.SIZE, height: cD.SIZE)
+            }
+            // Draw bodies symbol
+            ForEach(1...8, id: \.self) { idx in
+                VStack {
+                    GeometryReader { geometry in
+                        if idx < 10 {
+                            Image("b0" + idx.formatted())
+                                    .resizable()
+                                    .offset(
+                                            x: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPx,
+                                            y: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPy)
+                                    .frame(
+                                            width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSx,
+                                            height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSy)
+                        } else {
+                            Image("b" + idx.formatted())
+                                    .resizable()
+                                    .offset(
+                                            x: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPx,
+                                            y: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPy)
+                                    .frame(
+                                            width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSx,
+                                            height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSy)
+                        }
+                    }
+                }.frame(width: cD.SIZE, height: cD.SIZE)
+            }
+            // Draw bodies symbol
+            ForEach(1...8, id: \.self) { idx in
+                VStack {
+                    GeometryReader { geometry in
+                        if idx < 10 {
+                            Image("b0" + idx.formatted())
+                                    .resizable()
+                                    .offset(
+                                            x: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oPx,
+                                            y: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oPy)
+                                    .frame(
+                                            width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSx,
+                                            height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSy)
+                        } else {
+                            Image("b" + idx.formatted())
+                                    .resizable()
+                                    .offset(
+                                            x: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oPx,
+                                            y: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oPy)
+                                    .frame(
+                                            width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSx,
+                                            height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSy)
+                        }
+                    }
+                }.frame(width: cD.SIZE, height: cD.SIZE)
             }
         }
-}
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
-static var previews: some View {
-ContentView()
-}
+    static var previews: some View {
+        ContentView()
+    }
 }
