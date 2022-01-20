@@ -13,6 +13,7 @@ struct ChartDraw {
     let ZODIAC_RATIO = 10.0
     let ZODIAC_SIZE = 50.0
     let BODIE_SIZE = 35.0
+    let HOUSE_SIZE = 40.0
     let DEG_SIZE = 50.0
     let MIN_SIZE = 50.0
     let CIRCLE = 360.0
@@ -94,6 +95,13 @@ struct ChartDraw {
                 offY: getCenter + sin(angular / CIRCLE * 2.0 * Double.pi) * radiusCircle)
     }
 
+    func getRadiusCircleHouse() -> Double {
+        (getRadiusTotal() * (((
+                (CIRCLE_SIZE_TRANSIT[3].0 - CIRCLE_SIZE_TRANSIT[2].0) / 2.0))
+                + CIRCLE_SIZE_TRANSIT[2].0))
+                / 100.0
+    }
+
     func getRadiusCircleZodiac() -> Double {
         let divTraitBig = 0.2
         return (getRadiusTotal() * (
@@ -118,6 +126,13 @@ struct ChartDraw {
 
     struct ObjectBodie {
         var swRetrograde: Bool
+        var oSx: Double
+        var oSy: Double
+        var oPx: Double
+        var oPy: Double
+    }
+
+    struct ObjectHouse {
         var oSx: Double
         var oSy: Double
         var oPx: Double
@@ -514,6 +529,45 @@ struct ChartDraw {
                 oPx: offset.offX,
                 oPy: offset.offY)
         return res
+    }
+
+    func house(swe: Swe, number: Int32) -> ObjectHouse {
+        let houseRatio = 5.0 // TODO const
+        var houseSize = (((HOUSE_SIZE * houseRatio) / 100.0) * SIZE) / 100.0
+        let offPosAsc = CIRCLE - swe.houses[0].longitude
+        var posNext: Double
+        if number > 11 {
+            posNext = swe.houses[0].longitude + offPosAsc
+        } else {
+            posNext = swe.houses[Int(number)].longitude + offPosAsc
+        }
+        let posNow = swe.houses[Int(number - 1)].longitude + offPosAsc
+        var pos: Double
+        if posNow > posNext {
+            pos = posNow + ((posNext - posNow - CIRCLE) / 2.0)
+        } else {
+            pos = posNow + ((posNext - posNow) / 2.0)
+        }
+        pos = getFixedPos(pos_value: pos)
+        let offset = getCenterItem(
+                size: houseSize,
+                offset: getPosTrigo(
+                        angular: pos,
+                        radiusCircle: getRadiusCircleHouse()))
+        if number > 9 {
+            return ObjectHouse(
+                    oSx: houseSize,
+                    oSy: houseSize,
+                    oPx: offset.offX,
+                    oPy: offset.offY)
+        } else {
+            return ObjectHouse(
+                    oSx: houseSize / 1.5,
+                    oSy: houseSize,
+                    oPx: offset.offX,
+                    oPy: offset.offY)
+
+        }
     }
 
     func bodie(swe: Swe, bodie: Int32, swTransit: Bool) -> ObjectBodie {
