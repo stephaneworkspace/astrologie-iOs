@@ -68,6 +68,17 @@ struct ContentView: View {
                     }
                 }.frame(width: cD.SIZE, height: cD.SIZE)
             }
+            // Draw bodies line on chart
+            ForEach(1...8, id: \.self) { idx in
+                VStack {
+                    cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: false)).stroke(.black, lineWidth: 1.0)
+                }.frame(width: cD.SIZE, height: cD.SIZE)
+            }
+            ForEach(1...8, id: \.self) { idx in
+                VStack {
+                    cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: true)).stroke(.black, lineWidth: 1.0)
+                }.frame(width: cD.SIZE, height: cD.SIZE)
+            }
             // Draw bodies symbol
             ForEach(1...8, id: \.self) { idx in
                 VStack {
