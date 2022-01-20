@@ -82,12 +82,21 @@ struct ContentView: View {
             // Draw bodies symbol
             ForEach(0...8, id: \.self) { idx in
                 let bod = Swe.Bodies.init(rawValue: Int32(idx)) ?? Swe.Bodies.sun
-                let color = bod.color()
                 let bodN = cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false)
                 let bodT = cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true)
                 VStack {
                     GeometryReader { geometry in
-                        if cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).swRetrograde {
+                        if bodN.swRetrograde {
+                            Image("r")
+                                    .resizable()
+                                    .offset(
+                                            x: bodN.oPx + bodN.oSx / cD.RETOGRADE_DIV,
+                                            y: bodN.oPy + bodN.oSy / cD.RETOGRADE_DIV)
+                                    .frame(
+                                            width: bodN.oSx / cD.RETOGRADE_DIV,
+                                            height: bodN.oSy / cD.RETOGRADE_DIV)
+                        }
+                        if bodT.swRetrograde {
                             Image("r")
                                     .resizable()
                                     .offset(
@@ -97,50 +106,41 @@ struct ContentView: View {
                                             width: bodT.oSx / cD.RETOGRADE_DIV,
                                             height: bodT.oSy / cD.RETOGRADE_DIV)
                         }
-                        if cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).swRetrograde {
-                            Image("r")
-                                    .resizable()
-                                    .offset(
-                                            x: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPx + cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSx / cD.RETOGRADE_DIV,
-                                            y: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPy + cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSy / cD.RETOGRADE_DIV)
-                                    .frame(
-                                            width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSx / cD.RETOGRADE_DIV,
-                                            height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSy / cD.RETOGRADE_DIV)
-                        }
                         if idx < 10 {
                             Image("b0" + idx.formatted())
                                     .resizable()
+                                    .foregroundColor(.red)
                                     .offset(
-                                            x: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPx,
-                                            y: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPy)
+                                            x: bodN.oPx,
+                                            y: bodN.oPy)
                                     .frame(
-                                            width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSx,
-                                            height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSy)
+                                            width: bodN.oSx,
+                                            height: bodN.oSy)
                             Image("b0" + idx.formatted())
                                     .resizable()
                                     .offset(
-                                            x: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oPx,
-                                            y: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oPy)
+                                            x: bodT.oPx,
+                                            y: bodT.oPy)
                                     .frame(
-                                            width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSx,
-                                            height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSy)
+                                            width: bodT.oSx,
+                                            height: bodT.oSy)
                         } else {
                             Image("b" + idx.formatted())
                                     .resizable()
                                     .offset(
-                                            x: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPx,
-                                            y: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oPy)
+                                            x: bodN.oPx,
+                                            y: bodN.oPy)
                                     .frame(
-                                            width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSx,
-                                            height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false).oSy)
+                                            width: bodN.oSx,
+                                            height: bodN.oSy)
                             Image("b" + idx.formatted())
                                     .resizable()
                                     .offset(
-                                            x: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oPx,
-                                            y: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oPy)
+                                            x: bodT.oPx,
+                                            y: bodT.oPy)
                                     .frame(
-                                            width: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSx,
-                                            height: cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true).oSy)
+                                            width: bodT.oSx,
+                                            height: bodT.oSy)
                         }
                     }
                 }.frame(width: cD.SIZE, height: cD.SIZE)

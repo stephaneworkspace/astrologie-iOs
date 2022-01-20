@@ -284,17 +284,6 @@ class Swe {
     }
 }
 
-extension Swe.Bodies {
-    func color() -> Color {
-        switch self {
-        case .sun:
-            return .orange
-        default:
-            return .black
-        }
-    }
-}
-
 /*
 To convert from String to UnsafeMutablePointer<Int8>
 let cString = strdup("Hello") // UnsafeMutablePointer<Int8>

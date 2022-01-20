@@ -1,4 +1,12 @@
-<svg width="50" height="50" xmlns="http://www.w3.org/2000/svg">
-<path d="M14.65 31.64h-7v-1l4-1v-20l-4-1v-1h7v24ZM36.65 31.64h7v-1l-4-1v-20l4-1v-1h-7v24Z"/>
-<path d="M13.65 19.64h24m-12-12v27m-.01 0a4 4 0 1 0 .02 0Z" fill="none" stroke="#000" stroke-width="3"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#336666;stroke:#336666;stroke-width:0.75;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#336666;stroke-width:3;stroke-miterlimit:10;}
+</style>
+<path class="st0" d="M14.6,31.6h-7v-1l4-1v-20l-4-1v-1h7V31.6z M36.7,31.6h7v-1l-4-1v-20l4-1v-1h-7V31.6z"/>
+<path class="st1" d="M13.6,19.6h24 M25.7,7.6v27 M25.6,34.6c-2.2,0-4,1.8-4,4c0,2.2,1.8,4,4,4c2.2,0,4-1.8,4-4
+	C29.6,36.4,27.9,34.6,25.6,34.6L25.6,34.6z"/>
 </svg>

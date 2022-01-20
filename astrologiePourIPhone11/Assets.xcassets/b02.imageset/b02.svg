@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12pt" height="12pt" viewBox="0 0 12 12" version="1.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 12 12" style="enable-background:new 0 0 12 12;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#644C99;stroke-width:0.75;stroke-miterlimit:10;}
+</style>
 <g id="surface1">
-<path style="fill:none;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 80 70 C 80 81.054688 71.054688 90 60 90 C 48.945312 90 40 81.054688 40 70 C 40 58.945312 48.945312 50 60 50 C 71.054688 50 80 58.945312 80 70 Z M 80 70 " transform="matrix(0.1,0,0,-0.1,0,12)"/>
-<path style="fill:none;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 40 110 C 40 98.945312 48.945312 90 60 90 C 71.054688 90 80 98.945312 80 110 " transform="matrix(0.1,0,0,-0.1,0,12)"/>
-<path style="fill:none;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 60 10 L 60 50 " transform="matrix(0.1,0,0,-0.1,0,12)"/>
-<path style="fill:none;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M 40 30 L 80 30 " transform="matrix(0.1,0,0,-0.1,0,12)"/>
+	<path class="st0" d="M8,5c0-1.1-0.9-2-2-2S4,3.9,4,5s0.9,2,2,2S8,6.1,8,5z"/>
+	<path class="st0" d="M4,1c0,1.1,0.9,2,2,2s2-0.9,2-2"/>
+	<path class="st0" d="M6,11V7"/>
+	<path class="st0" d="M4,9h4"/>
 </g>
 </svg>
