@@ -83,9 +83,9 @@ struct ChartDraw {
         let divTraitBig = 0.2
         return (getRadiusTotal() * (
                         (
-                                (CIRCLE_SIZE_NATAL[1].0 - CIRCLE_SIZE_NATAL[0].0)
+                                (CIRCLE_SIZE_TRANSIT[2].0 - CIRCLE_SIZE_TRANSIT[1].0)
                                 / (2.0 + divTraitBig)
-                        ) + CIRCLE_SIZE_NATAL[0].0))
+                        ) + CIRCLE_SIZE_TRANSIT[1].0))
         / 100.0
     }
 
@@ -156,15 +156,35 @@ struct ChartDraw {
         return path
     }
 
+    struct DrawHouseTriangle: Shape {
+        var lines: [HouseLine]
+        func path(in rect: CGRect) -> Path {
+            var path = Path()
+            for line in lines {
+                if line.lXY3 {
+                    path.move(to: CGPoint(x: line.lX3, y: line.lY3))
+                    path.addLine(to: CGPoint(x: line.lX1, y: line.lY1))
+                    path.addLine(to: CGPoint(x: line.lX2, y: line.lY2))
+                    path.addLine(to: CGPoint(x: line.lX3, y: line.lY3))
+                    path.closeSubpath()
+                } /*else {
+                    path.move(to: CGPoint(x: line.lX1, y: line.lY1))
+                    path.addLine(to: CGPoint(x: line.lX2, y: line.lY2))
+                    path.closeSubpath()
+                }*/
+            }
+            return path
+        }
+    }
     func drawHouseLine(lines: [HouseLine]) -> Path {
         var path = Path()
         for line in lines {
             if line.lXY3 {
-                print(line)
-                path.move(to: CGPoint(x: line.lX3, y: line.lY3))
+               /* path.move(to: CGPoint(x: line.lX3, y: line.lY3))
                 path.addLine(to: CGPoint(x: line.lX1, y: line.lY1))
                 path.addLine(to: CGPoint(x: line.lX2, y: line.lY2))
                 path.addLine(to: CGPoint(x: line.lX3, y: line.lY3))
+                path.closeSubpath()*/
             } else {
                 path.move(to: CGPoint(x: line.lX1, y: line.lY1))
                 path.addLine(to: CGPoint(x: line.lX2, y: line.lY2))
@@ -401,108 +421,5 @@ struct ChartDraw {
                 oPx: offset.offX,
                 oPy: offset.offY)
         return res
-    }
-
-    func drawZodiacSvg(object: Object) -> some View {
-        //print(object)
-        switch object.sign.rawValue {
-        case 1:
-            return VStack {
-                GeometryReader { geometry in
-                    Image("zod01").resizable()
-                            .resizable()
-                            .position(x: object.oPx + object.oSx, y: object.oPy + object.oSy)
-                            .frame(width: object.oSx, height: object.oSy)
-                }
-            }
-        case 2:
-            return VStack {
-                GeometryReader { geometry in
-                    Image("zod02").resizable()
-                            .resizable()
-                            .position(x: object.oPx, y: object.oPy).frame(width: object.oSx, height: object.oSy)
-                }
-            }
-        case 3:
-            return VStack {
-                GeometryReader { geometry in
-                    Image("zod03").resizable()
-                            .resizable()
-                            .position(x: object.oPx, y: object.oPy).frame(width: object.oSx, height: object.oSy)
-                }
-            }
-        case 4:
-            return VStack {
-                GeometryReader { geometry in
-                    Image("zod04").resizable()
-                            .resizable()
-                            .position(x: object.oPx, y: object.oPy).frame(width: object.oSx, height: object.oSy)
-                }
-            }
-        case 5:
-            return VStack {
-                GeometryReader { geometry in
-                    Image("zod05").resizable()
-                            .resizable()
-                            .position(x: object.oPx, y: object.oPy).frame(width: object.oSx, height: object.oSy)
-                }
-            }
-        case 6:
-            return VStack {
-                GeometryReader { geometry in
-                    Image("zod06").resizable()
-                            .resizable()
-                            .position(x: object.oPx, y: object.oPy).frame(width: object.oSx, height: object.oSy)
-                }
-            }
-        case 7:
-            return VStack {
-                GeometryReader { geometry in
-                    Image("zod07").resizable()
-                            .resizable()
-                            .position(x: object.oPx, y: object.oPy).frame(width: object.oSx, height: object.oSy)
-                }
-            }
-        case 8:
-            return VStack {
-                GeometryReader { geometry in
-                    Image("zod08").resizable()
-                            .resizable()
-                            .position(x: object.oPx, y: object.oPy).frame(width: object.oSx, height: object.oSy)
-                }
-            }
-        case 9:
-            return VStack {
-                GeometryReader { geometry in
-                    Image("zod09").resizable()
-                            .resizable()
-                            .position(x: object.oPx, y: object.oPy).frame(width: object.oSx, height: object.oSy)
-                }
-            }
-        case 10:
-            return VStack {
-                GeometryReader { geometry in
-                    Image("zod10").resizable()
-                            .resizable()
-                            .position(x: object.oPx, y: object.oPy).frame(width: object.oSx, height: object.oSy)
-                }
-            }
-        case 11:
-            return VStack {
-                GeometryReader { geometry in
-                    Image("zod11").resizable()
-                            .resizable()
-                            .position(x: object.oPx, y: object.oPy).frame(width: object.oSx, height: object.oSy)
-                }
-            }
-        default:
-            return VStack {
-                GeometryReader { geometry in
-                    Image("zod12").resizable()
-                            .resizable()
-                            .position(x: object.oPx, y: object.oPy).frame(width: object.oSx, height: object.oSy)
-                }
-            }
-        }
     }
 }

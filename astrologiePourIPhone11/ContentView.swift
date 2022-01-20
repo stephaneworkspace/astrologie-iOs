@@ -24,15 +24,6 @@ struct ContentView: View {
                 // Text("Simulator").padding()
                 // #endif
             }.frame(width: .infinity, height: .infinity)
-            // Zodiac
-            /*
-            ForEach(1...12, id: \.self) { i in
-                VStack {
-                    ChartDraw.LineShape(o: cD.zodiac(swe: cD.swe, sign: Int32(i)))
-                            .stroke(Color.red, lineWidth: 2.0)
-                            .border(.red, width: 1.0)
-                }.frame(width: cD.SIZE, height: cD.SIZE)
-            }*/
             // Draw chart circles
             VStack {
                 cD.drawCircle(circles: cD.circles(swe: cD.swe))
@@ -44,15 +35,39 @@ struct ContentView: View {
                 cD.drawLine(lines: cD.zodiac_lines(swe: cD.swe))
                         .stroke(.black, lineWidth: 1.0)
             }.frame(width: cD.SIZE, height: cD.SIZE)
-            // Draw house lines
+            // Draw house triangle and lines
             VStack {
-                cD.drawHouseLine(lines: cD.house_lines(swe: cD.swe))
-                        .stroke(.black, lineWidth: 1.0)
+                ChartDraw.DrawHouseTriangle(lines: cD.house_lines(swe: cD.swe))
+                        .fill(.black)
+            }.frame(width: cD.SIZE, height: cD.SIZE)
+            VStack {
+                cD.drawHouseLine(lines: cD.house_lines(swe: cD.swe)).stroke(.black, lineWidth: 1.0)
             }.frame(width: cD.SIZE, height: cD.SIZE)
             // Draw zodiac symbols
             ForEach(1...12, id: \.self) { idx in
-                cD.drawZodiacSvg(object: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)))
-                        .frame(width: cD.SIZE, height: cD.SIZE).border(.red, width: 1.0)
+                VStack {
+                    GeometryReader { geometry in
+                        if idx < 10 {
+                            Image("zod0" + idx.formatted())
+                                    .resizable()
+                                    .offset(
+                                            x: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oPx,
+                                            y: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oPy)
+                                    .frame(
+                                            width: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oSx,
+                                            height: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oSy)
+                        } else {
+                            Image("zod" + idx.formatted())
+                                    .resizable()
+                                    .offset(
+                                            x: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oPx,
+                                            y: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oPy)
+                                    .frame(
+                                            width: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oSx,
+                                            height: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oSy)
+                        }
+                    }
+                }.frame(width: cD.SIZE, height: cD.SIZE).border(.red, width: 1.0)
             }
         }
 }
@@ -60,6 +75,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
 static var previews: some View {
-    ContentView()
+ContentView()
 }
 }
