@@ -253,6 +253,16 @@ struct ChartDraw {
         return path
     }
 
+    func drawAngleLine(lines: [Line]) -> Path {
+        var path = Path()
+        for line in lines {
+            path.move(to: CGPoint(x: line.lX1, y: line.lY1))
+            path.addLine(to: CGPoint(x: line.lX2, y: line.lY2))
+            path.closeSubpath()
+        }
+        return path
+    }
+
     func drawCircle(circles: [Circle]) -> Path {
         var path = Path()
         for circle in circles.reversed() {
@@ -383,6 +393,63 @@ struct ChartDraw {
                 res.append(Circle(center: center, radius: radius))
             }
         }
+        return res
+    }
+
+    func angle_lines(swe: Swe) -> [Line] {
+        var res: [Line] = []
+        //
+        var angle: Swe.Angle = .asc
+        var pos = getAngleLongitude(angle: angle)
+        var axyBegin: [Offset] = []
+        var axyLine: [Offset] = getLineTrigo(
+                angular: pos,
+                radiusCircleBegin: getRadiusCircle(occurs: 2).0,
+                radiusCircleEnd: getRadiusCircle(occurs: 8).0)
+        res.append(Line(
+                lX1: axyLine[0].offX,
+                lY1: axyLine[0].offY,
+                lX2: axyLine[1].offX,
+                lY2: axyLine[1].offY))
+        //
+        angle = .fc
+        pos = getAngleLongitude(angle: angle)
+        axyBegin = []
+        axyLine = getLineTrigo(
+                angular: pos,
+                radiusCircleBegin: getRadiusCircle(occurs: 2).0,
+                radiusCircleEnd: getRadiusCircle(occurs: 8).0)
+        res.append(Line(
+                lX1: axyLine[0].offX,
+                lY1: axyLine[0].offY,
+                lX2: axyLine[1].offX,
+                lY2: axyLine[1].offY))
+        //
+        angle = .desc
+        pos = getAngleLongitude(angle: angle)
+        axyBegin = []
+        axyLine = getLineTrigo(
+                angular: pos,
+                radiusCircleBegin: getRadiusCircle(occurs: 2).0,
+                radiusCircleEnd: getRadiusCircle(occurs: 8).0)
+        res.append(Line(
+                lX1: axyLine[0].offX,
+                lY1: axyLine[0].offY,
+                lX2: axyLine[1].offX,
+                lY2: axyLine[1].offY))
+        //
+        angle = .mc
+        pos = getAngleLongitude(angle: angle)
+        axyBegin = []
+        axyLine = getLineTrigo(
+                angular: pos,
+                radiusCircleBegin: getRadiusCircle(occurs: 2).0,
+                radiusCircleEnd: getRadiusCircle(occurs: 8).0)
+        res.append(Line(
+                    lX1: axyLine[0].offX,
+                    lY1: axyLine[0].offY,
+                    lX2: axyLine[1].offX,
+                    lY2: axyLine[1].offY))
         return res
     }
 

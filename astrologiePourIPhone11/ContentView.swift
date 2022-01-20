@@ -93,6 +93,9 @@ struct Chart1View: View {
                                 height: angle.oSy)
             }
         }.frame(width: cD.SIZE, height: cD.SIZE)
+        VStack {
+            cD.drawAngleLine(lines: cD.angle_lines(swe: cD.swe)).stroke(.black, lineWidth: 1.0)
+        }.frame(width: cD.SIZE, height: cD.SIZE)
 
     }
 }
