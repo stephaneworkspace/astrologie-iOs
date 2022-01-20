@@ -133,7 +133,7 @@ class Swe {
                 tMin: 0)
         do {
             let path = Bundle.main.path(forResource: "data", ofType: "json")
-            var jsonData = try! String(contentsOfFile: path!).data(using: .utf8)!
+            let jsonData = try! String(contentsOfFile: path!).data(using: .utf8)!
             decode = try JSONDecoder().decode(Chart.self, from: jsonData)
         } catch {
             print("Unable to open chart file")

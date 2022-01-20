@@ -398,7 +398,7 @@ struct ChartDraw {
 
     func bodie_lines(swe: Swe, swTransit: Bool) -> [Line] {
         var res: [Line] = []
-        for iIdx in 1...8 {
+        for _ in 1...8 {
             var pos = 0.0
             for bod in swe.bodies {
                 var axy: [Offset]
@@ -517,7 +517,7 @@ struct ChartDraw {
     }
 
     func bodie(swe: Swe, bodie: Int32, swTransit: Bool) -> ObjectBodie {
-        var planetRatio = 0.0
+        var planetRatio: Double
         if swTransit {
             planetRatio = 6.0 // TODO const
         } else {
