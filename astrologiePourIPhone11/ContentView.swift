@@ -10,27 +10,28 @@ import SwiftUI
 private func loadValue(selectedDate: Date, selectedDateTransit: Date) -> Swe.Chart {
     var chartDefault: Swe.Chart = loadDefaultValue().0
     //
-    var nLng = chartDefault.nLng
-    var tLng = chartDefault.tLng
-    var nLat = chartDefault.nLat
-    var tLat = chartDefault.tLat
-    var nTimeZone = chartDefault.nTimeZone
-    var tTimeZone = chartDefault.tTimeZone
+    let nLng = chartDefault.nLng
+    let tLng = chartDefault.tLng
+    let nLat = chartDefault.nLat
+    let tLat = chartDefault.tLat
+    let nTimeZone = chartDefault.nTimeZone
+    let tTimeZone = chartDefault.tTimeZone
     var dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "YYYY"
-    var nYear = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nYear
-    var tYear = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tYear
+    let nYear = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nYear
+    let tYear = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tYear
     dateFormatter.dateFormat = "MM"
-    var nMonth = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nMonth
-    var tMonth = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tMonth
+    let nMonth = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nMonth
+    let tMonth = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tMonth
     dateFormatter.dateFormat = "dd"
-    var nDay = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nDay
-    var tDay = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tDay
-    var nHour = chartDefault.nHour
-    var tHour = chartDefault.tHour
-    var nMin = chartDefault.nMin
-    var tMin = chartDefault.tMin
-    //
+    let nDay = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nDay
+    let tDay = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tDay
+    dateFormatter.dateFormat = "hh"
+    let nHour = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nHour
+    let tHour = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tHour
+    dateFormatter.dateFormat = "mm"
+    let nMin = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nMin
+    let tMin = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tMin
     return Swe.Chart(
             nLat: nLat,
             nLng: nLng,
@@ -58,8 +59,8 @@ struct ContentView: View {
         ZStack {
             VStack {
                 Text("Astrologie").padding()
-                DatePicker("Date de naissance", selection: $selectedDate, displayedComponents: .date)
-                DatePicker("Transit", selection: $selectedDateTransit, displayedComponents: .date)
+                DatePicker("Date de naissance", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
+                DatePicker("Transit", selection: $selectedDateTransit, displayedComponents: [.date, .hourAndMinute])
                 ChartView(swe: Swe(chart: loadValue(selectedDate: selectedDate, selectedDateTransit: selectedDateTransit)))
             }
         }
@@ -95,6 +96,8 @@ private func loadDefaultValue() -> (Swe.Chart, Date, Date) {
     dateN.year = Int(decode.nYear)
     dateN.month = Int(decode.nMonth)
     dateN.day = Int(decode.nDay)
+    dateN.hour = Int(decode.nHour)
+    dateN.minute = Int(decode.nMin)
     let calandarNatal = Calendar(identifier: .gregorian).date(from: dateN)
     let dateNatal = calandarNatal.unsafelyUnwrapped
 
@@ -102,7 +105,8 @@ private func loadDefaultValue() -> (Swe.Chart, Date, Date) {
     dateT.year = Int(decode.tYear)
     dateT.month = Int(decode.tMonth)
     dateT.day = Int(decode.tDay)
-
+    dateT.hour = Int(decode.nHour)
+    dateT.minute = Int(decode.nMin)
     let calandarTransit = Calendar(identifier: .gregorian).date(from: dateT)
     let dateTransit = calandarTransit.unsafelyUnwrapped
 
