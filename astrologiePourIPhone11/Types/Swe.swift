@@ -314,10 +314,6 @@ extension Swe.Aspects {
             return (150, 2)
         case .sequisquare:
             return (135, 1)
-        case .inconjunction:
-            return (150, 2)
-        case .sequisquare:
-            return (135, 1)
         case .semisquare:
             return (45, 1)
         case .semisextile:
@@ -359,10 +355,6 @@ extension Swe.Aspects {
         case .inconjunction:
             return "Quinconce"
         case .sequisquare:
-            return "Sextile"
-        case .inconjunction:
-            return "Quinconce"
-        case .sequisquare:
             return "Sesqui-carré"
         case .semisquare:
             return "Demi-carré"
@@ -383,19 +375,31 @@ extension Swe.Aspects {
         case .square:
             return .red
         case .sextile:
+            return .indigo
+        case .inconjunction:
             return .green
-        case .inconjunction:
-            return .black
         case .sequisquare:
-            return .black
-        case .inconjunction:
-            return .black
-        case .sequisquare:
-            return .black
+            return .red
         case .semisquare:
-            return .black
+            return .red
         case .semisextile:
-            return .black
+            return .blue
         }
+    }
+
+    // Return color
+    func style() -> StrokeStyle {
+        var stroke = StrokeStyle.init(lineWidth: 0.5)
+        switch self {
+        case .sequisquare:
+            stroke.dash = [7]
+        case .semisquare:
+            stroke.dash = [7]
+        case .semisextile:
+            stroke.dash = [7]
+        default:
+            return stroke
+        }
+        return stroke
     }
 }

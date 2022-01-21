@@ -143,10 +143,11 @@ struct ChartAspectView: View {
                 let aspect = Swe.Aspects.init(rawValue: Int32(idx)) ?? Swe.Aspects.conjunction
                 let aspectType = ChartDraw.AspectType.init(rawValue: jdx) ?? ChartDraw.AspectType.natal
                 let aspectColor = aspect.color()
+                let aspectStyle = aspect.style()
                 let lines = cD.aspect_lines(swe: cD.swe, aspect: aspect, aspectType: aspectType)
                 if lines.count > 0 {
                     VStack {
-                        ChartDraw.DrawAspectLines(lines: lines).stroke(aspectColor, lineWidth: 0.5)
+                        ChartDraw.DrawAspectLines(lines: lines).stroke(aspectColor, style: aspectStyle)
                     }.frame(width: cD.SIZE, height: cD.SIZE)
                 }
             }
