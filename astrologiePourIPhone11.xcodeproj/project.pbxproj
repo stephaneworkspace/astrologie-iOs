@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		552E84D25D0339BD12242985 /* ChartDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E87D333F0D0133EA10579 /* ChartDraw.swift */; };
+		552E8A6492F621D3E2807CF7 /* ChartDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E88C2B939982C5289FCDD /* ChartDraw.swift */; };
 		552E8D53C7B1F2734031F347 /* data.json.example in Resources */ = {isa = PBXBuildFile; fileRef = 552E8CAB5E7E36614CDBFAFD /* data.json.example */; };
 		F404446A2797F0F900B74503 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F40444692797F0F900B74503 /* .gitignore */; };
 		F404446C2797F11600B74503 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = F404446B2797F11600B74503 /* data.json */; };
@@ -66,7 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		552E87D333F0D0133EA10579 /* ChartDraw.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartDraw.swift; sourceTree = "<group>"; };
+		552E88C2B939982C5289FCDD /* ChartDraw.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartDraw.swift; sourceTree = "<group>"; };
 		552E8CAB5E7E36614CDBFAFD /* data.json.example */ = {isa = PBXFileReference; lastKnownFileType = file.example; path = data.json.example; sourceTree = "<group>"; };
 		F40444692797F0F900B74503 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F404446B2797F11600B74503 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
@@ -160,6 +160,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		552E8CB02AC747E66F61E168 /* Draw */ = {
+			isa = PBXGroup;
+			children = (
+				552E88C2B939982C5289FCDD /* ChartDraw.swift */,
+			);
+			path = Draw;
+			sourceTree = "<group>";
+		};
 		F4141E9C2797414800381179 = {
 			isa = PBXGroup;
 			children = (
@@ -233,7 +241,6 @@
 				F40444692797F0F900B74503 /* .gitignore */,
 				F404446B2797F11600B74503 /* data.json */,
 				552E8CAB5E7E36614CDBFAFD /* data.json.example */,
-				552E87D333F0D0133EA10579 /* ChartDraw.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -292,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				F446CDE0279AE0AC00D8CCD8 /* ChartView.swift */,
+				552E8CB02AC747E66F61E168 /* Draw */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -465,7 +473,7 @@
 				F4141F29279741FC00381179 /* Swe08.swift in Sources */,
 				F4141F0E279741A100381179 /* swejpl.c in Sources */,
 				F4141EA92797414800381179 /* astrologiePourIPhone11App.swift in Sources */,
-				552E84D25D0339BD12242985 /* ChartDraw.swift in Sources */,
+				552E8A6492F621D3E2807CF7 /* ChartDraw.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
