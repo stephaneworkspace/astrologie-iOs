@@ -282,6 +282,94 @@ class Swe {
              dpsideps1980 = 262144,
              jplHorApprox = 524288
     }
+
+    enum Aspects: Int32 {
+        case conjunction = 0,
+             opposition = 1,
+             trine = 2,
+             square = 3,
+             sextile = 4,
+             inconjunction = 5,
+             sequisquare = 6,
+             semisquare =  7,
+             semisextile = 8
+    }
+}
+
+extension Swe.Aspects {
+    // Return property (angle, orbe)
+    func angle() -> (Int32, Int32) {
+        switch self {
+        case .conjunction:
+            return (0, 10)
+        case .opposition:
+            return (180, 8)
+        case .trine:
+            return (120, 7)
+        case .square:
+            return (90, 6)
+        case .sextile:
+            return (60, 5)
+        case .inconjunction:
+            return (150, 2)
+        case .sequisquare:
+            return (135, 1)
+        case .inconjunction:
+            return (150, 2)
+        case .sequisquare:
+            return (135, 1)
+        case .semisquare:
+            return (45, 1)
+        case .semisextile:
+            return (30, 1)
+        }
+    }
+
+    // Return if maj
+    func maj() -> Bool {
+        switch self {
+        case .conjunction:
+            return true
+        case .opposition:
+            return true
+        case .trine:
+            return true
+        case .square:
+            return true
+        case .sextile:
+            return true
+        default:
+            return false
+        }
+    }
+
+    // Return text
+    func text() -> String {
+        switch self {
+        case .conjunction:
+            return "Conjonction"
+        case .opposition:
+            return "Opposition"
+        case .trine:
+            return "Trigone"
+        case .square:
+            return "Quadrature"
+        case .sextile:
+            return "Sextile"
+        case .inconjunction:
+            return "Quinconce"
+        case .sequisquare:
+            return "Sextile"
+        case .inconjunction:
+            return "Quinconce"
+        case .sequisquare:
+            return "Sesqui-carré"
+        case .semisquare:
+            return "Demi-carré"
+        case .semisextile:
+            return "Demi-sextile"
+        }
+    }
 }
 
 /*

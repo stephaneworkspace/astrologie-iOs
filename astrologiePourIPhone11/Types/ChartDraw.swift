@@ -165,6 +165,14 @@ struct ChartDraw {
         var lY3: Double
     }
 
+    struct AspectLine {
+        var aspect: Swe.Aspects
+        var lX1: Double
+        var lY1: Double
+        var lX2: Double
+        var lY2: Double
+    }
+
     struct Circle {
         var center: Double
         var radius: Double
@@ -251,6 +259,21 @@ struct ChartDraw {
             }
         }
         return path
+    }
+
+    struct DrawAspectLines: Shape {
+        var lines: [AspectLine]
+
+        func path(in rect: CGRect) -> Path {
+            var path = Path()
+            for line in lines {
+                print(line)
+                path.move(to: CGPoint(x: line.lX1, y: line.lY1))
+                path.addLine(to: CGPoint(x: line.lX2, y: line.lY2))
+                path.closeSubpath()
+            }
+            return path
+        }
     }
 
     func drawAngleLine(lines: [Line]) -> Path {
@@ -380,6 +403,19 @@ struct ChartDraw {
         return pos
     }
 
+    func getClosestDistance(angle1: Double, angle2: Double) -> Double {
+        getZnorm(angle: angle2 - angle1)
+    }
+
+    func getZnorm(angle: Double) -> Double {
+        let ang = Int(angle) % Int(SIZE)
+        if Double(ang) <= (SIZE / 2) {
+            return Double(ang)
+        } else {
+            return Double(ang) - SIZE
+        }
+    }
+
     enum LargerDrawLine {
         case large, small
     }
@@ -401,7 +437,6 @@ struct ChartDraw {
         //
         var angle: Swe.Angle = .asc
         var pos = getAngleLongitude(angle: angle)
-        var axyBegin: [Offset] = []
         var axyLine: [Offset] = getLineTrigo(
                 angular: pos,
                 radiusCircleBegin: getRadiusCircle(occurs: 2).0,
@@ -414,7 +449,6 @@ struct ChartDraw {
         //
         angle = .fc
         pos = getAngleLongitude(angle: angle)
-        axyBegin = []
         axyLine = getLineTrigo(
                 angular: pos,
                 radiusCircleBegin: getRadiusCircle(occurs: 2).0,
@@ -427,7 +461,6 @@ struct ChartDraw {
         //
         angle = .desc
         pos = getAngleLongitude(angle: angle)
-        axyBegin = []
         axyLine = getLineTrigo(
                 angular: pos,
                 radiusCircleBegin: getRadiusCircle(occurs: 2).0,
@@ -440,7 +473,6 @@ struct ChartDraw {
         //
         angle = .mc
         pos = getAngleLongitude(angle: angle)
-        axyBegin = []
         axyLine = getLineTrigo(
                 angular: pos,
                 radiusCircleBegin: getRadiusCircle(occurs: 2).0,
@@ -495,6 +527,99 @@ struct ChartDraw {
                     lX3: axyTriangle[2].offX,
                     lY3: axyTriangle[2].offY)
             )
+        }
+        return res
+    }
+
+    enum AspectType: Int {
+        case natal = 0, transit = 1, natalAndTransit = 2
+    }
+
+    func aspect_lines(swe: Swe, aspect: Swe.Aspects, aspectType: AspectType) -> [AspectLine] {
+        var res: [AspectLine] = []
+        for bod in swe.bodies {
+            let bodNatalLongitude = getBodieLongitude(bodie: bod.0, swTransit: false)
+            let bodTransitLongitude = getBodieLongitude(bodie: bod.0, swTransit: true)
+            switch aspectType {
+            case .natalAndTransit:
+                let separation = getClosestDistance(
+                        angle1: bodNatalLongitude,
+                        angle2: bodTransitLongitude)
+                let absSeparation = abs(separation)
+                let asp = aspect.angle().0
+                let orb = aspect.angle().1
+                if abs(absSeparation - Double(asp)) <= Double(orb) {
+                    let pos1: Offset = getPosTrigo(
+                            angular: bodNatalLongitude,
+                            radiusCircle: getRadiusCircle(occurs: 0).0)
+                    let pos2: Offset = getPosTrigo(
+                            angular: bodTransitLongitude,
+                            radiusCircle: getRadiusCircle(occurs: 0).0)
+                    let line: AspectLine = AspectLine(
+                            aspect: aspect,
+                            lX1: pos1.offX,
+                            lY1: pos1.offY,
+                            lX2: pos2.offX,
+                            lY2: pos2.offY)
+                    res.append(line)
+                }
+            case .natal:
+                for bodPair in swe.bodies.reversed() {
+                    if bodPair.0.bodie == bod.0.bodie {
+                        break
+                    }
+                    let bod2NatalLongitude = getBodieLongitude(bodie: bodPair.0, swTransit: false)
+                    let separation = getClosestDistance(
+                            angle1: bodNatalLongitude,
+                            angle2: bod2NatalLongitude)
+                    let absSeparation = abs(separation)
+                    let asp = aspect.angle().0
+                    let orb = aspect.angle().1
+                    if abs(absSeparation - Double(asp)) <= Double(orb) {
+                        let pos1: Offset = getPosTrigo(
+                                angular: bodNatalLongitude,
+                                radiusCircle: getRadiusCircle(occurs: 0).0)
+                        let pos2: Offset = getPosTrigo(
+                                angular: bod2NatalLongitude,
+                                radiusCircle: getRadiusCircle(occurs: 0).0)
+                        let line: AspectLine = AspectLine(
+                                aspect: aspect,
+                                lX1: pos1.offX,
+                                lY1: pos1.offY,
+                                lX2: pos2.offX,
+                                lY2: pos2.offY)
+                        res.append(line)
+                    }
+                }
+            case .transit:
+                for bodPair in swe.bodies.reversed() {
+                    if bodPair.1.bodie == bod.1.bodie {
+                        break
+                    }
+                    let bod2TransitLongitude = getBodieLongitude(bodie: bodPair.1, swTransit: true)
+                    let separation = getClosestDistance(
+                            angle1: bodTransitLongitude,
+                            angle2: bod2TransitLongitude)
+                    let absSeparation = abs(separation)
+                    let asp = aspect.angle().0
+                    let orb = aspect.angle().1
+                    if abs(absSeparation - Double(asp)) <= Double(orb) {
+                        let pos1: Offset = getPosTrigo(
+                                angular: bodTransitLongitude,
+                                radiusCircle: getRadiusCircle(occurs: 0).0)
+                        let pos2: Offset = getPosTrigo(
+                                angular: bod2TransitLongitude,
+                                radiusCircle: getRadiusCircle(occurs: 0).0)
+                        let line: AspectLine = AspectLine(
+                                aspect: aspect,
+                                lX1: pos1.offX,
+                                lY1: pos1.offY,
+                                lX2: pos2.offX,
+                                lY2: pos2.offY)
+                        res.append(line)
+                    }
+                }
+            }
         }
         return res
     }
