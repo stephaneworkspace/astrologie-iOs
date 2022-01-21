@@ -7,229 +7,46 @@
 
 import SwiftUI
 
-func swe() -> String {
-    let swe = Swe()
-    return swe.bodies[0].0.calculUt.longitude.formatted()
-}
-
-struct ChartZodiacView: View {
-    var cD: ChartDraw = ChartDraw()
-    var body: some View {
-        // Circle
-        /* VStack {
-             // Text("Astrologie").padding()
-             // Text("Éphémérides").padding()
-             // #if targetEnvironment(simulator)
-             // Text("Simulator").padding()
-             // #endif
-         }.frame(width: .infinity, height: .infinity)*/
-        // Draw chart circles
-        VStack {
-            cD.drawCircle(circles: cD.circles(swe: cD.swe))
-                    .stroke(.black, lineWidth: 1.0)
-        }.frame(width: cD.SIZE, height: cD.SIZE)
-        // Draw zodiac lines
-        VStack {
-            cD.drawLine(lines: cD.zodiac_lines(swe: cD.swe))
-                    .stroke(.black, lineWidth: 1.0)
-        }.frame(width: cD.SIZE, height: cD.SIZE)
-        ForEach(1...12, id: \.self) { idx in
-            VStack {
-                GeometryReader { geometry in
-                    Image("zod" + idx.formatted())
-                            .resizable()
-                            .offset(
-                                    x: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oPx,
-                                    y: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oPy)
-                            .frame(
-                                    width: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oSx,
-                                    height: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oSy)
-                }
-            }.frame(width: cD.SIZE, height: cD.SIZE)
-        }
-        let angle = cD.angle(swe: cD.swe, angle: .asc)
-        VStack {
-            GeometryReader { geometry in
-                Image(angle.svg)
-                        .resizable()
-                        .offset(
-                                x: angle.oPx,
-                                y: angle.oPy)
-                        .frame(
-                                width: angle.oSx,
-                                height: angle.oSy)
-            }
-        }.frame(width: cD.SIZE, height: cD.SIZE)
-        let angle = cD.angle(swe: cD.swe, angle: .fc)
-        VStack {
-            GeometryReader { geometry in
-                Image(angle.svg)
-                        .resizable()
-                        .offset(
-                                x: angle.oPx,
-                                y: angle.oPy)
-                        .frame(
-                                width: angle.oSx,
-                                height: angle.oSy)
-            }
-        }.frame(width: cD.SIZE, height: cD.SIZE)
-        let angle = cD.angle(swe: cD.swe, angle: .desc)
-        VStack {
-            GeometryReader { geometry in
-                Image(angle.svg)
-                        .resizable()
-                        .offset(
-                                x: angle.oPx,
-                                y: angle.oPy)
-                        .frame(
-                                width: angle.oSx,
-                                height: angle.oSy)
-            }
-        }.frame(width: cD.SIZE, height: cD.SIZE)
-        let angle = cD.angle(swe: cD.swe, angle: .mc)
-        VStack {
-            GeometryReader { geometry in
-                Image(angle.svg)
-                        .resizable()
-                        .offset(
-                                x: angle.oPx,
-                                y: angle.oPy)
-                        .frame(
-                                width: angle.oSx,
-                                height: angle.oSy)
-            }
-        }.frame(width: cD.SIZE, height: cD.SIZE)
-        VStack {
-            cD.drawAngleLine(lines: cD.angle_lines(swe: cD.swe)).stroke(.black, lineWidth: 1.0)
-        }.frame(width: cD.SIZE, height: cD.SIZE)
-    }
-}
-
-struct ChartHouseView: View {
-    var cD: ChartDraw = ChartDraw()
-    var body: some View {
-        // Draw house triangle and lines
-        VStack {
-            ChartDraw.DrawHouseTriangle(lines: cD.house_lines(swe: cD.swe))
-                    .fill(.black)
-        }.frame(width: cD.SIZE, height: cD.SIZE)
-        VStack {
-            cD.drawHouseLine(lines: cD.house_lines(swe: cD.swe)).stroke(.black, lineWidth: 1.0)
-        }.frame(width: cD.SIZE, height: cD.SIZE)
-        // House number
-        ForEach(1...12, id: \.self) { idx in
-            let house = cD.house(swe: cD.swe, number: Int32(idx))
-            VStack {
-                GeometryReader { geometry in
-                    Image("h" + idx.formatted())
-                            .resizable()
-                            .offset(
-                                    x: house.oPx,
-                                    y: house.oPy)
-                            .frame(
-                                    width: house.oSx,
-                                    height: house.oSy)
-                }
-            }.frame(width: cD.SIZE, height: cD.SIZE)
-        }
-    }
-}
-
-struct ChartAspectView: View {
-    var cD: ChartDraw = ChartDraw()
-    var body: some View {
-        ForEach(1...8, id: \.self) { idx in
-            ForEach(0...2, id: \.self) { jdx in
-                let aspect = Swe.Aspects.init(rawValue: Int32(idx)) ?? Swe.Aspects.conjunction
-                let aspectType = ChartDraw.AspectType.init(rawValue: jdx) ?? ChartDraw.AspectType.natal
-                let aspectColor = aspect.color()
-                let aspectStyle = aspect.style()
-                let lines = cD.aspect_lines(swe: cD.swe, aspect: aspect, aspectType: aspectType)
-                if lines.count > 0 {
-                    VStack {
-                        ChartDraw.DrawAspectLines(lines: lines).stroke(aspectColor, style: aspectStyle)
-                    }.frame(width: cD.SIZE, height: cD.SIZE)
-                }
-            }
-        }
-    }
-}
-
-struct ChartBodieView: View {
-    var cD: ChartDraw = ChartDraw()
-    var body: some View {
-        // Draw bodies line on chart
-        ForEach(1...8, id: \.self) { idx in
-            VStack {
-                cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: false)).stroke(.black, lineWidth: 0.1)
-            }.frame(width: cD.SIZE, height: cD.SIZE)
-        }
-        ForEach(1...8, id: \.self) { idx in
-            VStack {
-                cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: true)).stroke(.black, lineWidth: 0.1)
-            }.frame(width: cD.SIZE, height: cD.SIZE)
-        }
-        // Draw bodies symbol
-        ForEach(0...8, id: \.self) { idx in
-            let _ = Swe.Bodies.init(rawValue: Int32(idx)) ?? Swe.Bodies.sun
-            let bodN = cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false)
-            let bodT = cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true)
-            VStack {
-                GeometryReader { geometry in
-                    if bodN.swRetrograde {
-                        Image("r" + idx.formatted())
-                                .resizable()
-                                .offset(
-                                        x: bodN.oPx + bodN.oSx / cD.RETOGRADE_DIV,
-                                        y: bodN.oPy + bodN.oSy / cD.RETOGRADE_DIV)
-                                .frame(
-                                        width: bodN.oSx / cD.RETOGRADE_DIV,
-                                        height: bodN.oSy / cD.RETOGRADE_DIV)
-                    }
-                    if bodT.swRetrograde {
-                        Image("r" + idx.formatted())
-                                .resizable()
-                                .offset(
-                                        x: bodT.oPx + bodT.oSx / cD.RETOGRADE_DIV,
-                                        y: bodT.oPy + bodT.oSy / cD.RETOGRADE_DIV)
-                                .frame(
-                                        width: bodT.oSx / cD.RETOGRADE_DIV,
-                                        height: bodT.oSy / cD.RETOGRADE_DIV)
-                    }
-                    Image("b" + idx.formatted())
-                            .resizable()
-                            .foregroundColor(.red)
-                            .offset(
-                                    x: bodN.oPx,
-                                    y: bodN.oPy)
-                            .frame(
-                                    width: bodN.oSx,
-                                    height: bodN.oSy)
-                    Image("b" + idx.formatted())
-                            .resizable()
-                            .offset(
-                                    x: bodT.oPx,
-                                    y: bodT.oPy)
-                            .frame(
-                                    width: bodT.oSx,
-                                    height: bodT.oSy)
-                }
-            }.frame(width: cD.SIZE, height: cD.SIZE)
-        }
-    }
-}
-
 struct ContentView: View {
-    var cD: ChartDraw = ChartDraw()
+    var chart: Swe.Chart = load_default_value()
     var body: some View {
         ZStack {
-            ChartZodiacView(cD: cD)
-            ChartHouseView(cD: cD)
-            ChartBodieView(cD: cD)
-            ChartAspectView(cD: cD)
+            VStack {
+                Text("Astrologie").padding()
+                ChartView(swe: Swe(chart: chart))
+            }
         }
     }
 }
+
+private func load_default_value() -> Swe.Chart {
+    var decode: Swe.Chart = Swe.Chart.init(
+            nLat: 46.12,
+            nLng: 6.09,
+            nTimeZone: 2,
+            nYear: 1981,
+            nMonth: 1,
+            nDay: 1,
+            nHour: 0,
+            nMin: 0,
+            tLat: 46.12,
+            tLng: 6.09,
+            tTimeZone: 2,
+            tYear: 2022,
+            tMonth: 1,
+            tDay: 24,
+            tHour: 12,
+            tMin: 0)
+    do {
+        let path = Bundle.main.path(forResource: "data", ofType: "json")
+        let jsonData = try! String(contentsOfFile: path!).data(using: .utf8)!
+        decode = try JSONDecoder().decode(Swe.Chart.self, from: jsonData)
+    } catch {
+        print("Unable to open chart file")
+    }
+    return decode
+}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

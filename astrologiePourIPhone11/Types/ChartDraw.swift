@@ -6,6 +6,7 @@ import Foundation
 import SwiftUI
 
 struct ChartDraw {
+    let swe: Swe
     let size = 130
     let mult = 3
     let SIZE = 390.0
@@ -49,7 +50,7 @@ struct ChartDraw {
     let LARGER_DRAW_LINE_RULES_SMALL = 0.1
     let LARGER_DRAW_LINE_RULES_LARGE = 0.2
 
-    let swe = Swe()
+    //var chart: Swe.Chart
 
     func getFixedPos(pos_value: Double) -> Double {
         var pos = pos_value

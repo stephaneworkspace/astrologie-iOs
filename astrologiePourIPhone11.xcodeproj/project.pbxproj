@@ -45,6 +45,7 @@
 		F4141F2B279741FC00381179 /* Swe03.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141F23279741F900381179 /* Swe03.swift */; };
 		F4141F2C279741FC00381179 /* ephem.zip in Resources */ = {isa = PBXBuildFile; fileRef = F4141F24279741FC00381179 /* ephem.zip */; };
 		F4141F2D279741FC00381179 /* Swe14.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141F25279741FC00381179 /* Swe14.swift */; };
+		F446CDE1279AE0AC00D8CCD8 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F446CDE0279AE0AC00D8CCD8 /* ChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		F4141F23279741F900381179 /* Swe03.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swe03.swift; sourceTree = "<group>"; };
 		F4141F24279741FC00381179 /* ephem.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = ephem.zip; sourceTree = "<group>"; };
 		F4141F25279741FC00381179 /* Swe14.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swe14.swift; sourceTree = "<group>"; };
+		F446CDE0279AE0AC00D8CCD8 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 		F4141EA72797414800381179 /* astrologiePourIPhone11 */ = {
 			isa = PBXGroup;
 			children = (
+				F446CDDF279AE09800D8CCD8 /* Views */,
 				F4141ED22797415E00381179 /* Types */,
 				F4141EA82797414800381179 /* astrologiePourIPhone11App.swift */,
 				F4141EAA2797414800381179 /* ContentView.swift */,
@@ -283,6 +286,14 @@
 				F4141ED42797419F00381179 /* astrologiePourIPhone11-Bridging-Header.h */,
 			);
 			path = Swe;
+			sourceTree = "<group>";
+		};
+		F446CDDF279AE09800D8CCD8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F446CDE0279AE0AC00D8CCD8 /* ChartView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -438,6 +449,7 @@
 				F4141F15279741A100381179 /* Makefile in Sources */,
 				F4141F12279741A100381179 /* sweph.c in Sources */,
 				F4141F26279741FC00381179 /* Swe.swift in Sources */,
+				F446CDE1279AE0AC00D8CCD8 /* ChartView.swift in Sources */,
 				F4141F0A279741A100381179 /* swemplan.c in Sources */,
 				F4141F1A279741A100381179 /* swecl.c in Sources */,
 				F4141F2B279741FC00381179 /* Swe03.swift in Sources */,

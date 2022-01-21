@@ -11,9 +11,9 @@ import SwiftUI
 class Swe {
     var bodies: [(Bodie, Bodie)] = []
     var houses: [Swe14.House] = []
-    init() {
+    init(chart: Chart) {
         // Load json or default
-        let chart = load_default_value()
+        // let chart = load_default_value()
 
         // Set path
         let swe02 = Swe02()
@@ -111,34 +111,6 @@ class Swe {
         let tDay: Int32
         let tHour: Int32
         let tMin: Int32
-    }
-
-    private func load_default_value() -> Chart {
-        var decode: Chart = Chart.init(
-                nLat: 46.12,
-                nLng: 6.09,
-                nTimeZone: 2,
-                nYear: 1981,
-                nMonth: 1,
-                nDay: 1,
-                nHour: 0,
-                nMin: 0,
-                tLat: 46.12,
-                tLng: 6.09,
-                tTimeZone: 2,
-                tYear: 2022,
-                tMonth: 1,
-                tDay: 24,
-                tHour: 12,
-                tMin: 0)
-        do {
-            let path = Bundle.main.path(forResource: "data", ofType: "json")
-            let jsonData = try! String(contentsOfFile: path!).data(using: .utf8)!
-            decode = try JSONDecoder().decode(Chart.self, from: jsonData)
-        } catch {
-            print("Unable to open chart file")
-        }
-        return decode
     }
 
     struct Bodie {
