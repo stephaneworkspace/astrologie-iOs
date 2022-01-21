@@ -7,15 +7,20 @@
 
 import SwiftUI
 
-private func loadValue(selectedDate: Date, selectedDateTransit: Date) -> Swe.Chart {
+private func loadValue(
+        selectedDate: Date,
+        selectedDateTransit: Date,
+        lat: (Double, Double),
+        lng: (Double, Double),
+        tz: (Int32, Int32)) -> Swe.Chart {
     var chartDefault: Swe.Chart = loadDefaultValue().0
     //
-    let nLng = chartDefault.nLng
-    let tLng = chartDefault.tLng
-    let nLat = chartDefault.nLat
-    let tLat = chartDefault.tLat
-    let nTimeZone = chartDefault.nTimeZone
-    let tTimeZone = chartDefault.tTimeZone
+    let nLng = lng.0 // chartDefault.nLng
+    let tLng = lng.1 // chartDefault.tLng
+    let nLat = lat.0 // chartDefault.nLat
+    let tLat = lat.1 //chartDefault.tLat
+    let nTimeZone = tz.0 // chartDefault.nTimeZone
+    let tTimeZone = tz.1 // chartDefault.tTimeZone
     var dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "YYYY"
     let nYear = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nYear
@@ -52,16 +57,85 @@ private func loadValue(selectedDate: Date, selectedDateTransit: Date) -> Swe.Cha
 }
 
 struct ContentView: View {
+    var FONTSIZE = 15.0
     var chartDefault: Swe.Chart = loadDefaultValue().0
     @State var selectedDate: Date = loadDefaultValue().1
     @State var selectedDateTransit: Date = Date()
+    @State var latNatal: Double = loadDefaultValue().0.nLat
+    @State var lngNatal: Double = loadDefaultValue().0.nLng
+    @State var latTransit: Double = loadDefaultValue().0.tLat
+    @State var lngTransit: Double = loadDefaultValue().0.tLng
+    @State var tzNatal: Int32 = loadDefaultValue().0.nTimeZone
+    @State var tzTransit: Int32 = loadDefaultValue().0.tTimeZone
+    let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.allowsFloats = true
+        return formatter
+    }()
+    let formatterNoFloat: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.allowsFloats = false
+        return formatter
+    }()
     var body: some View {
         ZStack {
             VStack {
                 Text("Astrologie").padding()
-                DatePicker("Date de naissance", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
-                DatePicker("Transit", selection: $selectedDateTransit, displayedComponents: [.date, .hourAndMinute])
-                ChartView(swe: Swe(chart: loadValue(selectedDate: selectedDate, selectedDateTransit: selectedDateTransit)))
+                VStack {
+                    DatePicker("Date de naissance", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
+                            .font(.system(size: FONTSIZE, weight: .light, design: .default))
+                    HStack {
+                        Text("Lat")
+                        TextField(
+                                "Latitude",
+                                value: $latNatal,
+                                formatter: formatter
+                        ).textFieldStyle(RoundedBorderTextFieldStyle())
+                        Text("Lng")
+                        TextField(
+                                "Longitude",
+                                value: $lngNatal,
+                                formatter: formatter
+                        ).textFieldStyle(RoundedBorderTextFieldStyle())
+                        Text("Tz")
+                        TextField(
+                                "Timezone",
+                                value: $tzNatal,
+                                formatter: formatterNoFloat
+                        ).textFieldStyle(RoundedBorderTextFieldStyle())
+                    }.font(.system(size: FONTSIZE, weight: .light, design: .default))
+                    DatePicker("Transit", selection: $selectedDateTransit, displayedComponents: [.date, .hourAndMinute])
+                            .font(.system(size: FONTSIZE, weight: .light, design: .default))
+                    HStack {
+                        Text("Lat")
+                        TextField(
+                                "Latitude",
+                                value: $latTransit,
+                                formatter: formatter
+                        ).textFieldStyle(RoundedBorderTextFieldStyle())
+                        Text("Lng")
+                        TextField(
+                                "Longitude",
+                                value: $lngTransit,
+                                formatter: formatter
+                        ).textFieldStyle(RoundedBorderTextFieldStyle())
+                        Text("Tz")
+                        TextField(
+                                "Timezone",
+                                value: $tzNatal,
+                                formatter: formatterNoFloat
+                        ).textFieldStyle(RoundedBorderTextFieldStyle())
+                    }.font(.system(size: FONTSIZE, weight: .light, design: .default))
+                }.padding()
+                ChartView(swe: Swe(
+                        chart: loadValue(
+                                selectedDate: selectedDate,
+                                selectedDateTransit: selectedDateTransit,
+                                lat: (latNatal, latTransit),
+                                lng: (lngNatal, lngTransit),
+                                tz: (tzNatal, tzTransit))))
             }
         }
     }
