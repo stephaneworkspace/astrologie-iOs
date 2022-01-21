@@ -267,7 +267,6 @@ struct ChartDraw {
         func path(in rect: CGRect) -> Path {
             var path = Path()
             for line in lines {
-                print(line)
                 path.move(to: CGPoint(x: line.lX1, y: line.lY1))
                 path.addLine(to: CGPoint(x: line.lX2, y: line.lY2))
                 path.closeSubpath()

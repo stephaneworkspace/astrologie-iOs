@@ -138,22 +138,19 @@ struct ChartHouseView: View {
 struct ChartAspectView: View {
     var cD: ChartDraw = ChartDraw()
     var body: some View {
-        VStack {
-            ChartDraw.DrawAspectLines(lines: cD.aspect_lines(swe: cD.swe, aspect: .trine, aspectType: .natal)).stroke(.black)
-        }.frame(width: cD.SIZE, height: cD.SIZE)
-/*
         ForEach(1...8, id: \.self) { idx in
             ForEach(0...2, id: \.self) { jdx in
                 let aspect = Swe.Aspects.init(rawValue: Int32(idx)) ?? Swe.Aspects.conjunction
                 let aspectType = ChartDraw.AspectType.init(rawValue: jdx) ?? ChartDraw.AspectType.natal
+                let aspectColor = aspect.color()
                 let lines = cD.aspect_lines(swe: cD.swe, aspect: aspect, aspectType: aspectType)
                 if lines.count > 0 {
                     VStack {
-                        cD.drawAspectLines(lines: lines).stroke(.red, lineWidth: 2.0)
+                        ChartDraw.DrawAspectLines(lines: lines).stroke(aspectColor, lineWidth: 0.5)
                     }.frame(width: cD.SIZE, height: cD.SIZE)
                 }
             }
-        }*/
+        }
     }
 }
 

@@ -370,21 +370,32 @@ extension Swe.Aspects {
             return "Demi-sextile"
         }
     }
-}
 
-/*
-To convert from String to UnsafeMutablePointer<Int8>
-let cString = strdup("Hello") // UnsafeMutablePointer<Int8>
-
-func ptrFromAddress<T>(p: UnsafeMutablePointer<T>) -> UnsafeMutablePointer<T> {
-    return p
+    // Return color
+    func color() -> Color {
+        switch self {
+        case .conjunction:
+            return .black
+        case .opposition:
+            return .red
+        case .trine:
+            return .blue
+        case .square:
+            return .red
+        case .sextile:
+            return .green
+        case .inconjunction:
+            return .black
+        case .sequisquare:
+            return .black
+        case .inconjunction:
+            return .black
+        case .sequisquare:
+            return .black
+        case .semisquare:
+            return .black
+        case .semisextile:
+            return .black
+        }
+    }
 }
-
-func makeCString(from str: String) -> UnsafeMutablePointer<Int8> {
-    let count = str.utf8CString.count
-    let result: UnsafeMutableBufferPointer<Int8> = UnsafeMutableBufferPointer<Int8>.allocate(capacity: count)
-    // func initialize<S>(from: S) -> (S.Iterator, UnsafeMutableBufferPointer<Element>.Index)
-    _ = result.initialize(from: str.utf8CString)
-    return result.baseAddress!
-}
-*/
