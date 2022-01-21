@@ -237,28 +237,41 @@ struct ChartDraw {
     struct DrawTransit: Shape {
         func path(in rect: CGRect) -> Path {
             var path = Path()
-            let size = 300 // TODO SIZE don't work
-            let cas = size / 16
+            let size = 390 // TODO SIZE don't work
+            let cas = Double(size) / 16
             for iDx in 1...8 {
-                path.move(to: CGPoint(x: iDx * cas, y: iDx * cas))
-                path.addLine(to: CGPoint(x: iDx * cas, y: (iDx + 1) * cas))
-                path.move(to: CGPoint(x: iDx * cas, y: iDx * cas))
-                path.addLine(to: CGPoint(x: 0, y: iDx * cas))
-                path.move(to: CGPoint(x: iDx * cas, y: (iDx + 1) * cas))
-                path.addLine(to: CGPoint(x: 0, y: (iDx + 1) * cas))
+                let idx = Double(iDx)
+                path.move(to: CGPoint(x: idx * cas, y: idx * cas))
+                path.addLine(to: CGPoint(x: idx * cas, y: (idx + 1) * cas))
+                path.move(to: CGPoint(x: idx * cas, y: idx * cas))
+                path.addLine(to: CGPoint(x: 0, y: idx * cas))
+                path.move(to: CGPoint(x: idx * cas, y: (idx + 1) * cas))
+                path.addLine(to: CGPoint(x: 0, y: (idx + 1) * cas))
             }
-            path.move(to: CGPoint(x: 100, y: 100))
-            path.addLine(to: CGPoint(x: 200, y: 200))
-            path.addLine(to: CGPoint(x: 300, y: 100))
-            //path.addLine(to: CGPoint(x: 0, y: size / 2))
-           // path.addLine(to: CGPoint(x: size / 2, y: size / 2))
-          //  path.move(to: CGPoint(x: 0, y: size / 2))
-          //  path.addLine(to: CGPoint(x: 0, y: size))
-            //path.addLine(to: CGPoint(x: size / 2, y: size))
-          //  path.closeSubpath()
             return path
         }
     }
+
+    func drawTransitBodie(idx: Int) -> some View {
+        let size = 390 // TODO SIZE don't work
+        let bodPos = CGFloat((size / 2) * -1)
+        let cas = Double(size) / 16.0
+        let casDiv = 1.1
+        let xPos = bodPos + (cas / 2) + (cas * Double(idx))
+        let yPos = bodPos + (cas / 2) + (cas * Double(idx))
+        var body: some View {
+            Image("b" + idx.formatted())
+                    .resizable()
+                    .foregroundColor(.red)
+                    .offset(
+                            x: xPos,
+                            y: yPos)
+                    .frame(
+                            width: cas / casDiv,
+                            height: cas / casDiv)
+            }
+        return body
+        }
 
     func drawBodieLine(lines: [Line]) -> Path {
         var path = Path()

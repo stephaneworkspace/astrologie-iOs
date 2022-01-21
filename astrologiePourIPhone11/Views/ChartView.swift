@@ -22,11 +22,16 @@ struct ChartView: View {
 }
 
 struct TransitView: View {
-   var swe: Swe
+    var swe: Swe
+    var size = 390.0
     var body: some View {
         var cD: ChartDraw = ChartDraw(swe: swe)
-        ChartDraw.DrawTransit().stroke(.black).padding()
-
+        ZStack {
+            ChartDraw.DrawTransit().stroke(.black)
+            ForEach(0...8, id: \.self) { idx in
+                cD.drawTransitBodie(idx: idx).frame(width: size, height: size) // TODO const
+            }
+        }.padding()
     }
 }
 
