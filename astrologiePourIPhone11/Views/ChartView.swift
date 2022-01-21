@@ -25,7 +25,7 @@ struct TransitView: View {
    var swe: Swe
     var body: some View {
         var cD: ChartDraw = ChartDraw(swe: swe)
-        ChartDraw.DrawTransit().stroke(.black)
+        ChartDraw.DrawTransit().stroke(.black).padding()
 
     }
 }

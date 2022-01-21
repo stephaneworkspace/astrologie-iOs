@@ -237,7 +237,16 @@ struct ChartDraw {
     struct DrawTransit: Shape {
         func path(in rect: CGRect) -> Path {
             var path = Path()
-            let size = 390 // TODO SIZE don't work
+            let size = 300 // TODO SIZE don't work
+            let cas = size / 16
+            for iDx in 1...8 {
+                path.move(to: CGPoint(x: iDx * cas, y: iDx * cas))
+                path.addLine(to: CGPoint(x: iDx * cas, y: (iDx + 1) * cas))
+                path.move(to: CGPoint(x: iDx * cas, y: iDx * cas))
+                path.addLine(to: CGPoint(x: 0, y: iDx * cas))
+                path.move(to: CGPoint(x: iDx * cas, y: (iDx + 1) * cas))
+                path.addLine(to: CGPoint(x: 0, y: (iDx + 1) * cas))
+            }
             path.move(to: CGPoint(x: 100, y: 100))
             path.addLine(to: CGPoint(x: 200, y: 200))
             path.addLine(to: CGPoint(x: 300, y: 100))
