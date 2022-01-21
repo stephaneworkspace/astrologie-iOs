@@ -17,6 +17,16 @@ struct ChartView: View {
             ChartBodieView(swe: swe)
             ChartAspectView(swe: swe)
         }
+        TransitView(swe: swe)
+    }
+}
+
+struct TransitView: View {
+   var swe: Swe
+    var body: some View {
+        var cD: ChartDraw = ChartDraw(swe: swe)
+        ChartDraw.DrawTransit().stroke(.black)
+
     }
 }
 

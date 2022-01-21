@@ -234,6 +234,23 @@ struct ChartDraw {
         }
     }
 
+    struct DrawTransit: Shape {
+        func path(in rect: CGRect) -> Path {
+            var path = Path()
+            let size = 390 // TODO SIZE don't work
+            path.move(to: CGPoint(x: 100, y: 100))
+            path.addLine(to: CGPoint(x: 200, y: 200))
+            path.addLine(to: CGPoint(x: 300, y: 100))
+            //path.addLine(to: CGPoint(x: 0, y: size / 2))
+           // path.addLine(to: CGPoint(x: size / 2, y: size / 2))
+          //  path.move(to: CGPoint(x: 0, y: size / 2))
+          //  path.addLine(to: CGPoint(x: 0, y: size))
+            //path.addLine(to: CGPoint(x: size / 2, y: size))
+          //  path.closeSubpath()
+            return path
+        }
+    }
+
     func drawBodieLine(lines: [Line]) -> Path {
         var path = Path()
         for line in lines {
