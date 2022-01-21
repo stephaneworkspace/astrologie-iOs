@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-private func loadValue(@State selectedDate: Date, @State selectedDateTransit: Date) -> Swe.Chart {
-    var chartDefault: Swe.Chart = loadDefaultValue()
+private func loadValue(selectedDate: Date, selectedDateTransit: Date) -> Swe.Chart {
+    var chartDefault: Swe.Chart = loadDefaultValue().0
     //
     var nLng = chartDefault.nLng
     var tLng = chartDefault.tLng
@@ -17,7 +17,7 @@ private func loadValue(@State selectedDate: Date, @State selectedDateTransit: Da
     var nTimeZone = chartDefault.nTimeZone
     var tTimeZone = chartDefault.tTimeZone
     var dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "YY"
+    dateFormatter.dateFormat = "YYYY"
     var nYear = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nYear
     var tYear = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tYear
     dateFormatter.dateFormat = "MM"
@@ -51,23 +51,22 @@ private func loadValue(@State selectedDate: Date, @State selectedDateTransit: Da
 }
 
 struct ContentView: View {
-    @State var selectedDate = Date()
-    @State var selectedDateTransit = Date()
-    var chartDefault: Swe.Chart = loadDefaultValue()
+    var chartDefault: Swe.Chart = loadDefaultValue().0
+    @State var selectedDate: Date = loadDefaultValue().1
+    @State var selectedDateTransit: Date = Date()
     var body: some View {
         ZStack {
             VStack {
                 Text("Astrologie").padding()
                 DatePicker("Date de naissance", selection: $selectedDate, displayedComponents: .date)
                 DatePicker("Transit", selection: $selectedDateTransit, displayedComponents: .date)
-                ChartView(swe: Swe(chart: loadDefaultValue()))
                 ChartView(swe: Swe(chart: loadValue(selectedDate: selectedDate, selectedDateTransit: selectedDateTransit)))
             }
         }
     }
 }
 
-private func loadDefaultValue() -> Swe.Chart {
+private func loadDefaultValue() -> (Swe.Chart, Date, Date) {
     var decode: Swe.Chart = Swe.Chart.init(
             nLat: 46.12,
             nLng: 6.09,
@@ -92,9 +91,23 @@ private func loadDefaultValue() -> Swe.Chart {
     } catch {
         print("Unable to open chart file")
     }
-    return decode
-}
+    var dateN = DateComponents()
+    dateN.year = Int(decode.nYear)
+    dateN.month = Int(decode.nMonth)
+    dateN.day = Int(decode.nDay)
+    let calandarNatal = Calendar(identifier: .gregorian).date(from: dateN)
+    let dateNatal = calandarNatal.unsafelyUnwrapped
 
+    var dateT = DateComponents()
+    dateT.year = Int(decode.tYear)
+    dateT.month = Int(decode.tMonth)
+    dateT.day = Int(decode.tDay)
+
+    let calandarTransit = Calendar(identifier: .gregorian).date(from: dateT)
+    let dateTransit = calandarTransit.unsafelyUnwrapped
+
+    return (decode, dateNatal, dateTransit)
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
