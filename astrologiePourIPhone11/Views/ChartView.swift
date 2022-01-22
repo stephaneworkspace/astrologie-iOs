@@ -30,6 +30,7 @@ struct TransitView: View {
             ChartDraw.DrawTransit().stroke(.black)
             ForEach(0...8, id: \.self) { idx in
                 cD.drawTransitBodie(idx: idx).frame(width: size, height: size) // TODO const
+                cD.drawTransitAspect(idx: idx).frame(width: size, height: size) // TODO const
             }
         }.padding()
     }

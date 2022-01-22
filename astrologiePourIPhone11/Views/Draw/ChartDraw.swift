@@ -274,7 +274,30 @@ struct ChartDraw {
                     .frame(
                             width: cas / casDiv,
                             height: cas / casDiv)
+        }
+        return body
+    }
+
+    func drawTransitAspect(idx: Int) -> some View {
+        let size = 390 // TODO SIZE don't work
+        let bodPos = CGFloat((size / 2) * -1)
+        let cas = Double(size) / 16.0
+        let casDiv = 1.1
+        var body: some View {
+            ForEach(0...idx, id: \.self) { jdx in
+                let xPos = bodPos + (cas / 2) + (cas * Double(jdx))
+                let yPos = bodPos + (cas / 2) + (cas * Double(idx))
+                Image("b" + idx.formatted())
+                        .resizable()
+                        .foregroundColor(.red)
+                        .offset(
+                                x: xPos,
+                                y: yPos)
+                        .frame(
+                                width: cas / casDiv,
+                                height: cas / casDiv)
             }
+        }
         return body
         }
 
