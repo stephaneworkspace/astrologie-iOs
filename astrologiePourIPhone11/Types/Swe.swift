@@ -109,7 +109,19 @@ class Swe {
                         let asp = aspect.angle().0
                         let orb = aspect.angle().1
                         if abs(absSeparation - Double(asp)) <= Double(orb) {
-                            aspectsBodies.append(AspectBodie(id: UUID(), bodie1: bod.0.bodie, bodie2: bodPair.0.bodie, aspect: aspect))
+                            print(bodPair.0.bodie.rawValue.formatted() + "---" + bod.0.bodie.rawValue.formatted())
+                            print(bodNatalLongitude)
+                            print(bod2NatalLongitude)
+                            print(separation)
+                            print(aspect)
+                            aspectsBodies.append(
+                                AspectBodie(
+                                        id: UUID(),
+                                        bodie1: bod.0.bodie.rawValue > bodPair.0.bodie.rawValue ?
+                                                bod.0.bodie : bodPair.0.bodie,
+                                        bodie2: bod.0.bodie.rawValue < bodPair.0.bodie.rawValue ?
+                                                bod.0.bodie : bodPair.0.bodie,
+                                        aspect: aspect))
                         }
                     }
                 }

@@ -13,7 +13,7 @@ private func loadValue(
         lat: (Double, Double),
         lng: (Double, Double),
         tz: (Int32, Int32)) -> Swe.Chart {
-    var chartDefault: Swe.Chart = loadDefaultValue().0
+    let chartDefault: Swe.Chart = loadDefaultValue().0
     //
     let nLng = lng.0 // chartDefault.nLng
     let tLng = lng.1 // chartDefault.tLng
@@ -21,7 +21,7 @@ private func loadValue(
     let tLat = lat.1 //chartDefault.tLat
     let nTimeZone = tz.0 // chartDefault.nTimeZone
     let tTimeZone = tz.1 // chartDefault.tTimeZone
-    var dateFormatter = DateFormatter()
+    let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "YYYY"
     let nYear = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nYear
     let tYear = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tYear

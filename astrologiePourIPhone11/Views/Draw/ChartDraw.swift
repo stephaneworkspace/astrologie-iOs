@@ -278,27 +278,23 @@ struct ChartDraw {
         return body
     }
 
-    func drawTransitAspect(idx: Int, asp: Swe.AspectBodie) -> some View {
+    func drawTransitAspect(asp: Swe.AspectBodie) -> some View {
         let size = 390 // TODO SIZE don't work
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
         let casDiv = 1.1
+        let xPos = bodPos + (cas / 2) + (cas * Double(asp.bodie2.rawValue))
+        let yPos = bodPos + (cas / 2) + (cas * Double(asp.bodie1.rawValue))
         var body: some View {
-            ForEach(0...idx, id: \.self) { jdx in
-                if asp.bodie1.rawValue == idx + 1 && asp.bodie2.rawValue == jdx {
-                    let xPos = bodPos + (cas / 2) + (cas * Double(jdx))
-                    let yPos = bodPos + (cas / 2) + (cas * Double(idx + 1))
-                    Image("a" + asp.aspect.rawValue.formatted())
-                            .resizable()
-                            .foregroundColor(.red)
-                            .offset(
-                                    x: xPos,
-                                    y: yPos)
-                            .frame(
-                                    width: cas / casDiv,
-                                    height: cas / casDiv)
-                }
-            }
+            Image("a" + asp.aspect.rawValue.formatted())
+                    .resizable()
+                    .foregroundColor(.red)
+                    .offset(
+                            x: xPos,
+                            y: yPos)
+                    .frame(
+                            width: cas / casDiv,
+                            height: cas / casDiv)
         }
         return body
     }
@@ -477,11 +473,12 @@ struct ChartDraw {
     }
 
     func getZnorm(angle: Double) -> Double {
-        let ang = Int(angle) % Int(SIZE)
-        if Double(ang) <= (SIZE / 2) {
+        let ang = angle %% CIRCLE
+        //let ang = Int(angle) % Int(CIRCLE)
+        if ang <= (CIRCLE / 2.0) {
             return Double(ang)
         } else {
-            return Double(ang) - SIZE
+            return Double(ang) - CIRCLE
         }
     }
 
@@ -957,4 +954,22 @@ struct ChartDraw {
                     oPy: offset.offY)
             return res
     }
+}
+
+infix operator %%/*<--infix operator is required for custom infix char combos*/
+
+/**
+ * Brings back simple modulo syntax (was removed in swift 3)
+ * Calculates the remainder of expression1 divided by expression2
+ * The sign of the modulo result matches the sign of the dividend (the first number). For example, -4 % 3 and -4 % -3 both evaluate to -1
+ * EXAMPLE:
+ * print(12 %% 5)    // 2
+ * print(4.3 %% 2.1) // 0.0999999999999996
+ * print(4 %% 4)     // 0
+ * NOTE: The first print returns 2, rather than 12/5 or 2.4, because the modulo (%) operator returns only the remainder. The second trace returns 0.0999999999999996 instead of the expected 0.1 because of the limitations of floating-point accuracy in binary computing.
+ * NOTE: Int's can still use single %
+ * NOTE: there is also .remainder which supports returning negatives as oppose to truncatingRemainder (aka the old %) which returns only positive.
+ */
+public func %%(left: CGFloat, right: CGFloat) -> CGFloat {
+    return left.truncatingRemainder(dividingBy: right)
 }

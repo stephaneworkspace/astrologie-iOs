@@ -25,16 +25,14 @@ struct TransitView: View {
     var swe: Swe
     var size = 390.0
     var body: some View {
-        var cD: ChartDraw = ChartDraw(swe: swe)
+        let cD: ChartDraw = ChartDraw(swe: swe)
         ZStack {
             ChartDraw.DrawTransit().stroke(.black)
             ForEach(0...8, id: \.self) { idx in
                 cD.drawTransitBodie(idx: idx).frame(width: size, height: size) // TODO const
             }
             ForEach(swe.aspectsBodies, id: \.self) { asp in
-                ForEach(0...7, id: \.self) { idx in
-                    cD.drawTransitAspect(idx: idx, asp: asp).frame(width: size, height: size) // TODO const
-                }
+                cD.drawTransitAspect(asp: asp).frame(width: size, height: size) // TODO const
             }
         }.padding()
     }
@@ -137,7 +135,7 @@ struct ChartZodiacView: View {
 struct ChartHouseView: View {
     var swe: Swe
     var body: some View {
-        var cD: ChartDraw = ChartDraw(swe: swe)
+        let cD: ChartDraw = ChartDraw(swe: swe)
         // Draw house triangle and lines
         VStack {
             ChartDraw.DrawHouseTriangle(lines: cD.house_lines(swe: cD.swe))
@@ -168,7 +166,7 @@ struct ChartHouseView: View {
 struct ChartAspectView: View {
     var swe: Swe
     var body: some View {
-        var cD: ChartDraw = ChartDraw(swe: swe)
+        let cD: ChartDraw = ChartDraw(swe: swe)
         ForEach(1...8, id: \.self) { idx in
             ForEach(0...2, id: \.self) { jdx in
                 let aspect = Swe.Aspects.init(rawValue: Int32(idx)) ?? Swe.Aspects.conjunction
@@ -189,7 +187,7 @@ struct ChartAspectView: View {
 struct ChartBodieView: View {
     var swe: Swe
     var body: some View {
-        var cD: ChartDraw = ChartDraw(swe: swe)
+        let cD: ChartDraw = ChartDraw(swe: swe)
         // Draw bodies line on chart
         ForEach(1...8, id: \.self) { idx in
             VStack {
