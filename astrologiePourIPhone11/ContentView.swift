@@ -57,6 +57,38 @@ private func loadValue(
 }
 
 struct ContentView: View {
+    @State var selected: Int
+    var body: some View {
+        TabView(selection: $selected) {
+            AstrologieView(swTransit: false).tabItem {
+                VStack {
+                    Image(systemName: "eye")
+                    Text("Natal")
+                }
+            }.tag(0)
+            AstrologieView(swTransit: true).tabItem {
+                VStack {
+                    Image(systemName: "eye")
+                    Text("Natal et Transit")
+                }
+            }.tag(1)
+            VStack {
+                Text("Développé par bressani.dev (Stéphane Bressani)")
+                Text("Cette application est sous license GNU public license version 3.")
+                Text("Elle utilise la libraiaire swiss ephemeris developé par Dieter Koch and Alois Treindl en Dual license (GNU v2 ou supérieur ou commercial)")
+                Text("Cette application utilise aussi le package swift Zip en MIT par Roy Marmelstein")
+            }.tabItem {
+                VStack {
+                    Image(systemName: "info.circle")
+                    Text("À propos")
+                }
+            }.tag(2)
+        }
+    }
+}
+
+struct AstrologieView: View {
+    @State var swTransit: Bool
     var FONTSIZE = 15.0
     var chartDefault: Swe.Chart = loadDefaultValue().0
     @State var selectedDate: Date = loadDefaultValue().1
@@ -110,31 +142,39 @@ struct ContentView: View {
                                     formatter: formatterNoFloat
                             ).textFieldStyle(RoundedBorderTextFieldStyle())
                         }.font(.system(size: FONTSIZE, weight: .light, design: .default))
-                        DatePicker("Transit", selection: $selectedDateTransit, displayedComponents: [.date, .hourAndMinute])
-                                .font(.system(size: FONTSIZE, weight: .light, design: .default))
-                        HStack {
-                            Text("Lat")
-                            TextField(
-                                    "Latitude",
-                                    value: $latTransit,
-                                    formatter: formatter
-                            ).textFieldStyle(RoundedBorderTextFieldStyle())
-                            Text("Lng")
-                            TextField(
-                                    "Longitude",
-                                    value: $lngTransit,
-                                    formatter: formatter
-                            ).textFieldStyle(RoundedBorderTextFieldStyle())
-                            Text("Tz")
-                            TextField(
-                                    "Timezone",
-                                    value: $tzNatal,
-                                    formatter: formatterNoFloat
-                            ).textFieldStyle(RoundedBorderTextFieldStyle())
-                        }.font(.system(size: FONTSIZE, weight: .light, design: .default))
-                    }.padding()
-                    ChartView(swe: Swe(
-                            chart: loadValue(
+                        if swTransit {
+                            DatePicker(
+                                    "Transit",
+                                    selection: $selectedDateTransit,
+                                    displayedComponents: [.date, .hourAndMinute])
+                                    .font(.system(size: FONTSIZE, weight: .light, design: .default))
+                            HStack {
+                                Text("Lat")
+                                TextField(
+                                        "Latitude",
+                                        value: $latTransit,
+                                        formatter: formatter
+                                ).textFieldStyle(RoundedBorderTextFieldStyle())
+                                Text("Lng")
+                                TextField(
+                                        "Longitude",
+                                        value: $lngTransit,
+                                        formatter: formatter
+                                ).textFieldStyle(RoundedBorderTextFieldStyle())
+                                Text("Tz")
+                                TextField(
+                                        "Timezone",
+                                        value: $tzNatal,
+                                        formatter: formatterNoFloat
+                                ).textFieldStyle(RoundedBorderTextFieldStyle())
+                            }.font(.system(size: FONTSIZE, weight: .light, design: .default))
+                        }
+                        }.padding()
+                    }
+                    ChartView(
+                            swTransit: swTransit,
+                            swe: Swe(
+                                    chart: loadValue(
                                     selectedDate: selectedDate,
                                     selectedDateTransit: selectedDateTransit,
                                     lat: (latNatal, latTransit),
@@ -145,7 +185,6 @@ struct ContentView: View {
             }
         }
     }
-}
 
 private func loadDefaultValue() -> (Swe.Chart, Date, Date) {
     var decode: Swe.Chart = Swe.Chart.init(
@@ -195,6 +234,6 @@ private func loadDefaultValue() -> (Swe.Chart, Date, Date) {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(selected: 0)
     }
 }

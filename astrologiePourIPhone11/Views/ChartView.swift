@@ -9,20 +9,25 @@ import Foundation
 import SwiftUI
 
 struct ChartView: View {
+    @State var swTransit: Bool
     var swe: Swe
     var body: some View {
         ZStack {
             ChartZodiacView(swe: swe)
             ChartHouseView(swe: swe)
-            ChartBodieView(swe: swe)
-            ChartAspectView(swe: swe)
+            ChartBodieView(swTransit: swTransit, swe: swe)
+            ChartAspectView(swTransit: swTransit, swe: swe)
         }
-        Text("Natal")
+        if swTransit {
+            Text("Natal")
+        }
         TransitView(swe: swe, transitType: .NatalNatal)
-        Text("Natal and Transit")
-        TransitView(swe: swe, transitType: .NatalTransit)
-        Text("Transit")
-        TransitView(swe: swe, transitType: .TransitTransit)
+        if swTransit {
+            Text("Natal and Transit")
+            TransitView(swe: swe, transitType: .NatalTransit)
+            Text("Transit")
+            TransitView(swe: swe, transitType: .TransitTransit)
+        }
     }
 }
 
@@ -172,6 +177,7 @@ struct ChartHouseView: View {
 }
 
 struct ChartAspectView: View {
+    @State var swTransit: Bool
     var swe: Swe
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
@@ -182,10 +188,20 @@ struct ChartAspectView: View {
                 let aspectColor = aspect.color()
                 let aspectStyle = aspect.style()
                 let lines = cD.aspect_lines(swe: cD.swe, aspect: aspect, aspectType: aspectType)
-                if lines.count > 0 {
-                    VStack {
-                        ChartDraw.DrawAspectLines(lines: lines).stroke(aspectColor, style: aspectStyle)
-                    }.frame(width: cD.SIZE, height: cD.SIZE)
+                if aspectType == .natal {
+                    if lines.count > 0 {
+                        VStack {
+                            ChartDraw.DrawAspectLines(lines: lines).stroke(aspectColor, style: aspectStyle)
+                        }.frame(width: cD.SIZE, height: cD.SIZE)
+                    }
+                } else {
+                    if swTransit {
+                        if lines.count > 0 {
+                            VStack {
+                                ChartDraw.DrawAspectLines(lines: lines).stroke(aspectColor, style: aspectStyle)
+                            }.frame(width: cD.SIZE, height: cD.SIZE)
+                        }
+                    }
                 }
             }
         }
@@ -193,6 +209,7 @@ struct ChartAspectView: View {
 }
 
 struct ChartBodieView: View {
+    @State var swTransit: Bool
     var swe: Swe
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
@@ -203,9 +220,11 @@ struct ChartBodieView: View {
             }.frame(width: cD.SIZE, height: cD.SIZE)
         }
         ForEach(1...8, id: \.self) { idx in
-            VStack {
-                cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: true)).stroke(.black, lineWidth: 0.1)
-            }.frame(width: cD.SIZE, height: cD.SIZE)
+            if swTransit {
+                VStack {
+                    cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: true)).stroke(.black, lineWidth: 0.1)
+                }.frame(width: cD.SIZE, height: cD.SIZE)
+            }
         }
         // Draw bodies symbol
         ForEach(0...8, id: \.self) { idx in
@@ -224,7 +243,7 @@ struct ChartBodieView: View {
                                         width: bodN.oSx / cD.RETOGRADE_DIV,
                                         height: bodN.oSy / cD.RETOGRADE_DIV)
                     }
-                    if bodT.swRetrograde {
+                    if bodT.swRetrograde && swTransit {
                         Image("r" + idx.formatted())
                                 .resizable()
                                 .offset(
@@ -243,14 +262,16 @@ struct ChartBodieView: View {
                             .frame(
                                     width: bodN.oSx,
                                     height: bodN.oSy)
-                    Image("b" + idx.formatted())
-                            .resizable()
-                            .offset(
-                                    x: bodT.oPx,
-                                    y: bodT.oPy)
-                            .frame(
-                                    width: bodT.oSx,
-                                    height: bodT.oSy)
+                    if swTransit {
+                        Image("b" + idx.formatted())
+                                .resizable()
+                                .offset(
+                                        x: bodT.oPx,
+                                        y: bodT.oPy)
+                                .frame(
+                                        width: bodT.oSx,
+                                        height: bodT.oSy)
+                    }
                 }
             }.frame(width: cD.SIZE, height: cD.SIZE)
         }
