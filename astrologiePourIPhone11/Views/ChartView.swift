@@ -32,7 +32,9 @@ struct TransitView: View {
                 cD.drawTransitBodie(idx: idx).frame(width: size, height: size) // TODO const
             }
             ForEach(swe.aspectsBodies, id: \.self) { asp in
-                cD.drawTransitAspect(asp: asp).frame(width: size, height: size) // TODO const
+                if asp.transit == .NatalNatal {
+                    cD.drawTransitAspect(asp: asp).frame(width: size, height: size) // TODO const
+                }
             }
         }.padding()
     }
