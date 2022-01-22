@@ -235,9 +235,9 @@ struct ChartDraw {
     }
 
     struct DrawTransit: Shape {
+        var size: Double
         func path(in rect: CGRect) -> Path {
             var path = Path()
-            let size = 390 // TODO SIZE don't work
             let cas = Double(size) / 16
             let max = 8
             path.move(to: CGPoint(x: 0, y: cas))
@@ -257,8 +257,7 @@ struct ChartDraw {
         }
     }
 
-    func drawTransitBodie(idx: Int) -> some View {
-        let size = 390 // TODO SIZE don't work
+    func drawTransitBodie(idx: Int, size: Double) -> some View {
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
         let casDiv = 1.1
@@ -278,11 +277,10 @@ struct ChartDraw {
         return body
     }
 
-    func drawTransitAspect(asp: Swe.AspectBodie) -> some View {
-        let size = 390 // TODO SIZE don't work
+    func drawTransitAspect(asp: Swe.AspectBodie, size: Double) -> some View {
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
-        let casDiv = 1.1
+        let casDiv = 1.9
         let xPos = bodPos + (cas / 2) + (cas * Double(asp.bodie2.rawValue))
         let yPos = bodPos + (cas / 2) + (cas * Double(asp.bodie1.rawValue))
         var body: some View {

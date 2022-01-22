@@ -17,23 +17,29 @@ struct ChartView: View {
             ChartBodieView(swe: swe)
             ChartAspectView(swe: swe)
         }
-        TransitView(swe: swe)
+        Text("Natal")
+        TransitView(swe: swe, transitType: .NatalNatal)
+        Text("Natal and Transit")
+        TransitView(swe: swe, transitType: .NatalTransit)
+        Text("Transit")
+        TransitView(swe: swe, transitType: .TransitTransit)
     }
 }
 
 struct TransitView: View {
     var swe: Swe
     var size = 390.0
+    var transitType: Swe.TransitType
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
         ZStack {
-            ChartDraw.DrawTransit().stroke(.black)
+            ChartDraw.DrawTransit(size: size).stroke(.black)
             ForEach(0...8, id: \.self) { idx in
-                cD.drawTransitBodie(idx: idx).frame(width: size, height: size) // TODO const
+                cD.drawTransitBodie(idx: idx, size: size).frame(width: size, height: size) // TODO const
             }
             ForEach(swe.aspectsBodies, id: \.self) { asp in
-                if asp.transit == .NatalNatal {
-                    cD.drawTransitAspect(asp: asp).frame(width: size, height: size) // TODO const
+                if asp.transit == transitType {
+                    cD.drawTransitAspect(asp: asp, size: size).frame(width: size, height: size) // TODO const
                 }
             }
         }.padding()
