@@ -278,16 +278,17 @@ struct ChartDraw {
         return body
     }
 
-    func drawTransitAspect(idx: Int) -> some View {
+    func drawTransitAspect(idx: Int, asp: Swe.AspectBodie) -> some View {
         let size = 390 // TODO SIZE don't work
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
         let casDiv = 1.1
         var body: some View {
             ForEach(0...idx, id: \.self) { jdx in
-                let xPos = bodPos + (cas / 2) + (cas * Double(jdx))
-                let yPos = bodPos + (cas / 2) + (cas * Double(idx + 1))
-                    Image("a" + idx.formatted())
+                if asp.bodie1.bodie.rawValue == idx && asp.bodie2.bodie.rawValue == jdx {
+                    let xPos = bodPos + (cas / 2) + (cas * Double(jdx))
+                    let yPos = bodPos + (cas / 2) + (cas * Double(idx + 1))
+                    Image("a" + asp.aspect.rawValue.formatted())
                             .resizable()
                             .foregroundColor(.red)
                             .offset(
@@ -298,6 +299,7 @@ struct ChartDraw {
                                     height: cas / casDiv)
                 }
             }
+        }
         return body
     }
 

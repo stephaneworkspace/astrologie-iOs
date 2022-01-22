@@ -11,6 +11,7 @@ import SwiftUI
 class Swe {
     var bodies: [(Bodie, Bodie)] = []
     var houses: [Swe14.House] = []
+    var aspectsBodies: [AspectBodie] = []
     init(chart: Chart) {
         // Load json or default
         // let chart = load_default_value()
@@ -90,6 +91,30 @@ class Swe {
                                             iFlag: .speed))
                     )
             )
+        }
+        let cD = ChartDraw(swe: self)
+        for aspectIdx in 0...8 { // TODO const
+            // TODO transit
+            // TODO angle AC MC
+            for bod in bodies {
+                let bodNatalLongitude = cD.getBodieLongitude(bodie: bod.0, swTransit: false)
+                for bodPair in bodies.reversed() {
+                    /*if bodPair.0.bodie == bod.0.bodie {
+                        break
+                    }*/
+                    let bod2NatalLongitude = cD.getBodieLongitude(bodie: bodPair.0, swTransit: false)
+                    let separation = cD.getClosestDistance(
+                            angle1: bodNatalLongitude,
+                            angle2: bod2NatalLongitude)
+                    let absSeparation = abs(separation)
+                    let aspect = Aspects.init(rawValue: Int32(aspectIdx)) ?? Aspects.conjunction
+                    let asp = aspect.angle().0
+                    let orb = aspect.angle().1
+                    if abs(absSeparation - Double(asp)) <= Double(orb) {
+                        aspectsBodies.append(AspectBodie(id: UUID(), bodie1: bod.0, bodie2: bodPair.0, aspect: aspect))
+                    }
+                }
+            }
         }
         swe02.close()
     }
@@ -265,6 +290,21 @@ class Swe {
              sequisquare = 6,
              semisquare =  7,
              semisextile = 8
+    }
+
+    struct AspectBodie: Hashable {
+        static func ==(lhs: Swe.AspectBodie, rhs: Swe.AspectBodie) -> Bool {
+            lhs.id == rhs.id
+        }
+
+        var id: UUID?
+        var bodie1: Bodie
+        var bodie2: Bodie
+        var aspect: Aspects
+
+        func hash(into hasher: inout Hasher) {
+
+        }
     }
 }
 

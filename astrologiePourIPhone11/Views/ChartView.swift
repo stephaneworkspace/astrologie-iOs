@@ -31,8 +31,10 @@ struct TransitView: View {
             ForEach(0...8, id: \.self) { idx in
                 cD.drawTransitBodie(idx: idx).frame(width: size, height: size) // TODO const
             }
-            ForEach(0...7, id: \.self) { idx in
-                cD.drawTransitAspect(idx: idx).frame(width: size, height: size) // TODO const
+            ForEach(swe.aspectsBodies, id: \.self) { asp in
+                ForEach(0...7, id: \.self) { idx in
+                    cD.drawTransitAspect(idx: idx, asp: asp).frame(width: size, height: size) // TODO const
+                }
             }
         }.padding()
     }
