@@ -339,7 +339,7 @@ extension Swe.Aspects {
     func color() -> Color {
         switch self {
         case .conjunction:
-            return .black
+            return .red
         case .opposition:
             return .red
         case .trine:
@@ -347,15 +347,15 @@ extension Swe.Aspects {
         case .square:
             return .red
         case .sextile:
-            return .indigo
+            return .blue
         case .inconjunction:
             return .green
         case .sequisquare:
-            return .red
+            return .indigo
         case .semisquare:
-            return .red
+            return .indigo
         case .semisextile:
-            return .blue
+            return .green
         }
     }
 
