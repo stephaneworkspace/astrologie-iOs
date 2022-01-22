@@ -239,7 +239,10 @@ struct ChartDraw {
             var path = Path()
             let size = 390 // TODO SIZE don't work
             let cas = Double(size) / 16
-            for iDx in 1...8 {
+            let max = 8
+            path.move(to: CGPoint(x: 0, y: cas))
+            path.addLine(to: CGPoint(x: 0, y: Double(max + 1) * cas))
+            for iDx in 1...max {
                 let idx = Double(iDx)
                 path.move(to: CGPoint(x: idx * cas, y: idx * cas))
                 path.addLine(to: CGPoint(x: idx * cas, y: (idx + 1) * cas))
@@ -247,6 +250,8 @@ struct ChartDraw {
                 path.addLine(to: CGPoint(x: 0, y: idx * cas))
                 path.move(to: CGPoint(x: idx * cas, y: (idx + 1) * cas))
                 path.addLine(to: CGPoint(x: 0, y: (idx + 1) * cas))
+                path.move(to: CGPoint(x: idx * cas, y: (idx + 1) * cas))
+                path.addLine(to: CGPoint(x: idx * cas, y: Double(max + 1) * cas))
             }
             return path
         }

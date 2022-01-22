@@ -70,7 +70,7 @@
 		552E8CAB5E7E36614CDBFAFD /* data.json.example */ = {isa = PBXFileReference; lastKnownFileType = file.example; path = data.json.example; sourceTree = "<group>"; };
 		F40444692797F0F900B74503 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F404446B2797F11600B74503 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
-		F4141EA52797414800381179 /* astrologiePourIPhone11.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = astrologiePourIPhone11.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4141EA52797414800381179 /* Astrologie selon Placidus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Astrologie selon Placidus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4141EA82797414800381179 /* astrologiePourIPhone11App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = astrologiePourIPhone11App.swift; sourceTree = "<group>"; };
 		F4141EAA2797414800381179 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F4141EAC2797414900381179 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -181,7 +181,7 @@
 		F4141EA62797414800381179 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F4141EA52797414800381179 /* astrologiePourIPhone11.app */,
+				F4141EA52797414800381179 /* Astrologie selon Placidus.app */,
 				F4141EB52797414900381179 /* astrologiePourIPhone11Tests.xctest */,
 				F4141EBF2797414900381179 /* astrologiePourIPhone11UITests.xctest */,
 			);
@@ -324,7 +324,7 @@
 				F40CA0292797504600EF0991 /* Zip */,
 			);
 			productName = astrologiePourIPhone11;
-			productReference = F4141EA52797414800381179 /* astrologiePourIPhone11.app */;
+			productReference = F4141EA52797414800381179 /* Astrologie selon Placidus.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F4141EB42797414900381179 /* astrologiePourIPhone11Tests */ = {
@@ -372,6 +372,7 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					F4141EA42797414800381179 = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -632,6 +633,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"astrologiePourIPhone11/Preview Content\"";
@@ -652,9 +654,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/astrologiePourIPhone11/Types/Swe",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = stephane.bressani.dev.astrologiePourIPhone11;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Astrologie selon Placidus";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "astrologiePourIPhone11/Types/Swe/astrologiePourIPhone11-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -689,9 +692,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/astrologiePourIPhone11/Types/Swe",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = stephane.bressani.dev.astrologiePourIPhone11;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Astrologie selon Placidus";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "astrologiePourIPhone11/Types/Swe/astrologiePourIPhone11-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
