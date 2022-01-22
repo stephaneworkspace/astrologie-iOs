@@ -286,20 +286,20 @@ struct ChartDraw {
         var body: some View {
             ForEach(0...idx, id: \.self) { jdx in
                 let xPos = bodPos + (cas / 2) + (cas * Double(jdx))
-                let yPos = bodPos + (cas / 2) + (cas * Double(idx))
-                Image("b" + idx.formatted())
-                        .resizable()
-                        .foregroundColor(.red)
-                        .offset(
-                                x: xPos,
-                                y: yPos)
-                        .frame(
-                                width: cas / casDiv,
-                                height: cas / casDiv)
+                let yPos = bodPos + (cas / 2) + (cas * Double(idx + 1))
+                    Image("a" + idx.formatted())
+                            .resizable()
+                            .foregroundColor(.red)
+                            .offset(
+                                    x: xPos,
+                                    y: yPos)
+                            .frame(
+                                    width: cas / casDiv,
+                                    height: cas / casDiv)
+                }
             }
-        }
         return body
-        }
+    }
 
     func drawBodieLine(lines: [Line]) -> Path {
         var path = Path()
