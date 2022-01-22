@@ -99,22 +99,24 @@ class Swe {
             for bod in bodies {
                 let bodNatalLongitude = cD.getBodieLongitude(bodie: bod.0, swTransit: false)
                 for bodPair in bodies.reversed() {
-                    /*if bodPair.0.bodie == bod.0.bodie {
-                        break
-                    }*/
-                    let bod2NatalLongitude = cD.getBodieLongitude(bodie: bodPair.0, swTransit: false)
-                    let separation = cD.getClosestDistance(
-                            angle1: bodNatalLongitude,
-                            angle2: bod2NatalLongitude)
-                    let absSeparation = abs(separation)
-                    let aspect = Aspects.init(rawValue: Int32(aspectIdx)) ?? Aspects.conjunction
-                    let asp = aspect.angle().0
-                    let orb = aspect.angle().1
-                    if abs(absSeparation - Double(asp)) <= Double(orb) {
-                        aspectsBodies.append(AspectBodie(id: UUID(), bodie1: bod.0, bodie2: bodPair.0, aspect: aspect))
+                    if bodPair.0.bodie != bod.0.bodie {
+                        let bod2NatalLongitude = cD.getBodieLongitude(bodie: bodPair.0, swTransit: false)
+                        let separation = cD.getClosestDistance(
+                                angle1: bodNatalLongitude,
+                                angle2: bod2NatalLongitude)
+                        let absSeparation = abs(separation)
+                        let aspect = Aspects.init(rawValue: Int32(aspectIdx)) ?? Aspects.conjunction
+                        let asp = aspect.angle().0
+                        let orb = aspect.angle().1
+                        if abs(absSeparation - Double(asp)) <= Double(orb) {
+                            aspectsBodies.append(AspectBodie(id: UUID(), bodie1: bod.0.bodie, bodie2: bodPair.0.bodie, aspect: aspect))
+                        }
                     }
                 }
             }
+        }
+        for a in aspectsBodies {
+            print(a)
         }
         swe02.close()
     }
@@ -298,8 +300,8 @@ class Swe {
         }
 
         var id: UUID?
-        var bodie1: Bodie
-        var bodie2: Bodie
+        var bodie1: Bodies
+        var bodie2: Bodies
         var aspect: Aspects
 
         func hash(into hasher: inout Hasher) {

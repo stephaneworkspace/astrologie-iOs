@@ -285,7 +285,7 @@ struct ChartDraw {
         let casDiv = 1.1
         var body: some View {
             ForEach(0...idx, id: \.self) { jdx in
-                if asp.bodie1.bodie.rawValue == idx && asp.bodie2.bodie.rawValue == jdx {
+                if asp.bodie1.rawValue == idx + 1 && asp.bodie2.rawValue == jdx {
                     let xPos = bodPos + (cas / 2) + (cas * Double(jdx))
                     let yPos = bodPos + (cas / 2) + (cas * Double(idx + 1))
                     Image("a" + asp.aspect.rawValue.formatted())
