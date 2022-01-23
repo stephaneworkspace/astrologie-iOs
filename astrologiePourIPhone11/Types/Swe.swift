@@ -65,8 +65,10 @@ class Swe {
         bbb.append(.saturn)
         bbb.append(.uranus)
         bbb.append(.neptune)
-       // bbb.append(.pluto)
-        //bbb.append(.ceres)
+        bbb.append(.pluto)
+        bbb.append(.trueNode)
+        bbb.append(.chiron)
+        bbb.append(.ceres)
         for bbx in bbb {
             bodies.append(
                     (
@@ -370,6 +372,39 @@ class Swe {
 
         func hash(into hasher: inout Hasher) {
 
+        }
+    }
+}
+
+extension Swe.Bodies {
+    func pos() -> Int {
+        switch self {
+        case .sun:
+            return Int(self.rawValue)
+        case .mercury:
+            return Int(self.rawValue)
+        case .venus:
+            return Int(self.rawValue)
+        case .mars:
+            return Int(self.rawValue)
+        case .jupiter:
+            return Int(self.rawValue)
+        case .saturn:
+            return Int(self.rawValue)
+        case .uranus:
+            return Int(self.rawValue)
+        case .neptune:
+            return Int(self.rawValue)
+        case .pluto:
+            return Int(self.rawValue)
+        case .trueNode:
+            return 10
+        case .chiron:
+            return 11
+        case .ceres:
+            return 12
+        default:
+            return 12
         }
     }
 }

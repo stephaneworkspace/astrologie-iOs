@@ -239,7 +239,7 @@ struct ChartDraw {
         func path(in rect: CGRect) -> Path {
             var path = Path()
             let cas = Double(size) / 16
-            let max = 8
+            let max = 12
             path.move(to: CGPoint(x: 0, y: cas))
             path.addLine(to: CGPoint(x: 0, y: Double(max + 1) * cas))
             for iDx in 1...max {
@@ -257,13 +257,13 @@ struct ChartDraw {
         }
     }
 
-    func drawTransitBodie(idx: Int, size: Double) -> some View {
+    func drawTransitBodie(idx: Int, jdx: Int, size: Double) -> some View {
         let fix: Double = 30.0 // sizeMax et size problem (/4)
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
         let casDiv = 1.1
-        let xPos = bodPos + (cas / 2) + (cas * Double(idx)) - fix
-        let yPos = bodPos + (cas / 2) + (cas * Double(idx)) - fix
+        let xPos = bodPos + (cas / 2) + (cas * Double(jdx)) - fix
+        let yPos = bodPos + (cas / 2) + (cas * Double(jdx)) - fix
         var body: some View {
             Image("b" + idx.formatted())
                     .resizable()
@@ -284,7 +284,7 @@ struct ChartDraw {
         let cas = Double(size) / 16.0
         let casDiv = 1.9
         let xPos = bodPos + (cas / 2) + (cas * Double(asp.bodie2.rawValue)) - fix
-        let yPos = bodPos + (cas / 2) + (cas * Double(asp.bodie1.rawValue)) - fix
+        let yPos = bodPos + (cas / 2) + (cas * Double(asp.bodie1.pos())) - fix
         var body: some View {
             Image("a" + asp.aspect.rawValue.formatted())
                     .resizable()

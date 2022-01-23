@@ -44,11 +44,12 @@ struct TransitView: View {
     var transitType: Swe.TransitType
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
+        let forlopp: [Int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 15, 17] // TODO
         VStack {
             ZStack {
                 ChartDraw.DrawTransit(size: size).stroke(.black)
-                ForEach(0...8, id: \.self) { idx in
-                    cD.drawTransitBodie(idx: idx, size: size).frame(width: size, height: size) // TODO const
+                ForEach(0...forlopp.count - 1, id: \.self) { idx in
+                    cD.drawTransitBodie(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size) // TODO const
                 }
                 ForEach(swe.aspectsBodies, id: \.self) { asp in
                     if asp.transit == transitType {
@@ -222,21 +223,18 @@ struct ChartBodieView: View {
     var swe: Swe
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
+        let forlopp: [Int] = [0,1,2,3,4,5,6,7,8,9,11,15,17] // TODO
         // Draw bodies line on chart
-        ForEach(1...8, id: \.self) { idx in
+        VStack {
+            cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: false)).stroke(.black, lineWidth: 0.1)
+        }.frame(width: cD.SIZE, height: cD.SIZE)
+        if swTransit {
             VStack {
-                cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: false)).stroke(.black, lineWidth: 0.1)
+                cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: true)).stroke(.black, lineWidth: 0.1)
             }.frame(width: cD.SIZE, height: cD.SIZE)
         }
-        ForEach(1...8, id: \.self) { idx in
-            if swTransit {
-                VStack {
-                    cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: true)).stroke(.black, lineWidth: 0.1)
-                }.frame(width: cD.SIZE, height: cD.SIZE)
-            }
-        }
         // Draw bodies symbol
-        ForEach(0...8, id: \.self) { idx in
+        ForEach(forlopp, id: \.self) { idx in
             let _ = Swe.Bodies.init(rawValue: Int32(idx)) ?? Swe.Bodies.sun
             let bodN = cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false)
             let bodT = cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true)
