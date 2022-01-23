@@ -59,30 +59,40 @@ private func loadValue(
 struct ContentView: View {
     @State var selected: Int
     var body: some View {
-        TabView(selection: $selected) {
-            AstrologieView(swTransit: false).tabItem {
-                VStack {
-                    Image(systemName: "eye")
-                    Text("Natal")
-                }
-            }.tag(0)
-            AstrologieView(swTransit: true).tabItem {
-                VStack {
-                    Image(systemName: "eye")
-                    Text("Natal et Transit")
-                }
-            }.tag(1)
+        ZStack {
+            Image("bgl")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .edgesIgnoringSafeArea(.all)
             VStack {
-                Text("Développé par bressani.dev (Stéphane Bressani)")
-                Text("Cette application est sous license GNU public license version 3.")
-                Text("Elle utilise la libraiaire swiss ephemeris developé par Dieter Koch and Alois Treindl en Dual license (GNU v2 ou supérieur ou commercial)")
-                Text("Cette application utilise aussi le package swift Zip en MIT par Roy Marmelstein")
-            }.tabItem {
-                VStack {
-                    Image(systemName: "info.circle")
-                    Text("À propos")
+                TabView(selection: $selected) {
+                    AstrologieView(swTransit: false).tabItem {
+                        VStack {
+                            Image(systemName: "eye")
+                            Text("Natal")
+                        }
+                    }.tag(0)
+                    AstrologieView(swTransit: true).tabItem {
+                        VStack {
+                            Image(systemName: "eye")
+                            Text("Natal et Transit")
+                        }
+                    }.tag(1)
+                    VStack {
+                        Text("Développé par bressani.dev (Stéphane Bressani)")
+                        Text("Cette application est sous license GNU public license version 3.")
+                        Text("Elle utilise la libraiaire swiss ephemeris developé par Dieter Koch and Alois Treindl en Dual license (GNU v2 ou supérieur ou commercial)")
+                        Text("Cette application utilise aussi le package swift Zip en MIT par Roy Marmelstein")
+                    }.tabItem {
+                        VStack {
+                            Image(systemName: "info.circle")
+                            Text("À propos")
+                        }
+                    }.tag(2)
                 }
-            }.tag(2)
+
+            }
         }
     }
 }
@@ -113,6 +123,11 @@ struct AstrologieView: View {
     }()
     var body: some View {
         ZStack {
+            Image("bgl")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .edgesIgnoringSafeArea(.all)
             ScrollView {
                 VStack {
                     Text("Astrologie").padding()
@@ -185,6 +200,17 @@ struct AstrologieView: View {
             }
         }
     }
+
+extension TabView {
+    func myTabViewStyle() -> some View {
+        self.background(Image("bgl"))              // Replace 'BackgroundImage' with your image name
+                // or   self.background(Image(systemName: "questionmark.square"))
+                .frame(width: 200, height: 500, alignment: .top)   // Optional, but shows the background
+                .opacity(0.5)                                      // Again optional, but shows the effect
+
+        // etc, with other View modifiers, choose the ones you need
+    }
+}
 
 private func loadDefaultValue() -> (Swe.Chart, Date, Date) {
     var decode: Swe.Chart = Swe.Chart.init(

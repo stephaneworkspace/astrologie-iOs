@@ -11,7 +11,6 @@
 		552E8D53C7B1F2734031F347 /* data.json.example in Resources */ = {isa = PBXBuildFile; fileRef = 552E8CAB5E7E36614CDBFAFD /* data.json.example */; };
 		F404446A2797F0F900B74503 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F40444692797F0F900B74503 /* .gitignore */; };
 		F404446C2797F11600B74503 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = F404446B2797F11600B74503 /* data.json */; };
-		F40CA02A2797504600EF0991 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = F40CA0292797504600EF0991 /* Zip */; };
 		F4141EA92797414800381179 /* astrologiePourIPhone11App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141EA82797414800381179 /* astrologiePourIPhone11App.swift */; };
 		F4141EAB2797414800381179 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141EAA2797414800381179 /* ContentView.swift */; };
 		F4141EAD2797414900381179 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4141EAC2797414900381179 /* Assets.xcassets */; };
@@ -46,6 +45,7 @@
 		F4141F2C279741FC00381179 /* ephem.zip in Resources */ = {isa = PBXBuildFile; fileRef = F4141F24279741FC00381179 /* ephem.zip */; };
 		F4141F2D279741FC00381179 /* Swe14.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141F25279741FC00381179 /* Swe14.swift */; };
 		F446CDE1279AE0AC00D8CCD8 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F446CDE0279AE0AC00D8CCD8 /* ChartView.swift */; };
+		F491529A279D938D00911CA5 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = F4915299279D938D00911CA5 /* Zip */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,7 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F40CA02A2797504600EF0991 /* Zip in Frameworks */,
+				F491529A279D938D00911CA5 /* Zip in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,7 +321,7 @@
 			);
 			name = astrologiePourIPhone11;
 			packageProductDependencies = (
-				F40CA0292797504600EF0991 /* Zip */,
+				F4915299279D938D00911CA5 /* Zip */,
 			);
 			productName = astrologiePourIPhone11;
 			productReference = F4141EA52797414800381179 /* Astrologie selon Placidus.app */;
@@ -398,7 +398,7 @@
 			);
 			mainGroup = F4141E9C2797414800381179;
 			packageReferences = (
-				F40CA0282797504600EF0991 /* XCRemoteSwiftPackageReference "Zip-1" */,
+				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = F4141EA62797414800381179 /* Products */;
 			projectDirPath = "";
@@ -820,20 +820,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F40CA0282797504600EF0991 /* XCRemoteSwiftPackageReference "Zip-1" */ = {
+		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/stephaneworkspace/Zip-1";
+			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F40CA0292797504600EF0991 /* Zip */ = {
+		F4915299279D938D00911CA5 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F40CA0282797504600EF0991 /* XCRemoteSwiftPackageReference "Zip-1" */;
+			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */
