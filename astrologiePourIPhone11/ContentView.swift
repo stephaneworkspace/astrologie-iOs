@@ -130,50 +130,31 @@ struct AstrologieView: View {
                     .edgesIgnoringSafeArea(.all)
             ScrollView {
                 VStack {
-                    Text("Astrologie").padding()
-                    VStack {
-                        DatePicker(
-                                "Date de naissance",
-                                selection: $selectedDate,
-                                displayedComponents: [.date, .hourAndMinute])
-                                .font(.system(size: FONTSIZE, weight: .light, design: .default))
-                        HStack {
-                            Text("Lat")
-                            TextField(
-                                    "Latitude",
-                                    value: $latNatal,
-                                    formatter: formatter
-                            ).textFieldStyle(RoundedBorderTextFieldStyle())
-                            Text("Lng")
-                            TextField(
-                                    "Longitude",
-                                    value: $lngNatal,
-                                    formatter: formatter
-                            ).textFieldStyle(RoundedBorderTextFieldStyle())
-                            Text("Tz")
-                            TextField(
-                                    "Timezone",
-                                    value: $tzNatal,
-                                    formatter: formatterNoFloat
-                            ).textFieldStyle(RoundedBorderTextFieldStyle())
-                        }.font(.system(size: FONTSIZE, weight: .light, design: .default))
-                        if swTransit {
+                    Spacer().frame(height: 30)
+                    ZStack {
+                        VStack {
+                            Spacer()
+                                    .frame(width: 400, height: 84)
+                                    .background(Color.orange).opacity(0.2)
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                        }
+                        VStack {
                             DatePicker(
-                                    "Transit",
-                                    selection: $selectedDateTransit,
+                                    "Date de naissance",
+                                    selection: $selectedDate,
                                     displayedComponents: [.date, .hourAndMinute])
                                     .font(.system(size: FONTSIZE, weight: .light, design: .default))
                             HStack {
                                 Text("Lat")
                                 TextField(
                                         "Latitude",
-                                        value: $latTransit,
+                                        value: $latNatal,
                                         formatter: formatter
                                 ).textFieldStyle(RoundedBorderTextFieldStyle())
                                 Text("Lng")
                                 TextField(
                                         "Longitude",
-                                        value: $lngTransit,
+                                        value: $lngNatal,
                                         formatter: formatter
                                 ).textFieldStyle(RoundedBorderTextFieldStyle())
                                 Text("Tz")
@@ -183,9 +164,36 @@ struct AstrologieView: View {
                                         formatter: formatterNoFloat
                                 ).textFieldStyle(RoundedBorderTextFieldStyle())
                             }.font(.system(size: FONTSIZE, weight: .light, design: .default))
-                        }
+                            if swTransit {
+                                DatePicker(
+                                        "Transit",
+                                        selection: $selectedDateTransit,
+                                        displayedComponents: [.date, .hourAndMinute])
+                                        .font(.system(size: FONTSIZE, weight: .light, design: .default))
+                                HStack {
+                                    Text("Lat")
+                                    TextField(
+                                            "Latitude",
+                                            value: $latTransit,
+                                            formatter: formatter
+                                    ).textFieldStyle(RoundedBorderTextFieldStyle())
+                                    Text("Lng")
+                                    TextField(
+                                            "Longitude",
+                                            value: $lngTransit,
+                                            formatter: formatter
+                                    ).textFieldStyle(RoundedBorderTextFieldStyle())
+                                    Text("Tz")
+                                    TextField(
+                                            "Timezone",
+                                            value: $tzNatal,
+                                            formatter: formatterNoFloat
+                                    ).textFieldStyle(RoundedBorderTextFieldStyle())
+                                }.font(.system(size: FONTSIZE, weight: .light, design: .default))
+                            }
                         }.padding()
                     }
+                }
                     ChartView(
                             swTransit: swTransit,
                             swe: Swe(
