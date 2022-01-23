@@ -18,36 +18,45 @@ struct ChartView: View {
             ChartBodieView(swTransit: swTransit, swe: swe)
             ChartAspectView(swTransit: swTransit, swe: swe)
         }
-        if swTransit {
-            Text("Natal")
-        }
-        TransitView(swe: swe, transitType: .NatalNatal)
-        if swTransit {
-            Text("Natal and Transit")
-            TransitView(swe: swe, transitType: .NatalTransit)
-            Text("Transit")
-            TransitView(swe: swe, transitType: .TransitTransit)
+    }
+}
+
+struct ArrayView: View {
+    @State var swTransit: Bool
+    @State var transitType: Swe.TransitType
+    var swe: Swe
+    var body: some View {
+        switch transitType {
+        case .NatalNatal:
+            TransitView(swe: swe, transitType: transitType)
+        case .NatalTransit:
+            TransitView(swe: swe, transitType: transitType)
+        case .TransitTransit:
+            TransitView(swe: swe, transitType: transitType)
         }
     }
 }
 
 struct TransitView: View {
     var swe: Swe
-    var size = 390.0
+    let sizeMax = 390.0
+    var size = 300.0
     var transitType: Swe.TransitType
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
-        ZStack {
-            ChartDraw.DrawTransit(size: size).stroke(.black)
-            ForEach(0...8, id: \.self) { idx in
-                cD.drawTransitBodie(idx: idx, size: size).frame(width: size, height: size) // TODO const
-            }
-            ForEach(swe.aspectsBodies, id: \.self) { asp in
-                if asp.transit == transitType {
-                    cD.drawTransitAspect(asp: asp, size: size).frame(width: size, height: size) // TODO const
+        VStack {
+            ZStack {
+                ChartDraw.DrawTransit(size: size).stroke(.black)
+                ForEach(0...8, id: \.self) { idx in
+                    cD.drawTransitBodie(idx: idx, size: size).frame(width: size, height: size) // TODO const
                 }
-            }
-        }.padding()
+                ForEach(swe.aspectsBodies, id: \.self) { asp in
+                    if asp.transit == transitType {
+                        cD.drawTransitAspect(asp: asp, size: size).frame(width: size, height: size) // TODO const
+                    }
+                }
+            }.padding()
+        }.frame(width: sizeMax, height: sizeMax)
     }
 }
 

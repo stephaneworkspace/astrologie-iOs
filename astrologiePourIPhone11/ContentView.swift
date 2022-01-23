@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 private func loadValue(
         selectedDate: Date,
@@ -58,6 +59,7 @@ private func loadValue(
 
 struct ContentView: View {
     @State var selected: Int
+
     var body: some View {
         ZStack {
             Image("bgl")
@@ -90,8 +92,10 @@ struct ContentView: View {
                             Text("À propos")
                         }
                     }.tag(2)
-                }
-
+                }.onAppear() {
+                    UITabBar.appearance().barTintColor = UIColor(Color(hex: "aa9966"))
+                    UITabBar.appearance().unselectedItemTintColor = .systemGray5
+                }.accentColor(.white)
             }
         }
     }
@@ -128,14 +132,15 @@ struct AstrologieView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .edgesIgnoringSafeArea(.all)
+                    .opacity(0.3)
             ScrollView {
                 VStack {
-                    Spacer().frame(height: 30)
+                    Spacer().frame(height: 45)
                     ZStack {
                         VStack {
                             Spacer()
                                     .frame(width: 400, height: 84)
-                                    .background(Color.orange).opacity(0.2)
+                                    .background(Color.orange).opacity(0.1)
                                     .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
                         VStack {
@@ -194,20 +199,69 @@ struct AstrologieView: View {
                         }.padding()
                     }
                 }
+                let swe = Swe(
+                        chart: loadValue(
+                                selectedDate: selectedDate,
+                                selectedDateTransit: selectedDateTransit,
+                                lat: (latNatal, latTransit),
+                                lng: (lngNatal, lngTransit),
+                                tz: (tzNatal, tzTransit)))
+                ZStack {
+                    VStack {
+                        Spacer()
+                                .frame(width: 390, height: 390)
+                                .background(RadialGradient(
+                                        gradient: Gradient(colors: [Color.orange, Color.white]),
+                                        center: .center, startRadius: 60, endRadius: 200)).opacity(0.1)
+                                .clipShape(Circle())
+                    }
                     ChartView(
                             swTransit: swTransit,
-                            swe: Swe(
-                                    chart: loadValue(
-                                    selectedDate: selectedDate,
-                                    selectedDateTransit: selectedDateTransit,
-                                    lat: (latNatal, latTransit),
-                                    lng: (lngNatal, lngTransit),
-                                    tz: (tzNatal, tzTransit))))
-                    Text("").frame(width: 390, height: 390)
+                            swe: swe)
+                }
+                ZStack {
+                    VStack {
+                        Spacer()
+                                .frame(width: 390, height: 390)
+                                .background(.orange).opacity(0.1)
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                    ArrayView(
+                            swTransit: swTransit,
+                            transitType: .NatalNatal,
+                            swe: swe)
+                }
+                if swTransit {
+                    ZStack {
+                        VStack {
+                            Spacer()
+                                    .frame(width: 390, height: 390)
+                                    .background(.orange).opacity(0.1)
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                        }
+                        ArrayView(
+                                swTransit: swTransit,
+                                transitType: .NatalTransit,
+                                swe: swe)
+                    }
+                    ZStack {
+                        VStack {
+                            Spacer()
+                                    .frame(width: 390, height: 390)
+                                    .background(.orange).opacity(0.1)
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                        }
+                        ArrayView(
+                                swTransit: swTransit,
+                                transitType: .TransitTransit,
+                                swe: swe)
+                    }
+
                 }
             }
         }
     }
+}
 
 extension TabView {
     func myTabViewStyle() -> some View {
@@ -269,5 +323,80 @@ private func loadDefaultValue() -> (Swe.Chart, Date, Date) {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(selected: 0)
+    }
+}
+
+extension Color {
+    init(hex string: String) {
+        var string: String = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        if string.hasPrefix("#") {
+            _ = string.removeFirst()
+        }
+
+        // Double the last value if incomplete hex
+        if !string.count.isMultiple(of: 2), let last = string.last {
+            string.append(last)
+        }
+
+        // Fix invalid values
+        if string.count > 8 {
+            string = String(string.prefix(8))
+        }
+
+        // Scanner creation
+        let scanner = Scanner(string: string)
+
+        var color: UInt64 = 0
+        scanner.scanHexInt64(&color)
+
+        if string.count == 2 {
+            let mask = 0xFF
+
+            let g = Int(color) & mask
+
+            let gray = Double(g) / 255.0
+
+            self.init(.sRGB, red: gray, green: gray, blue: gray, opacity: 1)
+
+        } else if string.count == 4 {
+            let mask = 0x00FF
+
+            let g = Int(color >> 8) & mask
+            let a = Int(color) & mask
+
+            let gray = Double(g) / 255.0
+            let alpha = Double(a) / 255.0
+
+            self.init(.sRGB, red: gray, green: gray, blue: gray, opacity: alpha)
+
+        } else if string.count == 6 {
+            let mask = 0x0000FF
+            let r = Int(color >> 16) & mask
+            let g = Int(color >> 8) & mask
+            let b = Int(color) & mask
+
+            let red = Double(r) / 255.0
+            let green = Double(g) / 255.0
+            let blue = Double(b) / 255.0
+
+            self.init(.sRGB, red: red, green: green, blue: blue, opacity: 1)
+
+        } else if string.count == 8 {
+            let mask = 0x000000FF
+            let r = Int(color >> 24) & mask
+            let g = Int(color >> 16) & mask
+            let b = Int(color >> 8) & mask
+            let a = Int(color) & mask
+
+            let red = Double(r) / 255.0
+            let green = Double(g) / 255.0
+            let blue = Double(b) / 255.0
+            let alpha = Double(a) / 255.0
+
+            self.init(.sRGB, red: red, green: green, blue: blue, opacity: alpha)
+
+        } else {
+            self.init(.sRGB, red: 1, green: 1, blue: 1, opacity: 1)
+        }
     }
 }

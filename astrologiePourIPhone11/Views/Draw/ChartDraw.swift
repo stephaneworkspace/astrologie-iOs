@@ -258,11 +258,12 @@ struct ChartDraw {
     }
 
     func drawTransitBodie(idx: Int, size: Double) -> some View {
+        let fix: Double = 30.0 // sizeMax et size problem (/4)
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
         let casDiv = 1.1
-        let xPos = bodPos + (cas / 2) + (cas * Double(idx))
-        let yPos = bodPos + (cas / 2) + (cas * Double(idx))
+        let xPos = bodPos + (cas / 2) + (cas * Double(idx)) - fix
+        let yPos = bodPos + (cas / 2) + (cas * Double(idx)) - fix
         var body: some View {
             Image("b" + idx.formatted())
                     .resizable()
@@ -278,11 +279,12 @@ struct ChartDraw {
     }
 
     func drawTransitAspect(asp: Swe.AspectBodie, size: Double) -> some View {
+        let fix: Double = 30.0 // sizeMax et size problem (/4)
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
         let casDiv = 1.9
-        let xPos = bodPos + (cas / 2) + (cas * Double(asp.bodie2.rawValue))
-        let yPos = bodPos + (cas / 2) + (cas * Double(asp.bodie1.rawValue))
+        let xPos = bodPos + (cas / 2) + (cas * Double(asp.bodie2.rawValue)) - fix
+        let yPos = bodPos + (cas / 2) + (cas * Double(asp.bodie1.rawValue)) - fix
         var body: some View {
             Image("a" + asp.aspect.rawValue.formatted())
                     .resizable()
