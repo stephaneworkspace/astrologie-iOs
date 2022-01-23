@@ -12,6 +12,8 @@ class Swe {
     var bodies: [(Bodie, Bodie)] = []
     var houses: [Swe14.House] = []
     var aspectsBodies: [AspectBodie] = []
+    let CONSTforLopp: [Int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 15, 17]
+
     init(chart: Chart) {
         // Load json or default
         // let chart = load_default_value()
