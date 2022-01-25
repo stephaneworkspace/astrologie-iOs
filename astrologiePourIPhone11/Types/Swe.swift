@@ -12,6 +12,7 @@ class Swe {
     var bodies: [(Bodie, Bodie)] = []
     var houses: [Swe14.House] = []
     var aspectsBodies: [AspectBodie] = []
+    var aspectsAngleBodie: [AspectAngleBodie] = []
     let CONSTforLopp: [Int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 15, 17]
 
     init(chart: Chart) {
@@ -81,8 +82,8 @@ class Swe {
                                             ipl: bbx, iflag: .speed),
                                     phenoUt: swe07.pheno_ut(
                                             tjdUt: utcToJd.julianDayUt,
-                                    ipl: bbx,
-                                    iFlag: .speed)),
+                                            ipl: bbx,
+                                            iFlag: .speed)),
                             Swe.Bodie.init(
                                     bodie: bbx,
                                     calculUt: swe03.calc_ut(
@@ -124,6 +125,28 @@ class Swe {
                                             transit: transit))
                         }
                     }
+                    // AspectAngleBodie
+                    let angleArr: [Angle] = [.asc, .mc]
+                    for angle in angleArr {
+                        let angleLongitude = cD.getAngleLongitude(angle: angle)
+                        let separation = cD.getClosestDistance(
+                                angle1: bodNatalLongitude,
+                                angle2: angleLongitude)
+                        let absSeparation = abs(separation)
+                        let aspect = Aspects.init(rawValue: Int32(aspectIdx)) ?? Aspects.conjunction
+                        let asp = aspect.angle().0
+                        let orb = aspect.angle().1
+                        if abs(absSeparation - Double(asp)) <= Double(orb) {
+                            aspectsAngleBodie.append(
+                                    AspectAngleBodie(
+                                            id: UUID(),
+                                            angle: angle,
+                                            bodie: bod.0.bodie,
+                                            aspect: aspect,
+                                            transit: transit))
+
+                        }
+                    }
                 }
             }
             transit = .NatalTransit
@@ -141,14 +164,14 @@ class Swe {
                         let orb = aspect.angle().1
                         if abs(absSeparation - Double(asp)) <= Double(orb) {
                             aspectsBodies.append(
-                                AspectBodie(
-                                        id: UUID(),
-                                        bodie1: bod.0.bodie.rawValue > bodPair.1.bodie.rawValue ?
-                                                bod.0.bodie : bodPair.1.bodie,
-                                        bodie2: bod.0.bodie.rawValue < bodPair.1.bodie.rawValue ?
-                                                bod.0.bodie : bodPair.1.bodie,
-                                        aspect: aspect,
-                                        transit: transit))
+                                    AspectBodie(
+                                            id: UUID(),
+                                            bodie1: bod.0.bodie.rawValue > bodPair.1.bodie.rawValue ?
+                                                    bod.0.bodie : bodPair.1.bodie,
+                                            bodie2: bod.0.bodie.rawValue < bodPair.1.bodie.rawValue ?
+                                                    bod.0.bodie : bodPair.1.bodie,
+                                            aspect: aspect,
+                                            transit: transit))
                         }
                     }
                 }
@@ -177,6 +200,28 @@ class Swe {
                                             aspect: aspect,
                                             transit: transit))
                         }
+                    }
+                }
+                // AspectAngleBodie
+                let angleArr: [Angle] = [.asc, .mc]
+                for angle in angleArr {
+                    let angleLongitude = cD.getAngleLongitude(angle: angle)
+                    let separation = cD.getClosestDistance(
+                            angle1: bodNatalLongitude,
+                            angle2: angleLongitude)
+                    let absSeparation = abs(separation)
+                    let aspect = Aspects.init(rawValue: Int32(aspectIdx)) ?? Aspects.conjunction
+                    let asp = aspect.angle().0
+                    let orb = aspect.angle().1
+                    if abs(absSeparation - Double(asp)) <= Double(orb) {
+                        aspectsAngleBodie.append(
+                                AspectAngleBodie(
+                                        id: UUID(),
+                                        angle: angle,
+                                        bodie: bod.1.bodie,
+                                        aspect: aspect,
+                                        transit: transit))
+
                     }
                 }
             }
@@ -353,7 +398,7 @@ class Swe {
              sextile = 4,
              inconjunction = 5,
              sequisquare = 6,
-             semisquare =  7,
+             semisquare = 7,
              semisextile = 8
     }
 
@@ -369,6 +414,22 @@ class Swe {
         var id: UUID?
         var bodie1: Bodies
         var bodie2: Bodies
+        var aspect: Aspects
+        var transit: TransitType
+
+        func hash(into hasher: inout Hasher) {
+
+        }
+    }
+
+    struct AspectAngleBodie: Hashable {
+        static func ==(lhs: Swe.AspectAngleBodie, rhs: Swe.AspectAngleBodie) -> Bool {
+            lhs.id == rhs.id
+        }
+
+        var id: UUID?
+        var angle: Angle
+        var bodie: Bodies
         var aspect: Aspects
         var transit: TransitType
 
