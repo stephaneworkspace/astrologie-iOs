@@ -60,6 +60,7 @@ private func loadValue(
 struct ContentView: View {
     @State var selected: Int
     @State var isActive: Bool = false
+    @State var swChiron: Bool = true
 
     var body: some View {
         VStack {
@@ -72,18 +73,30 @@ struct ContentView: View {
                             .edgesIgnoringSafeArea(.all)
                     VStack {
                         TabView(selection: $selected) {
-                            AstrologieView(swTransit: false).tabItem {
+                            AstrologieView(
+                                    swTransit: false,
+                                    swChiron: swChiron
+                            ).tabItem {
                                 VStack {
                                     Image(systemName: "eye")
                                     Text("Natal")
                                 }
                             }.tag(0)
-                            AstrologieView(swTransit: true).tabItem {
+                            AstrologieView(
+                                    swTransit: true,
+                                    swChiron: swChiron
+                            ).tabItem {
                                 VStack {
                                     Image(systemName: "eye")
                                     Text("Natal et Transit")
                                 }
                             }.tag(1)
+                            BodieSelectView(swChiron: swChiron).tabItem {
+                                VStack {
+                                    Image(systemName: "c.circle.fill")
+                                    Text("Sélection planètes")
+                                }
+                            }.tag(2)
                             VStack {
                                 Text("Développé par bressani.dev (Stéphane Bressani)")
                                 Text("Cette application est sous license GNU public license version 3.")
@@ -94,7 +107,7 @@ struct ContentView: View {
                                     Image(systemName: "info.circle")
                                     Text("À propos")
                                 }
-                            }.tag(2)
+                            }.tag(3)
                         }.onAppear() {
                             UITabBar.appearance().barTintColor = UIColor(Color(hex: "aa9966"))
                             UITabBar.appearance().unselectedItemTintColor = .systemGray5
@@ -121,8 +134,39 @@ struct ContentView: View {
     }
 }
 
+struct BodieSelectView: View {
+    @State var swChiron: Bool = true
+    @State var swCeres: Bool = true
+
+    var body: some View {
+        ZStack {
+            Image("bgl")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                    .opacity(0.3)
+            VStack {
+                Spacer()
+                HStack {
+                    Toggle(isOn: $swCeres) {
+                        Text("Ceres")
+                    }
+                    Image("b15").padding()
+                    Toggle(isOn: $swChiron) {
+                        Text("Chrion")
+                    }
+                    Image("b15").padding()
+                }
+                Spacer()
+            }.padding()
+        }
+    }
+}
+
 struct AstrologieView: View {
     @State var swTransit: Bool
+    @State var swChiron: Bool
     var FONTSIZE = 15.0
     var chartDefault: Swe.Chart = loadDefaultValue().0
     @State var selectedDate: Date = loadDefaultValue().1
@@ -216,6 +260,7 @@ struct AstrologieView: View {
                                     ).textFieldStyle(RoundedBorderTextFieldStyle())
                                 }.font(.system(size: FONTSIZE, weight: .light, design: .default))
                             }
+
                         }.padding()
                     }
                 }
@@ -237,6 +282,7 @@ struct AstrologieView: View {
                     }
                     ChartView(
                             swTransit: swTransit,
+                            swChiron: swChiron,
                             swe: swe)
                 }
                 ZStack {

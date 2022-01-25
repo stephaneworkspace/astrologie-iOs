@@ -10,12 +10,13 @@ import SwiftUI
 
 struct ChartView: View {
     @State var swTransit: Bool
+    @State var swChiron: Bool
     var swe: Swe
     var body: some View {
         ZStack {
             ChartZodiacView(swe: swe)
             ChartHouseView(swe: swe)
-            ChartBodieView(swTransit: swTransit, swe: swe)
+            ChartBodieView(swTransit: swTransit, swChiron: swChiron, swe: swe)
             ChartAspectView(swTransit: swTransit, swe: swe)
         }
     }
@@ -25,7 +26,7 @@ struct ChartView: View {
 struct ChartZodiacView: View {
     var swe: Swe
     var body: some View {
-        var cD: ChartDraw = ChartDraw(swe: swe)
+        let cD: ChartDraw = ChartDraw(swe: swe)
         // Circle
         /* VStack {
              // Text("Astrologie").padding()
@@ -179,23 +180,14 @@ struct ChartAspectView: View {
     }
 }
 
-struct ChartBodieView: View {
+struct ChartBodieImageView: View {
     @State var swTransit: Bool
+    @State var swChiron: Bool
+    @State var idx: Int
     var swe: Swe
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
-        let forlopp: [Int] = [0,1,2,3,4,5,6,7,8,9,11,15,17] // TODO
-        // Draw bodies line on chart
-        VStack {
-            cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: false)).stroke(.black, lineWidth: 0.1)
-        }.frame(width: cD.SIZE, height: cD.SIZE)
-        if swTransit {
-            VStack {
-                cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: true)).stroke(.black, lineWidth: 0.1)
-            }.frame(width: cD.SIZE, height: cD.SIZE)
-        }
-        // Draw bodies symbol
-        ForEach(forlopp, id: \.self) { idx in
+        if (idx == Swe.Bodies.chiron.rawValue && swChiron == false) != true {
             let _ = Swe.Bodies.init(rawValue: Int32(idx)) ?? Swe.Bodies.sun
             let bodN = cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false)
             let bodT = cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true)
@@ -242,6 +234,29 @@ struct ChartBodieView: View {
                     }
                 }
             }.frame(width: cD.SIZE, height: cD.SIZE)
+        }
+    }
+}
+
+struct ChartBodieView: View {
+    @State var swTransit: Bool
+    @State var swChiron: Bool
+    var swe: Swe
+    var body: some View {
+        let cD: ChartDraw = ChartDraw(swe: swe)
+        let forlopp: [Int] = [0,1,2,3,4,5,6,7,8,9,11,15,17] // TODO
+        // Draw bodies line on chart
+        VStack {
+            cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: false)).stroke(.black, lineWidth: 0.1)
+        }.frame(width: cD.SIZE, height: cD.SIZE)
+        if swTransit {
+            VStack {
+                cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: true)).stroke(.black, lineWidth: 0.1)
+            }.frame(width: cD.SIZE, height: cD.SIZE)
+        }
+        // Draw bodies symbol
+        ForEach(forlopp, id: \.self) { idx in
+           ChartBodieImageView(swTransit: swTransit, swChiron: swChiron, idx: idx, swe: cD.swe)
         }
     }
 }
