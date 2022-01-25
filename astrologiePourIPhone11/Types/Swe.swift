@@ -450,6 +450,8 @@ extension Swe.Bodies {
         switch self {
         case .sun:
             return Int(self.rawValue)
+        case .moon:
+            return Int(self.rawValue)
         case .mercury:
             return Int(self.rawValue)
         case .venus:
