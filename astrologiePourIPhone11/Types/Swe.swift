@@ -12,7 +12,7 @@ class Swe {
     var bodies: [(Bodie, Bodie)] = []
     var houses: [Swe14.House] = []
     var aspectsBodies: [AspectBodie] = []
-    var aspectsAngleBodie: [AspectAngleBodie] = []
+    var aspectsAngleBodies: [AspectAngleBodie] = []
     let CONSTforLopp: [Int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 15, 17]
 
     init(chart: Chart) {
@@ -137,7 +137,7 @@ class Swe {
                         let asp = aspect.angle().0
                         let orb = aspect.angle().1
                         if abs(absSeparation - Double(asp)) <= Double(orb) {
-                            aspectsAngleBodie.append(
+                            aspectsAngleBodies.append(
                                     AspectAngleBodie(
                                             id: UUID(),
                                             angle: angle,
@@ -214,7 +214,7 @@ class Swe {
                     let asp = aspect.angle().0
                     let orb = aspect.angle().1
                     if abs(absSeparation - Double(asp)) <= Double(orb) {
-                        aspectsAngleBodie.append(
+                        aspectsAngleBodies.append(
                                 AspectAngleBodie(
                                         id: UUID(),
                                         angle: angle,

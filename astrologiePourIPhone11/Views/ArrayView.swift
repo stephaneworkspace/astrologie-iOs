@@ -12,16 +12,16 @@ struct ArrayView: View {
     var body: some View {
         switch transitType {
         case .NatalNatal:
-            TransitView(swe: swe, transitType: transitType)
+            ArrayDetailView(swe: swe, transitType: transitType)
         case .NatalTransit:
-            TransitView(swe: swe, transitType: transitType)
+            ArrayDetailView(swe: swe, transitType: transitType)
         case .TransitTransit:
-            TransitView(swe: swe, transitType: transitType)
+            ArrayDetailView(swe: swe, transitType: transitType)
         }
     }
 }
 
-struct TransitView: View {
+struct ArrayDetailView: View {
     var swe: Swe
     let sizeMax = 390.0
     var size = 300.0
@@ -33,11 +33,16 @@ struct TransitView: View {
             ZStack {
                 ChartDraw.DrawTransit(size: size).stroke(.black)
                 ForEach(0...forlopp.count - 1, id: \.self) { idx in
-                    cD.drawTransitBodie(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
+                    cD.drawArrayBodie(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
                 }
                 ForEach(swe.aspectsBodies, id: \.self) { asp in
                     if asp.transit == transitType {
-                        cD.drawTransitAspect(asp: asp, size: size).frame(width: size, height: size)
+                        cD.drawArrayAspect(asp: asp, size: size).frame(width: size, height: size)
+                    }
+                }
+                ForEach(swe.aspectsAngleBodies, id: \.self) { asp in
+                    if asp.transit == transitType {
+                        cD.drawArrayAngleAspect(asp: asp, size: size).frame(width: size, height: size)
                     }
                 }
             }.padding()

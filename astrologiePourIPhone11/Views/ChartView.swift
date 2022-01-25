@@ -152,7 +152,7 @@ struct ChartAspectView: View {
     var swe: Swe
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
-        ForEach(1...8, id: \.self) { idx in
+        ForEach(1...8, id: \.self) { idx in // nombre d'aspects
             ForEach(0...2, id: \.self) { jdx in
                 let aspect = Swe.Aspects.init(rawValue: Int32(idx)) ?? Swe.Aspects.conjunction
                 let aspectType = ChartDraw.AspectType.init(rawValue: jdx) ?? ChartDraw.AspectType.natal

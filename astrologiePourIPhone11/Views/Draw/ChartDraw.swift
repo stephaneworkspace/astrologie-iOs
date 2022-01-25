@@ -239,16 +239,28 @@ struct ChartDraw {
         func path(in rect: CGRect) -> Path {
             var path = Path()
             let cas = Double(size) / 16
-            let max = 12
+            let max = 14
             path.move(to: CGPoint(x: 0, y: cas))
             path.addLine(to: CGPoint(x: 0, y: Double(max + 1) * cas))
             for iDx in 1...max {
                 let idx = Double(iDx)
                 path.move(to: CGPoint(x: idx * cas, y: idx * cas))
-                path.addLine(to: CGPoint(x: idx * cas, y: (idx + 1) * cas))
-                path.move(to: CGPoint(x: idx * cas, y: idx * cas))
+                if iDx == max {
+                    path.addLine(to: CGPoint(x: idx * cas, y: idx * cas))
+                } else {
+                    path.addLine(to: CGPoint(x: idx * cas, y: (idx + 1) * cas))
+                }
+                if iDx == max {
+                    path.move(to: CGPoint(x: (idx - 1) * cas, y: idx * cas))
+                } else {
+                    path.move(to: CGPoint(x: idx * cas, y: idx * cas))
+                }
                 path.addLine(to: CGPoint(x: 0, y: idx * cas))
-                path.move(to: CGPoint(x: idx * cas, y: (idx + 1) * cas))
+                if iDx == max {
+                    path.move(to: CGPoint(x: (idx - 1) * cas, y: (idx + 1) * cas))
+                } else {
+                    path.move(to: CGPoint(x: idx * cas, y: (idx + 1) * cas))
+                }
                 path.addLine(to: CGPoint(x: 0, y: (idx + 1) * cas))
                 path.move(to: CGPoint(x: idx * cas, y: (idx + 1) * cas))
                 path.addLine(to: CGPoint(x: idx * cas, y: Double(max + 1) * cas))
@@ -257,7 +269,7 @@ struct ChartDraw {
         }
     }
 
-    func drawTransitBodie(idx: Int, jdx: Int, size: Double) -> some View {
+    func drawArrayBodie(idx: Int, jdx: Int, size: Double) -> some View {
         let fix: Double = 30.0 // sizeMax et size problem (/4)
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
@@ -278,13 +290,38 @@ struct ChartDraw {
         return body
     }
 
-    func drawTransitAspect(asp: Swe.AspectBodie, size: Double) -> some View {
+    func drawArrayAspect(asp: Swe.AspectBodie, size: Double) -> some View {
         let fix: Double = 30.0 // sizeMax et size problem (/4)
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
         let casDiv = 1.9
         let xPos = bodPos + (cas / 2) + (cas * Double(asp.bodie2.rawValue)) - fix
         let yPos = bodPos + (cas / 2) + (cas * Double(asp.bodie1.pos())) - fix
+        var body: some View {
+            Image("a" + asp.aspect.rawValue.formatted())
+                    .resizable()
+                    .foregroundColor(.red)
+                    .offset(
+                            x: xPos,
+                            y: yPos)
+                    .frame(
+                            width: cas / casDiv,
+                            height: cas / casDiv)
+        }
+        return body
+    }
+
+    func drawArrayAngleAspect(asp: Swe.AspectAngleBodie, size: Double) -> some View {
+        let fix: Double = 30.0 // sizeMax et size problem (/4)
+        let bodPos = CGFloat((size / 2) * -1)
+        let cas = Double(size) / 16.0
+        let casDiv = 1.9
+        var anglePos = 13
+        if asp.angle == .mc {
+            anglePos = 14
+        }
+        let xPos = bodPos + (cas / 2) + (cas * Double(asp.bodie.pos())) - fix
+        let yPos = bodPos + (cas / 2) + (cas * Double(anglePos)) - fix
         var body: some View {
             Image("a" + asp.aspect.rawValue.formatted())
                     .resizable()
