@@ -236,27 +236,32 @@ struct ChartDraw {
 
     struct DrawTransit: Shape {
         var size: Double
+        var transitType: Swe.TransitType
         func path(in rect: CGRect) -> Path {
             var path = Path()
             let cas = Double(size) / 16
-            let max = 14
+            var MAX = 14 // TODO const global
+            var max = 14
+            if transitType == .NatalTransit {
+                max -= 2
+            }
             path.move(to: CGPoint(x: 0, y: cas))
             path.addLine(to: CGPoint(x: 0, y: Double(max + 1) * cas))
             for iDx in 1...max {
                 let idx = Double(iDx)
                 path.move(to: CGPoint(x: idx * cas, y: idx * cas))
-                if iDx == max {
+                if iDx == MAX {
                     path.addLine(to: CGPoint(x: idx * cas, y: idx * cas))
                 } else {
                     path.addLine(to: CGPoint(x: idx * cas, y: (idx + 1) * cas))
                 }
-                if iDx == max {
+                if iDx == MAX {
                     path.move(to: CGPoint(x: (idx - 1) * cas, y: idx * cas))
                 } else {
                     path.move(to: CGPoint(x: idx * cas, y: idx * cas))
                 }
                 path.addLine(to: CGPoint(x: 0, y: idx * cas))
-                if iDx == max {
+                if iDx == MAX {
                     path.move(to: CGPoint(x: (idx - 1) * cas, y: (idx + 1) * cas))
                 } else {
                     path.move(to: CGPoint(x: idx * cas, y: (idx + 1) * cas))
@@ -290,12 +295,48 @@ struct ChartDraw {
         return body
     }
 
+    func drawArrayAngle(angle: Swe.Angle, size: Double) -> some View {
+        let fix: Double = 30.0 // sizeMax et size problem (/4)
+        let bodPos = CGFloat((size / 2) * -1)
+        let cas = Double(size) / 16.0
+        let casDiv = 1.1
+        var jdx = 13 // TODO const
+        var idx = 13
+        if angle == .mc {
+            jdx = 14 // TODO const
+            idx = 13
+        }
+        var ang = ""
+        switch angle {
+        case .asc:
+            ang = "aas"
+        case .mc:
+            ang = "amc"
+        default:
+            ang = ""
+        }
+        let xPos = bodPos + (cas / 2) + (cas * Double(idx)) - fix
+        let yPos = bodPos + (cas / 2) + (cas * Double(jdx)) - fix
+        var body: some View {
+            Image(ang)
+                    .resizable()
+                    .foregroundColor(.red)
+                    .offset(
+                            x: xPos,
+                            y: yPos)
+                    .frame(
+                            width: cas / casDiv,
+                            height: cas / casDiv)
+        }
+        return body
+    }
+
     func drawArrayAspect(asp: Swe.AspectBodie, size: Double) -> some View {
         let fix: Double = 30.0 // sizeMax et size problem (/4)
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
         let casDiv = 1.9
-        let xPos = bodPos + (cas / 2) + (cas * Double(asp.bodie2.rawValue)) - fix
+        let xPos = bodPos + (cas / 2) + (cas * Double(asp.bodie2.rawValue)) - fix + 1.0 // TODO const + 3.0
         let yPos = bodPos + (cas / 2) + (cas * Double(asp.bodie1.pos())) - fix
         var body: some View {
             Image("a" + asp.aspect.rawValue.formatted())
@@ -320,7 +361,7 @@ struct ChartDraw {
         if asp.angle == .mc {
             anglePos = 14
         }
-        let xPos = bodPos + (cas / 2) + (cas * Double(asp.bodie.pos())) - fix
+        let xPos = bodPos + (cas / 2) + (cas * Double(asp.bodie.pos())) - fix + 1.0 // TODO const + 3.0
         let yPos = bodPos + (cas / 2) + (cas * Double(anglePos)) - fix
         var body: some View {
             Image("a" + asp.aspect.rawValue.formatted())
@@ -665,6 +706,32 @@ struct ChartDraw {
                             lX2: pos2.offX,
                             lY2: pos2.offY)
                     res.append(line)
+                    // angle
+                    let angleArray: [Swe.Angle] = [.asc, .mc]
+                    for angle in angleArray {
+                        let angleLongitude = getAngleLongitude(angle: angle)
+                        let separation = getClosestDistance(
+                                angle1: bodTransitLongitude,
+                                angle2: angleLongitude)
+                        let absSeparation = abs(separation)
+                        let asp = aspect.angle().0
+                        let orb = aspect.angle().1
+                        if abs(absSeparation - Double(asp)) <= Double(orb) {
+                            let pos1: Offset = getPosTrigo(
+                                    angular: bodTransitLongitude,
+                                    radiusCircle: getRadiusCircle(occurs: 0).0)
+                            let pos2: Offset = getPosTrigo(
+                                    angular: angleLongitude,
+                                    radiusCircle: getRadiusCircle(occurs: 0).0)
+                            let line: AspectLine = AspectLine(
+                                    aspect: aspect,
+                                    lX1: pos1.offX,
+                                    lY1: pos1.offY,
+                                    lX2: pos2.offX,
+                                    lY2: pos2.offY)
+                            res.append(line)
+                        }
+                    }
                 }
             case .natal:
                 for bodPair in swe.bodies.reversed() {
@@ -692,6 +759,32 @@ struct ChartDraw {
                                 lX2: pos2.offX,
                                 lY2: pos2.offY)
                         res.append(line)
+                    }
+                    // angle
+                    let angleArray: [Swe.Angle] = [.asc, .mc]
+                    for angle in angleArray {
+                        let angleLongitude = getAngleLongitude(angle: angle)
+                        let separation = getClosestDistance(
+                                angle1: bodNatalLongitude,
+                                angle2: angleLongitude)
+                        let absSeparation = abs(separation)
+                        let asp = aspect.angle().0
+                        let orb = aspect.angle().1
+                        if abs(absSeparation - Double(asp)) <= Double(orb) {
+                            let pos1: Offset = getPosTrigo(
+                                    angular: bodNatalLongitude,
+                                    radiusCircle: getRadiusCircle(occurs: 0).0)
+                            let pos2: Offset = getPosTrigo(
+                                    angular: angleLongitude,
+                                    radiusCircle: getRadiusCircle(occurs: 0).0)
+                            let line: AspectLine = AspectLine(
+                                    aspect: aspect,
+                                    lX1: pos1.offX,
+                                    lY1: pos1.offY,
+                                    lX2: pos2.offX,
+                                    lY2: pos2.offY)
+                            res.append(line)
+                        }
                     }
                 }
             case .transit:

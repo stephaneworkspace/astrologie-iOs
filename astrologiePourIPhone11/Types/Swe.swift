@@ -125,27 +125,27 @@ class Swe {
                                             transit: transit))
                         }
                     }
-                    // AspectAngleBodie
-                    let angleArr: [Angle] = [.asc, .mc]
-                    for angle in angleArr {
-                        let angleLongitude = cD.getAngleLongitude(angle: angle)
-                        let separation = cD.getClosestDistance(
-                                angle1: bodNatalLongitude,
-                                angle2: angleLongitude)
-                        let absSeparation = abs(separation)
-                        let aspect = Aspects.init(rawValue: Int32(aspectIdx)) ?? Aspects.conjunction
-                        let asp = aspect.angle().0
-                        let orb = aspect.angle().1
-                        if abs(absSeparation - Double(asp)) <= Double(orb) {
-                            aspectsAngleBodies.append(
-                                    AspectAngleBodie(
-                                            id: UUID(),
-                                            angle: angle,
-                                            bodie: bod.0.bodie,
-                                            aspect: aspect,
-                                            transit: transit))
+                }
+                // AspectAngleBodie
+                let angleArr: [Angle] = [.asc, .mc]
+                for angle in angleArr {
+                    let angleLongitude = cD.getAngleLongitude(angle: angle)
+                    let separation = cD.getClosestDistance(
+                            angle1: bodNatalLongitude,
+                            angle2: angleLongitude)
+                    let absSeparation = abs(separation)
+                    let aspect = Aspects.init(rawValue: Int32(aspectIdx)) ?? Aspects.conjunction
+                    let asp = aspect.angle().0
+                    let orb = aspect.angle().1
+                    if abs(absSeparation - Double(asp)) <= Double(orb) {
+                        aspectsAngleBodies.append(
+                                AspectAngleBodie(
+                                        id: UUID(),
+                                        angle: angle,
+                                        bodie: bod.0.bodie,
+                                        aspect: aspect,
+                                        transit: transit))
 
-                        }
                     }
                 }
             }
@@ -154,10 +154,10 @@ class Swe {
                 let bodNatalLongitude = cD.getBodieLongitude(bodie: bod.0, swTransit: false)
                 for bodPair in bodies.reversed() {
                     if bodPair.0.bodie != bod.0.bodie {
-                        let bod2NatalLongitude = cD.getBodieLongitude(bodie: bodPair.1, swTransit: true)
+                        let bodTransitlLongitude = cD.getBodieLongitude(bodie: bodPair.1, swTransit: true)
                         let separation = cD.getClosestDistance(
                                 angle1: bodNatalLongitude,
-                                angle2: bod2NatalLongitude)
+                                angle2: bodTransitlLongitude)
                         let absSeparation = abs(separation)
                         let aspect = Aspects.init(rawValue: Int32(aspectIdx)) ?? Aspects.conjunction
                         let asp = aspect.angle().0
@@ -178,13 +178,13 @@ class Swe {
             }
             transit = .TransitTransit
             for bod in bodies {
-                let bodNatalLongitude = cD.getBodieLongitude(bodie: bod.1, swTransit: true)
+                let bodTransitLongitude = cD.getBodieLongitude(bodie: bod.1, swTransit: true)
                 for bodPair in bodies.reversed() {
                     if bodPair.0.bodie != bod.0.bodie {
-                        let bod2NatalLongitude = cD.getBodieLongitude(bodie: bodPair.1, swTransit: true)
+                        let bod2TransitLongitude = cD.getBodieLongitude(bodie: bodPair.1, swTransit: true)
                         let separation = cD.getClosestDistance(
-                                angle1: bodNatalLongitude,
-                                angle2: bod2NatalLongitude)
+                                angle1: bodTransitLongitude,
+                                angle2: bod2TransitLongitude)
                         let absSeparation = abs(separation)
                         let aspect = Aspects.init(rawValue: Int32(aspectIdx)) ?? Aspects.conjunction
                         let asp = aspect.angle().0
@@ -207,7 +207,7 @@ class Swe {
                 for angle in angleArr {
                     let angleLongitude = cD.getAngleLongitude(angle: angle)
                     let separation = cD.getClosestDistance(
-                            angle1: bodNatalLongitude,
+                            angle1: bodTransitLongitude,
                             angle2: angleLongitude)
                     let absSeparation = abs(separation)
                     let aspect = Aspects.init(rawValue: Int32(aspectIdx)) ?? Aspects.conjunction
@@ -226,6 +226,12 @@ class Swe {
                 }
             }
         }
+        /*
+        for x in aspectsAngleBodies {
+            if x.transit == .NatalNatal {
+                print(x)
+            }
+        }*/
         swe02.close()
     }
 
