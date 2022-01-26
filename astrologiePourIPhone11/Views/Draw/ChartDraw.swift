@@ -822,13 +822,13 @@ struct ChartDraw {
 
     func bodie_lines(swe: Swe, swTransit: Bool, swChiron: Bool, swCeres: Bool) -> [Line] {
         var res: [Line] = []
-        for _ in 1...8 { // TODO pourquoi
+        //for _ in 1...8 { // TODO pourquoi
             var pos = 0.0
             for bod in swe.bodies {
                 var axy: [Offset]
                 if swTransit {
-                    if (swChiron == false && bod.1.bodie.rawValue == Swe.Bodies.chiron.rawValue)
-                               && (swCeres == false && bod.1.bodie.rawValue == Swe.Bodies.ceres.rawValue) {
+                    if (swChiron == false && bod.1.bodie.rawValue == Swe.Bodies.chiron.rawValue) != true
+                               && (swCeres == false && bod.1.bodie.rawValue == Swe.Bodies.ceres.rawValue) != true {
 
                     } else {
                         pos = getBodieLongitude(bodie: bod.1, swTransit: swTransit)
@@ -856,8 +856,8 @@ struct ChartDraw {
                         )
                     }
                 } else {
-                    if (swChiron == false && bod.0.bodie == Swe.Bodies.chiron)
-                               && (swCeres == false && bod.0.bodie == Swe.Bodies.ceres) {
+                    if (swChiron == false && bod.0.bodie == Swe.Bodies.chiron) != true
+                               || (swCeres == false && bod.0.bodie == Swe.Bodies.ceres) != true {
 
                     } else {
                         pos = getBodieLongitude(bodie: bod.0, swTransit: swTransit)
@@ -886,7 +886,7 @@ struct ChartDraw {
                     }
                 }
             }
-        }
+        //}
         return res
     }
 

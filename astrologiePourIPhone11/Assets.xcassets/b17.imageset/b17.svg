@@ -6,17 +6,18 @@
 	 style="enable-background:new 0 0 12 12;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#999999;stroke:#999999;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st1{fill:#999999;stroke:#999999;stroke-width:0.384;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:5.12;}
+	.st1{fill:#999999;stroke:#999999;stroke-width:0.3072;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.096;}
 </style>
 <sodipodi:namedview  bordercolor="#666666" borderopacity="1" gridtolerance="10" guidetolerance="10" id="namedview11" inkscape:current-layer="svg9" inkscape:cx="4.878139" inkscape:cy="6.4789559" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="1015" inkscape:window-maximized="1" inkscape:window-width="1920" inkscape:window-x="0" inkscape:window-y="0" inkscape:zoom="28.969281" objecttolerance="10" pagecolor="#ffffff" showgrid="false">
 	</sodipodi:namedview>
 <g id="g873">
-	<path id="path4-7" inkscape:connector-curvature="0" sodipodi:nodetypes="ccscccscc" class="st0" d="M7.6,4.3c0-1.1-1.4-2-3.2-2
-		l0,0c0.2,0.1,0.3,0.2,0.4,0.3C5.6,3.1,6,3.7,6,4.3S5.5,5.6,4.8,6C4.7,6.2,4.5,6.3,4.4,6.3C6.2,6.3,7.6,5.5,7.6,4.3z"/>
+	<path id="path4-7" inkscape:connector-curvature="0" sodipodi:nodetypes="ccscccscc" class="st0" d="M7.6,4.3
+		c0-1.4-1.4-2.5-3.2-2.5l0,0C4.6,2,4.7,2.1,4.8,2.2C5.6,2.8,6,3.6,6,4.3S5.5,6,4.8,6.5C4.7,6.7,4.5,6.8,4.4,6.8
+		C6.2,6.8,7.6,5.8,7.6,4.3z"/>
 	<g id="g854" transform="translate(3.9152542,22.119144)">
 		<g id="g866" transform="matrix(0.8,0,0,0.8,0.41694916,-2.6237288)">
-			<path id="path4" inkscape:connector-curvature="0" class="st1" d="M2.1-16.5v5"/>
-			<path id="path6" inkscape:connector-curvature="0" class="st1" d="M-0.4-14h5"/>
+			<path id="path4" inkscape:connector-curvature="0" class="st1" d="M2.1-15.8v5"/>
+			<path id="path6" inkscape:connector-curvature="0" class="st1" d="M-0.4-13.3h5"/>
 		</g>
 	</g>
 </g>
