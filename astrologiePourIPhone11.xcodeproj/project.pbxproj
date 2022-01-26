@@ -72,7 +72,7 @@
 		552E8CAB5E7E36614CDBFAFD /* data.json.example */ = {isa = PBXFileReference; lastKnownFileType = file.example; path = data.json.example; sourceTree = "<group>"; };
 		F40444692797F0F900B74503 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F404446B2797F11600B74503 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
-		F4141EA52797414800381179 /* Astrologie traditionnelle selon Placidus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Astrologie traditionnelle selon Placidus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4141EA52797414800381179 /* Astrologie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Astrologie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4141EA82797414800381179 /* astrologiePourIPhone11App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = astrologiePourIPhone11App.swift; sourceTree = "<group>"; };
 		F4141EAA2797414800381179 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F4141EAC2797414900381179 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -183,7 +183,7 @@
 		F4141EA62797414800381179 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F4141EA52797414800381179 /* Astrologie traditionnelle selon Placidus.app */,
+				F4141EA52797414800381179 /* Astrologie.app */,
 				F4141EB52797414900381179 /* astrologiePourIPhone11Tests.xctest */,
 				F4141EBF2797414900381179 /* astrologiePourIPhone11UITests.xctest */,
 			);
@@ -327,7 +327,7 @@
 				F4915299279D938D00911CA5 /* Zip */,
 			);
 			productName = astrologiePourIPhone11;
-			productReference = F4141EA52797414800381179 /* Astrologie traditionnelle selon Placidus.app */;
+			productReference = F4141EA52797414800381179 /* Astrologie.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F4141EB42797414900381179 /* astrologiePourIPhone11Tests */ = {
@@ -660,7 +660,7 @@
 				);
 				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = stephane.bressani.dev.astrologiePourIPhone11;
-				PRODUCT_NAME = "Astrologie traditionnelle selon Placidus";
+				PRODUCT_NAME = Astrologie;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "astrologiePourIPhone11/Types/Swe/astrologiePourIPhone11-Bridging-Header.h";
@@ -698,7 +698,7 @@
 				);
 				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = stephane.bressani.dev.astrologiePourIPhone11;
-				PRODUCT_NAME = "Astrologie traditionnelle selon Placidus";
+				PRODUCT_NAME = Astrologie;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "astrologiePourIPhone11/Types/Swe/astrologiePourIPhone11-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

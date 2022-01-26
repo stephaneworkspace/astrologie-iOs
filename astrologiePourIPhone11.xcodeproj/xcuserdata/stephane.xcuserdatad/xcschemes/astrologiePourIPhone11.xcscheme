@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F4141EA42797414800381179"
-               BuildableName = "Astrologie selon Placidus.app"
+               BuildableName = "Astrologie.app"
                BlueprintName = "astrologiePourIPhone11"
                ReferencedContainer = "container:astrologiePourIPhone11.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F4141EA42797414800381179"
-            BuildableName = "Astrologie selon Placidus.app"
+            BuildableName = "Astrologie.app"
             BlueprintName = "astrologiePourIPhone11"
             ReferencedContainer = "container:astrologiePourIPhone11.xcodeproj">
          </BuildableReference>
