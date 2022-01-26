@@ -8,8 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		552E862EA88FBD2DDBF756A0 /* ArrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E86D3F66E88C962B98637 /* ArrayView.swift */; };
+		552E863BEA7ADCB8C252CD4C /* AstrologieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E875599442BF4A256205B /* AstrologieView.swift */; };
 		552E8A6492F621D3E2807CF7 /* ChartDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E88C2B939982C5289FCDD /* ChartDraw.swift */; };
+		552E8B02FAC2C1C0E423E791 /* ChartBodieImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E836DC53F8097740E79C7 /* ChartBodieImageView.swift */; };
+		552E8B612964264026990065 /* BodieSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E88EC73EE663400FD6A81 /* BodieSelectView.swift */; };
 		552E8D53C7B1F2734031F347 /* data.json.example in Resources */ = {isa = PBXBuildFile; fileRef = 552E8CAB5E7E36614CDBFAFD /* data.json.example */; };
+		552E8E7ADADEF58DCAB5C1A7 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E8110612D048FF9B074FD /* System.swift */; };
 		F404446A2797F0F900B74503 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F40444692797F0F900B74503 /* .gitignore */; };
 		F404446C2797F11600B74503 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = F404446B2797F11600B74503 /* data.json */; };
 		F4141EA92797414800381179 /* astrologiePourIPhone11App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141EA82797414800381179 /* astrologiePourIPhone11App.swift */; };
@@ -67,8 +71,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		552E8110612D048FF9B074FD /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
+		552E836DC53F8097740E79C7 /* ChartBodieImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartBodieImageView.swift; sourceTree = "<group>"; };
 		552E86D3F66E88C962B98637 /* ArrayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayView.swift; sourceTree = "<group>"; };
+		552E875599442BF4A256205B /* AstrologieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AstrologieView.swift; sourceTree = "<group>"; };
 		552E88C2B939982C5289FCDD /* ChartDraw.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartDraw.swift; sourceTree = "<group>"; };
+		552E88EC73EE663400FD6A81 /* BodieSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodieSelectView.swift; sourceTree = "<group>"; };
 		552E8CAB5E7E36614CDBFAFD /* data.json.example */ = {isa = PBXFileReference; lastKnownFileType = file.example; path = data.json.example; sourceTree = "<group>"; };
 		F40444692797F0F900B74503 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F404446B2797F11600B74503 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
@@ -162,6 +170,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		552E89A3C36EE1CEFE017B0B /* Funcs */ = {
+			isa = PBXGroup;
+			children = (
+				552E8110612D048FF9B074FD /* System.swift */,
+			);
+			path = Funcs;
+			sourceTree = "<group>";
+		};
 		552E8CB02AC747E66F61E168 /* Draw */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +215,7 @@
 				F4141EAA2797414800381179 /* ContentView.swift */,
 				F4141EAC2797414900381179 /* Assets.xcassets */,
 				F4141EAE2797414900381179 /* Preview Content */,
+				552E89A3C36EE1CEFE017B0B /* Funcs */,
 			);
 			path = astrologiePourIPhone11;
 			sourceTree = "<group>";
@@ -303,6 +320,9 @@
 				F446CDE0279AE0AC00D8CCD8 /* ChartView.swift */,
 				552E8CB02AC747E66F61E168 /* Draw */,
 				552E86D3F66E88C962B98637 /* ArrayView.swift */,
+				552E88EC73EE663400FD6A81 /* BodieSelectView.swift */,
+				552E875599442BF4A256205B /* AstrologieView.swift */,
+				552E836DC53F8097740E79C7 /* ChartBodieImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -401,7 +421,7 @@
 			);
 			mainGroup = F4141E9C2797414800381179;
 			packageReferences = (
-				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */,
+				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */,
 			);
 			productRefGroup = F4141EA62797414800381179 /* Products */;
 			projectDirPath = "";
@@ -479,6 +499,10 @@
 				F4141EA92797414800381179 /* astrologiePourIPhone11App.swift in Sources */,
 				552E8A6492F621D3E2807CF7 /* ChartDraw.swift in Sources */,
 				552E862EA88FBD2DDBF756A0 /* ArrayView.swift in Sources */,
+				552E8B612964264026990065 /* BodieSelectView.swift in Sources */,
+				552E863BEA7ADCB8C252CD4C /* AstrologieView.swift in Sources */,
+				552E8B02FAC2C1C0E423E791 /* ChartBodieImageView.swift in Sources */,
+				552E8E7ADADEF58DCAB5C1A7 /* System.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,7 +848,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */ = {
+		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -837,7 +861,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		F4915299279D938D00911CA5 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */;
+			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */;
 			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */
