@@ -38,12 +38,17 @@ struct ContentView: View {
                                             swCeres: $swCeres
                                     )
                                 } else {
-                                    Text("\(timeRemaining)")
+                                    Image("bgl")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(minWidth: 0, maxWidth: .infinity)
+                                            .edgesIgnoringSafeArea(.all)
+                                            .opacity(0.3)
                                             .onReceive(timer) { _ in
                                                 if timeRemaining > 0 {
                                                     timeRemaining -= 1
                                                 } else {
-                                                    timeRemaining = 2
+                                                    timeRemaining = 1
                                                     swRefresh = false
                                                 }
                                             }

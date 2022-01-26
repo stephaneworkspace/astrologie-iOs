@@ -23,13 +23,14 @@ struct BodieSelectView: View {
                 Spacer()
                 HStack {
                     Toggle("Ceres", isOn: $swCeres).onChange(of: swCeres, perform: { value in
-                        timeRemaining = 2
+                        timeRemaining = 1
                         swRefresh = true
                     })
-                    Image("b15").padding()
-                    Toggle(isOn: $swChiron) {
-                        Text("Chrion")
-                    }
+                    Image("b17").padding()
+                    Toggle("Chiron", isOn: $swChiron).onChange(of: swChiron, perform: { value in
+                        timeRemaining = 1
+                        swRefresh = true
+                    })
                     Image("b15").padding()
                 }
                 Spacer()
