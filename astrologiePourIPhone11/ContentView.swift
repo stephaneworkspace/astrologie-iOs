@@ -61,6 +61,7 @@ struct ContentView: View {
     @State var selected: Int
     @State var isActive: Bool = false
     @State var swChiron: Bool = true
+    @State var swCeres: Bool = true
 
     var body: some View {
         VStack {
@@ -75,7 +76,8 @@ struct ContentView: View {
                         TabView(selection: $selected) {
                             AstrologieView(
                                     swTransit: false,
-                                    swChiron: swChiron
+                                    swChiron: $swChiron,
+                                    swCeres: $swCeres
                             ).tabItem {
                                 VStack {
                                     Image(systemName: "eye")
@@ -84,14 +86,18 @@ struct ContentView: View {
                             }.tag(0)
                             AstrologieView(
                                     swTransit: true,
-                                    swChiron: swChiron
+                                    swChiron: $swChiron,
+                                    swCeres: $swCeres
                             ).tabItem {
                                 VStack {
                                     Image(systemName: "eye")
                                     Text("Natal et Transit")
                                 }
                             }.tag(1)
-                            BodieSelectView(swChiron: swChiron).tabItem {
+                            BodieSelectView(
+                                    swChiron: $swChiron,
+                                    swCeres: $swCeres
+                            ).tabItem {
                                 VStack {
                                     Image(systemName: "c.circle.fill")
                                     Text("Sélection planètes")
@@ -135,8 +141,8 @@ struct ContentView: View {
 }
 
 struct BodieSelectView: View {
-    @State var swChiron: Bool = true
-    @State var swCeres: Bool = true
+    @Binding var swChiron: Bool
+    @Binding var swCeres: Bool
 
     var body: some View {
         ZStack {
@@ -166,7 +172,8 @@ struct BodieSelectView: View {
 
 struct AstrologieView: View {
     @State var swTransit: Bool
-    @State var swChiron: Bool
+    @Binding var swChiron: Bool
+    @Binding var swCeres: Bool
     var FONTSIZE = 15.0
     var chartDefault: Swe.Chart = loadDefaultValue().0
     @State var selectedDate: Date = loadDefaultValue().1
@@ -282,7 +289,8 @@ struct AstrologieView: View {
                     }
                     ChartView(
                             swTransit: swTransit,
-                            swChiron: swChiron,
+                            swChiron: $swChiron,
+                            swCeres :$swCeres,
                             swe: swe)
                 }
                 ZStack {

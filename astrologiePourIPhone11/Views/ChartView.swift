@@ -10,13 +10,18 @@ import SwiftUI
 
 struct ChartView: View {
     @State var swTransit: Bool
-    @State var swChiron: Bool
+    @Binding var swChiron: Bool
+    @Binding var swCeres: Bool
     var swe: Swe
     var body: some View {
         ZStack {
             ChartZodiacView(swe: swe)
             ChartHouseView(swe: swe)
-            ChartBodieView(swTransit: swTransit, swChiron: swChiron, swe: swe)
+            ChartBodieView(
+                    swTransit: swTransit,
+                    swChiron: $swChiron,
+                    swCeres: $swCeres,
+                    swe: swe)
             ChartAspectView(swTransit: swTransit, swe: swe)
         }
     }
@@ -182,12 +187,14 @@ struct ChartAspectView: View {
 
 struct ChartBodieImageView: View {
     @State var swTransit: Bool
-    @State var swChiron: Bool
+    @Binding var swChiron: Bool
+    @Binding var swCeres: Bool
     @State var idx: Int
     var swe: Swe
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
-        if (idx == Swe.Bodies.chiron.rawValue && swChiron == false) != true {
+        if (idx == Swe.Bodies.chiron.rawValue && swChiron == false) != true
+                   && (idx == Swe.Bodies.ceres.rawValue && swCeres == false) != true {
             let _ = Swe.Bodies.init(rawValue: Int32(idx)) ?? Swe.Bodies.sun
             let bodN = cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false)
             let bodT = cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: true)
@@ -240,7 +247,8 @@ struct ChartBodieImageView: View {
 
 struct ChartBodieView: View {
     @State var swTransit: Bool
-    @State var swChiron: Bool
+    @Binding var swChiron: Bool
+    @Binding var swCeres: Bool
     var swe: Swe
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
@@ -256,7 +264,7 @@ struct ChartBodieView: View {
         }
         // Draw bodies symbol
         ForEach(forlopp, id: \.self) { idx in
-           ChartBodieImageView(swTransit: swTransit, swChiron: swChiron, idx: idx, swe: cD.swe)
+           ChartBodieImageView(swTransit: swTransit, swChiron: $swChiron, swCeres: $swCeres, idx: idx, swe: cD.swe)
         }
     }
 }
