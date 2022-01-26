@@ -255,11 +255,23 @@ struct ChartBodieView: View {
         let forlopp: [Int] = [0,1,2,3,4,5,6,7,8,9,11,15,17] // TODO
         // Draw bodies line on chart
         VStack {
-            cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: false)).stroke(.black, lineWidth: 0.1)
+            cD.drawBodieLine(
+                    lines: cD.bodie_lines(
+                            swe: cD.swe,
+                            swTransit: false,
+                            swChiron: swChiron,
+                            swCeres: swCeres)
+            ).stroke(.black, lineWidth: 0.1)
         }.frame(width: cD.SIZE, height: cD.SIZE)
         if swTransit {
             VStack {
-                cD.drawBodieLine(lines: cD.bodie_lines(swe: cD.swe, swTransit: true)).stroke(.black, lineWidth: 0.1)
+                cD.drawBodieLine(
+                        lines: cD.bodie_lines(
+                                swe: cD.swe,
+                                swTransit: true,
+                                swChiron: swChiron,
+                                swCeres: swCeres)
+                ).stroke(.black, lineWidth: 0.1)
             }.frame(width: cD.SIZE, height: cD.SIZE)
         }
         // Draw bodies symbol

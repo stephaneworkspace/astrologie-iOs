@@ -820,59 +820,70 @@ struct ChartDraw {
         return res
     }
 
-    func bodie_lines(swe: Swe, swTransit: Bool) -> [Line] {
+    func bodie_lines(swe: Swe, swTransit: Bool, swChiron: Bool, swCeres: Bool) -> [Line] {
         var res: [Line] = []
-        for _ in 1...8 {
+        for _ in 1...8 { // TODO pourquoi
             var pos = 0.0
             for bod in swe.bodies {
                 var axy: [Offset]
                 if swTransit {
-                    pos = getBodieLongitude(bodie: bod.1, swTransit: swTransit)
-                    axy =
-                            getLineTrigo(
-                                    angular: pos,
-                                    radiusCircleBegin: getRadiusCircle(occurs: 1).0,
-                                    radiusCircleEnd: getRadiusCircle(occurs: 10).0)
-                    res.append(Line(
-                            lX1: axy[0].offX,
-                            lY1: axy[0].offY,
-                            lX2: axy[1].offX,
-                            lY2: axy[1].offY)
-                    )
-                    // TODO posFix getBodieFixLongitude line 1306 svg_draw.rs}
-                    axy = getLineTrigo(
-                            angular: pos,
-                            radiusCircleBegin: getRadiusCircle(occurs: 10).0,
-                            radiusCircleEnd: getRadiusCircle(occurs: 11).0)
-                    res.append(Line(
-                            lX1: axy[0].offX,
-                            lY1: axy[0].offY,
-                            lX2: axy[1].offX,
-                            lY2: axy[1].offY)
-                    )
+                    if (swChiron == false && bod.1.bodie.rawValue == Swe.Bodies.chiron.rawValue)
+                               && (swCeres == false && bod.1.bodie.rawValue == Swe.Bodies.ceres.rawValue) {
+
+                    } else {
+                        pos = getBodieLongitude(bodie: bod.1, swTransit: swTransit)
+                        axy =
+                                getLineTrigo(
+                                        angular: pos,
+                                        radiusCircleBegin: getRadiusCircle(occurs: 1).0,
+                                        radiusCircleEnd: getRadiusCircle(occurs: 10).0)
+                        res.append(Line(
+                                lX1: axy[0].offX,
+                                lY1: axy[0].offY,
+                                lX2: axy[1].offX,
+                                lY2: axy[1].offY)
+                        )
+                        // TODO posFix getBodieFixLongitude line 1306 svg_draw.rs}
+                        axy = getLineTrigo(
+                                angular: pos,
+                                radiusCircleBegin: getRadiusCircle(occurs: 10).0,
+                                radiusCircleEnd: getRadiusCircle(occurs: 11).0)
+                        res.append(Line(
+                                lX1: axy[0].offX,
+                                lY1: axy[0].offY,
+                                lX2: axy[1].offX,
+                                lY2: axy[1].offY)
+                        )
+                    }
                 } else {
-                    pos = getBodieLongitude(bodie: bod.0, swTransit: swTransit)
-                    axy =
-                            getLineTrigo(
-                                    angular: pos,
-                                    radiusCircleBegin: getRadiusCircle(occurs: 3).0,
-                                    radiusCircleEnd: getRadiusCircle(occurs: 7).0)
-                    res.append(Line(
-                            lX1: axy[0].offX,
-                            lY1: axy[0].offY,
-                            lX2: axy[1].offX,
-                            lY2: axy[1].offY)
-                    )
-                    axy = getLineTrigo(
-                            angular: pos,
-                            radiusCircleBegin: getRadiusCircle(occurs: 7).0,
-                            radiusCircleEnd: getRadiusCircle(occurs: 8).0)
-                    res.append(Line(
-                            lX1: axy[0].offX,
-                            lY1: axy[0].offY,
-                            lX2: axy[1].offX,
-                            lY2: axy[1].offY)
-                    )
+                    if (swChiron == false && bod.0.bodie == Swe.Bodies.chiron)
+                               && (swCeres == false && bod.0.bodie == Swe.Bodies.ceres) {
+
+                    } else {
+                        pos = getBodieLongitude(bodie: bod.0, swTransit: swTransit)
+                        axy =
+                                getLineTrigo(
+                                        angular: pos,
+                                        radiusCircleBegin: getRadiusCircle(occurs: 3).0,
+                                        radiusCircleEnd: getRadiusCircle(occurs: 7).0)
+                        res.append(Line(
+                                lX1: axy[0].offX,
+                                lY1: axy[0].offY,
+                                lX2: axy[1].offX,
+                                lY2: axy[1].offY)
+                        )
+                        axy = getLineTrigo(
+                                angular: pos,
+                                radiusCircleBegin: getRadiusCircle(occurs: 7).0,
+                                radiusCircleEnd: getRadiusCircle(occurs: 8).0)
+                        res.append(Line(
+                                lX1: axy[0].offX,
+                                lY1: axy[0].offY,
+                                lX2: axy[1].offX,
+                                lY2: axy[1].offY)
+                        )
+
+                    }
                 }
             }
         }

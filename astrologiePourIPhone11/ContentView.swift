@@ -59,9 +59,13 @@ private func loadValue(
 
 struct ContentView: View {
     @State var selected: Int
+    @State var swRefresh: Bool = false
+    @State var timeRemaining = 2
     @State var isActive: Bool = false
     @State var swChiron: Bool = true
     @State var swCeres: Bool = true
+
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         VStack {
@@ -74,11 +78,25 @@ struct ContentView: View {
                             .edgesIgnoringSafeArea(.all)
                     VStack {
                         TabView(selection: $selected) {
-                            AstrologieView(
-                                    swTransit: false,
-                                    swChiron: $swChiron,
-                                    swCeres: $swCeres
-                            ).tabItem {
+                            VStack {
+                                if swRefresh == false {
+                                    AstrologieView(
+                                            swTransit: false,
+                                            swChiron: $swChiron,
+                                            swCeres: $swCeres
+                                    )
+                                } else {
+                                    Text("\(timeRemaining)")
+                                            .onReceive(timer) { _ in
+                                                if timeRemaining > 0 {
+                                                    timeRemaining -= 1
+                                                } else {
+                                                    timeRemaining = 2
+                                                    swRefresh = false
+                                                }
+                                            }
+                                }
+                            }.tabItem {
                                 VStack {
                                     Image(systemName: "eye")
                                     Text("Natal")
@@ -96,7 +114,9 @@ struct ContentView: View {
                             }.tag(1)
                             BodieSelectView(
                                     swChiron: $swChiron,
-                                    swCeres: $swCeres
+                                    swCeres: $swCeres,
+                                    swRefresh: $swRefresh,
+                                    timeRemaining: $timeRemaining
                             ).tabItem {
                                 VStack {
                                     Image(systemName: "c.circle.fill")
@@ -143,6 +163,8 @@ struct ContentView: View {
 struct BodieSelectView: View {
     @Binding var swChiron: Bool
     @Binding var swCeres: Bool
+    @Binding var swRefresh: Bool
+    @Binding var timeRemaining: Int
 
     var body: some View {
         ZStack {
@@ -155,9 +177,10 @@ struct BodieSelectView: View {
             VStack {
                 Spacer()
                 HStack {
-                    Toggle(isOn: $swCeres) {
-                        Text("Ceres")
-                    }
+                    Toggle("Ceres", isOn: $swCeres).onChange(of: swCeres, perform: { _ in
+                        timeRemaining = 2
+                        swRefresh = true
+                    })
                     Image("b15").padding()
                     Toggle(isOn: $swChiron) {
                         Text("Chrion")
