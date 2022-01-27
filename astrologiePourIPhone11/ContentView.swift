@@ -67,12 +67,7 @@ struct ContentView: View {
                                     Text("Sélection planètes")
                                 }
                             }.tag(2)
-                            VStack {
-                                Text("Développé par bressani.dev (Stéphane Bressani)")
-                                Text("Cette application est sous license GNU public license version 3.")
-                                Text("Elle utilise la libraiaire swiss ephemeris developé par Dieter Koch and Alois Treindl en Dual license (GNU v2 ou supérieur ou commercial)")
-                                Text("Cette application utilise aussi le package swift Zip en MIT par Roy Marmelstein")
-                            }.tabItem {
+                            AboutView().tabItem {
                                 VStack {
                                     Image(systemName: "info.circle")
                                     Text("À propos")

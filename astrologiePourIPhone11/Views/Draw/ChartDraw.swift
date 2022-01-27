@@ -295,6 +295,49 @@ struct ChartDraw {
         return body
     }
 
+    func drawArray2Bodie(idx: Int, jdx: Int, size: Double) -> some View {
+        let fix: Double = 30.0 // sizeMax et size problem (/4)
+        let bodPos = CGFloat((size / 2) * -1)
+        let cas = Double(size) / 16.0
+        let casDiv = 1.1
+        let xPos = bodPos - cas
+        let yPos = bodPos + (cas / 2) + (cas * Double(jdx)) - fix
+        let bod = Swe.Bodies(rawValue: Int32(idx)) ?? Swe.Bodies.sun
+        var body: some View {
+            Image("b" + idx.formatted())
+                    .resizable()
+                    .foregroundColor(.red)
+                    .offset(
+                            x: xPos,
+                            y: yPos)
+                    .frame(
+                            width: cas / casDiv,
+                            height: cas / casDiv)
+        }
+        return body
+    }
+
+    func drawArray2BodieNom(idx: Int, jdx: Int, size: Double) -> some View {
+        let fix: Double = 30.0 // sizeMax et size problem (/4)
+        let bodPos = CGFloat((size / 2) * -1)
+        let cas = Double(size) / 16.0
+        let casDiv = 1.1
+        let xPos = bodPos + (cas / 2)
+        let yPos = bodPos + (cas / 2) + (cas * Double(jdx)) - fix
+        let bod = Swe.Bodies(rawValue: Int32(idx)) ?? Swe.Bodies.sun
+        var body: some View {
+            VStack(alignment: .leading, spacing: 6.0) {
+                Text(bod.nom())
+                        .foregroundColor(.black)
+
+            }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .offset(x: 0, y: yPos) // TODO CONST
+                    .frame(alignment: .leading)
+        }
+        return body
+    }
+
     func drawArrayAngle(angle: Swe.Angle, size: Double) -> some View {
         let fix: Double = 30.0 // sizeMax et size problem (/4)
         let bodPos = CGFloat((size / 2) * -1)

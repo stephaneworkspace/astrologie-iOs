@@ -478,6 +478,38 @@ extension Swe.Bodies {
             return 12
         }
     }
+    func nom() -> String {
+        switch self {
+        case .sun:
+            return "Soleil"
+        case .moon:
+            return "Lune"
+        case .mercury:
+            return "Mercure"
+        case .venus:
+            return "Venus"
+        case .mars:
+            return "Mars"
+        case .jupiter:
+            return "Jupiter"
+        case .saturn:
+            return "Saturne"
+        case .uranus:
+            return "Uranus"
+        case .neptune:
+            return "Neptune"
+        case .pluto:
+            return "Pluton"
+        case .trueNode:
+            return "Noeud lunaire"
+        case .chiron:
+            return "Chiron"
+        case .ceres:
+            return "Ceres"
+        default:
+            return ""
+        }
+    }
 }
 
 extension Swe.Aspects {

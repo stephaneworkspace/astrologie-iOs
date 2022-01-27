@@ -96,6 +96,10 @@ struct AstrologieView: View {
                             swCeres: $swCeres,
                             swe: swe)
                 }
+                Array2View(
+                        swTransit: swTransit,
+                        transitType: .NatalNatal,
+                        swe: swe)
                 ZStack {
                     VStack {
                         Spacer()
