@@ -679,69 +679,29 @@ struct ChartDraw {
         case natal = 0, transit = 1, natalAndTransit = 2
     }
 
-    func aspect_lines(swe: Swe, aspect: Swe.Aspects, aspectType: AspectType) -> [AspectLine] {
+    func aspect_lines(
+            swe: Swe,
+            swPluton: Bool,
+            swNode: Bool,
+            swChiron: Bool,
+            swCeres: Bool,
+            aspect: Swe.Aspects,
+            aspectType: AspectType
+    ) -> [AspectLine] {
         var res: [AspectLine] = []
         for bod in swe.bodies {
             let bodNatalLongitude = getBodieLongitude(bodie: bod.0, swTransit: false)
             let bodTransitLongitude = getBodieLongitude(bodie: bod.0, swTransit: true)
             switch aspectType {
             case .natalAndTransit:
-                let separation = getClosestDistance(
-                        angle1: bodNatalLongitude,
-                        angle2: bodTransitLongitude)
-                let absSeparation = abs(separation)
-                let asp = aspect.angle().0
-                let orb = aspect.angle().1
-                if abs(absSeparation - Double(asp)) <= Double(orb) {
-                    let pos1: Offset = getPosTrigo(
-                            angular: bodNatalLongitude,
-                            radiusCircle: getRadiusCircle(occurs: 0).0)
-                    let pos2: Offset = getPosTrigo(
-                            angular: bodTransitLongitude,
-                            radiusCircle: getRadiusCircle(occurs: 0).0)
-                    let line: AspectLine = AspectLine(
-                            aspect: aspect,
-                            lX1: pos1.offX,
-                            lY1: pos1.offY,
-                            lX2: pos2.offX,
-                            lY2: pos2.offY)
-                    res.append(line)
-                    // angle
-                    let angleArray: [Swe.Angle] = [.asc, .mc]
-                    for angle in angleArray {
-                        let angleLongitude = getAngleLongitude(angle: angle)
-                        let separation = getClosestDistance(
-                                angle1: bodTransitLongitude,
-                                angle2: angleLongitude)
-                        let absSeparation = abs(separation)
-                        let asp = aspect.angle().0
-                        let orb = aspect.angle().1
-                        if abs(absSeparation - Double(asp)) <= Double(orb) {
-                            let pos1: Offset = getPosTrigo(
-                                    angular: bodTransitLongitude,
-                                    radiusCircle: getRadiusCircle(occurs: 0).0)
-                            let pos2: Offset = getPosTrigo(
-                                    angular: angleLongitude,
-                                    radiusCircle: getRadiusCircle(occurs: 0).0)
-                            let line: AspectLine = AspectLine(
-                                    aspect: aspect,
-                                    lX1: pos1.offX,
-                                    lY1: pos1.offY,
-                                    lX2: pos2.offX,
-                                    lY2: pos2.offY)
-                            res.append(line)
-                        }
-                    }
-                }
-            case .natal:
-                for bodPair in swe.bodies.reversed() {
-                    if bodPair.0.bodie == bod.0.bodie {
-                        break
-                    }
-                    let bod2NatalLongitude = getBodieLongitude(bodie: bodPair.0, swTransit: false)
+                if (swPluton == false && bod.0.bodie.rawValue == Swe.Bodies.pluto.rawValue)
+                           || (swNode == false && bod.0.bodie.rawValue == Swe.Bodies.trueNode.rawValue)
+                           || (swChiron == false && bod.0.bodie.rawValue == Swe.Bodies.chiron.rawValue)
+                           || (swCeres == false && bod.0.bodie.rawValue == Swe.Bodies.ceres.rawValue) {
+                } else {
                     let separation = getClosestDistance(
                             angle1: bodNatalLongitude,
-                            angle2: bod2NatalLongitude)
+                            angle2: bodTransitLongitude)
                     let absSeparation = abs(separation)
                     let asp = aspect.angle().0
                     let orb = aspect.angle().1
@@ -750,7 +710,7 @@ struct ChartDraw {
                                 angular: bodNatalLongitude,
                                 radiusCircle: getRadiusCircle(occurs: 0).0)
                         let pos2: Offset = getPosTrigo(
-                                angular: bod2NatalLongitude,
+                                angular: bodTransitLongitude,
                                 radiusCircle: getRadiusCircle(occurs: 0).0)
                         let line: AspectLine = AspectLine(
                                 aspect: aspect,
@@ -759,14 +719,53 @@ struct ChartDraw {
                                 lX2: pos2.offX,
                                 lY2: pos2.offY)
                         res.append(line)
+                        // angle
+                        let angleArray: [Swe.Angle] = [.asc, .mc]
+                        for angle in angleArray {
+                            let angleLongitude = getAngleLongitude(angle: angle)
+                            let separation = getClosestDistance(
+                                    angle1: bodTransitLongitude,
+                                    angle2: angleLongitude)
+                            let absSeparation = abs(separation)
+                            let asp = aspect.angle().0
+                            let orb = aspect.angle().1
+                            if abs(absSeparation - Double(asp)) <= Double(orb) {
+                                let pos1: Offset = getPosTrigo(
+                                        angular: bodTransitLongitude,
+                                        radiusCircle: getRadiusCircle(occurs: 0).0)
+                                let pos2: Offset = getPosTrigo(
+                                        angular: angleLongitude,
+                                        radiusCircle: getRadiusCircle(occurs: 0).0)
+                                let line: AspectLine = AspectLine(
+                                        aspect: aspect,
+                                        lX1: pos1.offX,
+                                        lY1: pos1.offY,
+                                        lX2: pos2.offX,
+                                        lY2: pos2.offY)
+                                res.append(line)
+                            }
+                        }
                     }
-                    // angle
-                    let angleArray: [Swe.Angle] = [.asc, .mc]
-                    for angle in angleArray {
-                        let angleLongitude = getAngleLongitude(angle: angle)
+                }
+            case .natal:
+                for bodPair in swe.bodies.reversed() {
+                    if bodPair.0.bodie == bod.0.bodie {
+                        break
+                    }
+                    if (swPluton == false && bod.0.bodie.rawValue == Swe.Bodies.pluto.rawValue)
+                               || (swPluton == false && bodPair.0.bodie.rawValue == Swe.Bodies.pluto.rawValue)
+                               || (swNode == false && bod.0.bodie.rawValue == Swe.Bodies.trueNode.rawValue)
+                               || (swNode == false && bodPair.0.bodie.rawValue == Swe.Bodies.trueNode.rawValue)
+                               || (swChiron == false && bod.0.bodie.rawValue == Swe.Bodies.chiron.rawValue)
+                               || (swChiron == false && bodPair.0.bodie.rawValue == Swe.Bodies.chiron.rawValue)
+                               || (swCeres == false && bod.0.bodie.rawValue == Swe.Bodies.ceres.rawValue)
+                               || (swCeres == false && bodPair.0.bodie.rawValue == Swe.Bodies.ceres.rawValue) {
+
+                    } else {
+                        let bod2NatalLongitude = getBodieLongitude(bodie: bodPair.0, swTransit: false)
                         let separation = getClosestDistance(
                                 angle1: bodNatalLongitude,
-                                angle2: angleLongitude)
+                                angle2: bod2NatalLongitude)
                         let absSeparation = abs(separation)
                         let asp = aspect.angle().0
                         let orb = aspect.angle().1
@@ -775,7 +774,72 @@ struct ChartDraw {
                                     angular: bodNatalLongitude,
                                     radiusCircle: getRadiusCircle(occurs: 0).0)
                             let pos2: Offset = getPosTrigo(
-                                    angular: angleLongitude,
+                                    angular: bod2NatalLongitude,
+                                    radiusCircle: getRadiusCircle(occurs: 0).0)
+                            let line: AspectLine = AspectLine(
+                                    aspect: aspect,
+                                    lX1: pos1.offX,
+                                    lY1: pos1.offY,
+                                    lX2: pos2.offX,
+                                    lY2: pos2.offY)
+                            res.append(line)
+                        }
+                        // angle
+                        let angleArray: [Swe.Angle] = [.asc, .mc]
+                        for angle in angleArray {
+                            let angleLongitude = getAngleLongitude(angle: angle)
+                            let separation = getClosestDistance(
+                                    angle1: bodNatalLongitude,
+                                    angle2: angleLongitude)
+                            let absSeparation = abs(separation)
+                            let asp = aspect.angle().0
+                            let orb = aspect.angle().1
+                            if abs(absSeparation - Double(asp)) <= Double(orb) {
+                                let pos1: Offset = getPosTrigo(
+                                        angular: bodNatalLongitude,
+                                        radiusCircle: getRadiusCircle(occurs: 0).0)
+                                let pos2: Offset = getPosTrigo(
+                                        angular: angleLongitude,
+                                        radiusCircle: getRadiusCircle(occurs: 0).0)
+                                let line: AspectLine = AspectLine(
+                                        aspect: aspect,
+                                        lX1: pos1.offX,
+                                        lY1: pos1.offY,
+                                        lX2: pos2.offX,
+                                        lY2: pos2.offY)
+                                res.append(line)
+                            }
+                        }
+                    }
+                }
+            case .transit:
+                for bodPair in swe.bodies.reversed() {
+                    if bodPair.1.bodie == bod.1.bodie {
+                        break
+                    }
+                    if (swPluton == false && bod.1.bodie.rawValue == Swe.Bodies.pluto.rawValue)
+                               || (swPluton == false && bodPair.1.bodie.rawValue == Swe.Bodies.pluto.rawValue)
+                               || (swNode == false && bod.1.bodie.rawValue == Swe.Bodies.trueNode.rawValue)
+                               || (swNode == false && bodPair.1.bodie.rawValue == Swe.Bodies.trueNode.rawValue)
+                               || (swChiron == false && bod.1.bodie.rawValue == Swe.Bodies.chiron.rawValue)
+                               || (swChiron == false && bodPair.1.bodie.rawValue == Swe.Bodies.chiron.rawValue)
+                               || (swCeres == false && bod.1.bodie.rawValue == Swe.Bodies.ceres.rawValue)
+                               || (swCeres == false && bodPair.1.bodie.rawValue == Swe.Bodies.ceres.rawValue) {
+
+                    } else {
+                        let bod2TransitLongitude = getBodieLongitude(bodie: bodPair.1, swTransit: true)
+                        let separation = getClosestDistance(
+                                angle1: bodTransitLongitude,
+                                angle2: bod2TransitLongitude)
+                        let absSeparation = abs(separation)
+                        let asp = aspect.angle().0
+                        let orb = aspect.angle().1
+                        if abs(absSeparation - Double(asp)) <= Double(orb) {
+                            let pos1: Offset = getPosTrigo(
+                                    angular: bodTransitLongitude,
+                                    radiusCircle: getRadiusCircle(occurs: 0).0)
+                            let pos2: Offset = getPosTrigo(
+                                    angular: bod2TransitLongitude,
                                     radiusCircle: getRadiusCircle(occurs: 0).0)
                             let line: AspectLine = AspectLine(
                                     aspect: aspect,
@@ -787,47 +851,28 @@ struct ChartDraw {
                         }
                     }
                 }
-            case .transit:
-                for bodPair in swe.bodies.reversed() {
-                    if bodPair.1.bodie == bod.1.bodie {
-                        break
-                    }
-                    let bod2TransitLongitude = getBodieLongitude(bodie: bodPair.1, swTransit: true)
-                    let separation = getClosestDistance(
-                            angle1: bodTransitLongitude,
-                            angle2: bod2TransitLongitude)
-                    let absSeparation = abs(separation)
-                    let asp = aspect.angle().0
-                    let orb = aspect.angle().1
-                    if abs(absSeparation - Double(asp)) <= Double(orb) {
-                        let pos1: Offset = getPosTrigo(
-                                angular: bodTransitLongitude,
-                                radiusCircle: getRadiusCircle(occurs: 0).0)
-                        let pos2: Offset = getPosTrigo(
-                                angular: bod2TransitLongitude,
-                                radiusCircle: getRadiusCircle(occurs: 0).0)
-                        let line: AspectLine = AspectLine(
-                                aspect: aspect,
-                                lX1: pos1.offX,
-                                lY1: pos1.offY,
-                                lX2: pos2.offX,
-                                lY2: pos2.offY)
-                        res.append(line)
-                    }
-                }
             }
         }
         return res
     }
 
-    func bodie_lines(swe: Swe, swTransit: Bool, swChiron: Bool, swCeres: Bool) -> [Line] {
+    func bodie_lines(
+            swe: Swe,
+            swTransit: Bool,
+            swPluton: Bool,
+            swNode: Bool,
+            swChiron: Bool,
+            swCeres: Bool
+    ) -> [Line] {
         var res: [Line] = []
         //for _ in 1...8 { // TODO pourquoi
             var pos = 0.0
             for bod in swe.bodies {
                 var axy: [Offset]
                 if swTransit {
-                    if (swChiron == false && bod.1.bodie.rawValue == Swe.Bodies.chiron.rawValue) != true
+                    if (swPluton == false && bod.1.bodie.rawValue == Swe.Bodies.pluto.rawValue) != true
+                               && (swNode == false && bod.1.bodie.rawValue == Swe.Bodies.trueNode.rawValue) != true
+                               && (swChiron == false && bod.1.bodie.rawValue == Swe.Bodies.chiron.rawValue) != true
                                && (swCeres == false && bod.1.bodie.rawValue == Swe.Bodies.ceres.rawValue) != true {
 
                     } else {
@@ -857,7 +902,8 @@ struct ChartDraw {
                     }
                 } else {
                     if (swChiron == false && bod.0.bodie == Swe.Bodies.chiron) != true
-                               || (swCeres == false && bod.0.bodie == Swe.Bodies.ceres) != true {
+                               && (swNode == false && bod.1.bodie.rawValue == Swe.Bodies.trueNode.rawValue) != true
+                               && (swCeres == false && bod.0.bodie == Swe.Bodies.ceres) != true {
 
                     } else {
                         pos = getBodieLongitude(bodie: bod.0, swTransit: swTransit)

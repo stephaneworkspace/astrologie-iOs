@@ -35,8 +35,10 @@ struct ArrayDetailView: View {
                 ForEach(0...forlopp.count - 1, id: \.self) { idx in
                     cD.drawArrayBodie(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
                 }
-                cD.drawArrayAngle(angle: .asc, size: size).frame(width: size, height: size)
-                cD.drawArrayAngle(angle: .mc, size: size).frame(width: size, height: size)
+                if transitType != .NatalTransit {
+                    cD.drawArrayAngle(angle: .asc, size: size).frame(width: size, height: size)
+                    cD.drawArrayAngle(angle: .mc, size: size).frame(width: size, height: size)
+                }
                 ForEach(swe.aspectsBodies, id: \.self) { asp in
                     if asp.transit == transitType {
                         cD.drawArrayAspect(asp: asp, size: size).frame(width: size, height: size)

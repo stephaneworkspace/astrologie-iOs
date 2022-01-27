@@ -6,10 +6,10 @@ import Foundation
 import SwiftUI
 
 struct BodieSelectView: View {
+    @Binding var swPluton: Bool
+    @Binding var swNode: Bool
     @Binding var swChiron: Bool
     @Binding var swCeres: Bool
-    @Binding var swRefresh: Bool
-    @Binding var timeRemaining: Int
 
     var body: some View {
         ZStack {
@@ -20,20 +20,38 @@ struct BodieSelectView: View {
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.3)
             VStack {
-                Spacer()
-                HStack {
-                    Toggle("Ceres", isOn: $swCeres).onChange(of: swCeres, perform: { value in
-                        timeRemaining = 1
-                        swRefresh = true
-                    })
-                    Image("b17").padding()
-                    Toggle("Chiron", isOn: $swChiron).onChange(of: swChiron, perform: { value in
-                        timeRemaining = 1
-                        swRefresh = true
-                    })
-                    Image("b15").padding()
+                VStack {
+                    Spacer()
+                    HStack {
+                        Toggle("Pluton", isOn: $swPluton)
+                        Image("b9")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .padding()
+                    }
+                    HStack {
+                        Toggle("Noeud lunaire", isOn: $swNode)
+                        Image("b11")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .padding()
+                    }
+                    HStack {
+                        Toggle("Chiron", isOn: $swChiron)
+                        Image("b15")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .padding()
+                    }
+                    HStack {
+                        Toggle("Ceres", isOn: $swCeres)
+                        Image("b17")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .padding()
+                    }
+                    Spacer()
                 }
-                Spacer()
             }.padding()
         }
     }

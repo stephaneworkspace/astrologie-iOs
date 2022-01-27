@@ -7,13 +7,17 @@ import SwiftUI
 
 struct ChartBodieImageView: View {
     @State var swTransit: Bool
+    @Binding var swPluton: Bool
+    @Binding var swNode: Bool
     @Binding var swChiron: Bool
     @Binding var swCeres: Bool
     @State var idx: Int
     var swe: Swe
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
-        if (idx == Swe.Bodies.chiron.rawValue && swChiron == false) != true
+        if (idx == Swe.Bodies.pluto.rawValue && swPluton == false) != true
+                   && (idx == Swe.Bodies.trueNode.rawValue && swNode == false) != true
+                   && (idx == Swe.Bodies.chiron.rawValue && swChiron == false) != true
                    && (idx == Swe.Bodies.ceres.rawValue && swCeres == false) != true {
             let _ = Swe.Bodies.init(rawValue: Int32(idx)) ?? Swe.Bodies.sun
             let bodN = cD.bodie(swe: cD.swe, bodie: Int32(idx), swTransit: false)

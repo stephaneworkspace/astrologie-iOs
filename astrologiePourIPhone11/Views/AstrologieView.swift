@@ -7,6 +7,8 @@ import SwiftUI
 
 struct AstrologieView: View {
     @State var swTransit: Bool
+    @Binding var swPluton: Bool
+    @Binding var swNode: Bool
     @Binding var swChiron: Bool
     @Binding var swCeres: Bool
     var FONTSIZE = 15.0
@@ -43,67 +45,31 @@ struct AstrologieView: View {
                 VStack {
                     Spacer().frame(height: 45)
                     ZStack {
-                        VStack {
-                            Spacer()
-                                    .frame(width: 400, height: 84)
-                                    .background(Color.orange).opacity(0.1)
-                                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                        }
-                        VStack {
-                            DatePicker(
-                                    "Date de naissance",
-                                    selection: $selectedDate,
-                                    displayedComponents: [.date, .hourAndMinute])
-                                    .font(.system(size: FONTSIZE, weight: .light, design: .default))
-                            HStack {
-                                Text("Lat")
-                                TextField(
-                                        "Latitude",
-                                        value: $latNatal,
-                                        formatter: formatter
-                                ).textFieldStyle(RoundedBorderTextFieldStyle())
-                                Text("Lng")
-                                TextField(
-                                        "Longitude",
-                                        value: $lngNatal,
-                                        formatter: formatter
-                                ).textFieldStyle(RoundedBorderTextFieldStyle())
-                                Text("Tz")
-                                TextField(
-                                        "Timezone",
-                                        value: $tzNatal,
-                                        formatter: formatterNoFloat
-                                ).textFieldStyle(RoundedBorderTextFieldStyle())
-                            }.font(.system(size: FONTSIZE, weight: .light, design: .default))
-                            if swTransit {
-                                DatePicker(
-                                        "Transit",
-                                        selection: $selectedDateTransit,
-                                        displayedComponents: [.date, .hourAndMinute])
-                                        .font(.system(size: FONTSIZE, weight: .light, design: .default))
-                                HStack {
-                                    Text("Lat")
-                                    TextField(
-                                            "Latitude",
-                                            value: $latTransit,
-                                            formatter: formatter
-                                    ).textFieldStyle(RoundedBorderTextFieldStyle())
-                                    Text("Lng")
-                                    TextField(
-                                            "Longitude",
-                                            value: $lngTransit,
-                                            formatter: formatter
-                                    ).textFieldStyle(RoundedBorderTextFieldStyle())
-                                    Text("Tz")
-                                    TextField(
-                                            "Timezone",
-                                            value: $tzNatal,
-                                            formatter: formatterNoFloat
-                                    ).textFieldStyle(RoundedBorderTextFieldStyle())
-                                }.font(.system(size: FONTSIZE, weight: .light, design: .default))
+                        if swTransit {
+                            VStack {
+                                Spacer()
+                                        .frame(width: 400, height: 168)
+                                        .background(Color.orange).opacity(0.1)
+                                        .clipShape(RoundedRectangle(cornerRadius: 12))
                             }
-
-                        }.padding()
+                        } else {
+                            VStack {
+                                Spacer()
+                                        .frame(width: 400, height: 84)
+                                        .background(Color.orange).opacity(0.1)
+                                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                            }
+                        }
+                        AstrologieInputsView(
+                                swTransit: $swTransit,
+                                selectedDate: $selectedDate,
+                                selectedDateTransit: $selectedDateTransit,
+                                latNatal: $latNatal,
+                                lngNatal: $lngNatal,
+                                latTransit: $latTransit,
+                                lngTransit: $lngTransit,
+                                tzNatal: $tzNatal,
+                                tzTransit: $tzTransit)
                     }
                 }
                 let swe = Swe(
@@ -124,6 +90,8 @@ struct AstrologieView: View {
                     }
                     ChartView(
                             swTransit: swTransit,
+                            swPluton: $swPluton,
+                            swNode: $swNode,
                             swChiron: $swChiron,
                             swCeres: $swCeres,
                             swe: swe)

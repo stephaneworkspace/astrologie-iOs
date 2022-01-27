@@ -11,11 +11,11 @@ import Foundation
 
 struct ContentView: View {
     @State var selected: Int
-    @State var swRefresh: Bool = false
-    @State var timeRemaining = 2
     @State var isActive: Bool = false
-    @State var swChiron: Bool = true
-    @State var swCeres: Bool = true
+    @State var swPluton: Bool = false
+    @State var swNode: Bool = false
+    @State var swChiron: Bool = false
+    @State var swCeres: Bool = false
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -31,52 +31,39 @@ struct ContentView: View {
                     VStack {
                         TabView(selection: $selected) {
                             VStack {
-                                if swRefresh == false {
-                                    AstrologieView(
-                                            swTransit: false,
-                                            swChiron: $swChiron,
-                                            swCeres: $swCeres
-                                    )
-                                } else {
-                                    Image("bgl")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(minWidth: 0, maxWidth: .infinity)
-                                            .edgesIgnoringSafeArea(.all)
-                                            .opacity(0.3)
-                                            .onReceive(timer) { _ in
-                                                if timeRemaining > 0 {
-                                                    timeRemaining -= 1
-                                                } else {
-                                                    timeRemaining = 1
-                                                    swRefresh = false
-                                                }
-                                            }
-                                }
+                                AstrologieView(
+                                        swTransit: false,
+                                        swPluton: $swPluton,
+                                        swNode: $swNode,
+                                        swChiron: $swChiron,
+                                        swCeres: $swCeres
+                                )
                             }.tabItem {
                                 VStack {
-                                    Image(systemName: "eye")
+                                    Image(systemName: "line.3.crossed.swirl.circle.fill")
                                     Text("Natal")
                                 }
                             }.tag(0)
                             AstrologieView(
                                     swTransit: true,
+                                    swPluton: $swPluton,
+                                    swNode: $swNode,
                                     swChiron: $swChiron,
                                     swCeres: $swCeres
                             ).tabItem {
                                 VStack {
-                                    Image(systemName: "eye")
+                                    Image(systemName: "line.3.crossed.swirl.circle.fill")
                                     Text("Natal et Transit")
                                 }
                             }.tag(1)
                             BodieSelectView(
+                                    swPluton: $swPluton,
+                                    swNode: $swNode,
                                     swChiron: $swChiron,
-                                    swCeres: $swCeres,
-                                    swRefresh: $swRefresh,
-                                    timeRemaining: $timeRemaining
+                                    swCeres: $swCeres
                             ).tabItem {
                                 VStack {
-                                    Image(systemName: "c.circle.fill")
+                                    Image(systemName: "switch.2")
                                     Text("Sélection planètes")
                                 }
                             }.tag(2)

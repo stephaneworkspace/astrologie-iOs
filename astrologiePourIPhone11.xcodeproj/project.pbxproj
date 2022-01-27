@@ -7,13 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		552E81560800FE949879A3DB /* ChartHouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E86DCC54FDB34A441809E /* ChartHouseView.swift */; };
+		552E84392246C5C0465EAC7E /* ChartBodieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E831B331701956DEA8864 /* ChartBodieView.swift */; };
 		552E862EA88FBD2DDBF756A0 /* ArrayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E86D3F66E88C962B98637 /* ArrayView.swift */; };
 		552E863BEA7ADCB8C252CD4C /* AstrologieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E875599442BF4A256205B /* AstrologieView.swift */; };
+		552E872AE316E813450EE9EB /* AstrologieInputsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E8C163C597F29EAC3C709 /* AstrologieInputsView.swift */; };
 		552E8A6492F621D3E2807CF7 /* ChartDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E88C2B939982C5289FCDD /* ChartDraw.swift */; };
 		552E8B02FAC2C1C0E423E791 /* ChartBodieImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E836DC53F8097740E79C7 /* ChartBodieImageView.swift */; };
 		552E8B612964264026990065 /* BodieSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E88EC73EE663400FD6A81 /* BodieSelectView.swift */; };
+		552E8CB860A8889C36F47706 /* ChartZodiacView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E80FD3B3262614E2C8230 /* ChartZodiacView.swift */; };
 		552E8D53C7B1F2734031F347 /* data.json.example in Resources */ = {isa = PBXBuildFile; fileRef = 552E8CAB5E7E36614CDBFAFD /* data.json.example */; };
 		552E8E7ADADEF58DCAB5C1A7 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E8110612D048FF9B074FD /* System.swift */; };
+		552E8FE80DB0CD0749FEFD11 /* ChartAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E8005EE2AF0BEB036417B /* ChartAspectView.swift */; };
 		F404446A2797F0F900B74503 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F40444692797F0F900B74503 /* .gitignore */; };
 		F404446C2797F11600B74503 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = F404446B2797F11600B74503 /* data.json */; };
 		F4141EA92797414800381179 /* astrologiePourIPhone11App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141EA82797414800381179 /* astrologiePourIPhone11App.swift */; };
@@ -71,12 +76,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		552E8005EE2AF0BEB036417B /* ChartAspectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartAspectView.swift; sourceTree = "<group>"; };
+		552E80FD3B3262614E2C8230 /* ChartZodiacView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartZodiacView.swift; sourceTree = "<group>"; };
 		552E8110612D048FF9B074FD /* System.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
+		552E831B331701956DEA8864 /* ChartBodieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartBodieView.swift; sourceTree = "<group>"; };
 		552E836DC53F8097740E79C7 /* ChartBodieImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartBodieImageView.swift; sourceTree = "<group>"; };
 		552E86D3F66E88C962B98637 /* ArrayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayView.swift; sourceTree = "<group>"; };
+		552E86DCC54FDB34A441809E /* ChartHouseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartHouseView.swift; sourceTree = "<group>"; };
 		552E875599442BF4A256205B /* AstrologieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AstrologieView.swift; sourceTree = "<group>"; };
 		552E88C2B939982C5289FCDD /* ChartDraw.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartDraw.swift; sourceTree = "<group>"; };
 		552E88EC73EE663400FD6A81 /* BodieSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodieSelectView.swift; sourceTree = "<group>"; };
+		552E8C163C597F29EAC3C709 /* AstrologieInputsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AstrologieInputsView.swift; sourceTree = "<group>"; };
 		552E8CAB5E7E36614CDBFAFD /* data.json.example */ = {isa = PBXFileReference; lastKnownFileType = file.example; path = data.json.example; sourceTree = "<group>"; };
 		F40444692797F0F900B74503 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F404446B2797F11600B74503 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
@@ -323,6 +333,11 @@
 				552E88EC73EE663400FD6A81 /* BodieSelectView.swift */,
 				552E875599442BF4A256205B /* AstrologieView.swift */,
 				552E836DC53F8097740E79C7 /* ChartBodieImageView.swift */,
+				552E8C163C597F29EAC3C709 /* AstrologieInputsView.swift */,
+				552E831B331701956DEA8864 /* ChartBodieView.swift */,
+				552E8005EE2AF0BEB036417B /* ChartAspectView.swift */,
+				552E86DCC54FDB34A441809E /* ChartHouseView.swift */,
+				552E80FD3B3262614E2C8230 /* ChartZodiacView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -503,6 +518,11 @@
 				552E863BEA7ADCB8C252CD4C /* AstrologieView.swift in Sources */,
 				552E8B02FAC2C1C0E423E791 /* ChartBodieImageView.swift in Sources */,
 				552E8E7ADADEF58DCAB5C1A7 /* System.swift in Sources */,
+				552E872AE316E813450EE9EB /* AstrologieInputsView.swift in Sources */,
+				552E84392246C5C0465EAC7E /* ChartBodieView.swift in Sources */,
+				552E8FE80DB0CD0749FEFD11 /* ChartAspectView.swift in Sources */,
+				552E81560800FE949879A3DB /* ChartHouseView.swift in Sources */,
+				552E8CB860A8889C36F47706 /* ChartZodiacView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
