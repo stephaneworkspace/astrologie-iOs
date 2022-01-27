@@ -979,6 +979,15 @@ struct ChartDraw {
         return res
     }
 
+    func TODO_ZODIAC(swe: Swe) {
+        print("TODO")
+        for idx in 1...12 {
+            let offPosAsc = 360 - swe.houses[0].longitude
+            var pos = Double(idx) * 30.0 + offPosAsc
+            let sign = Swe.Signs(rawValue: Int32(idx)) ?? Swe.Signs.aries
+        }
+    }
+
     func zodiac_lines(swe: Swe) -> [Line] {
         var res: [Line] = []
         for iIdx in 1...12 {
