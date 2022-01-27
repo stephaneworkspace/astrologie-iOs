@@ -338,6 +338,42 @@ struct ChartDraw {
         return body
     }
 
+    // TODO jdx et size pas analysé dans le copier collé
+    func drawArray2BodieSign(idx: Int, jdx: Int, size: Double) -> some View {
+        var sign = Swe.Signs(rawValue: Int32(idx)) ?? Swe.Signs.aries
+        for bod in swe.bodies {
+            if bod.0.bodie.rawValue == idx {
+                for kdx in 1...12 {
+                    sign = Swe.Signs(rawValue: Int32(kdx)) ?? Swe.Signs.aries
+                    let offPosAsc = 360 - swe.houses[0].longitude
+                    var pos = Double(kdx) * 30.0 + offPosAsc
+                    if pos > bod.0.calculUt.longitude && pos + 30 < bod.0.calculUt.longitude {
+                        break
+                    }
+                }
+            }
+        }
+        let fix: Double = 30.0 // sizeMax et size problem (/4)
+        let bodPos = CGFloat((size / 2) * -1)
+        let cas = Double(size) / 16.0
+        let casDiv = 1.1
+        let xPos = bodPos - cas + 150.0
+        let yPos = bodPos + (cas / 2) + (cas * Double(jdx)) - fix
+        let bod = Swe.Bodies(rawValue: Int32(idx)) ?? Swe.Bodies.sun
+        var body: some View {
+            Image("zod" + sign.rawValue.formatted())
+                    .resizable()
+                    .foregroundColor(.red)
+                    .offset(
+                            x: xPos,
+                            y: yPos)
+                    .frame(
+                            width: cas / casDiv,
+                            height: cas / casDiv)
+        }
+        return body
+    }
+
     func drawArrayAngle(angle: Swe.Angle, size: Double) -> some View {
         let fix: Double = 30.0 // sizeMax et size problem (/4)
         let bodPos = CGFloat((size / 2) * -1)
@@ -977,15 +1013,6 @@ struct ChartDraw {
             }
         //}
         return res
-    }
-
-    func TODO_ZODIAC(swe: Swe) {
-        print("TODO")
-        for idx in 1...12 {
-            let offPosAsc = 360 - swe.houses[0].longitude
-            var pos = Double(idx) * 30.0 + offPosAsc
-            let sign = Swe.Signs(rawValue: Int32(idx)) ?? Swe.Signs.aries
-        }
     }
 
     func zodiac_lines(swe: Swe) -> [Line] {

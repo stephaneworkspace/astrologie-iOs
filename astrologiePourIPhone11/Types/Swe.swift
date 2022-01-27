@@ -73,23 +73,25 @@ class Swe {
         bbb.append(.chiron)
         bbb.append(.ceres)
         for bbx in bbb {
+            let calculUtNatal = swe03.calc_ut(
+                    tjdUt: utcToJd.julianDayUt,
+                    ipl: bbx, iflag: .speed);
+            let calculUtTransit = swe03.calc_ut(
+                    tjdUt: utcToJdTransit.julianDayUt,
+                    ipl: bbx,
+                    iflag: .speed);
             bodies.append(
                     (
                             Swe.Bodie.init(
                                     bodie: bbx,
-                                    calculUt: swe03.calc_ut(
-                                            tjdUt: utcToJd.julianDayUt,
-                                            ipl: bbx, iflag: .speed),
+                                    calculUt: calculUtNatal,
                                     phenoUt: swe07.pheno_ut(
                                             tjdUt: utcToJd.julianDayUt,
                                             ipl: bbx,
                                             iFlag: .speed)),
                             Swe.Bodie.init(
                                     bodie: bbx,
-                                    calculUt: swe03.calc_ut(
-                                            tjdUt: utcToJdTransit.julianDayUt,
-                                            ipl: bbx,
-                                            iflag: .speed),
+                                    calculUt: calculUtTransit,
                                     phenoUt: swe07.pheno_ut(
                                             tjdUt: utcToJdTransit.julianDayUt,
                                             ipl: bbx,
