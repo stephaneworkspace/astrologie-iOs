@@ -340,14 +340,17 @@ struct ChartDraw {
 
     // TODO jdx et size pas analysé dans le copier collé
     func drawArray2BodieSign(idx: Int, jdx: Int, size: Double) -> some View {
-        var sign = Swe.Signs(rawValue: Int32(idx)) ?? Swe.Signs.aries
+        var sign = Swe.Signs.aries
         for bod in swe.bodies {
             if bod.0.bodie.rawValue == idx {
                 for kdx in 1...12 {
                     sign = Swe.Signs(rawValue: Int32(kdx)) ?? Swe.Signs.aries
-                    let offPosAsc = 360 - swe.houses[0].longitude
-                    var pos = Double(kdx) * 30.0 + offPosAsc
-                    if pos > bod.0.calculUt.longitude && pos + 30 < bod.0.calculUt.longitude {
+                    let offPosAsc = 0 // swe.houses[0].longitude
+                    var pos = Double(kdx - 1) * 30.0 // + offPosAsc
+                    if pos > 360 {
+                        pos = 360 - pos
+                    }
+                    if bod.0.calculUt.longitude >= pos && bod.0.calculUt.longitude <= pos + 30 {
                         break
                     }
                 }
@@ -949,10 +952,10 @@ struct ChartDraw {
             for bod in swe.bodies {
                 var axy: [Offset]
                 if swTransit {
-                    if (swPluton == false && bod.1.bodie.rawValue == Swe.Bodies.pluto.rawValue) != true
-                               && (swNode == false && bod.1.bodie.rawValue == Swe.Bodies.trueNode.rawValue) != true
-                               && (swChiron == false && bod.1.bodie.rawValue == Swe.Bodies.chiron.rawValue) != true
-                               && (swCeres == false && bod.1.bodie.rawValue == Swe.Bodies.ceres.rawValue) != true {
+                    if (swPluton == false && bod.1.bodie.rawValue == Swe.Bodies.pluto.rawValue) == true
+                               || (swNode == false && bod.1.bodie.rawValue == Swe.Bodies.trueNode.rawValue) == true
+                               || (swChiron == false && bod.1.bodie.rawValue == Swe.Bodies.chiron.rawValue) == true
+                               || (swCeres == false && bod.1.bodie.rawValue == Swe.Bodies.ceres.rawValue) == true {
 
                     } else {
                         pos = getBodieLongitude(bodie: bod.1, swTransit: swTransit)
@@ -980,9 +983,10 @@ struct ChartDraw {
                         )
                     }
                 } else {
-                    if (swChiron == false && bod.0.bodie == Swe.Bodies.chiron) != true
-                               && (swNode == false && bod.1.bodie.rawValue == Swe.Bodies.trueNode.rawValue) != true
-                               && (swCeres == false && bod.0.bodie == Swe.Bodies.ceres) != true {
+                    if (swPluton == false && bod.0.bodie == Swe.Bodies.pluto) == true
+                            || (swChiron == false && bod.0.bodie == Swe.Bodies.chiron) == true
+                               || (swNode == false && bod.1.bodie.rawValue == Swe.Bodies.trueNode.rawValue) == true
+                               || (swCeres == false && bod.0.bodie == Swe.Bodies.ceres) == true {
 
                     } else {
                         pos = getBodieLongitude(bodie: bod.0, swTransit: swTransit)

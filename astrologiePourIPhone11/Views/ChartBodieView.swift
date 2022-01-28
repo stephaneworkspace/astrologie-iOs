@@ -25,7 +25,7 @@ struct ChartBodieView: View {
                             swNode: swNode,
                             swChiron: swChiron,
                             swCeres: swCeres)
-            ).stroke(.black, lineWidth: 0.1)
+            ).stroke(.black, lineWidth: 0.3)
         }.frame(width: cD.SIZE, height: cD.SIZE)
         if swTransit {
             VStack {
@@ -37,7 +37,7 @@ struct ChartBodieView: View {
                                 swNode: swNode,
                                 swChiron: swChiron,
                                 swCeres: swCeres)
-                ).stroke(.black, lineWidth: 0.1)
+                ).stroke(.black, lineWidth: 0.3)
             }.frame(width: cD.SIZE, height: cD.SIZE)
         }
         // Draw bodies symbol
