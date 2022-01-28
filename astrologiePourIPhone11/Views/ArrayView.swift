@@ -52,6 +52,7 @@ struct Array2BodieView: View {
                     cD.drawArray2Bodie(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
                     cD.drawArray2BodieNom(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
                     cD.drawArray2BodieSign(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
+                    cD.drawArray2BodieLongitude(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
                 }
             }.padding()
         }.frame(width: sizeMax, height: sizeMax)
