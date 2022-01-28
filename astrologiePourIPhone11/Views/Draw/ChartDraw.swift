@@ -317,7 +317,7 @@ struct ChartDraw {
         return body
     }
 
-    func drawArray2BodieNom(idx: Int, jdx: Int, size: Double) -> some View {
+    func drawArray2BodieNom(idx: Int, jdx: Int, size: Double, colorScheme: ColorScheme) -> some View {
         let fix: Double = 30 //30.0 // sizeMax et size problem (/4)
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
@@ -328,7 +328,7 @@ struct ChartDraw {
         var body: some View {
             VStack(alignment: .leading, spacing: 6.0) {
                 Text(bod.nom())
-                        .foregroundColor(.black)
+                        .foregroundColor(colorScheme == .light ? .black : .white)
 
             }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
@@ -377,7 +377,7 @@ struct ChartDraw {
         return body
     }
 
-    func drawArray2BodieLongitude(idx: Int, jdx: Int, size: Double) -> some View {
+    func drawArray2BodieLongitude(idx: Int, jdx: Int, size: Double, colorScheme: ColorScheme) -> some View {
         var sign = Swe.Signs.aries
         var deg = ""
         var min = ""
@@ -400,7 +400,7 @@ struct ChartDraw {
             ZStack {
                 VStack(alignment: .leading, spacing: 6.0) {
                     Text(deg)
-                            .foregroundColor(.black)
+                            .foregroundColor(colorScheme == .light ? .black : .white)
 
                 }
                         .frame(maxWidth: 25, maxHeight: .infinity, alignment: .trailing)
@@ -408,7 +408,7 @@ struct ChartDraw {
                         .frame(alignment: .leading)
                 VStack(alignment: .leading, spacing: 6.0) {
                     Text("°")
-                            .foregroundColor(.black)
+                            .foregroundColor(colorScheme == .light ? .black : .white)
 
                 }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
@@ -416,7 +416,7 @@ struct ChartDraw {
                         .frame(alignment: .leading)
                 VStack(alignment: .leading, spacing: 6.0) {
                     Text(min)
-                            .foregroundColor(.black)
+                            .foregroundColor(colorScheme == .light ? .black : .white)
 
                 }
                         .frame(maxWidth: 25, maxHeight: .infinity, alignment: .trailing)
@@ -424,7 +424,7 @@ struct ChartDraw {
                         .frame(alignment: .leading)
                 VStack(alignment: .leading, spacing: 6.0) {
                     Text("'")
-                            .foregroundColor(.black)
+                            .foregroundColor(colorScheme == .light ? .black : .white)
 
                 }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
@@ -432,7 +432,7 @@ struct ChartDraw {
                         .frame(alignment: .leading)
                 VStack(alignment: .leading, spacing: 6.0) {
                     Text(sec)
-                            .foregroundColor(.black)
+                            .foregroundColor(colorScheme == .light ? .black : .white)
 
                 }
                         .frame(maxWidth: 25, maxHeight: .infinity, alignment: .trailing)
@@ -440,7 +440,7 @@ struct ChartDraw {
                         .frame(alignment: .leading)
                 VStack(alignment: .leading, spacing: 6.0) {
                     Text("\"")
-                            .foregroundColor(.black)
+                            .foregroundColor(colorScheme == .light ? .black : .white)
 
                 }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
@@ -450,7 +450,6 @@ struct ChartDraw {
         }
         return body
     }
-
 
     func drawArrayAngle(angle: Swe.Angle, size: Double) -> some View {
         let fix: Double = 30.0 // sizeMax et size problem (/4)

@@ -11,6 +11,7 @@ struct ChartBodieView: View {
     @Binding var swNode: Bool
     @Binding var swChiron: Bool
     @Binding var swCeres: Bool
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     var swe: Swe
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
@@ -25,7 +26,7 @@ struct ChartBodieView: View {
                             swNode: swNode,
                             swChiron: swChiron,
                             swCeres: swCeres)
-            ).stroke(.black, lineWidth: 0.3)
+            ).stroke(colorScheme == .light ? .black : .white, lineWidth: 0.3)
         }.frame(width: cD.SIZE, height: cD.SIZE)
         if swTransit {
             VStack {
@@ -37,7 +38,7 @@ struct ChartBodieView: View {
                                 swNode: swNode,
                                 swChiron: swChiron,
                                 swCeres: swCeres)
-                ).stroke(.black, lineWidth: 0.3)
+                ).stroke(colorScheme == .light ? .black : .white, lineWidth: 0.3)
             }.frame(width: cD.SIZE, height: cD.SIZE)
         }
         // Draw bodies symbol

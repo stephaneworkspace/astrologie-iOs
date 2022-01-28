@@ -38,6 +38,7 @@ struct Array2View: View {
 }
 
 struct Array2BodieView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     var swe: Swe
     let sizeMax = 390.0
     var size = 300.0
@@ -50,9 +51,19 @@ struct Array2BodieView: View {
                // ChartDraw.DrawTransit(size: size, transitType: transitType).stroke(.black)
                 ForEach(0...forlopp.count - 1, id: \.self) { idx in
                     cD.drawArray2Bodie(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
-                    cD.drawArray2BodieNom(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
+                    cD.drawArray2BodieNom(
+                            idx: forlopp[idx],
+                            jdx: idx,
+                            size: size,
+                            colorScheme: colorScheme
+                    ).frame(width: size, height: size)
                     cD.drawArray2BodieSign(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
-                    cD.drawArray2BodieLongitude(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
+                    cD.drawArray2BodieLongitude(
+                            idx: forlopp[idx],
+                            jdx: idx,
+                            size: size,
+                            colorScheme: colorScheme
+                    ).frame(width: size, height: size)
                 }
             }.padding()
         }.frame(width: sizeMax, height: sizeMax)

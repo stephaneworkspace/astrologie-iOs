@@ -6,16 +6,18 @@ import Foundation
 import SwiftUI
 
 struct ChartHouseView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     var swe: Swe
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
         // Draw house triangle and lines
         VStack {
             ChartDraw.DrawHouseTriangle(lines: cD.house_lines(swe: cD.swe))
-                    .fill(.black)
+                    .fill(colorScheme == .light ? .black : .white)
         }.frame(width: cD.SIZE, height: cD.SIZE)
         VStack {
-            cD.drawHouseLine(lines: cD.house_lines(swe: cD.swe)).stroke(.black, lineWidth: 1.0)
+            cD.drawHouseLine(lines: cD.house_lines(swe: cD.swe))
+                    .stroke(colorScheme == .light ? .black : .white, lineWidth: 1.0)
         }.frame(width: cD.SIZE, height: cD.SIZE)
         // House number
         ForEach(1...12, id: \.self) { idx in

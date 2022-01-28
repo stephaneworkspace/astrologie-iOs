@@ -439,7 +439,7 @@
 			);
 			mainGroup = F4141E9C2797414800381179;
 			packageReferences = (
-				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */,
+				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = F4141EA62797414800381179 /* Products */;
 			projectDirPath = "";
@@ -687,7 +687,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"astrologiePourIPhone11/Preview Content\"";
 				DEVELOPMENT_TEAM = 4M7L74G8T6;
 				ENABLE_PREVIEWS = YES;
@@ -725,7 +725,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"astrologiePourIPhone11/Preview Content\"";
 				DEVELOPMENT_TEAM = 4M7L74G8T6;
 				ENABLE_PREVIEWS = YES;
@@ -872,7 +872,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */ = {
+		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -885,7 +885,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		F4915299279D938D00911CA5 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */
