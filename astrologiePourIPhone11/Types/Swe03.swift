@@ -23,6 +23,7 @@ class Swe03 {
         var speedDistanceAu: Double
         var status: Int32
         var serr: String
+        var split: Swe17.SplitDeg
     }
 
     func calc_ut(tjdUt: Double, ipl: Swe.Bodies, iflag: Swe.OptionalFlag) -> CalcUt {
@@ -42,6 +43,8 @@ class Swe03 {
                 xxPtr[0] -= 360.0
             }
         }
+        let swe17 = Swe17()
+        let splitdeg = swe17.split_deg(ddeg: xxPtr[0], roundflag: 0)
         let res = CalcUt(
                 longitude: xxPtr[0],
                 latitude: xxPtr[1],
@@ -50,7 +53,8 @@ class Swe03 {
                 speedLatitude: xxPtr[4],
                 speedDistanceAu: xxPtr[5],
                 status: status,
-                serr: String(cString: serrPtr))
+                serr: String(cString: serrPtr),
+                split: splitdeg)
         free(xxPtr)
         free(serrPtr)
         return res

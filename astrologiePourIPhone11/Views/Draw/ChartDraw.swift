@@ -360,7 +360,7 @@ struct ChartDraw {
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
         let casDiv = 1.5
-        let xPos = bodPos - cas + 150.0
+        let xPos = bodPos - cas + 145.0
         let yPos = bodPos + (cas / 2) + (cas * Double(jdx)) - fix
         let bod = Swe.Bodies(rawValue: Int32(idx)) ?? Swe.Bodies.sun
         var body: some View {
@@ -379,11 +379,14 @@ struct ChartDraw {
 
     func drawArray2BodieLongitude(idx: Int, jdx: Int, size: Double) -> some View {
         var sign = Swe.Signs.aries
-        var longitude = 0.0
+        var deg = ""
+        var min = ""
+        var sec = ""
         for bod in swe.bodies {
             if bod.0.bodie.rawValue == idx {
-                let offPos: Double = 360.0 - swe.houses[0].longitude
-                longitude = bod.0.calculUt.longitude
+                deg = bod.0.calculUt.split.deg.formatted()
+                min = bod.0.calculUt.split.min.formatted()
+                sec = bod.0.calculUt.split.sec.formatted()
                 break
             }
         }
@@ -394,14 +397,56 @@ struct ChartDraw {
         let yPos = bodPos + (cas / 2) + (cas * Double(jdx)) - fix
         let bod = Swe.Bodies(rawValue: Int32(idx)) ?? Swe.Bodies.sun
         var body: some View {
-            VStack(alignment: .leading, spacing: 6.0) {
-                Text(longitude.formatted())
-                        .foregroundColor(.black)
+            ZStack {
+                VStack(alignment: .leading, spacing: 6.0) {
+                    Text(deg)
+                            .foregroundColor(.black)
 
+                }
+                        .frame(maxWidth: 25, maxHeight: .infinity, alignment: .trailing)
+                        .offset(x: 0, y: yPos) // TODO CONST
+                        .frame(alignment: .leading)
+                VStack(alignment: .leading, spacing: 6.0) {
+                    Text("°")
+                            .foregroundColor(.black)
+
+                }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .offset(x: 164, y: yPos) // TODO CONST
+                        .frame(alignment: .leading)
+                VStack(alignment: .leading, spacing: 6.0) {
+                    Text(min)
+                            .foregroundColor(.black)
+
+                }
+                        .frame(maxWidth: 25, maxHeight: .infinity, alignment: .trailing)
+                        .offset(x: 32, y: yPos) // TODO CONST
+                        .frame(alignment: .leading)
+                VStack(alignment: .leading, spacing: 6.0) {
+                    Text("'")
+                            .foregroundColor(.black)
+
+                }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .offset(x: 195, y: yPos) // TODO CONST
+                        .frame(alignment: .leading)
+                VStack(alignment: .leading, spacing: 6.0) {
+                    Text(sec)
+                            .foregroundColor(.black)
+
+                }
+                        .frame(maxWidth: 25, maxHeight: .infinity, alignment: .trailing)
+                        .offset(x: 60, y: yPos) // TODO CONST
+                        .frame(alignment: .leading)
+                VStack(alignment: .leading, spacing: 6.0) {
+                    Text("\"")
+                            .foregroundColor(.black)
+
+                }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .offset(x: 225, y: yPos) // TODO CONST
+                        .frame(alignment: .leading)
             }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    .offset(x: 200, y: yPos) // TODO CONST
-                    .frame(alignment: .leading)
         }
         return body
     }
