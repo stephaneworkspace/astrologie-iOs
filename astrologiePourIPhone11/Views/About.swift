@@ -6,9 +6,11 @@ import Foundation
 import SwiftUI
 
 struct AboutView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+
     var body: some View {
         ZStack {
-            Image("bgl")
+            Image(colorScheme == .light ? "bgl" : "bgd")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(minWidth: 0, maxWidth: .infinity)

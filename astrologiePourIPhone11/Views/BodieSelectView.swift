@@ -10,10 +10,11 @@ struct BodieSelectView: View {
     @Binding var swNode: Bool
     @Binding var swChiron: Bool
     @Binding var swCeres: Bool
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
 
     var body: some View {
         ZStack {
-            Image("bgl")
+            Image(colorScheme == .light ? "bgl" : "bgd")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(minWidth: 0, maxWidth: .infinity)

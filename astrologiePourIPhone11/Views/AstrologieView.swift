@@ -21,6 +21,8 @@ struct AstrologieView: View {
     @State var lngTransit: Double = loadDefaultValue().0.tLng
     @State var tzNatal: Int32 = loadDefaultValue().0.nTimeZone
     @State var tzTransit: Int32 = loadDefaultValue().0.tTimeZone
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -35,7 +37,7 @@ struct AstrologieView: View {
     }()
     var body: some View {
         ZStack {
-            Image("bgl")
+            Image(colorScheme == .light ? "bgl" : "bgd")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(minWidth: 0, maxWidth: .infinity)

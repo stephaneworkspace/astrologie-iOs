@@ -16,6 +16,7 @@ struct ContentView: View {
     @State var swNode: Bool = false
     @State var swChiron: Bool = false
     @State var swCeres: Bool = false
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -23,7 +24,7 @@ struct ContentView: View {
         VStack {
             if self.isActive {
                 ZStack {
-                    Image("bgl")
+                    Image(colorScheme == .light ? "bgl" : "bgd")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(minWidth: 0, maxWidth: .infinity)
