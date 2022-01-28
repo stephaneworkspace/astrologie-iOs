@@ -72,6 +72,7 @@ struct Array2BodieView: View {
 }
 
 struct ArrayDetailView: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     var swe: Swe
     let sizeMax = 390.0
     var size = 300.0
@@ -81,13 +82,14 @@ struct ArrayDetailView: View {
         let forlopp: [Int] = swe.CONSTforLopp
         VStack {
             ZStack {
-                ChartDraw.DrawTransit(size: size, transitType: transitType).stroke(.black)
+                ChartDraw.DrawTransit(size: size, transitType: transitType)
+                        .stroke(colorScheme == .light ? .black : .white)
                 ForEach(0...forlopp.count - 1, id: \.self) { idx in
                     cD.drawArrayBodie(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
                 }
                 if transitType != .NatalTransit {
-                    cD.drawArrayAngle(angle: .asc, size: size).frame(width: size, height: size)
-                    cD.drawArrayAngle(angle: .mc, size: size).frame(width: size, height: size)
+                    cD.drawArrayAngle(angle: .asc, size: size, colorScheme: colorScheme).frame(width: size, height: size)
+                    cD.drawArrayAngle(angle: .mc, size: size, colorScheme: colorScheme).frame(width: size, height: size)
                 }
                 ForEach(swe.aspectsBodies, id: \.self) { asp in
                     if asp.transit == transitType {

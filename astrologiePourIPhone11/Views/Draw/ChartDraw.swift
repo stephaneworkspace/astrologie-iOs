@@ -451,7 +451,7 @@ struct ChartDraw {
         return body
     }
 
-    func drawArrayAngle(angle: Swe.Angle, size: Double) -> some View {
+    func drawArrayAngle(angle: Swe.Angle, size: Double, colorScheme: ColorScheme) -> some View {
         let fix: Double = 30.0 // sizeMax et size problem (/4)
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
@@ -465,9 +465,9 @@ struct ChartDraw {
         var ang = ""
         switch angle {
         case .asc:
-            ang = "aas"
+            ang = colorScheme == .light ? "aas" : "adas"
         case .mc:
-            ang = "amc"
+            ang = colorScheme == .light ? "amc" : "admc"
         default:
             ang = ""
         }
@@ -1164,16 +1164,16 @@ struct ChartDraw {
                         angular: pos,
                         radiusCircle: getRadiusCircle(occurs: 5).0))
         var posNext: Double
-        var svg = "aas"
+        var svg = "as"
         switch angle {
         case .asc:
-            svg = "aas"
+            svg = "as"
         case .fc:
-            svg = "afc"
+            svg = "fc"
         case .desc:
-            svg = "ads"
+            svg = "ds"
         case .mc:
-            svg = "amc"
+            svg = "mc"
         case .nothing:
             svg = ""
         }

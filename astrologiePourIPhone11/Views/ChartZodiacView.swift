@@ -45,7 +45,7 @@ struct ChartZodiacView: View {
         let angle = cD.angle(swe: cD.swe, angle: .asc)
         VStack {
             GeometryReader { geometry in
-                Image(angle.svg)
+                Image(colorScheme == .light ? "a" + angle.svg : "ad" + angle.svg)
                         .resizable()
                         .offset(
                                 x: angle.oPx,
@@ -58,7 +58,7 @@ struct ChartZodiacView: View {
         let angle = cD.angle(swe: cD.swe, angle: .fc)
         VStack {
             GeometryReader { geometry in
-                Image(angle.svg)
+                Image(colorScheme == .light ? "a" + angle.svg : "ad" + angle.svg)
                         .resizable()
                         .offset(
                                 x: angle.oPx,
@@ -71,7 +71,7 @@ struct ChartZodiacView: View {
         let angle = cD.angle(swe: cD.swe, angle: .desc)
         VStack {
             GeometryReader { geometry in
-                Image(angle.svg)
+                Image(colorScheme == .light ? "a" + angle.svg : "ad" + angle.svg)
                         .resizable()
                         .offset(
                                 x: angle.oPx,
@@ -84,7 +84,7 @@ struct ChartZodiacView: View {
         let angle = cD.angle(swe: cD.swe, angle: .mc)
         VStack {
             GeometryReader { geometry in
-                Image(angle.svg)
+                Image(colorScheme == .light ? "a" + angle.svg : "ad" + angle.svg)
                         .resizable()
                         .offset(
                                 x: angle.oPx,

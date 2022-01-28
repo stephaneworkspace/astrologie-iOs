@@ -24,7 +24,7 @@ struct ChartHouseView: View {
             let house = cD.house(swe: cD.swe, number: Int32(idx))
             VStack {
                 GeometryReader { geometry in
-                    Image("h" + idx.formatted())
+                    Image(colorScheme == .light ? "h" + idx.formatted() : "hd" + idx.formatted())
                             .resizable()
                             .offset(
                                     x: house.oPx,
