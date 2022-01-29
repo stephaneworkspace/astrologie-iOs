@@ -41,19 +41,25 @@ struct AstrologieInputsView: View {
                         "Latitude",
                         value: $latNatal,
                         formatter: formatter
-                ).textFieldStyle(RoundedBorderTextFieldStyle())
+                )
+                        .keyboardType(.decimalPad)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                 Text("Lng")
                 TextField(
                         "Longitude",
                         value: $lngNatal,
                         formatter: formatter
-                ).textFieldStyle(RoundedBorderTextFieldStyle())
+                )
+                        .keyboardType(.decimalPad)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
                 Text("Tz")
                 TextField(
                         "Timezone",
                         value: $tzNatal,
                         formatter: formatterNoFloat
-                ).textFieldStyle(RoundedBorderTextFieldStyle())
+                )
+                        .keyboardType(.decimalPad)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
             }.font(.system(size: FONTSIZE, weight: .light, design: .default))
             if swTransit {
                 DatePicker(
@@ -67,19 +73,25 @@ struct AstrologieInputsView: View {
                             "Latitude",
                             value: $latTransit,
                             formatter: formatter
-                    ).textFieldStyle(RoundedBorderTextFieldStyle())
+                    )
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
                     Text("Lng")
                     TextField(
                             "Longitude",
                             value: $lngTransit,
                             formatter: formatter
-                    ).textFieldStyle(RoundedBorderTextFieldStyle())
+                    )
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
                     Text("Tz")
                     TextField(
                             "Timezone",
                             value: $tzNatal,
                             formatter: formatterNoFloat
-                    ).textFieldStyle(RoundedBorderTextFieldStyle())
+                    )
+                            .keyboardType(.decimalPad)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
                 }.font(.system(size: FONTSIZE, weight: .light, design: .default))
             }
 

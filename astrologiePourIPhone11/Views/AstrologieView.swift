@@ -36,6 +36,13 @@ struct AstrologieView: View {
         return formatter
     }()
     var body: some View {
+        let swe = Swe(
+                chart: loadValue(
+                        selectedDate: selectedDate,
+                        selectedDateTransit: selectedDateTransit,
+                        lat: (latNatal, latTransit),
+                        lng: (lngNatal, lngTransit),
+                        tz: (tzNatal, tzTransit)))
         ZStack {
             Image(colorScheme == .light ? "bgl" : "bgd")
                     .resizable()
@@ -45,7 +52,25 @@ struct AstrologieView: View {
                     .opacity(0.3)
             ScrollView {
                 VStack {
-                    Spacer().frame(height: 45)
+                    Spacer().frame(height: 60)
+                    ZStack {
+                        VStack {
+                            Spacer()
+                                    .frame(width: 390, height: 390)
+                                    .background(RadialGradient(
+                                            gradient: Gradient(colors: [Color.orange, Color.white]),
+                                            center: .center, startRadius: 60, endRadius: 200)).opacity(0.1)
+                                    .clipShape(Circle())
+                        }
+                        ChartView(
+                                swTransit: swTransit,
+                                swPluton: $swPluton,
+                                swNode: $swNode,
+                                swChiron: $swChiron,
+                                swCeres: $swCeres,
+                                swe: swe)
+                    }
+                    Spacer().frame(height: 20)
                     ZStack {
                         if swTransit {
                             VStack {
@@ -73,30 +98,6 @@ struct AstrologieView: View {
                                 tzNatal: $tzNatal,
                                 tzTransit: $tzTransit)
                     }
-                }
-                let swe = Swe(
-                        chart: loadValue(
-                                selectedDate: selectedDate,
-                                selectedDateTransit: selectedDateTransit,
-                                lat: (latNatal, latTransit),
-                                lng: (lngNatal, lngTransit),
-                                tz: (tzNatal, tzTransit)))
-                ZStack {
-                    VStack {
-                        Spacer()
-                                .frame(width: 390, height: 390)
-                                .background(RadialGradient(
-                                        gradient: Gradient(colors: [Color.orange, Color.white]),
-                                        center: .center, startRadius: 60, endRadius: 200)).opacity(0.1)
-                                .clipShape(Circle())
-                    }
-                    ChartView(
-                            swTransit: swTransit,
-                            swPluton: $swPluton,
-                            swNode: $swNode,
-                            swChiron: $swChiron,
-                            swCeres: $swCeres,
-                            swe: swe)
                 }
                 Array2View(
                         swTransit: swTransit,

@@ -28,21 +28,21 @@ struct Array2View: View {
     var body: some View {
         switch transitType {
         case .NatalNatal:
-            Array2BodieView(swe: swe, transitType: transitType)
+            Array2BodieView(transitType: transitType, swe: swe)
         case .NatalTransit:
-            Array2BodieView(swe: swe, transitType: transitType)
+            Array2BodieView(transitType: transitType, swe: swe)
         case .TransitTransit:
-            Array2BodieView(swe: swe, transitType: transitType)
+            Array2BodieView(transitType: transitType, swe: swe)
         }
     }
 }
 
 struct Array2BodieView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    @State var transitType: Swe.TransitType
     var swe: Swe
     let sizeMax = 390.0
     var size = 300.0
-    var transitType: Swe.TransitType // TODO State ?
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
         let forlopp: [Int] = swe.CONSTforLopp
@@ -64,7 +64,17 @@ struct Array2BodieView: View {
                             size: size,
                             colorScheme: colorScheme
                     ).frame(width: size, height: size)
-                    cD.drawArray2BodieSignTransit(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
+                    if transitType == .NatalNatal {
+
+                    } else {
+                        cD.drawArray2BodieSignTransit(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
+                        cD.drawArray2BodieLongitudeTransit(
+                                idx: forlopp[idx],
+                                jdx: idx,
+                                size: size,
+                                colorScheme: colorScheme
+                        ).frame(width: size, height: size)
+                    }
                 }
             }.padding()
         }.frame(width: sizeMax, height: sizeMax)
