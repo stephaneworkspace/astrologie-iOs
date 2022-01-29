@@ -15,6 +15,13 @@ struct AstrologieInputsView: View {
     @Binding var lngTransit: Double
     @Binding var tzNatal: Int32
     @Binding var tzTransit: Int32
+    @FocusState private var swlatNatal: Bool
+    @FocusState private var swlngNatal: Bool
+    @FocusState private var swtzNatal: Bool
+    @FocusState private var swlatTransit: Bool
+    @FocusState private var swlngTransit: Bool
+    @FocusState private var swtzTransit: Bool
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -42,14 +49,17 @@ struct AstrologieInputsView: View {
                         value: $latNatal,
                         formatter: formatter
                 )
+                        .focused($swlatNatal)
                         .keyboardType(.decimalPad)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                Text("Lng")
+                        .foregroundColor(colorScheme == .light ? .black : .white)
+            Text("Lng")
                 TextField(
                         "Longitude",
                         value: $lngNatal,
                         formatter: formatter
                 )
+                        .focused($swlngNatal)
                         .keyboardType(.decimalPad)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                 Text("Tz")
@@ -58,9 +68,21 @@ struct AstrologieInputsView: View {
                         value: $tzNatal,
                         formatter: formatterNoFloat
                 )
+                        .focused($swtzNatal)
                         .keyboardType(.decimalPad)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-            }.font(.system(size: FONTSIZE, weight: .light, design: .default))
+            }
+                    .font(.system(size: FONTSIZE, weight: .light, design: .default))
+            if swlatNatal || swlngNatal || swtzNatal {
+                Button("Close keyboard") {
+                    swlatNatal = false
+                    swlngNatal = false
+                    swtzNatal = false
+                    swlatTransit = false
+                    swlngTransit = false
+                    swtzTransit = false
+                }.foregroundColor(colorScheme == .light ? .black : .white)
+            }
             if swTransit {
                 DatePicker(
                         "Transit",
@@ -74,6 +96,7 @@ struct AstrologieInputsView: View {
                             value: $latTransit,
                             formatter: formatter
                     )
+                            .focused($swlatTransit)
                             .keyboardType(.decimalPad)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     Text("Lng")
@@ -82,6 +105,7 @@ struct AstrologieInputsView: View {
                             value: $lngTransit,
                             formatter: formatter
                     )
+                            .focused($swlngTransit)
                             .keyboardType(.decimalPad)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                     Text("Tz")
@@ -90,11 +114,19 @@ struct AstrologieInputsView: View {
                             value: $tzNatal,
                             formatter: formatterNoFloat
                     )
+                            .focused($swtzNatal)
                             .keyboardType(.decimalPad)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                 }.font(.system(size: FONTSIZE, weight: .light, design: .default))
+                Button("Close keyboard") {
+                    swlatNatal = false
+                    swlngNatal = false
+                    swtzNatal = false
+                    swlatTransit = false
+                    swlngTransit = false
+                    swtzTransit = false
+                }.foregroundColor(colorScheme == .light ? .black : .white)
             }
-
         }.padding()
 
     }
