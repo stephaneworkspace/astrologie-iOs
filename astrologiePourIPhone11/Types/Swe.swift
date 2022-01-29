@@ -503,7 +503,7 @@ extension Swe.Bodies {
         case .pluto:
             return "Pluton"
         case .trueNode:
-            return "Noeud lunaire"
+            return "Noeud lun."
         case .chiron:
             return "Chiron"
         case .ceres:

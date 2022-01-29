@@ -64,6 +64,7 @@ struct Array2BodieView: View {
                             size: size,
                             colorScheme: colorScheme
                     ).frame(width: size, height: size)
+                    cD.drawArray2BodieSignTransit(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
                 }
             }.padding()
         }.frame(width: sizeMax, height: sizeMax)

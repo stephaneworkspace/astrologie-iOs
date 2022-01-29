@@ -338,7 +338,6 @@ struct ChartDraw {
         return body
     }
 
-    // TODO jdx et size pas analysé dans le copier collé
     func drawArray2BodieSign(idx: Int, jdx: Int, size: Double) -> some View {
         var sign = Swe.Signs.aries
         for bod in swe.bodies {
@@ -360,7 +359,45 @@ struct ChartDraw {
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
         let casDiv = 1.5
-        let xPos = bodPos - cas + 145.0
+        let xPos = bodPos - cas + 125.0
+        let yPos = bodPos + (cas / 2) + (cas * Double(jdx)) - fix
+        let bod = Swe.Bodies(rawValue: Int32(idx)) ?? Swe.Bodies.sun
+        var body: some View {
+            Image("zod" + sign.rawValue.formatted())
+                    .resizable()
+                    .foregroundColor(.red)
+                    .offset(
+                            x: xPos,
+                            y: yPos)
+                    .frame(
+                            width: cas / casDiv,
+                            height: cas / casDiv)
+        }
+        return body
+    }
+
+    func drawArray2BodieSignTransit(idx: Int, jdx: Int, size: Double) -> some View {
+        var sign = Swe.Signs.aries
+        for bod in swe.bodies {
+            if bod.1.bodie.rawValue == idx {
+                for kdx in 1...12 {
+                    sign = Swe.Signs(rawValue: Int32(kdx)) ?? Swe.Signs.aries
+                    let offPosAsc = 0 // swe.houses[0].longitude
+                    var pos = Double(kdx - 1) * 30.0 // + offPosAsc
+                    if pos > 360 {
+                        pos = 360 - pos
+                    }
+                    if bod.1.calculUt.longitude >= pos && bod.1.calculUt.longitude <= pos + 30 {
+                        break
+                    }
+                }
+            }
+        }
+        let fix: Double = 30 //30.0 // sizeMax et size problem (/4)
+        let bodPos = CGFloat((size / 2) * -1)
+        let cas = Double(size) / 16.0
+        let casDiv = 1.5
+        let xPos = bodPos - cas + 240.0
         let yPos = bodPos + (cas / 2) + (cas * Double(jdx)) - fix
         let bod = Swe.Bodies(rawValue: Int32(idx)) ?? Swe.Bodies.sun
         var body: some View {
@@ -404,7 +441,7 @@ struct ChartDraw {
 
                 }
                         .frame(maxWidth: 25, maxHeight: .infinity, alignment: .trailing)
-                        .offset(x: 0, y: yPos) // TODO CONST
+                        .offset(x: -20, y: yPos) // TODO CONST
                         .frame(alignment: .leading)
                 VStack(alignment: .leading, spacing: 6.0) {
                     Text("°")
@@ -412,7 +449,7 @@ struct ChartDraw {
 
                 }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                        .offset(x: 164, y: yPos) // TODO CONST
+                        .offset(x: 144, y: yPos) // TODO CONST
                         .frame(alignment: .leading)
                 VStack(alignment: .leading, spacing: 6.0) {
                     Text(min)
@@ -420,7 +457,7 @@ struct ChartDraw {
 
                 }
                         .frame(maxWidth: 25, maxHeight: .infinity, alignment: .trailing)
-                        .offset(x: 32, y: yPos) // TODO CONST
+                        .offset(x: 12, y: yPos) // TODO CONST
                         .frame(alignment: .leading)
                 VStack(alignment: .leading, spacing: 6.0) {
                     Text("'")
@@ -428,7 +465,7 @@ struct ChartDraw {
 
                 }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                        .offset(x: 195, y: yPos) // TODO CONST
+                        .offset(x: 175, y: yPos) // TODO CONST
                         .frame(alignment: .leading)
                 VStack(alignment: .leading, spacing: 6.0) {
                     Text(sec)
@@ -436,7 +473,7 @@ struct ChartDraw {
 
                 }
                         .frame(maxWidth: 25, maxHeight: .infinity, alignment: .trailing)
-                        .offset(x: 60, y: yPos) // TODO CONST
+                        .offset(x: 40, y: yPos) // TODO CONST
                         .frame(alignment: .leading)
                 VStack(alignment: .leading, spacing: 6.0) {
                     Text("\"")
@@ -444,7 +481,7 @@ struct ChartDraw {
 
                 }
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                        .offset(x: 225, y: yPos) // TODO CONST
+                        .offset(x: 205, y: yPos) // TODO CONST
                         .frame(alignment: .leading)
             }
         }
