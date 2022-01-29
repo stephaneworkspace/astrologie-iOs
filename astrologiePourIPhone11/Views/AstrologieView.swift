@@ -118,12 +118,17 @@ struct AstrologieView: View {
                                 Button(action: {
                                     swShowNatal = false
                                 }, label: {
-                                    Text("Fermer")
+                                    VStack {
+                                        Text("Fermer")
+                                        Text("")
+                                        Text("")
+                                    }
                                 }).padding().foregroundColor(.white)
                                 Spacer()
                             }
                         }
                         if swTransit {
+                            Spacer()
                             Button(action: {
                                 swShowTransit.toggle()
                             }, label: {
@@ -139,7 +144,11 @@ struct AstrologieView: View {
                                     Button(action: {
                                         swShowTransit = false
                                     }, label: {
-                                        Text("Fermer")
+                                        VStack {
+                                            Text("Fermer")
+                                            Text("")
+                                            Text("")
+                                        }
                                     }).padding().foregroundColor(.white)
                                     Spacer()
                                 }
