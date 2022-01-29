@@ -15,6 +15,7 @@
 		552E8A6492F621D3E2807CF7 /* ChartDraw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E88C2B939982C5289FCDD /* ChartDraw.swift */; };
 		552E8B02FAC2C1C0E423E791 /* ChartBodieImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E836DC53F8097740E79C7 /* ChartBodieImageView.swift */; };
 		552E8B3AC24831DAF6FE6FFE /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E855264D6A932CC35E8A6 /* About.swift */; };
+		552E8B42AB04539E02430C08 /* AstrologieInputsTransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E8AEDDA765FBC4F574EE7 /* AstrologieInputsTransitView.swift */; };
 		552E8B612964264026990065 /* BodieSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E88EC73EE663400FD6A81 /* BodieSelectView.swift */; };
 		552E8CB860A8889C36F47706 /* ChartZodiacView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E80FD3B3262614E2C8230 /* ChartZodiacView.swift */; };
 		552E8D53C7B1F2734031F347 /* data.json.example in Resources */ = {isa = PBXBuildFile; fileRef = 552E8CAB5E7E36614CDBFAFD /* data.json.example */; };
@@ -88,6 +89,7 @@
 		552E875599442BF4A256205B /* AstrologieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AstrologieView.swift; sourceTree = "<group>"; };
 		552E88C2B939982C5289FCDD /* ChartDraw.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartDraw.swift; sourceTree = "<group>"; };
 		552E88EC73EE663400FD6A81 /* BodieSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodieSelectView.swift; sourceTree = "<group>"; };
+		552E8AEDDA765FBC4F574EE7 /* AstrologieInputsTransitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AstrologieInputsTransitView.swift; sourceTree = "<group>"; };
 		552E8C163C597F29EAC3C709 /* AstrologieInputsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AstrologieInputsView.swift; sourceTree = "<group>"; };
 		552E8CAB5E7E36614CDBFAFD /* data.json.example */ = {isa = PBXFileReference; lastKnownFileType = file.example; path = data.json.example; sourceTree = "<group>"; };
 		F40444692797F0F900B74503 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				552E86DCC54FDB34A441809E /* ChartHouseView.swift */,
 				552E80FD3B3262614E2C8230 /* ChartZodiacView.swift */,
 				552E855264D6A932CC35E8A6 /* About.swift */,
+				552E8AEDDA765FBC4F574EE7 /* AstrologieInputsTransitView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -439,7 +442,7 @@
 			);
 			mainGroup = F4141E9C2797414800381179;
 			packageReferences = (
-				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */,
+				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */,
 			);
 			productRefGroup = F4141EA62797414800381179 /* Products */;
 			projectDirPath = "";
@@ -527,6 +530,7 @@
 				552E81560800FE949879A3DB /* ChartHouseView.swift in Sources */,
 				552E8CB860A8889C36F47706 /* ChartZodiacView.swift in Sources */,
 				552E8B3AC24831DAF6FE6FFE /* About.swift in Sources */,
+				552E8B42AB04539E02430C08 /* AstrologieInputsTransitView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -872,7 +876,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */ = {
+		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -885,7 +889,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		F4915299279D938D00911CA5 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */;
+			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */;
 			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -10,17 +10,36 @@ import Foundation
 
 
 struct ContentView: View {
+    @State var swLock: Bool = true
     @State var selected: Int
     @State var isActive: Bool = false
     @State var swPluton: Bool = false
     @State var swNode: Bool = false
     @State var swChiron: Bool = false
     @State var swCeres: Bool = false
+    var chartDefault: Swe.Chart = loadDefaultValue().0
+    @State var selectedDate: Date = loadDefaultValue().1
+    @State var selectedDateTransit: Date = Date()
+    @State var latNatal: Double = loadDefaultValue().0.nLat
+    @State var lngNatal: Double = loadDefaultValue().0.nLng
+    @State var latTransit: Double = loadDefaultValue().0.tLat
+    @State var lngTransit: Double = loadDefaultValue().0.tLng
+    @State var tzNatal: Int = Int(loadDefaultValue().0.nTimeZone)
+    @State var tzTransit: Int = Int(loadDefaultValue().0.tTimeZone)
+    @State var swShowNatal = false
+    @State var swShowTransit = false
     @Environment(\.colorScheme) var colorScheme: ColorScheme
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
+        let swe = Swe(
+                chart: loadValue(
+                        selectedDate: selectedDate,
+                        selectedDateTransit: selectedDateTransit,
+                        lat: (latNatal, latTransit),
+                        lng: (lngNatal, lngTransit),
+                        tz: (Int32(tzNatal), Int32(tzTransit))))
         VStack {
             if self.isActive {
                 ZStack {
@@ -37,26 +56,48 @@ struct ContentView: View {
                                         swPluton: $swPluton,
                                         swNode: $swNode,
                                         swChiron: $swChiron,
-                                        swCeres: $swCeres
+                                        swCeres: $swCeres,
+                                        selectedDate: $selectedDate,
+                                        selectedDateTransit: $selectedDateTransit,
+                                        latNatal: $latNatal,
+                                        lngNatal: $lngTransit,
+                                        latTransit: $latTransit,
+                                        lngTransit: $lngTransit,
+                                        tzNatal: $tzNatal,
+                                        tzTransit: $tzTransit,
+                                        swShowNatal: $swShowNatal,
+                                        swShowTransit: $swShowTransit,
+                                        swLock: $swLock
                                 )
                             }.tabItem {
                                 VStack {
                                     Image(systemName: "line.3.crossed.swirl.circle.fill")
                                     Text("Natal")
                                 }
-                            }.tag(0)
+                            }.tag(1)
                             AstrologieView(
                                     swTransit: true,
                                     swPluton: $swPluton,
                                     swNode: $swNode,
                                     swChiron: $swChiron,
-                                    swCeres: $swCeres
+                                    swCeres: $swCeres,
+                                    selectedDate: $selectedDate,
+                                    selectedDateTransit: $selectedDateTransit,
+                                    latNatal: $latNatal,
+                                    lngNatal: $lngTransit,
+                                    latTransit: $latTransit,
+                                    lngTransit: $lngTransit,
+                                    tzNatal: $tzNatal,
+                                    tzTransit: $tzTransit,
+                                    swShowNatal: $swShowNatal,
+                                    swShowTransit: $swShowTransit,
+                                    swLock: $swLock
                             ).tabItem {
                                 VStack {
                                     Image(systemName: "line.3.crossed.swirl.circle.fill")
-                                    Text("Natal et Transit")
+                                    Text("Transit")
                                 }
-                            }.tag(1)
+                            }.tag(2)
                             BodieSelectView(
                                     swPluton: $swPluton,
                                     swNode: $swNode,
@@ -67,13 +108,13 @@ struct ContentView: View {
                                     Image(systemName: "switch.2")
                                     Text("Sélection planètes")
                                 }
-                            }.tag(2)
+                            }.tag(3)
                             AboutView().tabItem {
                                 VStack {
                                     Image(systemName: "info.circle")
                                     Text("À propos")
                                 }
-                            }.tag(3)
+                            }.tag(4)
                         }.onAppear() {
                             UITabBar.appearance().barTintColor = UIColor(Color(hex: "aa9966"))
                             UITabBar.appearance().unselectedItemTintColor = .systemGray5
@@ -117,4 +158,99 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(selected: 0)
     }
+}
+
+func loadValue(
+        selectedDate: Date,
+        selectedDateTransit: Date,
+        lat: (Double, Double),
+        lng: (Double, Double),
+        tz: (Int32, Int32)) -> Swe.Chart {
+    let chartDefault: Swe.Chart = loadDefaultValue().0
+    //
+    let nLng = lng.0 // chartDefault.nLng
+    let tLng = lng.1 // chartDefault.tLng
+    let nLat = lat.0 // chartDefault.nLat
+    let tLat = lat.1 //chartDefault.tLat
+    let nTimeZone = tz.0 // chartDefault.nTimeZone
+    let tTimeZone = tz.1 // chartDefault.tTimeZone
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "YYYY"
+    let nYear = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nYear
+    let tYear = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tYear
+    dateFormatter.dateFormat = "MM"
+    let nMonth = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nMonth
+    let tMonth = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tMonth
+    dateFormatter.dateFormat = "dd"
+    let nDay = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nDay
+    let tDay = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tDay
+    dateFormatter.dateFormat = "hh"
+    let nHour = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nHour
+    let tHour = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tHour
+    dateFormatter.dateFormat = "mm"
+    let nMin = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nMin
+    let tMin = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tMin
+    return Swe.Chart(
+            nLat: nLat,
+            nLng: nLng,
+            nTimeZone: nTimeZone,
+            nYear: nYear,
+            nMonth: nMonth,
+            nDay: nDay,
+            nHour: nHour,
+            nMin: nMin,
+            tLat: tLat,
+            tLng: tLng,
+            tTimeZone: tTimeZone,
+            tYear: tYear,
+            tMonth: tMonth,
+            tDay: tDay,
+            tHour: tHour,
+            tMin: tMin)
+}
+
+func loadDefaultValue() -> (Swe.Chart, Date, Date) {
+    var decode: Swe.Chart = Swe.Chart.init(
+            nLat: 46.12,
+            nLng: 6.09,
+            nTimeZone: 2,
+            nYear: 1981,
+            nMonth: 1,
+            nDay: 1,
+            nHour: 0,
+            nMin: 0,
+            tLat: 46.12,
+            tLng: 6.09,
+            tTimeZone: 2,
+            tYear: 2022,
+            tMonth: 1,
+            tDay: 24,
+            tHour: 12,
+            tMin: 0)
+    do {
+        let path = Bundle.main.path(forResource: "data", ofType: "json")
+        let jsonData = try! String(contentsOfFile: path!).data(using: .utf8)!
+        decode = try JSONDecoder().decode(Swe.Chart.self, from: jsonData)
+    } catch {
+        print("Unable to open chart file")
+    }
+    var dateN = DateComponents()
+    dateN.year = Int(decode.nYear)
+    dateN.month = Int(decode.nMonth)
+    dateN.day = Int(decode.nDay)
+    dateN.hour = Int(decode.nHour)
+    dateN.minute = Int(decode.nMin)
+    let calandarNatal = Calendar(identifier: .gregorian).date(from: dateN)
+    let dateNatal = calandarNatal.unsafelyUnwrapped
+
+    var dateT = DateComponents()
+    dateT.year = Int(decode.tYear)
+    dateT.month = Int(decode.tMonth)
+    dateT.day = Int(decode.tDay)
+    dateT.hour = Int(decode.nHour)
+    dateT.minute = Int(decode.nMin)
+    let calandarTransit = Calendar(identifier: .gregorian).date(from: dateT)
+    let dateTransit = calandarTransit.unsafelyUnwrapped
+
+    return (decode, dateNatal, dateTransit)
 }

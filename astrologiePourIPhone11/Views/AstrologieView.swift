@@ -11,17 +11,19 @@ struct AstrologieView: View {
     @Binding var swNode: Bool
     @Binding var swChiron: Bool
     @Binding var swCeres: Bool
-    var FONTSIZE = 15.0
-    var chartDefault: Swe.Chart = loadDefaultValue().0
-    @State var selectedDate: Date = loadDefaultValue().1
-    @State var selectedDateTransit: Date = Date()
-    @State var latNatal: Double = loadDefaultValue().0.nLat
-    @State var lngNatal: Double = loadDefaultValue().0.nLng
-    @State var latTransit: Double = loadDefaultValue().0.tLat
-    @State var lngTransit: Double = loadDefaultValue().0.tLng
-    @State var tzNatal: Int32 = loadDefaultValue().0.nTimeZone
-    @State var tzTransit: Int32 = loadDefaultValue().0.tTimeZone
+    @Binding var selectedDate: Date
+    @Binding var selectedDateTransit: Date
+    @Binding var latNatal: Double
+    @Binding var lngNatal: Double
+    @Binding var latTransit: Double
+    @Binding var lngTransit: Double
+    @Binding var tzNatal: Int
+    @Binding var tzTransit: Int
+    @Binding var swShowNatal: Bool
+    @Binding var swShowTransit: Bool
+    @Binding var swLock: Bool
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    var FONTSIZE = 15.0
 
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -42,7 +44,7 @@ struct AstrologieView: View {
                         selectedDateTransit: selectedDateTransit,
                         lat: (latNatal, latTransit),
                         lng: (lngNatal, lngTransit),
-                        tz: (tzNatal, tzTransit)))
+                        tz: (Int32(tzNatal), Int32(tzTransit))))
         ZStack {
             Image(colorScheme == .light ? "bgl" : "bgd")
                     .resizable()
@@ -71,7 +73,7 @@ struct AstrologieView: View {
                                 swe: swe)
                     }
                     Spacer().frame(height: 20)
-                    ZStack {
+                    /*ZStack {
                         if swTransit {
                             VStack {
                                 Spacer()
@@ -87,6 +89,7 @@ struct AstrologieView: View {
                                         .clipShape(RoundedRectangle(cornerRadius: 12))
                             }
                         }
+                        /*
                         AstrologieInputsView(
                                 swTransit: $swTransit,
                                 selectedDate: $selectedDate,
@@ -96,26 +99,58 @@ struct AstrologieView: View {
                                 latTransit: $latTransit,
                                 lngTransit: $lngTransit,
                                 tzNatal: $tzNatal,
-                                tzTransit: $tzTransit)
+                                tzTransit: $tzTransit)*/
                     }
-                }
-                Array2View(
-                        swTransit: swTransit,
-                        transitType: .NatalNatal,
-                        swe: swe)
-                ZStack {
-                    VStack {
-                        Spacer()
-                                .frame(width: 390, height: 390)
-                                .background(.orange).opacity(0.1)
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                }*/
+                    HStack {
+                        Button(action: {
+                            swShowNatal.toggle()
+                        }, label: {
+                            Text("Saisie données natal")
+                        }).fullScreenCover(isPresented: $swShowNatal) {
+                            VStack {
+                                AstrologieInputsView(
+                                        swLock: $swLock,
+                                        selectedDate: $selectedDate,
+                                        lat: $latNatal,
+                                        lng: $lngNatal,
+                                        tz: $tzNatal)
+                                Button(action: {
+                                    swShowNatal = false
+                                }, label: {
+                                    Text("Fermer")
+                                }).padding().foregroundColor(.white)
+                                Spacer()
+                            }
+                        }
+                        if swTransit {
+                            Button(action: {
+                                swShowTransit.toggle()
+                            }, label: {
+                                Text("Saisie données transit")
+                            }).fullScreenCover(isPresented: $swShowTransit) {
+                                VStack {
+                                    AstrologieInputsTransitView(
+                                            swLock: $swLock,
+                                            selectedDate: $selectedDateTransit,
+                                            lat: $latTransit,
+                                            lng: $lngTransit,
+                                            tz: $tzTransit)
+                                    Button(action: {
+                                        swShowTransit = false
+                                    }, label: {
+                                        Text("Fermer")
+                                    }).padding().foregroundColor(.white)
+                                    Spacer()
+                                }
+                            }
+                        }
+
                     }
-                    ArrayView(
+                    Array2View(
                             swTransit: swTransit,
                             transitType: .NatalNatal,
                             swe: swe)
-                }
-                if swTransit {
                     ZStack {
                         VStack {
                             Spacer()
@@ -125,119 +160,38 @@ struct AstrologieView: View {
                         }
                         ArrayView(
                                 swTransit: swTransit,
-                                transitType: .NatalTransit,
+                                transitType: .NatalNatal,
                                 swe: swe)
                     }
-                    ZStack {
-                        VStack {
-                            Spacer()
-                                    .frame(width: 390, height: 390)
-                                    .background(.orange).opacity(0.1)
-                                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    if swTransit {
+                        ZStack {
+                            VStack {
+                                Spacer()
+                                        .frame(width: 390, height: 390)
+                                        .background(.orange).opacity(0.1)
+                                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                            }
+                            ArrayView(
+                                    swTransit: swTransit,
+                                    transitType: .NatalTransit,
+                                    swe: swe)
                         }
-                        ArrayView(
-                                swTransit: swTransit,
-                                transitType: .TransitTransit,
-                                swe: swe)
-                    }
+                        ZStack {
+                            VStack {
+                                Spacer()
+                                        .frame(width: 390, height: 390)
+                                        .background(.orange).opacity(0.1)
+                                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                            }
+                            ArrayView(
+                                    swTransit: swTransit,
+                                    transitType: .TransitTransit,
+                                    swe: swe)
+                        }
 
+                    }
                 }
             }
         }
     }
-}
-
-private func loadValue(
-        selectedDate: Date,
-        selectedDateTransit: Date,
-        lat: (Double, Double),
-        lng: (Double, Double),
-        tz: (Int32, Int32)) -> Swe.Chart {
-    let chartDefault: Swe.Chart = loadDefaultValue().0
-    //
-    let nLng = lng.0 // chartDefault.nLng
-    let tLng = lng.1 // chartDefault.tLng
-    let nLat = lat.0 // chartDefault.nLat
-    let tLat = lat.1 //chartDefault.tLat
-    let nTimeZone = tz.0 // chartDefault.nTimeZone
-    let tTimeZone = tz.1 // chartDefault.tTimeZone
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "YYYY"
-    let nYear = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nYear
-    let tYear = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tYear
-    dateFormatter.dateFormat = "MM"
-    let nMonth = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nMonth
-    let tMonth = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tMonth
-    dateFormatter.dateFormat = "dd"
-    let nDay = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nDay
-    let tDay = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tDay
-    dateFormatter.dateFormat = "hh"
-    let nHour = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nHour
-    let tHour = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tHour
-    dateFormatter.dateFormat = "mm"
-    let nMin = Int32(dateFormatter.string(from: selectedDate)) ?? chartDefault.nMin
-    let tMin = Int32(dateFormatter.string(from: selectedDateTransit)) ?? chartDefault.tMin
-    return Swe.Chart(
-            nLat: nLat,
-            nLng: nLng,
-            nTimeZone: nTimeZone,
-            nYear: nYear,
-            nMonth: nMonth,
-            nDay: nDay,
-            nHour: nHour,
-            nMin: nMin,
-            tLat: tLat,
-            tLng: tLng,
-            tTimeZone: tTimeZone,
-            tYear: tYear,
-            tMonth: tMonth,
-            tDay: tDay,
-            tHour: tHour,
-            tMin: tMin)
-}
-
-private func loadDefaultValue() -> (Swe.Chart, Date, Date) {
-    var decode: Swe.Chart = Swe.Chart.init(
-            nLat: 46.12,
-            nLng: 6.09,
-            nTimeZone: 2,
-            nYear: 1981,
-            nMonth: 1,
-            nDay: 1,
-            nHour: 0,
-            nMin: 0,
-            tLat: 46.12,
-            tLng: 6.09,
-            tTimeZone: 2,
-            tYear: 2022,
-            tMonth: 1,
-            tDay: 24,
-            tHour: 12,
-            tMin: 0)
-    do {
-        let path = Bundle.main.path(forResource: "data", ofType: "json")
-        let jsonData = try! String(contentsOfFile: path!).data(using: .utf8)!
-        decode = try JSONDecoder().decode(Swe.Chart.self, from: jsonData)
-    } catch {
-        print("Unable to open chart file")
-    }
-    var dateN = DateComponents()
-    dateN.year = Int(decode.nYear)
-    dateN.month = Int(decode.nMonth)
-    dateN.day = Int(decode.nDay)
-    dateN.hour = Int(decode.nHour)
-    dateN.minute = Int(decode.nMin)
-    let calandarNatal = Calendar(identifier: .gregorian).date(from: dateN)
-    let dateNatal = calandarNatal.unsafelyUnwrapped
-
-    var dateT = DateComponents()
-    dateT.year = Int(decode.tYear)
-    dateT.month = Int(decode.tMonth)
-    dateT.day = Int(decode.tDay)
-    dateT.hour = Int(decode.nHour)
-    dateT.minute = Int(decode.nMin)
-    let calandarTransit = Calendar(identifier: .gregorian).date(from: dateT)
-    let dateTransit = calandarTransit.unsafelyUnwrapped
-
-    return (decode, dateNatal, dateTransit)
 }

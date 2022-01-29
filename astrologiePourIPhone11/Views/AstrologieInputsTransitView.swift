@@ -5,13 +5,13 @@
 import Foundation
 import SwiftUI
 
-struct AstrologieInputsView: View {
+struct AstrologieInputsTransitView: View {
     @Binding var swLock: Bool
     @Binding var selectedDate: Date
     @Binding var lat: Double
     @Binding var lng: Double
-    @State var latC: Double = loadDefaultValue().0.nLat
-    @State var lngC: Double = loadDefaultValue().0.nLng
+    @State var latC: Double = loadDefaultValue().0.tLat
+    @State var lngC: Double = loadDefaultValue().0.tLng
     @Binding var tz: Int
     @FocusState private var swlat: Bool
     @FocusState private var swlng: Bool
@@ -41,7 +41,7 @@ struct AstrologieInputsView: View {
                 HStack {
                     Spacer()
                     VStack {
-                            Text("Natal")
+                            Text("Transit")
                             DatePicker(
                                     "Date de naissance",
                                     selection: $selectedDate,
