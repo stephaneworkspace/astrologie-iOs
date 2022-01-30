@@ -333,7 +333,15 @@ func loadDefaultValue() -> (Swe.Chart, Date, Date) {
             } catch {
                 fatalError("Couldn't load \(filename) from documents directory:\n\(error)")
             }
+            //
+            do {
+                let decoder = JSONDecoder()
+                decode = try decoder.decode(Swe.Chart.self, from: data)
+            } catch {
+                fatalError("Couldn't parse \(filename) as Swe.Chart.self:\n\(error)")
+            }
         } else {
+            /*
             // If the file doesn't exist in the documents directory load it from the bundle
             guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
                     else {
@@ -344,15 +352,9 @@ func loadDefaultValue() -> (Swe.Chart, Date, Date) {
                 data = try Data(contentsOf: file)
             } catch {
                 fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
-            }
+            }*/
         }
 
-        do {
-            let decoder = JSONDecoder()
-            decode = try decoder.decode(Swe.Chart.self, from: data)
-        } catch {
-            fatalError("Couldn't parse \(filename) as Swe.Chart.self:\n\(error)")
-        }
 
     } catch {
         do {
