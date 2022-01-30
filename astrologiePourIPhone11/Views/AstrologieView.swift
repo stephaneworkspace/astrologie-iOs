@@ -192,10 +192,10 @@ struct AstrologieView: View {
                     ZStack {
                         VStack {
                             Spacer()
-                                    .frame(width: 390, height: 390)
+                                    .frame(width: 390, height: 305)
                                     .background(.orange).opacity(0.1)
                                     .clipShape(RoundedRectangle(cornerRadius: 12))
-                        }
+                        }.offset(x: 0, y: -35)
                         ArrayView(
                                 swTransit: swTransit,
                                 transitType: .NatalNatal,
@@ -205,10 +205,10 @@ struct AstrologieView: View {
                         ZStack {
                             VStack {
                                 Spacer()
-                                        .frame(width: 390, height: 390)
+                                        .frame(width: 390, height: 285)
                                         .background(.orange).opacity(0.1)
                                         .clipShape(RoundedRectangle(cornerRadius: 12))
-                            }
+                            }.offset(x: 0, y: -55)
                             ArrayView(
                                     swTransit: swTransit,
                                     transitType: .NatalTransit,
@@ -217,10 +217,10 @@ struct AstrologieView: View {
                         ZStack {
                             VStack {
                                 Spacer()
-                                        .frame(width: 390, height: 390)
+                                        .frame(width: 390, height: 305)
                                         .background(.orange).opacity(0.1)
                                         .clipShape(RoundedRectangle(cornerRadius: 12))
-                            }
+                            }.offset(x: 0, y: -35)
                             ArrayView(
                                     swTransit: swTransit,
                                     transitType: .TransitTransit,
