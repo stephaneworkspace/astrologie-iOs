@@ -39,7 +39,11 @@ struct AstrologieInputsView: View {
                 HStack {
                     Spacer()
                     VStack {
-                            Text("Natal")
+                            Image("natall")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                    .frame(height: 100)
                             DatePicker(
                                     "Date de naissance",
                                     selection: $selectedDate,
@@ -117,8 +121,13 @@ struct AstrologieInputsView: View {
                                         .pickerStyle(WheelPickerStyle())
                             }
                             //     .font(.system(size: FONTSIZE, weight: .light, design: .default))
-                            HStack {
-                                if swlat || swlng {
+                        HStack {
+                            if swlat || swlng {
+                                ZStack {
+                                    Spacer()
+                                            .frame(width: 150, height: 50)
+                                            .background(.orange).opacity(0.1)
+                                            .clipShape(RoundedRectangle(cornerRadius: 12))
                                     Button("Close keyboard") {
                                         swlat = false
                                         swlng = false
@@ -129,11 +138,14 @@ struct AstrologieInputsView: View {
                                             .overlay(RoundedRectangle(cornerRadius: 10)
                                                     .stroke(lineWidth: 1)
                                                     .foregroundColor(colorScheme == .light ? .black : .white))
+
                                 }
+
                             }
+                        }
                     }
                             .padding()
-                    }
+                }
                     Spacer()
                 }
             }

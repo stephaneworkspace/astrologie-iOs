@@ -39,8 +39,12 @@ struct AstrologieInputsTransitView: View {
                 HStack {
                     Spacer()
                     VStack {
-                            Text("Transit")
-                            DatePicker(
+                        Image("transit")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .frame(height: 100)
+                        DatePicker(
                                     "Date de naissance",
                                     selection: $selectedDate,
                                     displayedComponents: [.date, .hourAndMinute]
@@ -119,16 +123,23 @@ struct AstrologieInputsTransitView: View {
                             //     .font(.system(size: FONTSIZE, weight: .light, design: .default))
                             HStack {
                                 if swlat || swlng {
-                                    Button("Close keyboard") {
-                                        swlat = false
-                                        swlng = false
+                                    ZStack {
+                                        Spacer()
+                                                .frame(width: 150, height: 50)
+                                                .background(.orange).opacity(0.1)
+                                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                        Button("Close keyboard") {
+                                            swlat = false
+                                            swlng = false
+                                        }
+                                                .foregroundColor(colorScheme == .light ? .black : .white)
+                                                .padding()
+                                                .frame(width: 150, height: 50)
+                                                .overlay(RoundedRectangle(cornerRadius: 10)
+                                                        .stroke(lineWidth: 1)
+                                                        .foregroundColor(colorScheme == .light ? .black : .white))
+
                                     }
-                                            .foregroundColor(colorScheme == .light ? .black : .white)
-                                            .padding()
-                                            .frame(width: 150, height: 50)
-                                            .overlay(RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(lineWidth: 1)
-                                                    .foregroundColor(colorScheme == .light ? .black : .white))
 
                                 }
                             }
