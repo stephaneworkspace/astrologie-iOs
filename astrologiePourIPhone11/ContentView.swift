@@ -302,7 +302,7 @@ func loadDefaultValue() -> (Swe.Chart, Date, Date) {
             nLat: 46.12,
             nLng: 6.09,
             nTimeZone: 2,
-            nYear: 1981,
+            nYear: 1984,
             nMonth: 1,
             nDay: 1,
             nHour: 0,

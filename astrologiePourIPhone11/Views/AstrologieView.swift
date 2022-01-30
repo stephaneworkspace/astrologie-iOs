@@ -113,23 +113,39 @@ struct AstrologieView: View {
                                     latNatal = latNatalC
                                     lngNatal = lngNatalC
                                     tzNatal = tzNatalC
+                                    let dateFormatter = DateFormatter()
+                                    dateFormatter.dateFormat = "YYYY"
+                                    let nYear = Int32(dateFormatter.string(from: selectedDateNatal)) ?? 1984
+                                    let tYear = Int32(dateFormatter.string(from: selectedDateTransit)) ?? 1984
+                                    dateFormatter.dateFormat = "MM"
+                                    let nMonth = Int32(dateFormatter.string(from: selectedDateNatal)) ?? 1
+                                    let tMonth = Int32(dateFormatter.string(from: selectedDateTransit)) ?? 1
+                                    dateFormatter.dateFormat = "dd"
+                                    let nDay = Int32(dateFormatter.string(from: selectedDateNatal)) ?? 1
+                                    let tDay = Int32(dateFormatter.string(from: selectedDateTransit)) ?? 1
+                                    dateFormatter.dateFormat = "hh"
+                                    let nHour = Int32(dateFormatter.string(from: selectedDateNatal)) ?? 0
+                                    let tHour = Int32(dateFormatter.string(from: selectedDateTransit)) ?? 0
+                                    dateFormatter.dateFormat = "mm"
+                                    let nMin = Int32(dateFormatter.string(from: selectedDateNatal)) ?? 0
+                                    let tMin = Int32(dateFormatter.string(from: selectedDateTransit)) ?? 0
                                     saveChart(chart: Swe.Chart(
                                             nLat: latNatal,
                                             nLng: lngNatal,
                                             nTimeZone: Int32(tzNatal),
-                                            nYear: 1981,
-                                            nMonth: 1,
-                                            nDay: 1,
-                                            nHour: 1,
-                                            nMin: 1,
-                                            tLat: 0.0,
-                                            tLng: 0.0,
-                                            tTimeZone: 0,
-                                            tYear: 1981,
-                                            tMonth: 1,
-                                            tDay: 1,
-                                            tHour: 0,
-                                            tMin: 0))
+                                            nYear: nYear,
+                                            nMonth: nMonth,
+                                            nDay: nDay,
+                                            nHour: nHour,
+                                            nMin: nMin,
+                                            tLat: latTransit,
+                                            tLng: lngTransit,
+                                            tTimeZone: Int32(tzTransit),
+                                            tYear: tYear,
+                                            tMonth: tMonth,
+                                            tDay: tDay,
+                                            tHour: tHour,
+                                            tMin: tMin))
                                     swShowNatal = false
                                 }, label: {
                                     VStack {
@@ -179,6 +195,39 @@ struct AstrologieView: View {
                                         latTransit = latTransitC
                                         lngTransit = lngTransitC
                                         tzTransit = tzTransitC
+                                        let dateFormatter = DateFormatter()
+                                        dateFormatter.dateFormat = "YYYY"
+                                        let nYear = Int32(dateFormatter.string(from: selectedDateNatal)) ?? 1984
+                                        let tYear = Int32(dateFormatter.string(from: selectedDateTransit)) ?? 1984
+                                        dateFormatter.dateFormat = "MM"
+                                        let nMonth = Int32(dateFormatter.string(from: selectedDateNatal)) ?? 1
+                                        let tMonth = Int32(dateFormatter.string(from: selectedDateTransit)) ?? 1
+                                        dateFormatter.dateFormat = "dd"
+                                        let nDay = Int32(dateFormatter.string(from: selectedDateNatal)) ?? 1
+                                        let tDay = Int32(dateFormatter.string(from: selectedDateTransit)) ?? 1
+                                        dateFormatter.dateFormat = "hh"
+                                        let nHour = Int32(dateFormatter.string(from: selectedDateNatal)) ?? 0
+                                        let tHour = Int32(dateFormatter.string(from: selectedDateTransit)) ?? 0
+                                        dateFormatter.dateFormat = "mm"
+                                        let nMin = Int32(dateFormatter.string(from: selectedDateNatal)) ?? 0
+                                        let tMin = Int32(dateFormatter.string(from: selectedDateTransit)) ?? 0
+                                        saveChart(chart: Swe.Chart(
+                                                nLat: latNatal,
+                                                nLng: lngNatal,
+                                                nTimeZone: Int32(tzNatal),
+                                                nYear: nYear,
+                                                nMonth: nMonth,
+                                                nDay: nDay,
+                                                nHour: nHour,
+                                                nMin: nMin,
+                                                tLat: latTransit,
+                                                tLng: lngTransit,
+                                                tTimeZone: Int32(tzTransit),
+                                                tYear: tYear,
+                                                tMonth: tMonth,
+                                                tDay: tDay,
+                                                tHour: tHour,
+                                                tMin: tMin))
                                         swShowTransit = false
                                     }, label: {
                                         VStack {
