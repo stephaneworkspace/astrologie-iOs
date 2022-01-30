@@ -8,15 +8,16 @@ import SwiftUI
 struct ArrayView: View {
     @State var swTransit: Bool
     @State var transitType: Swe.TransitType
+    var sizeHeight: CGFloat
     var swe: Swe
     var body: some View {
         switch transitType {
         case .NatalNatal:
-            ArrayDetailView(swe: swe, transitType: transitType)
+            ArrayDetailView(sizeHeight: sizeHeight, swe: swe, transitType: transitType)
         case .NatalTransit:
-            ArrayDetailView(swe: swe, transitType: transitType)
+            ArrayDetailView(sizeHeight: sizeHeight, swe: swe, transitType: transitType)
         case .TransitTransit:
-            ArrayDetailView(swe: swe, transitType: transitType)
+            ArrayDetailView(sizeHeight: sizeHeight, swe: swe, transitType: transitType)
         }
     }
 }
@@ -92,6 +93,7 @@ struct Array2BodieView: View {
 
 struct ArrayDetailView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    var sizeHeight: CGFloat
     var swe: Swe
     let sizeMax = 390.0
     var size = 300.0
@@ -103,6 +105,7 @@ struct ArrayDetailView: View {
             ZStack {
                 ChartDraw.DrawTransit(size: size, transitType: transitType)
                         .stroke(colorScheme == .light ? .black : .white)
+                        .offset(x: 0, y: -30)
                 ForEach(0...forlopp.count - 1, id: \.self) { idx in
                     cD.drawArrayBodie(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
                 }
@@ -121,6 +124,6 @@ struct ArrayDetailView: View {
                     }
                 }
             }.padding()
-        }.frame(width: sizeMax, height: sizeMax)
+        }.frame(width: sizeMax, height: sizeHeight)
     }
 }

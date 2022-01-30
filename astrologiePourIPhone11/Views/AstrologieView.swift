@@ -199,8 +199,12 @@ struct AstrologieView: View {
                         ArrayView(
                                 swTransit: swTransit,
                                 transitType: .NatalNatal,
+                                sizeHeight: 305,
                                 swe: swe)
                     }
+                    VStack {
+
+                    }.frame(height: 35) // TODO CONST
                     if swTransit {
                         ZStack {
                             VStack {
@@ -212,8 +216,12 @@ struct AstrologieView: View {
                             ArrayView(
                                     swTransit: swTransit,
                                     transitType: .NatalTransit,
+                                    sizeHeight: 285,
                                     swe: swe)
                         }
+                        VStack {
+
+                        }.frame(height: -5) // TODO CONST
                         ZStack {
                             VStack {
                                 Spacer()
@@ -224,9 +232,12 @@ struct AstrologieView: View {
                             ArrayView(
                                     swTransit: swTransit,
                                     transitType: .TransitTransit,
+                                    sizeHeight: 305,
                                     swe: swe)
                         }
+                        VStack {
 
+                        }.frame(height: 30) // TODO CONST
                     }
                 }
             }
