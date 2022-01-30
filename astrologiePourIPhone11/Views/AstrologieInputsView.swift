@@ -28,7 +28,7 @@ struct AstrologieInputsView: View {
     }()
     var FONTSIZE = 15.0
     private func localize() {
-        var locationManager = CLLocationManager()
+        let locationManager = CLLocationManager()
         locationManager.requestWhenInUseAuthorization()
     }
     var body: some View {
@@ -104,24 +104,6 @@ struct AstrologieInputsView: View {
                                     })
                                 }
                             }
-                            HStack {
-                                Text("Timezone")
-                                Picker("Timezone", selection: $tz, content: {
-                                    ForEach(-12...0, id: \.self) { idx in
-                                        if idx != 0 {
-                                            Text("GMT " + idx.formatted()).tag(idx)
-                                        }
-                                    }
-                                    ForEach(0...12, id: \.self) { idx in
-                                        Text("GMT +" + idx.formatted()).tag(idx)
-                                    }
-                                })
-                                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                                        .foregroundColor(colorScheme == .light ? .black : .white)
-                                        .font(.system(size: FONTSIZE, weight: .light, design: .default))
-                                        .pickerStyle(WheelPickerStyle())
-                            }
-                            //     .font(.system(size: FONTSIZE, weight: .light, design: .default))
                         HStack {
                             if swlat || swlng {
                                 ZStack {
@@ -144,8 +126,27 @@ struct AstrologieInputsView: View {
 
                             }
                         }
+                            HStack {
+                                Text("Timezone")
+                                Picker("Timezone", selection: $tz, content: {
+                                    ForEach(-12...0, id: \.self) { idx in
+                                        if idx != 0 {
+                                            Text("GMT " + idx.formatted()).tag(idx)
+                                        }
+                                    }
+                                    ForEach(0...12, id: \.self) { idx in
+                                        Text("GMT +" + idx.formatted()).tag(idx)
+                                    }
+                                })
+                                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                                        .foregroundColor(colorScheme == .light ? .black : .white)
+                                        .font(.system(size: FONTSIZE, weight: .light, design: .default))
+                                        .pickerStyle(WheelPickerStyle())
+                            }
+                            //     .font(.system(size: FONTSIZE, weight: .light, design: .default))
                     }
                             .padding()
+                    Spacer()
                 }
                     Spacer()
                 }

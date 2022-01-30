@@ -240,7 +240,7 @@ struct ChartDraw {
         func path(in rect: CGRect) -> Path {
             var path = Path()
             let cas = Double(size) / 16
-            var MAX = 14 // TODO const global
+            let MAX = 14 // TODO const global
             var max = 14
             if transitType == .NatalTransit {
                 max -= 2
@@ -302,7 +302,7 @@ struct ChartDraw {
         let casDiv = 1.1
         let xPos = bodPos - cas
         let yPos = bodPos + (cas / 2) + (cas * Double(jdx)) - fix
-        let bod = Swe.Bodies(rawValue: Int32(idx)) ?? Swe.Bodies.sun
+        _ = Swe.Bodies(rawValue: Int32(idx)) ?? Swe.Bodies.sun
         var body: some View {
             Image("b" + idx.formatted())
                     .resizable()
@@ -321,7 +321,7 @@ struct ChartDraw {
         let fix: Double = 30 //30.0 // sizeMax et size problem (/4)
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
-        let casDiv = 1.1
+        _ = 1.1
         let xPos = bodPos + (cas / 2)
         let yPos = bodPos + (cas / 2) + (cas * Double(jdx)) - fix
         let bod = Swe.Bodies(rawValue: Int32(idx)) ?? Swe.Bodies.sun

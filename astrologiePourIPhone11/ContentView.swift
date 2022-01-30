@@ -33,7 +33,7 @@ struct ContentView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     private func localize() {
-        var locationManager = CLLocationManager()
+        let locationManager = CLLocationManager()
         locationManager.requestWhenInUseAuthorization()
     }
 
@@ -46,7 +46,7 @@ struct ContentView: View {
                         lng: (lngNatal, lngTransit),
                         tz: (Int32(tzNatal), Int32(tzTransit))))
         VStack {
-            //Text(screenSize.width.formatted() + " " + screenSize.height.formatted())
+            // Text(screenSize.width.formatted() + " " + screenSize.height.formatted())
             if isActive {
                 ZStack {
                     BgView()

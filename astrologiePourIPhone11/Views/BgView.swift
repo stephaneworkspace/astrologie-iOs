@@ -25,8 +25,16 @@ struct BgView: View {
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.3)
-        }
-        else {
+        } else if screenSize.width == 1024 && screenSize.height == 1366 {
+            // iPad Pro
+            Image(colorScheme == .light ? "bgliPadPro" : "bgdiPadPro")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                    .opacity(0.3)
+
+        } else {
             //
             Image(colorScheme == .light ? "bgl" : "bgd")
                     .resizable()

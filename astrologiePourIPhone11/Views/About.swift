@@ -12,18 +12,17 @@ struct AboutView: View {
         ZStack {
             BgView()
             VStack {
-                VStack {
-                    Spacer()
-                    Image("bressani.dev")
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    Text("Développé par bressani.dev (Stéphane Bressani)")
-                    Spacer()
-                    Text("Cette application est sous license GNU public license version 3.")
-                    Spacer()
-                    Text("Elle utilise la libraiaire swiss ephemeris developé par Dieter Koch and Alois Treindl en Dual license (GNU v2 ou supérieur ou commercial)")
-                    Spacer()
-                    Text("Cette application utilise aussi le package swift Zip en MIT par Roy Marmelstein")
-                    Spacer()
+                Image("bressani.dev")
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                VStack(alignment: .trailing) {
+                    Text("""
+                         Développé par bressani.dev (Stéphane Bressani)\n
+                         \n
+                         Cette application est sous license GNU public license version 3.\n
+                         \n
+                         Elle utilise la libraiaire swiss ephemeris developé parDieter Koch and Alois Treindl en Dual license(GNU v2 ou supérieur / commercial)\n
+                         \nAinsi que le package swift Zip en MIT par Roy Marmelstein
+                         """)
                 }
             }.padding()
         }

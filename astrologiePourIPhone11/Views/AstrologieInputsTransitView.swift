@@ -28,7 +28,7 @@ struct AstrologieInputsTransitView: View {
     }()
     var FONTSIZE = 15.0
     private func localize() {
-        var locationManager = CLLocationManager()
+        let locationManager = CLLocationManager()
         locationManager.requestWhenInUseAuthorization()
     }
     var body: some View {
@@ -76,7 +76,7 @@ struct AstrologieInputsTransitView: View {
                                     Button(action: {
                                         if (CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
                                                 CLLocationManager.authorizationStatus() == .authorizedAlways) {
-                                            var locationManager = CLLocationManager()
+                                            let locationManager = CLLocationManager()
                                             locationManager.requestWhenInUseAuthorization()
                                             var currentLoc: CLLocation!
                                             currentLoc = locationManager.location
@@ -107,8 +107,30 @@ struct AstrologieInputsTransitView: View {
 
                                 }
                             }
-                            HStack {
-                                Text("Timezone")
+                        HStack {
+                            if swlat || swlng {
+                                ZStack {
+                                    Spacer()
+                                            .frame(width: 150, height: 50)
+                                            .background(.orange).opacity(0.1)
+                                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                                    Button("Close keyboard") {
+                                        swlat = false
+                                        swlng = false
+                                    }
+                                            .foregroundColor(colorScheme == .light ? .black : .white)
+                                            .padding()
+                                            .frame(width: 150, height: 50)
+                                            .overlay(RoundedRectangle(cornerRadius: 10)
+                                                    .stroke(lineWidth: 1)
+                                                    .foregroundColor(colorScheme == .light ? .black : .white))
+
+                                }
+
+                            }
+                        }
+                        HStack {
+                            Text("Timezone")
                                 Picker("Timezone", selection: $tz, content: {
                                     ForEach(-12...0, id: \.self) { idx in
                                         if idx != 0 {
@@ -125,30 +147,9 @@ struct AstrologieInputsTransitView: View {
                                         .pickerStyle(WheelPickerStyle())
                             }
                             //     .font(.system(size: FONTSIZE, weight: .light, design: .default))
-                            HStack {
-                                if swlat || swlng {
-                                    ZStack {
-                                        Spacer()
-                                                .frame(width: 150, height: 50)
-                                                .background(.orange).opacity(0.1)
-                                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                                        Button("Close keyboard") {
-                                            swlat = false
-                                            swlng = false
-                                        }
-                                                .foregroundColor(colorScheme == .light ? .black : .white)
-                                                .padding()
-                                                .frame(width: 150, height: 50)
-                                                .overlay(RoundedRectangle(cornerRadius: 10)
-                                                        .stroke(lineWidth: 1)
-                                                        .foregroundColor(colorScheme == .light ? .black : .white))
-
-                                    }
-
-                                }
-                            }
                     }
                             .padding()
+                    Spacer()
                     }
                     Spacer()
                 }
