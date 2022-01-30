@@ -196,6 +196,9 @@ struct AstrologieView: View {
                                     .background(.orange).opacity(0.1)
                                     .clipShape(RoundedRectangle(cornerRadius: 12))
                         }.offset(x: 0, y: -35)
+                        VStack {
+                            Image("natalArray").resizable().frame(width: 150, height: 80)
+                        }.offset(x: 150, y: -160)
                         ArrayView(
                                 swTransit: swTransit,
                                 transitType: .NatalNatal,
