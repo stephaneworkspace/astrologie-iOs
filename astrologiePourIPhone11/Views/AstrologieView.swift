@@ -198,7 +198,7 @@ struct AstrologieView: View {
                         }.offset(x: 0, y: -35)
                         VStack {
                             Image("natalArray").resizable().frame(width: 150, height: 80)
-                        }.offset(x: 150, y: -160)
+                        }.offset(x: 152, y: -160)
                         ArrayView(
                                 swTransit: swTransit,
                                 transitType: .NatalNatal,
@@ -216,6 +216,12 @@ struct AstrologieView: View {
                                         .background(.orange).opacity(0.1)
                                         .clipShape(RoundedRectangle(cornerRadius: 12))
                             }.offset(x: 0, y: -55)
+                            VStack {
+                                Image("natalArray").resizable().frame(width: 150, height: 80)
+                            }.offset(x: 152, y: -170)
+                            VStack {
+                                Image("transitArray").resizable().frame(width: 210, height: 80)
+                            }.offset(x: 145, y: -125)
                             ArrayView(
                                     swTransit: swTransit,
                                     transitType: .NatalTransit,
@@ -232,6 +238,9 @@ struct AstrologieView: View {
                                         .background(.orange).opacity(0.1)
                                         .clipShape(RoundedRectangle(cornerRadius: 12))
                             }.offset(x: 0, y: -35)
+                            VStack {
+                                Image("transitArray").resizable().frame(width: 210, height: 80)
+                            }.offset(x: 145, y: -160)
                             ArrayView(
                                     swTransit: swTransit,
                                     transitType: .TransitTransit,
