@@ -19,7 +19,6 @@
 		552E8B612964264026990065 /* BodieSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E88EC73EE663400FD6A81 /* BodieSelectView.swift */; };
 		552E8BD9262B90C28D5489E3 /* BgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E8D31C26756A41821AA8B /* BgView.swift */; };
 		552E8CB860A8889C36F47706 /* ChartZodiacView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E80FD3B3262614E2C8230 /* ChartZodiacView.swift */; };
-		552E8D53C7B1F2734031F347 /* data.json.example in Resources */ = {isa = PBXBuildFile; fileRef = 552E8CAB5E7E36614CDBFAFD /* data.json.example */; };
 		552E8E7ADADEF58DCAB5C1A7 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E8110612D048FF9B074FD /* System.swift */; };
 		552E8FE80DB0CD0749FEFD11 /* ChartAspectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E8005EE2AF0BEB036417B /* ChartAspectView.swift */; };
 		F404446A2797F0F900B74503 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F40444692797F0F900B74503 /* .gitignore */; };
@@ -93,7 +92,6 @@
 		552E88EC73EE663400FD6A81 /* BodieSelectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BodieSelectView.swift; sourceTree = "<group>"; };
 		552E8AEDDA765FBC4F574EE7 /* AstrologieInputsTransitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AstrologieInputsTransitView.swift; sourceTree = "<group>"; };
 		552E8C163C597F29EAC3C709 /* AstrologieInputsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AstrologieInputsView.swift; sourceTree = "<group>"; };
-		552E8CAB5E7E36614CDBFAFD /* data.json.example */ = {isa = PBXFileReference; lastKnownFileType = file.example; path = data.json.example; sourceTree = "<group>"; };
 		552E8D31C26756A41821AA8B /* BgView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BgView.swift; sourceTree = "<group>"; };
 		F40444692797F0F900B74503 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F404446B2797F11600B74503 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
@@ -283,7 +281,6 @@
 				F4141ED32797417900381179 /* Swe */,
 				F40444692797F0F900B74503 /* .gitignore */,
 				F404446B2797F11600B74503 /* data.json */,
-				552E8CAB5E7E36614CDBFAFD /* data.json.example */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -461,7 +458,7 @@
 			);
 			mainGroup = F4141E9C2797414800381179;
 			packageReferences = (
-				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */,
+				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */,
 			);
 			productRefGroup = F4141EA62797414800381179 /* Products */;
 			projectDirPath = "";
@@ -490,7 +487,6 @@
 				F4141F17279741A100381179 /* CMakeLists.txt in Resources */,
 				F4141EAD2797414900381179 /* Assets.xcassets in Resources */,
 				F4141F0D279741A100381179 /* sefstars.txt in Resources */,
-				552E8D53C7B1F2734031F347 /* data.json.example in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,7 +904,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */ = {
+		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -921,7 +917,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		F4915299279D938D00911CA5 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */;
+			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */;
 			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -253,6 +253,50 @@ func loadValue(
             tMin: tMin)
 }
 
+// Read JSON directory
+func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
+
+func load<T: Decodable>(_ filename: String) -> T {
+    let data: Data
+
+    // Check that the fileExists in the documents directory
+    let filemanager = FileManager.default
+    let localPath = getDocumentsDirectory().appendingPathComponent(filename)
+
+    if filemanager.fileExists(atPath: localPath.path) {
+
+        do {
+            data = try Data(contentsOf: localPath)
+        } catch {
+            fatalError("Couldn't load \(filename) from documents directory:\n\(error)")
+        }
+
+    } else {
+        // If the file doesn't exist in the documents directory load it from the bundle
+        guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
+                else {
+            fatalError("Couldn't find \(filename) in main bundle.")
+        }
+
+        do {
+            data = try Data(contentsOf: file)
+        } catch {
+            fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
+        }
+    }
+
+
+    do {
+        let decoder = JSONDecoder()
+        return try decoder.decode(T.self, from: data)
+    } catch {
+        fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
+    }
+}
+
 func loadDefaultValue() -> (Swe.Chart, Date, Date) {
     var decode: Swe.Chart = Swe.Chart.init(
             nLat: 46.12,
@@ -271,13 +315,56 @@ func loadDefaultValue() -> (Swe.Chart, Date, Date) {
             tDay: 24,
             tHour: 12,
             tMin: 0)
+
     do {
-        let path = Bundle.main.path(forResource: "data", ofType: "json")
-        let jsonData = try! String(contentsOfFile: path!).data(using: .utf8)!
-        decode = try JSONDecoder().decode(Swe.Chart.self, from: jsonData)
+        let data: Data
+        let filename = "save.json"
+        // Check that the fileExists in the documents directory
+        let filemanager = FileManager.default
+        let localPath = getDocumentsDirectory().appendingPathComponent(filename)
+
+        if filemanager.fileExists(atPath: localPath.path) {
+            do {
+                do {
+                    data = try Data(contentsOf: localPath)
+                } catch {
+                    fatalError("Couldn't load save.json from documents directory:\n\(error)")
+                }
+            } catch {
+                fatalError("Couldn't load \(filename) from documents directory:\n\(error)")
+            }
+        } else {
+            // If the file doesn't exist in the documents directory load it from the bundle
+            guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
+                    else {
+                fatalError("Couldn't find \(filename) in main bundle.")
+            }
+
+            do {
+                data = try Data(contentsOf: file)
+            } catch {
+                fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
+            }
+        }
+
+        do {
+            let decoder = JSONDecoder()
+            decode = try decoder.decode(Swe.Chart.self, from: data)
+        } catch {
+            fatalError("Couldn't parse \(filename) as Swe.Chart.self:\n\(error)")
+        }
+
     } catch {
-        print("Unable to open chart file")
+        do {
+            let path = Bundle.main.path(forResource: "data", ofType: "json")
+            let jsonData = try! String(contentsOfFile: path!).data(using: .utf8)!
+            decode = try JSONDecoder().decode(Swe.Chart.self, from: jsonData)
+        } catch {
+            print("Unable to open chart file")
+        }
+        print("Unable to open saved chart file")
     }
+
     var dateN = DateComponents()
     dateN.year = Int(decode.nYear)
     dateN.month = Int(decode.nMonth)

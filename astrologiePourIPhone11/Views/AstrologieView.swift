@@ -113,6 +113,23 @@ struct AstrologieView: View {
                                     latNatal = latNatalC
                                     lngNatal = lngNatalC
                                     tzNatal = tzNatalC
+                                    saveChart(chart: Swe.Chart(
+                                            nLat: latNatal,
+                                            nLng: lngNatal,
+                                            nTimeZone: Int32(tzNatal),
+                                            nYear: 1981,
+                                            nMonth: 1,
+                                            nDay: 1,
+                                            nHour: 1,
+                                            nMin: 1,
+                                            tLat: 0.0,
+                                            tLng: 0.0,
+                                            tTimeZone: 0,
+                                            tYear: 1981,
+                                            tMonth: 1,
+                                            tDay: 1,
+                                            tHour: 0,
+                                            tMin: 0))
                                     swShowNatal = false
                                 }, label: {
                                     VStack {
@@ -254,5 +271,16 @@ struct AstrologieView: View {
                 }
             }
         }
+    }
+}
+
+func saveChart(chart: Swe.Chart) {
+    do {
+        let encoded = try JSONEncoder().encode(chart)
+        let jsonString = String(data: encoded, encoding: .utf8)
+        let url = getDocumentsDirectory().appendingPathComponent("save.json")
+        try jsonString?.write(to: url, atomically: true, encoding: .utf8)
+    } catch {
+        print("Unable to open chart file")
     }
 }
