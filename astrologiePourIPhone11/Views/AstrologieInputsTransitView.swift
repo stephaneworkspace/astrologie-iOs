@@ -14,6 +14,8 @@ struct AstrologieInputsTransitView: View {
     @FocusState private var swlat: Bool
     @FocusState private var swlng: Bool
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    var screenSize: CGRect = UIScreen.main.bounds
+    var maxSizeFrame: CGFloat? = .infinity
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -32,10 +34,13 @@ struct AstrologieInputsTransitView: View {
         locationManager.requestWhenInUseAuthorization()
     }
     var body: some View {
+        if screenSize.width <= 375 {
+            let maxSizeFrame = 370
+        }
         ZStack {
             BgView()
             VStack {
-                HStack {
+                VStack {
                     Spacer()
                     VStack {
                         Image("transit")
@@ -130,7 +135,6 @@ struct AstrologieInputsTransitView: View {
                             }
                         }
                         HStack {
-                            Text("Timezone")
                                 Picker("Timezone", selection: $tz, content: {
                                     ForEach(-12...0, id: \.self) { idx in
                                         if idx != 0 {
@@ -152,7 +156,7 @@ struct AstrologieInputsTransitView: View {
                     Spacer()
                     }
                     Spacer()
-                }
+                }.frame(maxWidth: maxSizeFrame)
             }
                 .padding()
                 .onAppear(perform: localize)

@@ -458,7 +458,7 @@
 			);
 			mainGroup = F4141E9C2797414800381179;
 			packageReferences = (
-				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */,
+				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = F4141EA62797414800381179 /* Products */;
 			projectDirPath = "";
@@ -732,7 +732,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/astrologiePourIPhone11/Types/Swe",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = stephane.bressani.dev.astrologiePourIPhone11;
 				PRODUCT_NAME = Astrologie;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -776,7 +776,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/astrologiePourIPhone11/Types/Swe",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = stephane.bressani.dev.astrologiePourIPhone11;
 				PRODUCT_NAME = Astrologie;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -904,7 +904,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */ = {
+		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -917,7 +917,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		F4915299279D938D00911CA5 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */

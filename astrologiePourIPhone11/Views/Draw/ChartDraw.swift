@@ -607,7 +607,7 @@ struct ChartDraw {
         let bodPos = CGFloat((size / 2) * -1)
         let cas = Double(size) / 16.0
         let casDiv = 1.9
-        let xPos = bodPos + (cas / 2) + (cas * Double(asp.bodie2.rawValue)) - fix + 1.0 // TODO const + 3.0
+        let xPos = bodPos + (cas / 2) + (cas * Double(asp.bodie2.pos())) - fix + 1.0 // TODO const + 3.0
         let yPos = bodPos + (cas / 2) + (cas * Double(asp.bodie1.pos())) - fix
         var body: some View {
             Image("a" + asp.aspect.rawValue.formatted())
