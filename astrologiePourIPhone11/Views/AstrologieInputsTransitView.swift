@@ -4,6 +4,7 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
 struct AstrologieInputsTransitView: View {
     @Binding var selectedDate: Date
@@ -65,6 +66,38 @@ struct AstrologieInputsTransitView: View {
                                         .focused($swlng)
                                         .keyboardType(.decimalPad)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                                Button(action: {
+                                    var locationManager = CLLocationManager()
+                                    locationManager.requestWhenInUseAuthorization()
+                                    Thread.sleep(forTimeInterval: 2)
+                                    var currentLoc: CLLocation!
+                                    if (CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+                                            CLLocationManager.authorizationStatus() == .authorizedAlways) {
+                                        currentLoc = locationManager.location
+                                        swlat = false
+                                        swlng = false
+                                        lat = currentLoc.coordinate.latitude
+                                        lng = currentLoc.coordinate.longitude
+                                    }
+                                }, label: {
+                                    ZStack {
+                                        Spacer()
+                                                .frame(width: 150, height: 50)
+                                                .background(.orange).opacity(0.1)
+                                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                        if colorScheme == .light {
+                                            Image("bouton")
+                                                    .resizable()
+                                                    .frame(width: 150, height: 50)
+                                                    .opacity(0.3)
+                                        }
+                                        Text("Position actuel")
+                                    }
+                                            .frame(width: 150, height: 50)
+                                            .overlay(RoundedRectangle(cornerRadius: 10)
+                                                    .stroke(lineWidth: 1)
+                                                    .foregroundColor(colorScheme == .light ? .black : .white))
+                                })
                             }
                             HStack {
                                 Text("Timezone")
@@ -92,9 +125,11 @@ struct AstrologieInputsTransitView: View {
                                     }
                                             .foregroundColor(colorScheme == .light ? .black : .white)
                                             .padding()
-                                            .cornerRadius(10)
-                                            .border(colorScheme == .light ? .black : .white, width: 1)
-                                            .background(colorScheme == .light ? .orange : .orange)
+                                            .frame(width: 150, height: 50)
+                                            .overlay(RoundedRectangle(cornerRadius: 10)
+                                                    .stroke(lineWidth: 1)
+                                                    .foregroundColor(colorScheme == .light ? .black : .white))
+
                                 }
                             }
                     }

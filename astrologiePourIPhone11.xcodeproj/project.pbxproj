@@ -58,6 +58,7 @@
 		F4141F2D279741FC00381179 /* Swe14.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4141F25279741FC00381179 /* Swe14.swift */; };
 		F446CDE1279AE0AC00D8CCD8 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F446CDE0279AE0AC00D8CCD8 /* ChartView.swift */; };
 		F491529A279D938D00911CA5 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = F4915299279D938D00911CA5 /* Zip */; };
+		F4C0ED2427A6981500DF9994 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4C0ED2327A6981500DF9994 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,6 +157,8 @@
 		F4141F24279741FC00381179 /* ephem.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = ephem.zip; sourceTree = "<group>"; };
 		F4141F25279741FC00381179 /* Swe14.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swe14.swift; sourceTree = "<group>"; };
 		F446CDE0279AE0AC00D8CCD8 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		F4C0ED2127A6981400DF9994 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F4C0ED2327A6981500DF9994 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4C0ED2427A6981500DF9994 /* MapKit.framework in Frameworks */,
 				F491529A279D938D00911CA5 /* Zip in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,6 +211,7 @@
 				F4141EB82797414900381179 /* astrologiePourIPhone11Tests */,
 				F4141EC22797414900381179 /* astrologiePourIPhone11UITests */,
 				F4141EA62797414800381179 /* Products */,
+				F4C0ED2227A6981500DF9994 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -223,6 +228,7 @@
 		F4141EA72797414800381179 /* astrologiePourIPhone11 */ = {
 			isa = PBXGroup;
 			children = (
+				F4C0ED2127A6981400DF9994 /* Info.plist */,
 				F446CDDF279AE09800D8CCD8 /* Views */,
 				F4141ED22797415E00381179 /* Types */,
 				F4141EA82797414800381179 /* astrologiePourIPhone11App.swift */,
@@ -348,6 +354,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		F4C0ED2227A6981500DF9994 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F4C0ED2327A6981500DF9994 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -442,7 +456,7 @@
 			);
 			mainGroup = F4141E9C2797414800381179;
 			packageReferences = (
-				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */,
+				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = F4141EA62797414800381179 /* Products */;
 			projectDirPath = "";
@@ -696,6 +710,7 @@
 				DEVELOPMENT_TEAM = 4M7L74G8T6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = astrologiePourIPhone11/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -734,6 +749,7 @@
 				DEVELOPMENT_TEAM = 4M7L74G8T6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = astrologiePourIPhone11/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -876,7 +892,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */ = {
+		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -889,7 +905,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		F4915299279D938D00911CA5 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */;
+			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */
