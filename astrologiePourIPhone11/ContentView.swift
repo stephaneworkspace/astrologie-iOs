@@ -81,31 +81,33 @@ struct ContentView: View {
                                     Text("Natal")
                                 }
                             }.tag(1)
-                            AstrologieView(
-                                    swTransit: true,
-                                    swPluton: $swPluton,
-                                    swNode: $swNode,
-                                    swChiron: $swChiron,
-                                    swCeres: $swCeres,
-                                    selectedDateNatal: $selectedDateNatal,
-                                    selectedDateNatalC: $selectedDateNatal,
-                                    selectedDateTransit: $selectedDateTransit,
-                                    selectedDateTransitC: $selectedDateTransit,
-                                    latNatal: $latNatal,
-                                    latNatalC: $latNatal,
-                                    lngNatal: $lngNatal,
-                                    lngNatalC: $lngNatal,
-                                    latTransit: $latTransit,
-                                    latTransitC: $latTransit,
-                                    lngTransit: $lngTransit,
-                                    lngTransitC: $lngTransit,
-                                    tzNatal: $tzNatal,
-                                    tzNatalC: $tzNatal,
-                                    tzTransit: $tzTransit,
-                                    tzTransitC: $tzTransit,
-                                    swShowNatal: $swShowNatal,
-                                    swShowTransit: $swShowTransit
-                            ).tabItem {
+                            VStack {
+                                AstrologieView(
+                                        swTransit: true,
+                                        swPluton: $swPluton,
+                                        swNode: $swNode,
+                                        swChiron: $swChiron,
+                                        swCeres: $swCeres,
+                                        selectedDateNatal: $selectedDateNatal,
+                                        selectedDateNatalC: $selectedDateNatal,
+                                        selectedDateTransit: $selectedDateTransit,
+                                        selectedDateTransitC: $selectedDateTransit,
+                                        latNatal: $latNatal,
+                                        latNatalC: $latNatal,
+                                        lngNatal: $lngNatal,
+                                        lngNatalC: $lngNatal,
+                                        latTransit: $latTransit,
+                                        latTransitC: $latTransit,
+                                        lngTransit: $lngTransit,
+                                        lngTransitC: $lngTransit,
+                                        tzNatal: $tzNatal,
+                                        tzNatalC: $tzNatal,
+                                        tzTransit: $tzTransit,
+                                        tzTransitC: $tzTransit,
+                                        swShowNatal: $swShowNatal,
+                                        swShowTransit: $swShowTransit
+                                )
+                            }.tabItem {
                                 VStack {
                                     Image(systemName: "line.3.crossed.swirl.circle.fill")
                                     Text("Transit")

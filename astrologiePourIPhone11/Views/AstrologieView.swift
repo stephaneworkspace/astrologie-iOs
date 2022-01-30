@@ -80,40 +80,29 @@ struct AstrologieView: View {
                                 swe: swe)
                     }
                     Spacer().frame(height: 20)
-                    /*ZStack {
-                        if swTransit {
-                            VStack {
-                                Spacer()
-                                        .frame(width: 400, height: 168)
-                                        .background(Color.orange).opacity(0.1)
-                                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                            }
-                        } else {
-                            VStack {
-                                Spacer()
-                                        .frame(width: 400, height: 84)
-                                        .background(Color.orange).opacity(0.1)
-                                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                            }
-                        }
-                        /*
-                        AstrologieInputsView(
-                                swTransit: $swTransit,
-                                selectedDate: $selectedDate,
-                                selectedDateTransit: $selectedDateTransit,
-                                latNatal: $latNatal,
-                                lngNatal: $lngNatal,
-                                latTransit: $latTransit,
-                                lngTransit: $lngTransit,
-                                tzNatal: $tzNatal,
-                                tzTransit: $tzTransit)*/
-                    }
-                }*/
                     HStack {
+                        Spacer().frame(width: 30)
                         Button(action: {
                             swShowNatal.toggle()
                         }, label: {
-                            Text("Saisie données natal")
+                            ZStack {
+                                Spacer()
+                                        .frame(width: 150, height: 50)
+                                        .background(.orange).opacity(0.1)
+                                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                                if colorScheme == .light {
+                                    Image("bouton")
+                                            .resizable()
+                                            .frame(width: 150, height: 50)
+                                            .opacity(0.3)
+                                }
+                                Text("Saisie natal")
+
+                            }
+                                    .frame(width: 150, height: 50)
+                                    .overlay(RoundedRectangle(cornerRadius: 10)
+                                            .stroke(lineWidth: 1)
+                                            .foregroundColor(colorScheme == .light ? .black : .white))
                         }).fullScreenCover(isPresented: $swShowNatal) {
                             VStack {
                                 AstrologieInputsView(
@@ -141,14 +130,30 @@ struct AstrologieView: View {
                                 .foregroundColor(colorScheme == .light ? .black : .white)
                                 .padding()
                                 .cornerRadius(10)
-                                .border(colorScheme == .light ? .black : .white, width: 1)
-                                .background(colorScheme == .light ? .orange : .orange)
+                                //.border(colorScheme == .light ? .black : .white, width: 1)
+                               // .background(colorScheme == .light ? .orange : .orange)
                         if swTransit {
                             Spacer()
                             Button(action: {
                                 swShowTransit.toggle()
                             }, label: {
-                                Text("Saisie données transit")
+                                ZStack {
+                                    Spacer()
+                                            .frame(width: 150, height: 50)
+                                            .background(.orange).opacity(0.1)
+                                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                                    if colorScheme == .light {
+                                        Image("bouton")
+                                                .resizable()
+                                                .frame(width: 150, height: 50)
+                                                .opacity(0.3)
+                                    }
+                                    Text("Saisie transit")
+                                }
+                                        .frame(width: 150, height: 50)
+                                        .overlay(RoundedRectangle(cornerRadius: 10)
+                                                .stroke(lineWidth: 1)
+                                                .foregroundColor(colorScheme == .light ? .black : .white))
                             }).fullScreenCover(isPresented: $swShowTransit) {
                                 VStack {
                                     AstrologieInputsTransitView(
@@ -175,11 +180,12 @@ struct AstrologieView: View {
                             }
                                     .foregroundColor(colorScheme == .light ? .black : .white)
                                     .padding()
-                                    .cornerRadius(10)
-                                    .border(colorScheme == .light ? .black : .white, width: 1)
-                                    .background(colorScheme == .light ? .orange : .orange)
-                        }
 
+
+                            //  .border(colorScheme == .light ? .black : .white, width: 1)
+                                   // .background(colorScheme == .light ? .orange : .orange)
+                        }
+                        Spacer().frame(width: 30)
                     }
                     Array2View(
                             swTransit: swTransit,
