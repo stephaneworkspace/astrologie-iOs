@@ -10,7 +10,6 @@ import Foundation
 
 
 struct ContentView: View {
-    @State var swLock: Bool = true
     @State var selected: Int
     @State var isActive: Bool = false
     @State var swPluton: Bool = false
@@ -18,7 +17,7 @@ struct ContentView: View {
     @State var swChiron: Bool = false
     @State var swCeres: Bool = false
     var chartDefault: Swe.Chart = loadDefaultValue().0
-    @State var selectedDate: Date = loadDefaultValue().1
+    @State var selectedDateNatal: Date = loadDefaultValue().1
     @State var selectedDateTransit: Date = Date()
     @State var latNatal: Double = loadDefaultValue().0.nLat
     @State var lngNatal: Double = loadDefaultValue().0.nLng
@@ -35,7 +34,7 @@ struct ContentView: View {
     var body: some View {
         let swe = Swe(
                 chart: loadValue(
-                        selectedDate: selectedDate,
+                        selectedDate: selectedDateNatal,
                         selectedDateTransit: selectedDateTransit,
                         lat: (latNatal, latTransit),
                         lng: (lngNatal, lngTransit),
@@ -57,17 +56,24 @@ struct ContentView: View {
                                         swNode: $swNode,
                                         swChiron: $swChiron,
                                         swCeres: $swCeres,
-                                        selectedDate: $selectedDate,
+                                        selectedDateNatal: $selectedDateNatal,
+                                        selectedDateNatalC: $selectedDateNatal,
                                         selectedDateTransit: $selectedDateTransit,
+                                        selectedDateTransitC: $selectedDateTransit,
                                         latNatal: $latNatal,
-                                        lngNatal: $lngTransit,
+                                        latNatalC: $latNatal,
+                                        lngNatal: $lngNatal,
+                                        lngNatalC: $lngNatal,
                                         latTransit: $latTransit,
+                                        latTransitC: $latTransit,
                                         lngTransit: $lngTransit,
+                                        lngTransitC: $lngTransit,
                                         tzNatal: $tzNatal,
+                                        tzNatalC: $tzNatal,
                                         tzTransit: $tzTransit,
+                                        tzTransitC: $tzTransit,
                                         swShowNatal: $swShowNatal,
-                                        swShowTransit: $swShowTransit,
-                                        swLock: $swLock
+                                        swShowTransit: $swShowTransit
                                 )
                             }.tabItem {
                                 VStack {
@@ -81,17 +87,24 @@ struct ContentView: View {
                                     swNode: $swNode,
                                     swChiron: $swChiron,
                                     swCeres: $swCeres,
-                                    selectedDate: $selectedDate,
+                                    selectedDateNatal: $selectedDateNatal,
+                                    selectedDateNatalC: $selectedDateNatal,
                                     selectedDateTransit: $selectedDateTransit,
+                                    selectedDateTransitC: $selectedDateTransit,
                                     latNatal: $latNatal,
-                                    lngNatal: $lngTransit,
+                                    latNatalC: $latNatal,
+                                    lngNatal: $lngNatal,
+                                    lngNatalC: $lngNatal,
                                     latTransit: $latTransit,
+                                    latTransitC: $latTransit,
                                     lngTransit: $lngTransit,
+                                    lngTransitC: $lngTransit,
                                     tzNatal: $tzNatal,
+                                    tzNatalC: $tzNatal,
                                     tzTransit: $tzTransit,
+                                    tzTransitC: $tzTransit,
                                     swShowNatal: $swShowNatal,
-                                    swShowTransit: $swShowTransit,
-                                    swLock: $swLock
+                                    swShowTransit: $swShowTransit
                             ).tabItem {
                                 VStack {
                                     Image(systemName: "line.3.crossed.swirl.circle.fill")

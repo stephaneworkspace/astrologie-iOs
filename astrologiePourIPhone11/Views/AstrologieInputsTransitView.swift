@@ -6,12 +6,9 @@ import Foundation
 import SwiftUI
 
 struct AstrologieInputsTransitView: View {
-    @Binding var swLock: Bool
     @Binding var selectedDate: Date
     @Binding var lat: Double
     @Binding var lng: Double
-    @State var latC: Double = loadDefaultValue().0.tLat
-    @State var lngC: Double = loadDefaultValue().0.tLng
     @Binding var tz: Int
     @FocusState private var swlat: Bool
     @FocusState private var swlng: Bool
@@ -47,16 +44,14 @@ struct AstrologieInputsTransitView: View {
                                     selection: $selectedDate,
                                     displayedComponents: [.date, .hourAndMinute]
                             )
-                                    .disabled(swLock)
                                     .font(.system(size: FONTSIZE, weight: .light, design: .default))
                             HStack {
                                 Text("Lat")
                                 TextField(
                                         "Latitude",
-                                        value: $latC,
+                                        value: $lat,
                                         formatter: formatter
                                 )
-                                        .disabled(swLock)
                                         .focused($swlat)
                                         .keyboardType(.decimalPad)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -64,10 +59,9 @@ struct AstrologieInputsTransitView: View {
                                 Text("Lng")
                                 TextField(
                                         "Longitude",
-                                        value: $lngC,
+                                        value: $lng,
                                         formatter: formatter
                                 )
-                                        .disabled(swLock)
                                         .focused($swlng)
                                         .keyboardType(.decimalPad)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -84,7 +78,6 @@ struct AstrologieInputsTransitView: View {
                                         Text("GMT +" + idx.formatted()).tag(idx)
                                     }
                                 })
-                                        .disabled(swLock)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
                                         .foregroundColor(colorScheme == .light ? .black : .white)
                                         .font(.system(size: FONTSIZE, weight: .light, design: .default))
@@ -101,30 +94,8 @@ struct AstrologieInputsTransitView: View {
                                             .padding()
                                             .cornerRadius(10)
                                             .border(colorScheme == .light ? .black : .white, width: 1)
-                                            .background(!swLock ? .orange : .white)
+                                            .background(colorScheme == .light ? .orange : .orange)
                                 }
-                                Button("Valider") {
-                                    swlat = false
-                                    swlng = false
-                                    lat = latC
-                                    lng = lngC
-                                    swLock = true
-                                }
-                                        .disabled(swLock)
-                                        .foregroundColor(colorScheme == .light ? .black : .white)
-                                        .padding()
-                                        .cornerRadius(10)
-                                        .border(colorScheme == .light ? .black : .white, width: 1)
-                                        .background(!swLock ? .orange : .white)
-                                Button("Dévalider") {
-                                    swLock = false
-                                }
-                                        .disabled(swLock == false)
-                                        .foregroundColor(colorScheme == .light ? .black : .white)
-                                        .padding()
-                                        .cornerRadius(10)
-                                        .border(colorScheme == .light ? .black : .white, width: 1)
-                                        .background(swLock ? .orange : .white)
                             }
                     }
                             .padding()

@@ -11,17 +11,24 @@ struct AstrologieView: View {
     @Binding var swNode: Bool
     @Binding var swChiron: Bool
     @Binding var swCeres: Bool
-    @Binding var selectedDate: Date
+    @Binding var selectedDateNatal: Date
+    @Binding var selectedDateNatalC: Date
     @Binding var selectedDateTransit: Date
+    @Binding var selectedDateTransitC: Date
     @Binding var latNatal: Double
+    @Binding var latNatalC: Double
     @Binding var lngNatal: Double
+    @Binding var lngNatalC: Double
     @Binding var latTransit: Double
+    @Binding var latTransitC: Double
     @Binding var lngTransit: Double
+    @Binding var lngTransitC: Double
     @Binding var tzNatal: Int
+    @Binding var tzNatalC: Int
     @Binding var tzTransit: Int
+    @Binding var tzTransitC: Int
     @Binding var swShowNatal: Bool
     @Binding var swShowTransit: Bool
-    @Binding var swLock: Bool
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     var FONTSIZE = 15.0
 
@@ -40,11 +47,11 @@ struct AstrologieView: View {
     var body: some View {
         let swe = Swe(
                 chart: loadValue(
-                        selectedDate: selectedDate,
+                        selectedDate: selectedDateNatal,
                         selectedDateTransit: selectedDateTransit,
-                        lat: (latNatal, latTransit),
-                        lng: (lngNatal, lngTransit),
-                        tz: (Int32(tzNatal), Int32(tzTransit))))
+                        lat: (latNatalC, latTransitC),
+                        lng: (lngNatalC, lngTransitC),
+                        tz: (Int32(tzNatalC), Int32(tzTransitC))))
         ZStack {
             Image(colorScheme == .light ? "bgl" : "bgd")
                     .resizable()
@@ -110,12 +117,15 @@ struct AstrologieView: View {
                         }).fullScreenCover(isPresented: $swShowNatal) {
                             VStack {
                                 AstrologieInputsView(
-                                        swLock: $swLock,
-                                        selectedDate: $selectedDate,
-                                        lat: $latNatal,
-                                        lng: $lngNatal,
-                                        tz: $tzNatal)
+                                        selectedDate: $selectedDateNatalC,
+                                        lat: $latNatalC,
+                                        lng: $lngNatalC,
+                                        tz: $tzNatalC)
                                 Button(action: {
+                                    selectedDateNatal = selectedDateNatalC
+                                    latNatal = latNatalC
+                                    lngNatal = lngNatalC
+                                    tzNatal = tzNatalC
                                     swShowNatal = false
                                 }, label: {
                                     VStack {
@@ -123,10 +133,16 @@ struct AstrologieView: View {
                                         Text("")
                                         Text("")
                                     }
-                                }).padding().foregroundColor(.white)
+                                })
+                                        .padding().foregroundColor(colorScheme == .light ? .black : .white)
                                 Spacer()
                             }
                         }
+                                .foregroundColor(colorScheme == .light ? .black : .white)
+                                .padding()
+                                .cornerRadius(10)
+                                .border(colorScheme == .light ? .black : .white, width: 1)
+                                .background(colorScheme == .light ? .orange : .orange)
                         if swTransit {
                             Spacer()
                             Button(action: {
@@ -136,12 +152,15 @@ struct AstrologieView: View {
                             }).fullScreenCover(isPresented: $swShowTransit) {
                                 VStack {
                                     AstrologieInputsTransitView(
-                                            swLock: $swLock,
-                                            selectedDate: $selectedDateTransit,
-                                            lat: $latTransit,
-                                            lng: $lngTransit,
-                                            tz: $tzTransit)
+                                            selectedDate: $selectedDateTransitC,
+                                            lat: $latTransitC,
+                                            lng: $lngTransitC,
+                                            tz: $tzTransitC)
                                     Button(action: {
+                                        selectedDateTransit = selectedDateTransitC
+                                        latTransit = latTransitC
+                                        lngTransit = lngTransitC
+                                        tzTransit = tzTransitC
                                         swShowTransit = false
                                     }, label: {
                                         VStack {
@@ -149,10 +168,16 @@ struct AstrologieView: View {
                                             Text("")
                                             Text("")
                                         }
-                                    }).padding().foregroundColor(.white)
+                                    })
+                                            .padding().foregroundColor(colorScheme == .light ? .black : .white)
                                     Spacer()
                                 }
                             }
+                                    .foregroundColor(colorScheme == .light ? .black : .white)
+                                    .padding()
+                                    .cornerRadius(10)
+                                    .border(colorScheme == .light ? .black : .white, width: 1)
+                                    .background(colorScheme == .light ? .orange : .orange)
                         }
 
                     }

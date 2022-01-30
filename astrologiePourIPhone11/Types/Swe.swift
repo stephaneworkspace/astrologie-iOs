@@ -33,7 +33,7 @@ class Swe {
                 hour: chart.nHour,
                 min: chart.nMin,
                 sec: 0.0)
-        utcTimeZone.utc_time_zone(timezone: 2.0)
+        utcTimeZone.utc_time_zone(timezone: Double(chart.nTimeZone))
         let utcToJd = swe08.utc_to_jd(tz: utcTimeZone, calandar: .gregorian)
         // Transit
         var utcTimeZoneTransit = TimeZone(
@@ -43,7 +43,7 @@ class Swe {
                 hour: chart.tHour,
                 min: chart.tMin,
                 sec: 0.0)
-        utcTimeZoneTransit.utc_time_zone(timezone: 2.0)
+        utcTimeZoneTransit.utc_time_zone(timezone: Double(chart.tTimeZone))
         let utcToJdTransit = swe08.utc_to_jd(tz: utcTimeZoneTransit, calandar: .gregorian)
 
         // Computes houses
