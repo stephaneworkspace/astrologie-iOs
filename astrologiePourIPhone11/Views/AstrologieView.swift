@@ -79,9 +79,11 @@ struct AstrologieView: View {
                                 swCeres: $swCeres,
                                 swe: swe)
                     }
-                    Spacer().frame(height: 20)
                     HStack {
-                        Spacer().frame(width: 30)
+                        if swTransit {
+                            VStack {
+                            }.frame(height: 20)
+                        }
                         Button(action: {
                             swShowNatal.toggle()
                         }, label: {
@@ -124,7 +126,6 @@ struct AstrologieView: View {
                                     }
                                 })
                                         .padding().foregroundColor(colorScheme == .light ? .black : .white)
-                                Spacer()
                             }
                         }
                                 .foregroundColor(colorScheme == .light ? .black : .white)
@@ -133,7 +134,6 @@ struct AstrologieView: View {
                                 //.border(colorScheme == .light ? .black : .white, width: 1)
                                // .background(colorScheme == .light ? .orange : .orange)
                         if swTransit {
-                            Spacer()
                             Button(action: {
                                 swShowTransit.toggle()
                             }, label: {
@@ -185,7 +185,6 @@ struct AstrologieView: View {
                             //  .border(colorScheme == .light ? .black : .white, width: 1)
                                    // .background(colorScheme == .light ? .orange : .orange)
                         }
-                        Spacer().frame(width: 30)
                     }
                     Array2View(
                             swTransit: swTransit,
