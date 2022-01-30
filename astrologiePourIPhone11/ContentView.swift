@@ -28,6 +28,7 @@ struct ContentView: View {
     @State var swShowNatal = false
     @State var swShowTransit = false
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    var screenSize: CGRect = UIScreen.main.bounds
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -45,13 +46,10 @@ struct ContentView: View {
                         lng: (lngNatal, lngTransit),
                         tz: (Int32(tzNatal), Int32(tzTransit))))
         VStack {
-            if self.isActive {
+            //Text(screenSize.width.formatted() + " " + screenSize.height.formatted())
+            if isActive {
                 ZStack {
-                    Image(colorScheme == .light ? "bgl" : "bgd")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            .edgesIgnoringSafeArea(.all)
+                    BgView()
                     VStack {
                         TabView(selection: $selected) {
                             VStack {
@@ -82,8 +80,14 @@ struct ContentView: View {
                                 )
                             }.tabItem {
                                 VStack {
-                                    Image(systemName: "line.3.crossed.swirl.circle.fill")
-                                    Text("Natal")
+                                    Image(systemName: "line.3.crossed.swirl.circle")
+                                    if screenSize.width == 414 && screenSize.height == 736 {
+                                        // iPhone 8s 7s 6s
+                                    } else if screenSize.width == 375 && screenSize.height == 667 {
+                                        // iPhone 8 7 6
+                                    } else {
+                                        Text("Natal")
+                                    }
                                 }
                             }.tag(1)
                             VStack {
@@ -115,7 +119,13 @@ struct ContentView: View {
                             }.tabItem {
                                 VStack {
                                     Image(systemName: "line.3.crossed.swirl.circle.fill")
-                                    Text("Transit")
+                                    if screenSize.width == 414 && screenSize.height == 736 {
+                                        // iPhone 8s 7s 6s
+                                    } else if screenSize.width == 375 && screenSize.height == 667 {
+                                        // iPhone 8 7 6
+                                    } else {
+                                        Text("Transit")
+                                    }
                                 }
                             }.tag(2)
                             BodieSelectView(
@@ -126,13 +136,25 @@ struct ContentView: View {
                             ).tabItem {
                                 VStack {
                                     Image(systemName: "switch.2")
-                                    Text("Sélection planètes")
+                                    if screenSize.width == 414 && screenSize.height == 736 {
+                                        // iPhone 8s 7s 6s
+                                    } else if screenSize.width == 375 && screenSize.height == 667 {
+                                        // iPhone 8 7 6
+                                    } else {
+                                        Text("Sélection des planètes")
+                                    }
                                 }
                             }.tag(3)
                             AboutView().tabItem {
                                 VStack {
                                     Image(systemName: "info.circle")
-                                    Text("À propos")
+                                    if screenSize.width == 414 && screenSize.height == 736 {
+                                        // iPhone 8s 7s 6s
+                                    } else if screenSize.width == 375 && screenSize.height == 667 {
+                                        // iPhone 8 7 6
+                                    } else {
+                                        Text("À propos")
+                                    }
                                 }
                             }.tag(4)
                         }.onAppear() {

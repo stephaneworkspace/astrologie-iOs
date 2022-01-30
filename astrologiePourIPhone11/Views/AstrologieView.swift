@@ -31,6 +31,7 @@ struct AstrologieView: View {
     @Binding var swShowTransit: Bool
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     var FONTSIZE = 15.0
+    var screenSize: CGRect = UIScreen.main.bounds
 
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -53,12 +54,7 @@ struct AstrologieView: View {
                         lng: (lngNatalC, lngTransitC),
                         tz: (Int32(tzNatalC), Int32(tzTransitC))))
         ZStack {
-            Image(colorScheme == .light ? "bgl" : "bgd")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .edgesIgnoringSafeArea(.all)
-                    .opacity(0.3)
+            BgView()
             ScrollView {
                 VStack {
                     Spacer().frame(height: 60)

@@ -17,6 +17,7 @@
 		552E8B3AC24831DAF6FE6FFE /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E855264D6A932CC35E8A6 /* About.swift */; };
 		552E8B42AB04539E02430C08 /* AstrologieInputsTransitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E8AEDDA765FBC4F574EE7 /* AstrologieInputsTransitView.swift */; };
 		552E8B612964264026990065 /* BodieSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E88EC73EE663400FD6A81 /* BodieSelectView.swift */; };
+		552E8BD9262B90C28D5489E3 /* BgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E8D31C26756A41821AA8B /* BgView.swift */; };
 		552E8CB860A8889C36F47706 /* ChartZodiacView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E80FD3B3262614E2C8230 /* ChartZodiacView.swift */; };
 		552E8D53C7B1F2734031F347 /* data.json.example in Resources */ = {isa = PBXBuildFile; fileRef = 552E8CAB5E7E36614CDBFAFD /* data.json.example */; };
 		552E8E7ADADEF58DCAB5C1A7 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552E8110612D048FF9B074FD /* System.swift */; };
@@ -93,6 +94,7 @@
 		552E8AEDDA765FBC4F574EE7 /* AstrologieInputsTransitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AstrologieInputsTransitView.swift; sourceTree = "<group>"; };
 		552E8C163C597F29EAC3C709 /* AstrologieInputsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AstrologieInputsView.swift; sourceTree = "<group>"; };
 		552E8CAB5E7E36614CDBFAFD /* data.json.example */ = {isa = PBXFileReference; lastKnownFileType = file.example; path = data.json.example; sourceTree = "<group>"; };
+		552E8D31C26756A41821AA8B /* BgView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BgView.swift; sourceTree = "<group>"; };
 		F40444692797F0F900B74503 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F404446B2797F11600B74503 /* data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		F4141EA52797414800381179 /* Astrologie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Astrologie.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -352,6 +354,7 @@
 				552E80FD3B3262614E2C8230 /* ChartZodiacView.swift */,
 				552E855264D6A932CC35E8A6 /* About.swift */,
 				552E8AEDDA765FBC4F574EE7 /* AstrologieInputsTransitView.swift */,
+				552E8D31C26756A41821AA8B /* BgView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -458,7 +461,7 @@
 			);
 			mainGroup = F4141E9C2797414800381179;
 			packageReferences = (
-				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */,
+				F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */,
 			);
 			productRefGroup = F4141EA62797414800381179 /* Products */;
 			projectDirPath = "";
@@ -547,6 +550,7 @@
 				552E8CB860A8889C36F47706 /* ChartZodiacView.swift in Sources */,
 				552E8B3AC24831DAF6FE6FFE /* About.swift in Sources */,
 				552E8B42AB04539E02430C08 /* AstrologieInputsTransitView.swift in Sources */,
+				552E8BD9262B90C28D5489E3 /* BgView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,6 +724,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
@@ -763,6 +768,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
@@ -902,7 +908,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */ = {
+		F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
@@ -915,7 +921,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		F4915299279D938D00911CA5 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip" */;
+			package = F4915298279D938D00911CA5 /* XCRemoteSwiftPackageReference "Zip.git" */;
 			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */

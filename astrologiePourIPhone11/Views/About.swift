@@ -10,12 +10,7 @@ struct AboutView: View {
 
     var body: some View {
         ZStack {
-            Image(colorScheme == .light ? "bgl" : "bgd")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .edgesIgnoringSafeArea(.all)
-                    .opacity(0.3)
+            BgView()
             VStack {
                 VStack {
                     Spacer()
