@@ -159,6 +159,7 @@
 		F446CDE0279AE0AC00D8CCD8 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		F4C0ED2127A6981400DF9994 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F4C0ED2327A6981500DF9994 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F4C0ED2527A6B2C100DF9994 /* astrologiePourIPhone11.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = astrologiePourIPhone11.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +229,7 @@
 		F4141EA72797414800381179 /* astrologiePourIPhone11 */ = {
 			isa = PBXGroup;
 			children = (
+				F4C0ED2527A6B2C100DF9994 /* astrologiePourIPhone11.entitlements */,
 				F4C0ED2127A6981400DF9994 /* Info.plist */,
 				F446CDDF279AE09800D8CCD8 /* Views */,
 				F4141ED22797415E00381179 /* Types */,
@@ -703,6 +705,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = astrologiePourIPhone11/astrologiePourIPhone11.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
@@ -711,6 +714,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = astrologiePourIPhone11/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "L'application utilise ces informations pour détecter la localisation";
+				INFOPLIST_KEY_NSLocationUsageDescription = "L'application utilise ces informations pour détecter la localisation";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "L'application utilise ces informations pour détecter la localisation";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -743,6 +749,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = astrologiePourIPhone11/astrologiePourIPhone11.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"astrologiePourIPhone11/Preview Content\"";
@@ -750,6 +757,9 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = astrologiePourIPhone11/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "L'application utilise ces informations pour détecter la localisation";
+				INFOPLIST_KEY_NSLocationUsageDescription = "L'application utilise ces informations pour détecter la localisation";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "L'application utilise ces informations pour détecter la localisation";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -27,6 +27,10 @@ struct AstrologieInputsView: View {
         return formatter
     }()
     var FONTSIZE = 15.0
+    private func localize() {
+        var locationManager = CLLocationManager()
+        locationManager.requestWhenInUseAuthorization()
+    }
     var body: some View {
         ZStack {
             Image(colorScheme == .light ? "bgl" : "bgd")
@@ -39,7 +43,7 @@ struct AstrologieInputsView: View {
                 HStack {
                     Spacer()
                     VStack {
-                            Image("natall")
+                            Image("natal")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .frame(minWidth: 0, maxWidth: .infinity)
@@ -70,38 +74,40 @@ struct AstrologieInputsView: View {
                                         .focused($swlng)
                                         .keyboardType(.decimalPad)
                                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                                Button(action: {
-                                    var locationManager = CLLocationManager()
-                                    locationManager.requestWhenInUseAuthorization()
-                                    Thread.sleep(forTimeInterval: 3)
-                                    var currentLoc: CLLocation!
-                                    if (CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-                                            CLLocationManager.authorizationStatus() == .authorizedAlways) {
-                                        currentLoc = locationManager.location
-                                        swlat = false
-                                        swlng = false
-                                        lat = currentLoc.coordinate.latitude
-                                        lng = currentLoc.coordinate.longitude
-                                    }
-                                }, label: {
-                                    ZStack {
-                                        Spacer()
-                                                .frame(width: 150, height: 50)
-                                                .background(.orange).opacity(0.1)
-                                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                                        if colorScheme == .light {
-                                            Image("bouton")
-                                                    .resizable()
-                                                    .frame(width: 150, height: 50)
-                                                    .opacity(0.3)
+                                if CLLocationManager.authorizationStatus() == .restricted ||
+                                        CLLocationManager.authorizationStatus() == .denied {
+                                } else {
+                                    Button(action: {
+                                        if (CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+                                                CLLocationManager.authorizationStatus() == .authorizedAlways) {
+                                            var locationManager = CLLocationManager()
+                                            var currentLoc: CLLocation!
+                                            currentLoc = locationManager.location
+                                            swlat = false
+                                            swlng = false
+                                            lat = currentLoc.coordinate.latitude
+                                            lng = currentLoc.coordinate.longitude
                                         }
-                                        Text("Position actuel")
-                                    }
-                                            .frame(width: 150, height: 50)
-                                            .overlay(RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(lineWidth: 1)
-                                                    .foregroundColor(colorScheme == .light ? .black : .white))
-                                })
+                                    }, label: {
+                                        ZStack {
+                                            Spacer()
+                                                    .frame(width: 150, height: 50)
+                                                    .background(.orange).opacity(0.1)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                                            if colorScheme == .light {
+                                                Image("bouton")
+                                                        .resizable()
+                                                        .frame(width: 150, height: 50)
+                                                        .opacity(0.3)
+                                            }
+                                            Text("Position actuel")
+                                        }
+                                                .frame(width: 150, height: 50)
+                                                .overlay(RoundedRectangle(cornerRadius: 10)
+                                                        .stroke(lineWidth: 1)
+                                                        .foregroundColor(colorScheme == .light ? .black : .white))
+                                    })
+                                }
                             }
                             HStack {
                                 Text("Timezone")
@@ -149,6 +155,7 @@ struct AstrologieInputsView: View {
                     Spacer()
                 }
             }
-                    .padding()
+                .padding()
+                .onAppear(perform: localize)
         }
     }

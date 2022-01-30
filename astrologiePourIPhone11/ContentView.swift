@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Foundation
-
+import CoreLocation
 
 struct ContentView: View {
     @State var selected: Int
@@ -30,6 +30,11 @@ struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
+    private func localize() {
+        var locationManager = CLLocationManager()
+        locationManager.requestWhenInUseAuthorization()
+    }
 
     var body: some View {
         let swe = Swe(
@@ -149,6 +154,7 @@ struct ContentView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 // 7.
                 withAnimation {
+                    localize()
                     self.isActive = true
                 }
             }
