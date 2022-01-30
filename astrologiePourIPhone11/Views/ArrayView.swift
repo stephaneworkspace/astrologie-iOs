@@ -26,13 +26,21 @@ struct Array2View: View {
     @State var transitType: Swe.TransitType
     var swe: Swe
     var body: some View {
-        switch transitType {
-        case .NatalNatal:
-            Array2BodieView(swTransit: $swTransit, transitType: transitType, swe: swe)
-        case .NatalTransit:
-            Array2BodieView(swTransit: $swTransit, transitType: transitType, swe: swe)
-        case .TransitTransit:
-            Array2BodieView(swTransit: $swTransit, transitType: transitType, swe: swe)
+        ZStack {
+            VStack {
+                Spacer()
+                        .frame(width: 390, height: 260)
+                        .background(.orange).opacity(0.1)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+            }.offset(x: 0, y: -60)
+            switch transitType {
+            case .NatalNatal:
+                Array2BodieView(swTransit: $swTransit, transitType: transitType, swe: swe)
+            case .NatalTransit:
+                Array2BodieView(swTransit: $swTransit, transitType: transitType, swe: swe)
+            case .TransitTransit:
+                Array2BodieView(swTransit: $swTransit, transitType: transitType, swe: swe)
+            }
         }
     }
 }
@@ -42,7 +50,8 @@ struct Array2BodieView: View {
     @Binding var swTransit: Bool
     @State var transitType: Swe.TransitType
     var swe: Swe
-    let sizeMax = 390.0
+    let sizeMax = 390.0 // TODO CONST
+    let sizeMaxHeight = 260.0 // TODO CONST
     var size = 300.0
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
@@ -51,20 +60,20 @@ struct Array2BodieView: View {
             ZStack {
                // ChartDraw.DrawTransit(size: size, transitType: transitType).stroke(.black)
                 ForEach(0...forlopp.count - 1, id: \.self) { idx in
-                    cD.drawArray2Bodie(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
+                    cD.drawArray2Bodie(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: sizeMaxHeight)
                     cD.drawArray2BodieNom(
                             idx: forlopp[idx],
                             jdx: idx,
                             size: size,
                             colorScheme: colorScheme
-                    ).frame(width: size, height: size)
-                    cD.drawArray2BodieSign(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
+                    ).frame(width: size, height: sizeMaxHeight)
+                    cD.drawArray2BodieSign(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: sizeMaxHeight)
                     cD.drawArray2BodieLongitude(
                             idx: forlopp[idx],
                             jdx: idx,
                             size: size,
                             colorScheme: colorScheme
-                    ).frame(width: size, height: size)
+                    ).frame(width: size, height: sizeMaxHeight)
                     if swTransit {
                         cD.drawArray2BodieSignTransit(idx: forlopp[idx], jdx: idx, size: size).frame(width: size, height: size)
                         cD.drawArray2BodieLongitudeTransit(
@@ -72,11 +81,11 @@ struct Array2BodieView: View {
                                 jdx: idx,
                                 size: size,
                                 colorScheme: colorScheme
-                        ).frame(width: size, height: size)
+                        ).frame(width: size, height: sizeMaxHeight)
                     }
                 }
             }.padding()
-        }.frame(width: sizeMax, height: sizeMax)
+        }.frame(width: sizeMax, height: sizeMaxHeight)
     }
 
 }

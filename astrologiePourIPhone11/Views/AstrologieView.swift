@@ -182,6 +182,9 @@ struct AstrologieView: View {
                                    // .background(colorScheme == .light ? .orange : .orange)
                         }
                     }
+                    VStack {
+
+                    }.frame(height: 70) // TODO CONST
                     Array2View(
                             swTransit: swTransit,
                             transitType: .NatalNatal,
