@@ -73,7 +73,7 @@ struct AstrologieInputsView: View {
                                 Button(action: {
                                     var locationManager = CLLocationManager()
                                     locationManager.requestWhenInUseAuthorization()
-                                    Thread.sleep(forTimeInterval: 2)
+                                    Thread.sleep(forTimeInterval: 3)
                                     var currentLoc: CLLocation!
                                     if (CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
                                             CLLocationManager.authorizationStatus() == .authorizedAlways) {
