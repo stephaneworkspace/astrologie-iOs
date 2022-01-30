@@ -40,6 +40,7 @@ struct BgView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(minWidth: 0, maxWidth: .infinity)
+                    .frame(maxHeight: .infinity)
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.3)
         }
