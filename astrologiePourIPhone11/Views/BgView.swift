@@ -16,6 +16,7 @@ struct BgView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .edgesIgnoringSafeArea(.all)
+                    .opacity(0.3)
         } else if screenSize.width == 375 && screenSize.height == 667  {
             // iPhone 8 7 6
             Image(colorScheme == .light ? "bgl876" : "bgd876")
@@ -23,6 +24,7 @@ struct BgView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .edgesIgnoringSafeArea(.all)
+                    .opacity(0.3)
         }
         else {
             //
@@ -31,6 +33,7 @@ struct BgView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .edgesIgnoringSafeArea(.all)
+                    .opacity(0.3)
         }
     }
 }
