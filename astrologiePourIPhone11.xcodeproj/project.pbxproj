@@ -712,7 +712,7 @@
 				CODE_SIGN_ENTITLEMENTS = astrologiePourIPhone11/astrologiePourIPhone11.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"astrologiePourIPhone11/Preview Content\"";
 				DEVELOPMENT_TEAM = 4M7L74G8T6;
 				ENABLE_PREVIEWS = YES;
@@ -736,7 +736,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/astrologiePourIPhone11/Types/Swe",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = stephane.bressani.dev.astrologiePourIPhone11;
 				PRODUCT_NAME = Astrologie;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -756,7 +756,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = astrologiePourIPhone11/astrologiePourIPhone11.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"astrologiePourIPhone11/Preview Content\"";
 				DEVELOPMENT_TEAM = 4M7L74G8T6;
 				ENABLE_PREVIEWS = YES;
@@ -780,7 +780,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/astrologiePourIPhone11/Types/Swe",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = stephane.bressani.dev.astrologiePourIPhone11;
 				PRODUCT_NAME = Astrologie;
 				SWIFT_EMIT_LOC_STRINGS = YES;

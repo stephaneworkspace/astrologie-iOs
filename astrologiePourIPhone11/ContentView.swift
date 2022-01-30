@@ -11,7 +11,8 @@ import CoreLocation
 
 struct ContentView: View {
     @State var selected: Int
-    @State var isActive: Bool = false
+    // TODO if simulator false
+    @State var isActive: Bool = true
     @State var swPluton: Bool = false
     @State var swNode: Bool = false
     @State var swChiron: Bool = false
