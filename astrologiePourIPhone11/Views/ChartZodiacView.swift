@@ -42,56 +42,56 @@ struct ChartZodiacView: View {
                 }
             }.frame(width: cD.SIZE, height: cD.SIZE)
         }
-        let angle = cD.angle(swe: cD.swe, angle: .asc)
+        let angle_asc = cD.angle(swe: cD.swe, angle: .asc)
         VStack {
             GeometryReader { geometry in
-                Image(colorScheme == .light ? "a" + angle.svg : "ad" + angle.svg)
+                Image(colorScheme == .light ? "a" + angle_asc.svg : "ad" + angle_asc.svg)
                         .resizable()
                         .offset(
-                                x: angle.oPx,
-                                y: angle.oPy)
+                                x: angle_asc.oPx,
+                                y: angle_asc.oPy)
                         .frame(
-                                width: angle.oSx,
-                                height: angle.oSy)
+                                width: angle_asc.oSx,
+                                height: angle_asc.oSy)
             }
         }.frame(width: cD.SIZE, height: cD.SIZE)
-        let angle = cD.angle(swe: cD.swe, angle: .fc)
+        let angle_fc = cD.angle(swe: cD.swe, angle: .fc)
         VStack {
             GeometryReader { geometry in
-                Image(colorScheme == .light ? "a" + angle.svg : "ad" + angle.svg)
+                Image(colorScheme == .light ? "a" + angle_fc.svg : "ad" + angle_fc.svg)
                         .resizable()
                         .offset(
-                                x: angle.oPx,
-                                y: angle.oPy)
+                                x: angle_fc.oPx,
+                                y: angle_fc.oPy)
                         .frame(
-                                width: angle.oSx,
-                                height: angle.oSy)
+                                width: angle_fc.oSx,
+                                height: angle_fc.oSy)
             }
         }.frame(width: cD.SIZE, height: cD.SIZE)
-        let angle = cD.angle(swe: cD.swe, angle: .desc)
+        let angle_desc = cD.angle(swe: cD.swe, angle: .desc)
         VStack {
             GeometryReader { geometry in
-                Image(colorScheme == .light ? "a" + angle.svg : "ad" + angle.svg)
+                Image(colorScheme == .light ? "a" + angle_desc.svg : "ad" + angle_desc.svg)
                         .resizable()
                         .offset(
-                                x: angle.oPx,
-                                y: angle.oPy)
+                                x: angle_desc.oPx,
+                                y: angle_desc.oPy)
                         .frame(
-                                width: angle.oSx,
-                                height: angle.oSy)
+                                width: angle_desc.oSx,
+                                height: angle_desc.oSy)
             }
         }.frame(width: cD.SIZE, height: cD.SIZE)
-        let angle = cD.angle(swe: cD.swe, angle: .mc)
+        let angle_mc = cD.angle(swe: cD.swe, angle: .mc)
         VStack {
             GeometryReader { geometry in
-                Image(colorScheme == .light ? "a" + angle.svg : "ad" + angle.svg)
+                Image(colorScheme == .light ? "a" + angle_mc.svg : "ad" + angle_mc.svg)
                         .resizable()
                         .offset(
-                                x: angle.oPx,
-                                y: angle.oPy)
+                                x: angle_mc.oPx,
+                                y: angle_mc.oPy)
                         .frame(
-                                width: angle.oSx,
-                                height: angle.oSy)
+                                width: angle_mc.oSx,
+                                height: angle_mc.oSy)
             }
         }.frame(width: cD.SIZE, height: cD.SIZE)
         VStack {
