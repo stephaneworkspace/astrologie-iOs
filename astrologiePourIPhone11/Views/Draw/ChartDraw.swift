@@ -1130,6 +1130,7 @@ struct ChartDraw {
     func bodie_lines(
             swe: Swe,
             swTransit: Bool,
+            swBodie: [Bool],
             swPluton: Bool,
             swNode: Bool,
             swChiron: Bool,

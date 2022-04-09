@@ -7,6 +7,7 @@ import SwiftUI
 
 struct ChartBodieView: View {
     @State var swTransit: Bool
+    @Binding var swBodie: [Bool]
     @Binding var swPluton: Bool
     @Binding var swNode: Bool
     @Binding var swChiron: Bool
@@ -22,6 +23,7 @@ struct ChartBodieView: View {
                     lines: cD.bodie_lines(
                             swe: cD.swe,
                             swTransit: false,
+                            swBodie: swBodie,
                             swPluton: swPluton,
                             swNode: swNode,
                             swChiron: swChiron,

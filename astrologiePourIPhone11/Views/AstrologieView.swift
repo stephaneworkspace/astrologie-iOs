@@ -7,6 +7,7 @@ import SwiftUI
 
 struct AstrologieView: View {
     @State var swTransit: Bool
+    @Binding var swBodie: [Bool]
     @Binding var swPluton: Bool
     @Binding var swNode: Bool
     @Binding var swChiron: Bool
@@ -69,6 +70,7 @@ struct AstrologieView: View {
                         }
                         ChartView(
                                 swTransit: swTransit,
+                                swBodie: $swBodie,
                                 swPluton: $swPluton,
                                 swNode: $swNode,
                                 swChiron: $swChiron,
