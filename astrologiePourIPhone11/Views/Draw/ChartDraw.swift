@@ -82,7 +82,7 @@ struct ChartDraw {
     func getBodieLongitude(bodie: Swe.Bodie, swTransit: Bool) -> Double {
         var pos = 0.0
         if swTransit {
-            pos = CIRCLE - swe.houses[0].longitude + bodie.calculUt.longitude // TODO
+            pos = CIRCLE - swe.houses[0].longitude + bodie.calculUt.longitude
         } else {
             pos = CIRCLE - swe.houses[0].longitude + bodie.calculUt.longitude
         }
@@ -952,6 +952,7 @@ struct ChartDraw {
 
     func aspect_lines(
             swe: Swe,
+            swBodies: [Bool],
             swPluton: Bool,
             swNode: Bool,
             swChiron: Bool,
@@ -964,8 +965,9 @@ struct ChartDraw {
             let bodNatalLongitude = getBodieLongitude(bodie: bod.0, swTransit: false)
             let bodTransitLongitude = getBodieLongitude(bodie: bod.0, swTransit: true)
             switch aspectType {
-            case .natalAndTransit:
-                if (swPluton == false && bod.0.bodie.rawValue == Swe.Bodies.pluto.rawValue)
+            case .natalAndTransit: // TODO quelque chose me semble faux
+                if (bod.0.bodie.rawValue <= 8 && swBodies[Int(bod.0.bodie.rawValue)] == false)
+                           || (swPluton == false && bod.0.bodie.rawValue == Swe.Bodies.pluto.rawValue)
                            || (swNode == false && bod.0.bodie.rawValue == Swe.Bodies.trueNode.rawValue)
                            || (swChiron == false && bod.0.bodie.rawValue == Swe.Bodies.chiron.rawValue)
                            || (swCeres == false && bod.0.bodie.rawValue == Swe.Bodies.ceres.rawValue) {
@@ -1023,7 +1025,9 @@ struct ChartDraw {
                     if bodPair.0.bodie == bod.0.bodie {
                         break
                     }
-                    if (swPluton == false && bod.0.bodie.rawValue == Swe.Bodies.pluto.rawValue)
+                    if (bod.0.bodie.rawValue <= 8 && swBodies[Int(bod.0.bodie.rawValue)] == false)
+                               || (bodPair.0.bodie.rawValue <= 8 && swBodies[Int(bodPair.0.bodie.rawValue)] == false)
+                               || (swPluton == false && bod.0.bodie.rawValue == Swe.Bodies.pluto.rawValue)
                                || (swPluton == false && bodPair.0.bodie.rawValue == Swe.Bodies.pluto.rawValue)
                                || (swNode == false && bod.0.bodie.rawValue == Swe.Bodies.trueNode.rawValue)
                                || (swNode == false && bodPair.0.bodie.rawValue == Swe.Bodies.trueNode.rawValue)
@@ -1088,7 +1092,9 @@ struct ChartDraw {
                     if bodPair.1.bodie == bod.1.bodie {
                         break
                     }
-                    if (swPluton == false && bod.1.bodie.rawValue == Swe.Bodies.pluto.rawValue)
+                    if (bod.1.bodie.rawValue <= 8 && swBodies[Int(bod.1.bodie.rawValue)] == false)
+                               || (bodPair.1.bodie.rawValue <= 8 && swBodies[Int(bodPair.1.bodie.rawValue)] == false)
+                               || (swPluton == false && bod.1.bodie.rawValue == Swe.Bodies.pluto.rawValue)
                                || (swPluton == false && bodPair.1.bodie.rawValue == Swe.Bodies.pluto.rawValue)
                                || (swNode == false && bod.1.bodie.rawValue == Swe.Bodies.trueNode.rawValue)
                                || (swNode == false && bodPair.1.bodie.rawValue == Swe.Bodies.trueNode.rawValue)
@@ -1130,7 +1136,7 @@ struct ChartDraw {
     func bodie_lines(
             swe: Swe,
             swTransit: Bool,
-            swBodie: [Bool],
+            swBodies: [Bool],
             swPluton: Bool,
             swNode: Bool,
             swChiron: Bool,
@@ -1141,11 +1147,13 @@ struct ChartDraw {
             var pos = 0.0
             for bod in swe.bodies {
                 var axy: [Offset]
+                    // TODO remove this later and remove the if bod.1.bodie.rawValue <= 8
                 if swTransit {
-                    if (swPluton == false && bod.1.bodie.rawValue == Swe.Bodies.pluto.rawValue) == true
-                               || (swNode == false && bod.1.bodie.rawValue == Swe.Bodies.trueNode.rawValue) == true
-                               || (swChiron == false && bod.1.bodie.rawValue == Swe.Bodies.chiron.rawValue) == true
-                               || (swCeres == false && bod.1.bodie.rawValue == Swe.Bodies.ceres.rawValue) == true {
+                     if (bod.1.bodie.rawValue <= 8 && swBodies[Int(bod.1.bodie.rawValue)] == false) == true
+                                || (swPluton == false && bod.1.bodie.rawValue == Swe.Bodies.pluto.rawValue) == true
+                                || (swNode == false && bod.1.bodie.rawValue == Swe.Bodies.trueNode.rawValue) == true
+                                || (swChiron == false && bod.1.bodie.rawValue == Swe.Bodies.chiron.rawValue) == true
+                                || (swCeres == false && bod.1.bodie.rawValue == Swe.Bodies.ceres.rawValue) == true {
 
                     } else {
                         pos = getBodieLongitude(bodie: bod.1, swTransit: swTransit)
@@ -1160,7 +1168,6 @@ struct ChartDraw {
                                 lX2: axy[1].offX,
                                 lY2: axy[1].offY)
                         )
-                        // TODO posFix getBodieFixLongitude line 1306 svg_draw.rs}
                         axy = getLineTrigo(
                                 angular: pos,
                                 radiusCircleBegin: getRadiusCircle(occurs: 10).0,
@@ -1173,9 +1180,10 @@ struct ChartDraw {
                         )
                     }
                 } else {
-                    if (swPluton == false && bod.0.bodie == Swe.Bodies.pluto) == true
-                            || (swChiron == false && bod.0.bodie == Swe.Bodies.chiron) == true
-                               || (swNode == false && bod.1.bodie.rawValue == Swe.Bodies.trueNode.rawValue) == true
+                    if (bod.0.bodie.rawValue <= 8 && swBodies[Int(bod.0.bodie.rawValue)] == false) == true
+                               || (swPluton == false && bod.0.bodie == Swe.Bodies.pluto) == true
+                               || (swChiron == false && bod.0.bodie == Swe.Bodies.chiron) == true
+                               || (swNode == false && bod.0.bodie.rawValue == Swe.Bodies.trueNode.rawValue) == true
                                || (swCeres == false && bod.0.bodie == Swe.Bodies.ceres) == true {
 
                     } else {
@@ -1201,7 +1209,6 @@ struct ChartDraw {
                                 lX2: axy[1].offX,
                                 lY2: axy[1].offY)
                         )
-
                     }
                 }
             }

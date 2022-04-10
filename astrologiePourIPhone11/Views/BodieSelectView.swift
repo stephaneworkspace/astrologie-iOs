@@ -6,7 +6,7 @@ import Foundation
 import SwiftUI
 
 struct BodieSelectView: View {
-    @Binding var swBodie: [Bool]
+    @Binding var swBodies: [Bool]
     @Binding var swPluton: Bool
     @Binding var swNode: Bool
     @Binding var swChiron: Bool
@@ -26,7 +26,7 @@ struct BodieSelectView: View {
                         Spacer()
                         ForEach(forlopp, id: \.self) { idx in
                             HStack {
-                                Toggle(forloppStr[idx], isOn: $swBodie[idx])
+                                Toggle(forloppStr[idx], isOn: $swBodies[idx])
                                 Image("b" + String(idx))
                                         .resizable()
                                         .frame(width: 25, height: 25)
