@@ -9,7 +9,6 @@ struct ChartDraw {
     let swe: Swe
     let size = 130
     let mult = 3
-    let SIZE = 390.0
     let b = 1.0
     let ZODIAC_RATIO = 10.0
     let ZODIAC_SIZE = 50.0
@@ -115,7 +114,7 @@ struct ChartDraw {
     }
 
     func getRadiusTotal() -> Double {
-        SIZE / 2.0
+        self.swe.SIZE / 2.0
     }
 
     struct Object {
@@ -1259,7 +1258,7 @@ struct ChartDraw {
     }
 
     func zodiac_sign(swe: Swe, sign: Int32) -> Object {
-        let zodiacSize = (((ZODIAC_SIZE * ZODIAC_RATIO) / 100.0) * SIZE) / 100.0;
+        let zodiacSize = (((ZODIAC_SIZE * ZODIAC_RATIO) / 100.0) * self.swe.SIZE) / 100.0;
         let offPosAsc = CIRCLE - swe.houses[0].longitude
         let signEnum: Swe.Signs = Swe.Signs.init(rawValue: sign) ?? Swe.Signs.aries
         let pos = (Double(signEnum.rawValue - 1) * 30.0) + 15.0 + offPosAsc
@@ -1279,7 +1278,7 @@ struct ChartDraw {
 
     func angle(swe: Swe, angle: Swe.Angle) -> ObjectAngle {
         let angleRatio = 12.0 // TODO const
-        var angleSize = (((ANGLE_SIZE * angleRatio) / 100.0) * SIZE) / 100.0
+        var angleSize = (((ANGLE_SIZE * angleRatio) / 100.0) * self.swe.SIZE) / 100.0
         let pos = getAngleLongitude(angle: angle)
         let offAngle = getCenterItem(
                 size: angleSize,
@@ -1310,7 +1309,7 @@ struct ChartDraw {
 
     func house(swe: Swe, number: Int32) -> ObjectHouse {
         let houseRatio = 5.0 // TODO const
-        var houseSize = (((HOUSE_SIZE * houseRatio) / 100.0) * SIZE) / 100.0
+        var houseSize = (((HOUSE_SIZE * houseRatio) / 100.0) * self.swe.SIZE) / 100.0
         let offPosAsc = CIRCLE - swe.houses[0].longitude
         var posNext: Double
         if number > 11 {
@@ -1354,11 +1353,11 @@ struct ChartDraw {
         } else {
             planetRatio = 12.0 // TODO const
         }
-        let planetSize = (((BODIE_SIZE * ZODIAC_RATIO) / 100.0) * SIZE) / 100.0;
+        let planetSize = (((BODIE_SIZE * ZODIAC_RATIO) / 100.0) * self.swe.SIZE) / 100.0;
         let degRatio = 6.0 // TODO const
-        let degSize = (((DEG_SIZE * degRatio) / 100.0) * SIZE)
+        let degSize = (((DEG_SIZE * degRatio) / 100.0) * self.swe.SIZE)
         let minRatio = 6.0 // TODO const
-        let minSize = (((MIN_SIZE * degRatio) / 100.0) * SIZE)
+        let minSize = (((MIN_SIZE * degRatio) / 100.0) * self.swe.SIZE)
         var swRetrograde = false
         for bod in swe.bodies {
             if bod.1.bodie.rawValue == bodie {

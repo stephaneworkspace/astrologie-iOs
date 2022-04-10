@@ -732,7 +732,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/astrologiePourIPhone11/Types/Swe",
 				);
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = stephane.bressani.dev.astrologiePourIPhone11;
 				PRODUCT_NAME = Astrologie;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -740,7 +740,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "astrologiePourIPhone11/Types/Swe/astrologiePourIPhone11-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -776,13 +776,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/astrologiePourIPhone11/Types/Swe",
 				);
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = stephane.bressani.dev.astrologiePourIPhone11;
 				PRODUCT_NAME = Astrologie;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "astrologiePourIPhone11/Types/Swe/astrologiePourIPhone11-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

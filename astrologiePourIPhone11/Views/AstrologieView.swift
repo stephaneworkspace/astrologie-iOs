@@ -53,7 +53,8 @@ struct AstrologieView: View {
                         selectedDateTransit: selectedDateTransit,
                         lat: (latNatalC, latTransitC),
                         lng: (lngNatalC, lngTransitC),
-                        tz: (Int32(tzNatalC), Int32(tzTransitC))))
+                        tz: (Int32(tzNatalC), Int32(tzTransitC))),
+                sizeChart: (screenSize.width == 744 && screenSize.height == 1133) ? 630.0 : 390.0)
         ZStack {
             BgView()
             ScrollView {

@@ -14,7 +14,7 @@ struct AboutView: View {
             VStack {
                 Image("bressani.dev")
                         .clipShape(RoundedRectangle(cornerRadius: 12))
-                VStack(alignment: .trailing) {
+                VStack(alignment: .leading) {
                     Text("""
                          Développé par bressani.dev (Stéphane Bressani)\n
                          Cette application est sous license GNU public license version 3.\n

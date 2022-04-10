@@ -45,7 +45,8 @@ struct ContentView: View {
                         selectedDateTransit: selectedDateTransit,
                         lat: (latNatal, latTransit),
                         lng: (lngNatal, lngTransit),
-                        tz: (Int32(tzNatal), Int32(tzTransit))))
+                        tz: (Int32(tzNatal), Int32(tzTransit))),
+                sizeChart: (screenSize.width == 744 && screenSize.height == 1133) ? 630.0 : 390.0)
         VStack {
             // Text(screenSize.width.formatted() + " " + screenSize.height.formatted())
             if isActive {

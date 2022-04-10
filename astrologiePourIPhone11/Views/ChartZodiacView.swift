@@ -22,12 +22,12 @@ struct ChartZodiacView: View {
         VStack {
             cD.drawCircle(circles: cD.circles(swe: cD.swe))
                     .stroke(colorScheme == .light ? .black : .white, lineWidth: 1.0)
-        }.frame(width: cD.SIZE, height: cD.SIZE)
+        }.frame(width: cD.swe.SIZE, height: cD.swe.SIZE)
         // Draw zodiac lines
         VStack {
             cD.drawLine(lines: cD.zodiac_lines(swe: cD.swe))
                     .stroke(colorScheme == .light ? .black : .white, lineWidth: 1.0)
-        }.frame(width: cD.SIZE, height: cD.SIZE)
+        }.frame(width: cD.swe.SIZE, height: cD.swe.SIZE)
         ForEach(1...12, id: \.self) { idx in
             VStack {
                 GeometryReader { geometry in
@@ -40,7 +40,7 @@ struct ChartZodiacView: View {
                                     width: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oSx,
                                     height: cD.zodiac_sign(swe: cD.swe, sign: Int32(idx)).oSy)
                 }
-            }.frame(width: cD.SIZE, height: cD.SIZE)
+            }.frame(width: cD.swe.SIZE, height: cD.swe.SIZE)
         }
         let angle_asc = cD.angle(swe: cD.swe, angle: .asc)
         VStack {
@@ -54,7 +54,7 @@ struct ChartZodiacView: View {
                                 width: angle_asc.oSx,
                                 height: angle_asc.oSy)
             }
-        }.frame(width: cD.SIZE, height: cD.SIZE)
+        }.frame(width: cD.swe.SIZE, height: cD.swe.SIZE)
         let angle_fc = cD.angle(swe: cD.swe, angle: .fc)
         VStack {
             GeometryReader { geometry in
@@ -67,7 +67,7 @@ struct ChartZodiacView: View {
                                 width: angle_fc.oSx,
                                 height: angle_fc.oSy)
             }
-        }.frame(width: cD.SIZE, height: cD.SIZE)
+        }.frame(width: cD.swe.SIZE, height: cD.swe.SIZE)
         let angle_desc = cD.angle(swe: cD.swe, angle: .desc)
         VStack {
             GeometryReader { geometry in
@@ -80,7 +80,7 @@ struct ChartZodiacView: View {
                                 width: angle_desc.oSx,
                                 height: angle_desc.oSy)
             }
-        }.frame(width: cD.SIZE, height: cD.SIZE)
+        }.frame(width: cD.swe.SIZE, height: cD.swe.SIZE)
         let angle_mc = cD.angle(swe: cD.swe, angle: .mc)
         VStack {
             GeometryReader { geometry in
@@ -93,10 +93,10 @@ struct ChartZodiacView: View {
                                 width: angle_mc.oSx,
                                 height: angle_mc.oSy)
             }
-        }.frame(width: cD.SIZE, height: cD.SIZE)
+        }.frame(width: cD.swe.SIZE, height: cD.swe.SIZE)
         VStack {
             cD.drawAngleLine(lines: cD.angle_lines(swe: cD.swe))
                     .stroke(colorScheme == .light ? .black : .white, lineWidth: 1.0)
-        }.frame(width: cD.SIZE, height: cD.SIZE)
+        }.frame(width: cD.swe.SIZE, height: cD.swe.SIZE)
     }
 }

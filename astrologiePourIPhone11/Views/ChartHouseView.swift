@@ -14,11 +14,11 @@ struct ChartHouseView: View {
         VStack {
             ChartDraw.DrawHouseTriangle(lines: cD.house_lines(swe: cD.swe))
                     .fill(colorScheme == .light ? .black : .white)
-        }.frame(width: cD.SIZE, height: cD.SIZE)
+        }.frame(width: cD.swe.SIZE, height: cD.swe.SIZE)
         VStack {
             cD.drawHouseLine(lines: cD.house_lines(swe: cD.swe))
                     .stroke(colorScheme == .light ? .black : .white, lineWidth: 1.0)
-        }.frame(width: cD.SIZE, height: cD.SIZE)
+        }.frame(width: cD.swe.SIZE, height: cD.swe.SIZE)
         // House number
         ForEach(1...12, id: \.self) { idx in
             let house = cD.house(swe: cD.swe, number: Int32(idx))
@@ -33,7 +33,7 @@ struct ChartHouseView: View {
                                     width: house.oSx,
                                     height: house.oSy)
                 }
-            }.frame(width: cD.SIZE, height: cD.SIZE)
+            }.frame(width: cD.swe.SIZE, height: cD.swe.SIZE)
         }
     }
 }

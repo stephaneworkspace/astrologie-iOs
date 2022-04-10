@@ -29,7 +29,7 @@ struct ChartBodieView: View {
                             swChiron: swChiron,
                             swCeres: swCeres)
             ).stroke(colorScheme == .light ? .black : .white, lineWidth: 0.3)
-        }.frame(width: cD.SIZE, height: cD.SIZE)
+        }.frame(width: cD.swe.SIZE, height: cD.swe.SIZE)
         if swTransit {
             VStack {
                 cD.drawBodieLine(
@@ -42,7 +42,7 @@ struct ChartBodieView: View {
                                 swChiron: swChiron,
                                 swCeres: swCeres)
                 ).stroke(colorScheme == .light ? .black : .white, lineWidth: 0.3)
-            }.frame(width: cD.SIZE, height: cD.SIZE)
+            }.frame(width: cD.swe.SIZE, height: cD.swe.SIZE)
         }
         // Draw bodies symbol
         ForEach(forlopp, id: \.self) { idx in

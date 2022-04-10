@@ -26,7 +26,7 @@ struct BgView: View {
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.3)
         } else if screenSize.width == 1024 && screenSize.height == 1366 {
-            // iPad Pro
+            // iPad Pro (don't work bad size TODO)
             Image(colorScheme == .light ? "bgliPadPro" : "bgdiPadPro")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -34,6 +34,14 @@ struct BgView: View {
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.3)
 
+        } else if screenSize.width == 744 && screenSize.height == 1133 {
+            // iPad Mini 6th
+            Image(colorScheme == .light ? "bgliPadMini6th" : "bgdiPadMini6th")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                    .opacity(0.3)
         } else {
             //
             Image(colorScheme == .light ? "bgl" : "bgd")

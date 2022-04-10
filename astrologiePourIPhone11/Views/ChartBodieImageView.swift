@@ -66,7 +66,7 @@ struct ChartBodieImageView: View {
                                         height: bodT.oSy)
                     }
                 }
-            }.frame(width: cD.SIZE, height: cD.SIZE)
+            }.frame(width: cD.swe.SIZE, height: cD.swe.SIZE)
         }
     }
 }
