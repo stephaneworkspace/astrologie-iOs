@@ -30,13 +30,11 @@ class Swe03 {
         let xxPtr = UnsafeMutablePointer<Double>.allocate(capacity: 6)
         let serrPtr = UnsafeMutablePointer<Int8>.allocate(capacity: 255)
         let status: Int32
-        // TODO make proper Node South/True later
         if ipl == Swe.Bodies.southNode {
             status = swe_calc_ut(tjdUt, Swe.Bodies.trueNode.rawValue, iflag.rawValue, xxPtr, serrPtr)
         } else {
             status = swe_calc_ut(tjdUt, ipl.rawValue, iflag.rawValue, xxPtr, serrPtr)
         }
-        // TODO make proper Node South/True later
         if ipl == Swe.Bodies.southNode {
             xxPtr[0] += 180.0
             if xxPtr[0] >= 360.0 {

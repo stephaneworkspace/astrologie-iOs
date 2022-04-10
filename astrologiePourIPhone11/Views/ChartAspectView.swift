@@ -7,6 +7,7 @@ import SwiftUI
 
 struct ChartAspectView: View {
     @State var swTransit: Bool
+    @Binding var swBodies: [Bool]
     @Binding var swPluton: Bool
     @Binding var swNode: Bool
     @Binding var swChiron: Bool
@@ -23,6 +24,7 @@ struct ChartAspectView: View {
                 let aspectStyle = aspect.style()
                 let lines = cD.aspect_lines(
                         swe: cD.swe,
+                        swBodies: swBodies,
                         swPluton: swPluton,
                         swNode: swNode,
                         swChiron: swChiron,

@@ -11,8 +11,8 @@ import CoreLocation
 
 struct ContentView: View {
     @State var selected: Int
-    // TODO if simulator false
     @State var isActive: Bool = true
+    @State var swBodies: [Bool] = [true, true, true, true, true, true, true, true, true]
     @State var swPluton: Bool = false
     @State var swNode: Bool = false
     @State var swChiron: Bool = false
@@ -56,6 +56,7 @@ struct ContentView: View {
                             VStack {
                                 AstrologieView(
                                         swTransit: false,
+                                        swBodies: $swBodies,
                                         swPluton: $swPluton,
                                         swNode: $swNode,
                                         swChiron: $swChiron,
@@ -94,6 +95,7 @@ struct ContentView: View {
                             VStack {
                                 AstrologieView(
                                         swTransit: true,
+                                        swBodies: $swBodies,
                                         swPluton: $swPluton,
                                         swNode: $swNode,
                                         swChiron: $swChiron,
@@ -130,6 +132,7 @@ struct ContentView: View {
                                 }
                             }.tag(2)
                             BodieSelectView(
+                                    swBodies: $swBodies,
                                     swPluton: $swPluton,
                                     swNode: $swNode,
                                     swChiron: $swChiron,

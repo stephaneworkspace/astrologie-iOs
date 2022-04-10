@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ChartView: View {
     @State var swTransit: Bool
+    @Binding var swBodies: [Bool]
     @Binding var swPluton: Bool
     @Binding var swNode: Bool
     @Binding var swChiron: Bool
@@ -21,6 +22,7 @@ struct ChartView: View {
             ChartHouseView(swe: swe)
             ChartBodieView(
                     swTransit: swTransit,
+                    swBodies: $swBodies,
                     swPluton: $swPluton,
                     swNode: $swNode,
                     swChiron: $swChiron,
@@ -29,6 +31,7 @@ struct ChartView: View {
             )
             ChartAspectView(
                     swTransit: swTransit,
+                    swBodies: $swBodies,
                     swPluton: $swPluton,
                     swNode: $swNode,
                     swChiron: $swChiron,

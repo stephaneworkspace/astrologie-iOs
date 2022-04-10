@@ -1,16 +1,14 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Zip",
-        "repositoryURL": "https://github.com/marmelroy/Zip.git",
-        "state": {
-          "branch": "master",
-          "revision": "f34106fbf053319638ea42056eb5d131c6bb2149",
-          "version": null
-        }
+  "pins" : [
+    {
+      "identity" : "zip",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/marmelroy/Zip.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "f34106fbf053319638ea42056eb5d131c6bb2149"
       }
-    ]
-  },
-  "version": 1
+    }
+  ],
+  "version" : 2
 }

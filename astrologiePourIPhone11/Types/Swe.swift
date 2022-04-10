@@ -100,8 +100,7 @@ class Swe {
             )
         }
         let cD = ChartDraw(swe: self)
-        for aspectIdx in 0...8 { // TODO const
-            // TODO angle AC MC
+        for aspectIdx in 0...8 {
             var transit: TransitType = .NatalNatal
             for bod in bodies {
                 let bodNatalLongitude = cD.getBodieLongitude(bodie: bod.0, swTransit: false)
