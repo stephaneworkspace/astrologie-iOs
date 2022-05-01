@@ -10,15 +10,16 @@ struct ChartZodiacView: View {
     var swe: Swe
     var body: some View {
         let cD: ChartDraw = ChartDraw(swe: swe)
-        // Circle
-        /* VStack {
-             // Text("Astrologie").padding()
-             // Text("Éphémérides").padding()
-             // #if targetEnvironment(simulator)
-             // Text("Simulator").padding()
-             // #endif
-         }.frame(width: .infinity, height: .infinity)*/
-        // Draw chart circles
+        #if targetEnvironment(simulator)
+        VStack {
+            Image(colorScheme == .light ? "polyedre_7" : "polyedre_7")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(minWidth: 0, maxWidth: .infinity)
+                    .edgesIgnoringSafeArea(.all)
+                    .opacity(0.3)
+        }
+        #endif
         VStack {
             cD.drawCircle(circles: cD.circles(swe: cD.swe))
                     .stroke(colorScheme == .light ? .black : .white, lineWidth: 1.0)
